@@ -1,0 +1,17 @@
+---
+layout: default
+---
+{% include home.html %}
+
+<div class="container blog">
+  <div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-7 nofloat center-block {{page.type}}">
+      {{ content }}
+
+      <a class="rssLink" href="{{home}}/feed.xml">
+        <img title="RSS" alt="RSS" src="{{home}}/img/rss.gif" width="36" height="14">
+      </a>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,29 @@
+---
+layout: null
+---
+{% include home.html %}
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SLATE</title>
+    <description>Services layer at the edge</description>
+    <pubDate>{{ site.time | date_to_xmlschema }}</pubDate>
+    <link>{{home}}/index.html</link>
+    <image>
+      <url>img/android-chrome-96x96.png</url>
+      <link>{{home}}/index.html</link>
+    </image>
+    {% for post in site.posts %}
+      {% unless post.draft %}
+        <item>
+          <title>{{ post.title | xml_escape }}</title>
+          <description>{{ post.overview | xml_escape }}</description>
+          <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
+          <link>{{ post.url | prepend: site.github.url }}</link>
+          <author>{{ post.attribution }}</author>
+          <guid isPermaLink="true">{{ post.url | prepend: site.github.url }}</guid>
+        </item>
+      {% endunless %}
+    {% endfor %}
+  </channel>
+</rss>
