@@ -23,3 +23,17 @@ root: Contains Dockerfile (if the app is a single container), README, LICENSE.
  --- build: Contains build.sh to build the images and run.sh to start the app
             in minikube
 ```
+
+Each application should include a README that document how to use the container.
+In particular, it should include a table with all the ways in which the container
+can be configured in the following format:
+
+
+|   | Type | Description  | Example |
+|---|---|---|---|
+| MY_PARAM | Conf param (ENV)  | A parameter passed through an environment variable.  | -e MY_PARAM=value |
+| /etc/myapp/myapp.conf  | Conf file (VOLUME)  | A configuration file passed through volumes. | -v ~/myapp.conf:/etc/myapp/myapp.conf  |
+| /var/data/myapp  | Data dir (VOLUME)  | Persistent storage that must survive redeployment. | -v /storage/data/myapp:/var/data/myapp |
+| /var/cache/myapp  | Cache dir (VOLUME)  | Storage space that is preferable to survive between redeployment but can be deleted.  | -v /tmp/cache/myapp:/var/cache/squid |
+| /var/scratch  | Temp dir (VOLUME)  | Temporary storage space that can be deleted when done. | -v /tmp/scratch:/var/scratch |
+
