@@ -1,5 +1,5 @@
 ---
-title: Application development conventions
+title: Application Development Conventions
 overview: Best practices for SLATE container development
 
 order: 60
