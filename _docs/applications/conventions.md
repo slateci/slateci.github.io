@@ -13,6 +13,7 @@ Each SLATE application should reside in a separate git repository in the
 githube slateci group. The name of the repository should be containter-app-name.
 The directory structure should look like
 
+```
 root: Contains Dockerfile (if the app is a single container), README, LICENSE.
  |
  --- app: Contains all the sources for the application. The main script should
@@ -21,4 +22,4 @@ root: Contains Dockerfile (if the app is a single container), README, LICENSE.
  |
  --- build: Contains build.sh to build the images and run.sh to start the app
             in minikube
-
+```
