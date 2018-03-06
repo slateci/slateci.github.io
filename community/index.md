@@ -39,6 +39,13 @@ Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slate
     </tr>
 
     <tr>
+      <td class="logo"><img src="{{home}}/img/docker.png" alt="Docker Hub"/></td>
+      <td>
+        View our catalog of applications on <a href="http://hub.docker.com/r/slateci">Docker Hub</a>
+      </td>
+    </tr>
+
+    <tr>
       <td class="logo"><img src="{{home}}/img/stackoverflow.png" alt="Stack Overflow"/></td>
       <td>
         <a href="https://stackoverflow.com/questions/tagged/slateci">Stack Overflow</a> is for practical questions and curated answers
