@@ -1,5 +1,5 @@
 ---
-title: Analitics
+title: Analytics
 overview: TODO
 
 order: 60
