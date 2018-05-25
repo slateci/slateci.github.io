@@ -1,6 +1,6 @@
 ---
 title: Edge Node
-overview: TODO
+overview: 
 
 order: 40
 
@@ -9,6 +9,6 @@ type: markdown
 ---
 {% include home.html %}
 
-The SLATE Vocabulary document defines the various components.  This document is available for public comment at:
-[Link to SLATE Vocabulary](https://docs.google.com/document/d/1tDWsV5EN7ZJP3UlJ3qxSrhK0Sp-f-9Qv7cL2guCkRgM/edit?usp=sharing)
+The [SLATE Vocabulary](https://docs.google.com/document/d/1tDWsV5EN7ZJP3UlJ3qxSrhK0Sp-f-9Qv7cL2guCkRgM/edit?usp=sharing) document defines the various components of the SLATE project.  
+
 
