@@ -1,6 +1,6 @@
 ---
 title: Federation
-overview: TODO
+overview: 
 
 order: 60
 
@@ -9,4 +9,4 @@ type: markdown
 ---
 {% include home.html %}
 
-TODO: fill it
+Federation is a rapidly moving target in the existing technology.  For now, the SLATE development team has a set of tools that allows the manual deployment of applications to each site with a common set of credentials.
