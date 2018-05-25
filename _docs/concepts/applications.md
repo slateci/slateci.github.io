@@ -1,6 +1,6 @@
 ---
 title: Applications
-overview: TODO
+overview: 
 
 order: 80
 
@@ -9,4 +9,4 @@ type: markdown
 ---
 {% include home.html %}
 
-TODO: fill it
+SLATE applications are science and infrastructure applications that a Virtual Organization might deploy at each site.
