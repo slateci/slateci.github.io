@@ -1,6 +1,6 @@
 ---
 title: SLATE Hardware
-overview: TODO
+overview: 
 index: true
 
 order: 60
