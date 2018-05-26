@@ -10,7 +10,7 @@ type: markdown
 {% include home.html %}
 
 ---
-Dell quote:
+Hardware configuration:
 
 ---
 
