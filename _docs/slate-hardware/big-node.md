@@ -1,6 +1,6 @@
 ---
 title: Big Node
-overview: TODO
+overview: 
 
 order: 20
 
@@ -9,4 +9,8 @@ type: markdown
 ---
 {% include home.html %}
 
-TODO: fill it
+---
+Dell quote:
+
+---
+
