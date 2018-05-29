@@ -7,6 +7,7 @@ order: 40
 layout: docs
 type: markdown
 ---
+<img class="landing-image pull-left" src="{{home}}/img/slate_concepts.png" alt="SLATE Concepts and Components">
 
 DevOps friendly (for platform and science gateway developers)
 quick patches, release iterations, fast track new capabilities
