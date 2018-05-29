@@ -9,14 +9,13 @@ type: markdown
 ---
 <img class="landing-image pull-left" src="{{home}}/img/slate_concepts.png" alt="SLATE Concepts and Components">
 
-DevOps friendly (for platform and science gateway developers)
-quick patches, release iterations, fast track new capabilities
-
-Widely used open source technologies for growth and sustainability
-
-API for local and (potentially) remote admin
-Monitoring & analytics
-SLATE SciDMZ node -- to be compatible with emerging national specs
+SLATE Design Goals:
+* DevOps friendly (for platform and science gateway developers)
+* quick patches, release iterations, fast track new capabilities
+* Widely used open source technologies for growth and sustainability
+* API for local and (potentially) remote admin
+* Monitoring & analytics
+* Compatible with emerging national specs
 
 Deploy apps in containers in simple manner
 
