@@ -10,8 +10,8 @@ type: markdown
 {% include home.html %}
 
 ---
-Hardware configuration:
------------------------
+Hardware configuration: |
+---
 PowerEdge R740XD Server |
 PowerEdge R740/R740XD Motherboard |
 Trusted Platform Module 2.0 |
@@ -30,5 +30,7 @@ Dual, Hot-plug, Redundant Power Supply (1+1), 750W |
 2U Combo Drop-In/Stab-In Rails |
 Basic Hardware Services: Business Hours (5x10) Next
 Business Day On-Site Hardware Warranty Repair, 5 Years |
+---
+
 ---
 
