@@ -1,6 +1,6 @@
 ---
-title: Big Node
-overview: 
+title: SLATE Big Node
+overview: Describes the SLATE Big Node hardware configuration.
 
 order: 20
 
