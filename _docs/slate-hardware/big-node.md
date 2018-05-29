@@ -10,11 +10,11 @@ type: markdown
 {% include home.html %}
 
 ---
-Hardware configuration: |
+Hardware configuration: 
 ---
-PowerEdge R740XD Server |
-PowerEdge R740/R740XD Motherboard |
-Trusted Platform Module 2.0 |
+PowerEdge R740XD Server|
+PowerEdge R740/R740XD Motherboard|
+Trusted Platform Module 2.0|
 Chassis with Up to 12 x 3.5 Hard Drives for 2CPU 
 Configuration |
 Intel Xeon Silver 4116 2.1G, 12C/24T, 9.6GT/s , 16.5M
