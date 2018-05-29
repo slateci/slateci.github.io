@@ -15,10 +15,9 @@ type: markdown
 Welcome to SLATE's latest documentation home page. From here you can learn all about SLATE by following
 the links below:
 
-- [Concepts]({{home}}/docs/concepts/). This
-is where you can learn about the SLATE vision and platform capabilities. 
+- [Concepts]({{home}}/docs/concepts/). SLATE vision and platform capabilities. 
 
-- [SLATE Hardware]({{home}}/docs/slate-hardware/). Describes possible edge node physical configurations 
+- [SLATE Hardware]({{home}}/docs/slate-hardware/). Describes physical hardware configurations of SLATE components
 
 - [Samples]({{home}}/docs/samples/). Samples are fully working stand-alone examples
 intended to highlight a particular set of SLATE's features.
