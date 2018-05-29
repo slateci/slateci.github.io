@@ -1,6 +1,6 @@
 ---
 title: Concepts
-overview: Concepts help you learn about the different parts of SLATE.
+overview: Different parts of SLATE.
 index: true
 
 order: 10
