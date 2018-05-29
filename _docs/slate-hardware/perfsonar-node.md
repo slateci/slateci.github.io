@@ -1,6 +1,6 @@
 ---
-title: Perfsonar Node
-overview: TODO
+title: SLATE Perfsonar Node
+overview: Describes the SLATE perfSONAR node hardware configuration
 
 order: 40
 
