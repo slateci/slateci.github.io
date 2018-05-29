@@ -10,7 +10,7 @@ type: markdown
 {% include home.html %}
 
 
-|Hardware configuration |
+|SLATE Big Node Hardware configuration |
 |---|
 |PowerEdge R740XD Server|
 |PowerEdge R740/R740XD Motherboard|
