@@ -14,7 +14,7 @@ Each page on the website as a link "Edit This Page on GitHub". This will open th
 
 Blog posts are in the directory [posts](https://github.com/slateci/slateci.github.io/tree/master/_posts). Add a file there following the format of the others.
 
-#### Technical details
+# Technical details
 
 The website uses [Jekyll](https://jekyllrb.com/) templates and is hosted on GitHub Pages.
 
