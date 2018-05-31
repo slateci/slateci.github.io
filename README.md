@@ -2,6 +2,20 @@
 
 This repository contains the source code for the [slateci.io](https://slateci.io) web site. It is modeled after the [istio.io](https://istio.io) website.
 
+## How to contribute
+
+You can contribute to the website simply by modifying the markdown in the places.
+
+### How to modify a page that already exists
+
+Each page on the website as a link "Edit This Page on GitHub". This will open the corresponding markdown page in the repository. Edit and commit.
+
+### How to add a post on the blog
+
+Blog posts are in the directory [posts](https://github.com/slateci/slateci.github.io/tree/master/_posts). Add a file there following the format of the others.
+
+#### Technical details
+
 The website uses [Jekyll](https://jekyllrb.com/) templates and is hosted on GitHub Pages.
 
 To run the site locally with Docker, use the following command:
