@@ -37,3 +37,4 @@ can be configured in the following format:
 | /var/cache/myapp  | Cache dir (VOLUME)  | Storage space that is preferable to survive between redeployment but can be deleted.  | -v /tmp/cache/myapp:/var/cache/squid |
 | /var/scratch  | Temp dir (VOLUME)  | Temporary storage space that can be deleted when done. | -v /tmp/scratch:/var/scratch |
 
+We strongly recommend CentOS or Ubuntu for base applications.
