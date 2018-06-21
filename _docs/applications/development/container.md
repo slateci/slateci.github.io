@@ -9,32 +9,25 @@ type: markdown
 ---
 {% include home.html %}
 
+The first goal is to create a set of Docker containers properly packaged to run all
+processes related to the application.
 
-Creating Container for SLATE Application
-----------------------------------------
+If the application is already packaged as a Docker container by the original developers
+and is already available on [Docker HUB](http://hub.docker.com), you can use that
+directly and skip this step.
 
-There are various different ways to create a container in Docker. For SLATE, 
-we *strongly recommend* using a `Dockerfile` to create the container(s) for 
-a SLATE application. The Dockerfile` allows a third party, such as the SLATE 
+While there are various different ways to create a container in Docker, within SLATE
+we recommended using a `Dockerfile`. This allows a third party, such as the SLATE 
 app curators, to easily follow and understand the contents of a Docker 
-container. We will only show how to create and populate a `Dockerfile` for 
-now.
+container. You can look at the
+[container repositories](https://github.com/search?q=topic%3Acontainer+org%3Aslateci&type=Repositories)
+on SLATE GitHub for examples and guidance.
 
-The starting point for any `Dockerfile` is the baseline Docker image to 
-import. This is typically an OS image, such as `centos:7` or `centos:6`, 
-a container that is already part of SLATE or OSG, such as the 
-[OSG worker image](). 
-In a docker file this will be, for example,
-
-```
-FROM centos:7:latest
-````
-
-at the top of the file. 
-
+Guidelines and conventions for SLATE developers
+-----------------------------------------------
 
 Each SLATE application should reside in a separate git repository in the
-githube slateci group. The name of the repository should be containter-app-name.
+GitHub slateci group. The name of the repository should be containter-appname.
 The directory structure should look like
 
 ```
@@ -48,10 +41,11 @@ root: Contains Dockerfile (if the app is a single container), README, LICENSE.
             in minikube
 ```
 
-Each application should include a README that document how to use the container.
+As a base image, we recommend CentOS or Ubuntu.
+
+Each application should include a README that documents how to use the container.
 In particular, it should include a table with all the ways in which the container
 can be configured in the following format:
-
 
 |   | Type | Description  | Example |
 |---|---|---|---|
@@ -61,4 +55,11 @@ can be configured in the following format:
 | /var/cache/myapp  | Cache dir (VOLUME)  | Storage space that is preferable to survive between redeployment but can be deleted.  | -v /tmp/cache/myapp:/var/cache/squid |
 | /var/scratch  | Temp dir (VOLUME)  | Temporary storage space that can be deleted when done. | -v /tmp/scratch:/var/scratch |
 
-We strongly recommend CentOS or Ubuntu for base applications.
+Each image should be published through [Docker HUB](https://hub.docker.com/).
+Make sure you have an account on DockerHub and you are a member of the slateci
+organization on DockerHub. On DockerHub, logged in as the organization, create
+a repository linked to the github repository.
+The name of the repository on DockerHub should match “slateci/appname” where
+appname matches the github repository “container-appname”.
+In case the github repository has more than one image, the DockerHub repository
+should match “slateci/appname-componentname”.
