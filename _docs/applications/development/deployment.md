@@ -9,3 +9,5 @@ type: markdown
 ---
 {% include home.html %}
 
+The second goal is to create a Kubernetes deployment that properly configures
+all the components of the application.
