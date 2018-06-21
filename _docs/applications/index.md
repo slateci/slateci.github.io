@@ -1,6 +1,6 @@
 ---
 title: Applications
-overview: TODO
+overview: How SLATE applications are installed and developed
 index: true
 
 order: 80
