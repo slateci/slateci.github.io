@@ -1,6 +1,6 @@
 ---
-title: Developing Platform Applications
-overview: TODO
+title: Overview
+overview: Highlights the different steps in packaging a SLATE application
 
 order: 10
 
