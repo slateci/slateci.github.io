@@ -1,6 +1,6 @@
 ---
 title: Installation and Configuration
-overview: TODO
+overview: Notes on how to install a SLATE application
 
 order: 40
 
@@ -9,4 +9,10 @@ type: markdown
 ---
 {% include home.html %}
 
-TODO: fill it
+To install an application, use the command line to select the vo and the cluster. For
+example:
+```bash
+>slate app --vo voname --cluster clustername install appname
+```
+
+For a full set of options, consult the [manual of the commandline](https://github.com/slateci/slate-tools/blob/18.05/cli/docs/manual.md).
