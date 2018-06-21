@@ -9,8 +9,3 @@ type: markdown
 ---
 
 {% include section-index.html %}
-
-Overview
---------
-
-Can we include an overview here?
