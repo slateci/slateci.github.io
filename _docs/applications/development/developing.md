@@ -2,7 +2,7 @@
 title: Developing Platform Applications
 overview: TODO
 
-order: 60
+order: 120
 
 layout: docs
 type: markdown
