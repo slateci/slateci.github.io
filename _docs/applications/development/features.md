@@ -17,7 +17,7 @@ One common example of a sidecar feature may be to include a FluentBit container 
 
 Workflow for including FluentBit sidecar container:
 1. Download and customize the [FluentBit ConfigMap](https://github.com/fluent/fluent-bit-kubernetes-logging/blob/master/fluent-bit-config-kafka-rest.yml) for your deployment.
-  * Change metadata name to `fluent-bit-[Instance]-configuration`  
+  * Change metadata name to `fluent-bit-{{ .Values.Instance }}-configuration`  
   * Change namespace to `{{ .Release.Namespace }}`  
   * Update Input `Path` to your container's log directory  
   * Turn `off` Service `Daemon` and `Logstash Format`  
