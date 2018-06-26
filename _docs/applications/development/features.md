@@ -17,12 +17,13 @@ One common example of a sidecar feature may be to include a FluentBit container 
 
 Workflow for including FluentBit sidecar container:
 1. Download and customize the [FluentBit ConfigMap](https://github.com/fluent/fluent-bit-kubernetes-logging/blob/master/fluent-bit-config-kafka-rest.yml) for your deployment.
-  * Change metadata name to `fluent-bit-{{ .Values.Instance }}-configuration`  
-  * Change namespace to `{{ .Release.Namespace }}`  
+  * Change metadata name to {% raw %}`fluent-bit-{{ .Values.Instance }}-configuration`{% endraw %}  
+  * Change namespace to {% raw %}`{{ .Release.Namespace }}`  {% endraw %}
   * Update Input `Path` to your container's log directory  
   * Turn `off` Service `Daemon` and `Logstash Format`  
   * Update Output `Host` and `Port` to your Elastic Search endpoint  
 2. Include the FluentBit container in your deployment, and mount a shared volume around the log files in your host container, and mount your configMap. Ex)  
+{% raw %}
 ```
 ...
 containers:
@@ -43,5 +44,5 @@ volumes:
     emptyDir: {}
 ...
 ```  
+{% endraw %}
 where `varlog` is mounted to FluentBit and to your container's log directory.  
-

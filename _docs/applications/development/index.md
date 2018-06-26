@@ -2,7 +2,7 @@
 title: Application development
 overview: Guidelines for SLATE application development
 
-order: 80
+order: 60
 
 layout: docs
 type: markdown
