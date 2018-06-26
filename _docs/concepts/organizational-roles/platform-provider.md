@@ -1,8 +1,8 @@
 ---
 title: Platform Provider
-overview: 
+overview: The organization that manages a particular installation of a SLATE platform.
               
-order: 40
+order: 20
 
 layout: docs
 type: markdown

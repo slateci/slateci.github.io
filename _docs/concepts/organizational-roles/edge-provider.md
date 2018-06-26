@@ -1,6 +1,6 @@
 ---
 title: Edge Provider
-overview: 
+overview: The organization that hosts a SLATE edge cluster.
               
 order: 40
 
