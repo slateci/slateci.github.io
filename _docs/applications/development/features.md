@@ -1,8 +1,8 @@
 ---
-title: Preparing a Kubernetes deployment
+title: Adding Additional Features
 overview: Optional fourth step to include extra features 
 
-order: 40
+order: 80
 
 layout: docs
 type: markdown
