@@ -21,7 +21,7 @@ Workflow for including FluentBit sidecar container:
   * Change namespace to `{{ .Release.Namespace }}`  
   * Update Input `Path` to your container's log directory  
   * Turn `off` Service `Daemon` and `Logstash Format`  
-  * Update Output `Host` and `Port`  
+  * Update Output `Host` and `Port` to your Elastic Search endpoint  
 2. Include the FluentBit container in your deployment, and mount a shared volume around the log files in your host container, and mount your configMap. Ex)  
 ```
 ...
