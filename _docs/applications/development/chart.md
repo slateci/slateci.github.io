@@ -11,6 +11,8 @@ type: markdown
 
 The third and final step to preparing an application for SLATE is creating a Helm Chart for the application.
 
+Documentation on how to create and use Helm Charts can be found at [on Helm's website](https://docs.helm.sh/developing_charts/)
+
 The Helm Chart should offer customization of application parameters, but should be balanced with abstraction of the application.  
 An example of this is the Frontier Squid Helm package. The values.yaml file (required for all Helm packages) is as follows:  
 ```
@@ -45,7 +47,7 @@ Some notes about creating the Helm Chart and deciding on values:
 * Limit the number of variables a user must keep track of to only what is most important.
 * Provide simple documentation for each variable within the file for ease of access.
 * Choose default values that are immediately functional for a general purpose.
-* Avoid using technical terminology of kubernetes or docker. In the example we use "ExternallyVisible" rather than "LoadBalancer".
+* Avoid using technical terminology of kubernetes or docker. In the example we use `ExternallyVisible` rather than `LoadBalancer`.
 
 SLATE Standardization:
 * Include an `Instance` variable in your naming scheme such that each part of the deployment can by uniquely labeled by instance using the template `[Application name]-[Instance]-[Utility type]`. Ex) `osg-frontier-squid-global-configuration`.
