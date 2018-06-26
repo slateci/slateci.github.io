@@ -1,5 +1,5 @@
 ---
-title: SLATE core developer
+title: SLATE Core Developer
 overview: A member of the SLATE Core Team.
               
 order: 100

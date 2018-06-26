@@ -1,5 +1,5 @@
 ---
-title: SLATE core team
+title: SLATE Core Team
 overview: The organization that develops SLATE.
               
 order: 80

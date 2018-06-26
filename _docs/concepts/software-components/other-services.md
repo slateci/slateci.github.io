@@ -1,5 +1,5 @@
 ---
-title: Other SLATE core services
+title: Other SLATE Core Services
 overview: SLATE applications that live in the SLATE application catalog that can be installed as part of a platform.
               
 order: 140
