@@ -11,9 +11,9 @@ type: markdown
 
 The third and final step to preparing an application for SLATE is creating a Helm Chart for the application.
 
-Documentation on how to create and use Helm Charts can be found at [on Helm's website](https://docs.helm.sh/developing_charts/)
+An intro on how to create and use Helm Charts can be found [on Helm's website](https://docs.helm.sh/developing_charts/)
 
-The Helm Chart should offer customization of application parameters, but should be balanced with abstraction of the application.  
+The Helm Chart for SLATE should offer customization of application parameters, but should be balanced with abstraction of the application.  
 An example of this is the Frontier Squid Helm package. The values.yaml file (required for all Helm packages) is as follows:  
 ```
 # Instance to label use case of Frontier Squid deployment
