@@ -1,6 +1,7 @@
 ---
 title: Application Developer
-overview: The person who manages local deployment of a SLATE edge cluster. 
+overview: The person that packages an application in a way that
+          can be installed on a SLATE platform. 
               
 order: 60
 
