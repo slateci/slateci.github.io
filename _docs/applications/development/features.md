@@ -29,8 +29,6 @@ containers:
   - name: fluent-bit
     image: fluent/fluent-bit:0.13.4
     imagePullPolicy: IfNotPresent
-    securityContext:
-      runAsUser: 0
     volumeMounts:
     - name: fluent-bit-{{ .Values.Instance }}-config
       mountPath: /fluent-bit/etc/
