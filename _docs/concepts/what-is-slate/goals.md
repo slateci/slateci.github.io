@@ -8,13 +8,13 @@ layout: docs
 type: markdown
 ---
 
-We have goals!  Here are the overarching SLATE design drivers:
+The overarching SLATE design drivers are:
 
-* It must be DevOps friendly for multi-campus platform builders and science gateway deployers
-* Allow for quick patch updates, release iterations, and fast tracking of new capabilities
-* Use best of breed open source technologies for growth and sustainability
-* Provide centralized monitoring & analytics for all layers in the system - edge clusters, applications
-* Collaborate with national cyberinfrastructure for science projects
+* SLATE must be DevOps friendly for multi-campus platform builders and science gateway deployers
+* SLATE must allow for quick patch updates, release iterations, and fast tracking of new capabilities
+* SLATE should use best of breed open source technologies for growth and sustainability
+* SLATE must provide centralized monitoring & analytics for all layers in the system - edge clusters, applications
+* SLATE must collaborate with national cyberinfrastructure for science projects
 
 A reference ("figurative") architecture of the system:
 
