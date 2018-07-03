@@ -36,6 +36,12 @@
       font-weight: 500;
       font-size: $font-size--primary;
     }
+    
+    &.btn-edit-on-github {
+
+      border-radius: 10px 10px 0 0;
+      border-bottom: 1px solid $white;
+    }
   }
 
   // Floating Action Button
