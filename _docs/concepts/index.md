@@ -1,6 +1,6 @@
 ---
 title: Concepts
-overview: Different parts of SLATE.
+overview: 
 index: true
 
 order: 10
