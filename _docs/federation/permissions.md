@@ -2,7 +2,7 @@
 title: Permissions
 overview: Permissions required at each SLATE Edge Cluster to allow the cluster to participate in a SLATE Platform.
 
-order: 60
+order: 20
 
 layout: docs
 type: markdown
