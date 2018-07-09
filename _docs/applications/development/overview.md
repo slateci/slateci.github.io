@@ -11,22 +11,21 @@ type: markdown
 
 The development of a SLATE application can be broken down into the following three components.
 
-* The Docker container(s) of the application. A Docker container encapsulates a process
-that will run on the cluster. Many applications consist of only one process (e.g. a static website,
-a database server, ...) so they will require only one container. Some applications, though, may
-require different processes (e.g. a web server frontend and a database backend) so they will be
-composed of multiple containers that work together.
-* A Kubernetes deployment for the application. A Kubernetes deployment encapsulates the set of
+* A **Docker container**, or set of containers, that encapsulate processes for the target edge clusters.
+Many applications consist of only one process (e.g. a Globus Connect server) so they will require 
+only one container. Some applications may require multiple processes (e.g. a web server frontend 
+and a database backend) so they will be composed of multiple containers that work together.
+
+* A **Kubernetes deployment** for the application. A Kubernetes deployment encapsulates the set of
 instructions that are needed to make the applications run. It will describe which containers need
-to run, how do they need to be configured, what kind of network access will they have, what 
-storage requirements do they have and so on.
-* A Helm chart for the application. A Helm chart allows to parametrize the deployment so that
-multiple instances of the same applications can be installed. It will allow to describe which
-element of the Kubernetes deployment can be changed based on user requirements.
+to run, how they need to be configured, requirements for network access and storage. 
 
-It is recommended that each step is followed independently from the later ones. That is, first create
-the Docker images and test them independently with Docker; then create the Kubernetes
-deployments and test them in minikube and on a cluster; finally parametrize the Kubernetes deployment
+* A **Helm chart** for the application. A Helm chart parametrizes the deployment so that
+multiple instances of the same application can be installed. It describes which
+elements of a Kubernetes deployment can be changed based on user requirements.
+
+It is recommended that each step is developed independently and in order. That is, first create
+Docker images and test them independently with Docker. Then create Kubernetes
+deployments and test them in Minikube or on a test cluster. Finally parametrize the Kubernetes deployment
 with a Helm chart.
-
 
