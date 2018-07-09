@@ -15,7 +15,7 @@ Federation is the mechanism that allows a set of [SLATE Edge Cluster](http://sla
 
 A key SLATE Federation design principle is to allow discrete sites to join a local cluster to the SLATE Platform through a web portal.  Each cluster that joins must meet constraints imposed by software version requirements and hardware requirements.  Each site must also allow certain permissions in order for software to deploy seamlessly across all sites.  
 
-SLATE Federation breaks out into the full set
+SLATE Federation comprises a full set
 
 {% include section-index.html %}
 
