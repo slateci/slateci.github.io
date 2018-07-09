@@ -15,4 +15,4 @@ example:
 >slate app --vo voname --cluster clustername install appname
 ```
 
-For a full set of options, consult the [manual of the commandline](https://github.com/slateci/slate-tools/blob/18.05/cli/docs/manual.md).
+For a full set of options, consult the command line interface [reference document](https://github.com/slateci/slate-tools/blob/18.05/cli/docs/manual.md).
