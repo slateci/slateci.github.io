@@ -1,6 +1,6 @@
 ---
 title: Interfaces
-overview: Users and developers will be able to access the services, monitoring and alerting through the following interfaces:
+overview: Users and developers will be able to access the services, monitoring and alerting through the following interfaces
 
 
 order: 40
