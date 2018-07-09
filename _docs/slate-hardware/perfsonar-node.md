@@ -9,9 +9,6 @@ type: markdown
 ---
 {% include home.html %}
 
-
-
-PerfSONAR server Configuration
 ----
 
 | VENDOR PART NO. | ITEM | QUANTITY | 
