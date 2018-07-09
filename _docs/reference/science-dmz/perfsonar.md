@@ -9,4 +9,4 @@ type: markdown
 ---
 {% include home.html %}
 
-https://www.perfsonar.net/
+Active measurement is a key component of the SLATE infrastructure.  SLATE uses [perfSONAR](https://www.perfsonar.net/) as one of its key components.
