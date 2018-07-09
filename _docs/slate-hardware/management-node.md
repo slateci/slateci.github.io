@@ -9,8 +9,6 @@ type: markdown
 ---
 {% include home.html %}
 
-
-Out-of-band Managment Node server Configuration
 ----
 
 | VENDOR PART NO. | ITEM | QUANTITY | 
