@@ -9,7 +9,5 @@ type: markdown
 ---
 {% include home.html %}
 
-All the applications that can be installed in SLATE can be found in the
+All the applications that can be installed on a SLATE platform can be found in the
 [SLATE application catalog](https://github.com/slateci/slate-catalog).
-
-Currently, the slate tool does not allow to list the available applications directly.
