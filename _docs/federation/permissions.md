@@ -1,6 +1,6 @@
 ---
 title: Permissions
-overview: Permissions required at each [SLATE Edge Cluster](http://slateci.io/docs/concepts/hardware-components/edge-cluster.html) to allow the cluster to participate in a [SLATE Platform](http://slateci.io/docs/concepts/hardware-components/platform.html).
+overview: Permissions required at each SLATE Edge Cluster to allow the cluster to participate in a SLATE Platform.
 
 order: 60
 
