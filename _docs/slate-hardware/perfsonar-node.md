@@ -10,8 +10,8 @@ type: markdown
 {% include home.html %}
 
 
-perfSONAR hardware configuration 
-
+| perfSONAR hardware configuration|
+| ---- |
 |PowerEdge R440 Server |
 |2.5" Chassis with up to 8 Hot Plug Hard Drives |
 |Internal PERC |
