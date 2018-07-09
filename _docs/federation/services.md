@@ -1,6 +1,7 @@
 ---
 title: Services
-overview: TODO
+overview: Services required at each site in order to participate within a
+  SLATE platform
 
 order: 20
 
