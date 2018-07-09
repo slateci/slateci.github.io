@@ -1,6 +1,6 @@
 ---
 title: SLATE Management Node
-overview: Describes the SLATE perfSONAR node hardware configuration
+overview: Describes the SLATE management node hardware configuration
 
 order: 40
 
