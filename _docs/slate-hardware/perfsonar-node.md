@@ -10,8 +10,8 @@ type: markdown
 {% include home.html %}
 
 
-perfSONAR hardware configuration |
-|---|
+perfSONAR hardware configuration 
+
 |PowerEdge R440 Server |
 |2.5" Chassis with up to 8 Hot Plug Hard Drives |
 |Internal PERC |
@@ -23,5 +23,5 @@ perfSONAR hardware configuration |
 |Dual, Hot Plug, Redundant Power Supply (1+1), 550W|
 |1x800GB Mixed Use SSD |
 |Intel X710 Dual Port 10Gb Direct Attach, SFP+, Converged Network Adapter|
-||Basic Hardware Services: Business Hours (5x10) Next Business Day On-Site Hardware Warranty Repair, 5 Years |
+|Basic Hardware Services: Business Hours (5x10) Next Business Day On-Site Hardware Warranty Repair, 5 Years |
 
