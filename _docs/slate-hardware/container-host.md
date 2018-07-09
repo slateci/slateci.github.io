@@ -1,6 +1,6 @@
 ---
 title: SLATE Big Node
-overview: Describes the SLATE Big Node hardware configuration.
+overview: Describes the SLATE Container Host hardware configuration.
 
 order: 20
 
