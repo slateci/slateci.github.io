@@ -1,6 +1,6 @@
 ---
 title: Science DMZ
-overview: 
+overview: How SLATE fits in the Science DMZ design pattern
 
 order: 20
 
