@@ -1,7 +1,6 @@
 ---
 title: Alert System
-overview: Alerting based on status of each site of a [SLATE platform](http://slateci.io/docs/concepts/hardware-components/platform.html)
-
+overview: Alerting based on status of each site of a SLATE platform.
 order: 80
 
 layout: docs
