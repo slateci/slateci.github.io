@@ -9,5 +9,5 @@ type: markdown
 ---
 {% include home.html %}
 
-All the applications that can be installed on a SLATE platform can be found in the
+Applications that have been validated for deployment on a SLATE platform can be found in the
 [SLATE application catalog](https://github.com/slateci/slate-catalog).

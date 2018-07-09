@@ -1,5 +1,5 @@
 ---
-title: SLATE Perfsonar Node
+title: SLATE perfSONAR Node
 overview: Describes the SLATE perfSONAR node hardware configuration
 
 order: 40
