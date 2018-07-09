@@ -3,7 +3,7 @@ title: Services
 overview: Services required at each site in order to participate within a
   SLATE platform
 
-order: 20
+order: 30
 
 layout: docs
 type: markdown
