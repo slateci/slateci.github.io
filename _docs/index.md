@@ -12,8 +12,6 @@ type: markdown
 
 # Welcome to SLATE 
 
-% {{site.data.slate.version}}
-
 Welcome to SLATE's latest documentation home page. From here you can learn all about SLATE by following
 the links below:
 
