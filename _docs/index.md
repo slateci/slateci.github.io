@@ -20,3 +20,5 @@ the links below:
 - [SLATE Hardware]({{home}}/docs/slate-hardware/). Describes sample physical hardware configurations of SLATE components.
 
 - [Applications]({{home}}/docs/applications/). How to program for a SLATE platform: application preparation and deployment.
+
+- [Federation]({{home}}/docs/federation/). SLATE federation approaches.
