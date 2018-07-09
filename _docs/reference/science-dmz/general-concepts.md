@@ -29,5 +29,5 @@ DTN.
 A [SLATE Edge Cluster](http://fasterdata.es.net/science-dmz/DTN/) also provides the basic active measurement defined in
 the Science DMZ design pattern by providing one or more [perfSONAR
 testpoints](http://docs.perfsonar.net/install_options.html).  The SLATE [perfSONAR](https://www.perfsonar.net/) implementation
-alloss the use of the dedicated [perfSONAR](https://www.perfsonar.net/) environment or the ability to bring
+allows the use of the dedicated [perfSONAR](https://www.perfsonar.net/) environment or the ability to bring
 up ephemeral SLATE testpoints.
