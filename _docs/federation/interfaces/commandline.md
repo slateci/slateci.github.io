@@ -1,5 +1,5 @@
 ---
-title: Command Line API
+title: Federation Command Line API
 overview: TODO
 
 order: 75
