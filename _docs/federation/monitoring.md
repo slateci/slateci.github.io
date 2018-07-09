@@ -1,7 +1,7 @@
 ---
 title: Monitoring
 overview: Metrics and logs required at each site in order to provide
-  visibility for a [SLATE Platform](http://slateci.io/docs/concepts/hardware-components/platform.html) .
+  visibility for a SLATE Platform.
 
 order: 60
 
