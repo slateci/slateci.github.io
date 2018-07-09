@@ -13,7 +13,7 @@ The first goal is to create a set of Docker containers properly packaged to run 
 processes related to the application.
 
 If the application is already packaged as a Docker container by the original developers
-and is already available on [Docker HUB](http://hub.docker.com), you can use that
+and is already available on [Docker Hub](http://hub.docker.com), you can use that
 directly and skip this step.
 
 While there are various different ways to create a container in Docker, within SLATE
