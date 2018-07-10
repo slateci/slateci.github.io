@@ -1,3 +1,14 @@
+---
+title: StashCache Overview
+overview: Explanation of StashCache
+
+order: 10
+
+layout: docs
+type: markdown
+---
+{% include home.html %}
+
 StashCache is an data federation service based on the 
 [xrootd protocol](http://xrootd.org/). A StashCache instance can act as an 
 "origin", "cache", and "redirector". In the SLATE context, we will only
