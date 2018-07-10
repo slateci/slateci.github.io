@@ -22,9 +22,8 @@ For advanced use cases, the SLATE application developer may need to be aware
 of the underlying implementation and be able to develop against it.
 
 Examples:
-* The team who packages frontier-squid so that it can be deployed on SLATE
-* Wei Yang - containerizing XCache
-* Science gateway developers! (aside: c.f. https://sciencegateways.org/) 
+* The developers and packagers of edge applications
+* Science gateway developers. (aside: c.f. https://sciencegateways.org/) 
 
 Requirements:
 * The ability to deploy at scale and debug the application
