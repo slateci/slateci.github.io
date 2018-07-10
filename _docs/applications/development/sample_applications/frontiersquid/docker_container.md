@@ -9,7 +9,7 @@ type: markdown
 ---
 {% include home.html %}
 
-The docker container for StashCache can be found 
+The docker container for OSG Frontier Squid can be found 
 [here](https://hub.docker.com/r/slateci/osg-frontier-squid/). The container
 allows the service to be configured either with the direct configuration file `/etc/squid/squid.conf`
 or with the more portable costumization script `/etc/squid/customize.sh`.
