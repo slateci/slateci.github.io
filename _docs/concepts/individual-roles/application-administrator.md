@@ -9,7 +9,7 @@ type: markdown
 ---
 
 The person who administers a SLATE application service on a SLATE platform.
-A SLATE application administrator may be a part of a SLATE virtual organization
+A SLATE application administrator may be a part of a virtual organization
 (deploying an application for their specific use) or may be a SLATE platform
 administrator (installing basic services that are available to all SLATE virtual
 organizations).
@@ -20,8 +20,7 @@ match the SLATE application administrator use cases and that can be remapped
 to different implementation and technology in future versions of SLATE.
 
 Examples:
-* The person who deploys and operates frontier-squid for ATLAS on all Tier-2s
-* For the XCache network across US ATLAS Tier2 centers: Ilija Vukotic
+* A person who deploys and operates a software caching service across multiple sites
 * Science gateway operator
 
 Requirements:
