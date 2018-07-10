@@ -2,7 +2,7 @@
 title: Docker Container
 overview: Docker container for StashCache
 
-order: 40
+order: 20
 
 layout: docs
 type: markdown
