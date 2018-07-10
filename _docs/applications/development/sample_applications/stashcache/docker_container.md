@@ -1,3 +1,14 @@
+---
+title: Docker Container
+overview: Docker container for StashCache
+
+order: 40
+
+layout: docs
+type: markdown
+---
+{% include home.html %}
+
 The docker container for StashCache can be found 
 [here](https://hub.docker.com/r/slateci/stashcache/). The container allows
 running either of the two containers (StashCache and HTCondor) that are 

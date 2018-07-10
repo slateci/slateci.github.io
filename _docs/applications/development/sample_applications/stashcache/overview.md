@@ -1,5 +1,5 @@
 ---
-title: StashCache Overview
+title: StashCache
 overview: Explanation of StashCache
 
 order: 10
