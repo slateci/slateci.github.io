@@ -1,3 +1,16 @@
+---
+title: Kubernetes Deployment
+overview: Docker container for StashCache
+
+order: 40
+
+layout: docs
+type: markdown
+---
+{% include home.html %}
+
+
+
 Deploying StashCache in Kubernetes, see Kubernetes deployment files [here](https://github.com/slateci/container-stashcache/tree/master/kubernetes), 
 requires running a [`LoadBalancer Service`](https://kubernetes.io/docs/concepts/services-networking/service/), [`Deployment`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), and [storage](https://kubernetes.io/docs/concepts/storage/). The 
 `LoadBalancer Service` is needed to get a public IP for the service. The `Deployment` is required to describe the [`Pod`](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/) 
