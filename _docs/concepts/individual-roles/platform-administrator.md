@@ -11,11 +11,11 @@ type: markdown
 The person/group who manages access and configuration for a SLATE platform.
  
 Examples:
-* Lincoln Bryant for the the SLATE Reference Platform (SRP)
-* OSG operation for OSG built on SLATE
+* The core SLATE team that develops and operates the SLATE Reference Platform
+* A multi-institution science collaboration operating a distributed data delivery service
 
 Responsibilities:
-* Manage SLATE edge clusters within the platform (including certificates and idm)
+* Manage SLATE edge clusters within the platform (including certificates and the identity management)
 * Manager virtual organizations within the platform
 * Monitoring the platform for software and hardware failures, notifying Edge Administrators of local issues as necessary
 * Maintaining consistent versions of the SLATE Platform across sites
