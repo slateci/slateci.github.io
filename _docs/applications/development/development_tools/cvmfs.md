@@ -38,7 +38,7 @@ Here is an example of a pvc that uses the above storage class
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: my-application-{% raw %}{{ .Values.Instance }}{% raw %}-pvc
+  name: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-pvc
 spec:
   accessModes:
   - ReadOnlyMany
@@ -60,7 +60,7 @@ volumeMounts:
 volumes:
 - name: mypvc
   persistentVolumeClaim:
-    claimName: my-application-{% raw %}{{ .Values.Instance }}{% raw %}-pvc
+    claimName: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-pvc
     readOnly: true
 ...
 ```

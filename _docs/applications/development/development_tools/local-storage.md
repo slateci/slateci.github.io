@@ -25,14 +25,14 @@ The `pvc` template should look similar to
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: my-application-{% raw %}{{ .Values.Instance }}{% raw %}-pvc
+  name: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-pvc
 spec:
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
   resources:
     requests:
-      storage: {% raw %}{{ .Values.LocalStorageSize }}{% raw %}Gi
+      storage: {% raw %}{{ .Values.LocalStorageSize }}{% endraw %}Gi
   storageClassName: nfs-provisioner
 ```  
 The important feature of this is the `storageClassName` which must match `nfs-provisioner`.
@@ -42,13 +42,13 @@ The `pvc` is then mounted within the application deployment as a volume as follo
 ...
 volumeMounts:
 - mountPath: /etc/
-  subPath: my-application-{% raw %}{{ .Values.Instance }}{% raw %}-cache
-  name: my-application-{% raw %}{{ .Values.Instance }}{% raw %}-pvc
+  subPath: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-cache
+  name: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-pvc
 ...
 volumes:
-- name: my-application-{% raw %}{{ .Values.Instance }}{% raw %}-pvc
+- name: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-pvc
   persistentVolumeClaim:
-    claimName: my-application-{% raw %}{{ .Values.Instance }}{% raw %}-pvc
+    claimName: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-pvc
 ```
 
 ## Including a Node Affinity
