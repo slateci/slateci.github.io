@@ -36,7 +36,7 @@ collections:
   glossary:
     output: false
 
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-sitemap
 
