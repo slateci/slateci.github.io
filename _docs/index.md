@@ -22,3 +22,5 @@ the links below:
 - [Applications]({{home}}/docs/applications/): How to program for a SLATE platform: application preparation and deployment.
 
 - [Federation]({{home}}/docs/federation/): SLATE federation approaches.
+
+- [Client Quickstart]({{home}}/docs/client-quickstart/): How to get started using the SLATE CLI client. 
