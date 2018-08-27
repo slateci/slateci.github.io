@@ -8,13 +8,17 @@ layout: docs
 type: markdown
 ---
 
-SLATE sites: On first build of SLATE sites the metrics shipper will be deployed by a SLATE admin to automatically forward metrics to central database.
+SLATE sites: 
+On first build of SLATE sites the metrics shipper will be deployed by a SLATE admin to automatically forward metrics to central database.
 
-SLATE Catalog App: SLATE catalog app will have flag to enable application logs forwarding to central SLATE database.
+SLATE Catalog App: 
+SLATE catalog app will have flag to enable application logs forwarding to central SLATE database.
 
-Application Development: A flag for a side car container(s) reading and shipping logs to central database will need to be implemented for every application wanting to become part of the SLATE catalog.
+Application Development: 
+A flag for a side car container(s) reading and shipping logs to central database will need to be implemented for every application wanting to become part of the SLATE catalog.
 
-Central Database Address: The address for the central database will need to be provided by a SLATE administrator. 
+Central Database Address: 
+The address for the central database will need to be provided by a SLATE administrator. 
 
 Examples:
 * Metricbeats Daemonset running across a SLATE site forwarding to the central SLATE Elasticsearch cluster.
