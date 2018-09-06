@@ -49,7 +49,7 @@ The simplest uses of the client are to list objects which exist on the SLATE pla
 	
 In this (abbreviated) output, three edge clusters are listed. Each cluster has name associated with it for convenience, an automatically generated unique identifier, and an owning Virtual Organization (VO) which administers it (in this case all three clusters are administered by the SLATE team). All objects in the SLATE platform have unique IDs, and these must often be specified when using the client to indicate which objects you wish to manipulate. VOs and clusters have names which are globally unique as well, though, so when specifying a VO or cluster you can always use the name instead of the ID. 
 
-To do very much on the SLATE platform you must belong to a VO, as VOs are the foundation of SLATE's permissions model. You can either join a VO by asking a person who is already a meber to add you, or you can create a new VO with the command `slate-client vo create`. Note that newly created VOs do not generally have access to any resources (edge clusters), but they *can* add resources of their own. 
+To do very much on the SLATE platform you must belong to a VO, as VOs are the foundation of SLATE's permissions model. You can either join a VO by asking a person who is already a member to add you, or you can create a new VO with the command `slate-client vo create`. Note that newly created VOs do not generally have access to any resources (edge clusters), but they *can* add resources of their own. 
 
 Let's suppose for the moment that you are a system administrator at the fictional University of Southern North Dakota at Hoople, and you want to add your Kubernetes cluster to the SLATE platform. You can begin by creating a VO: 
 
