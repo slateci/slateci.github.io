@@ -8,15 +8,15 @@ order: 90
 layout: docs
 type: markdown
 ---
-The SLATE Client is a command line interface (CLI) intended to give a convenient way for users of SLATE, primarily edge administrators and application administrators, to work with the platform. Copies of the client executable itself and the credentials necessary for it to carry out actions on your behalf can be obtained from the [web portal](https://slateci.io). 
+The SLATE Client is a command line interface (CLI) intended to give a convenient way for users of SLATE, primarily edge administrators and application administrators, to work with the platform. 
 
-<!-- TODO: Correct link to web portal. Document procedure for installing client and credentials -->
+Copies of the client executable itself and the credentials necessary for it to carry out actions on your behalf can be obtained from the [web portal](https://slateci.io). To set up the client first log into the web portal, then go to the 'CLI Access' section, and run the provided script (which is specific to your account). You can then download and unpack the version of the client executable suitable for your system (Linux and Mac OS are supported). If when running the client you receive an error similar to `slate: Exception: Credentials file /Users/cnw4/.slate/token does not exist` it means that you either still need to run the token installation script from the portal, or that something has gone wrong with that script. 
 
 Help information on using the client can be obtained by running it with the `--help` option:
 
-	$ slate-client --help
+	$ slate --help
 	SLATE command line interface
-	Usage: ./slate-client [OPTIONS] SUBCOMMAND
+	Usage: ./slate [OPTIONS] SUBCOMMAND
 	
 	Options:
 	  -h,--help                   Print this help message and exit
@@ -41,7 +41,7 @@ The `--help` option can also be used together with any of the client's subcomman
 
 The simplest uses of the client are to list objects which exist on the SLATE platform. For example, you can list the edge clusters currently participating in the platform:
 
-	$ ./slate-client cluster list
+	$ ./slate cluster list
 	Name        ID                                           Owned By 
 	utah-coreos Cluster_3249cb47-7318-4fd0-a61b-0cf99c1aceb8 slate-dev
 	umich       Cluster_2426348a-e6cc-4282-a142-4ab60443df42 slate-dev
@@ -49,41 +49,41 @@ The simplest uses of the client are to list objects which exist on the SLATE pla
 	
 In this (abbreviated) output, three edge clusters are listed. Each cluster has name associated with it for convenience, an automatically generated unique identifier, and an owning Virtual Organization (VO) which administers it (in this case all three clusters are administered by the SLATE team). All objects in the SLATE platform have unique IDs, and these must often be specified when using the client to indicate which objects you wish to manipulate. VOs and clusters have names which are globally unique as well, though, so when specifying a VO or cluster you can always use the name instead of the ID. 
 
-To do very much on the SLATE platform you must belong to a VO, as VOs are the foundation of SLATE's permissions model. You can either join a VO by asking a person who is already a member to add you, or you can create a new VO with the command `slate-client vo create`. Note that newly created VOs do not generally have access to any resources (edge clusters), but they *can* add resources of their own. 
+To do very much on the SLATE platform you must belong to a VO, as VOs are the foundation of SLATE's permissions model. You can either join a VO by asking a person who is already a member to add you, or you can create a new VO with the command `slate vo create`. Note that newly created VOs do not generally have access to any resources (edge clusters), but they *can* add resources of their own. 
 
 Let's suppose for the moment that you are a system administrator at the fictional University of Southern North Dakota at Hoople, and you want to add your Kubernetes cluster to the SLATE platform. You can begin by creating a VO: 
 
-	$ slate-client vo create usnd-hoople
+	$ slate vo create usnd-hoople
 	Successfully created VO usnd-hoople with ID VO_70dc4426-1f92-4b44-932b-7c4678c30a05
 
 As the creator of the VO, you are automatically a member. You can add other users to the VO through the web portal. 
 
-The `slate-client cluster create` command can register your Kubernetes cluster with the SLATE platform. Its behavior is currently rather simplistic: When run it will collect your current kubectl context and send it to the SLATE API server to be used when SLATE accesses your cluster. So, if you want to limit how SLATE accesses your cluster you should first create a suitable `ClusterRole`, user account, and `ClusterRoleBinding`, switch to a context corresponding to the account, and then run the registration command. Assuming that any preparation is done, you can add your cluster:
+The `slate cluster create` command can register your Kubernetes cluster with the SLATE platform. Its behavior is currently rather simplistic: When run it will collect your current kubectl context and send it to the SLATE API server to be used when SLATE accesses your cluster. So, if you want to limit how SLATE accesses your cluster you should first create a suitable `ClusterRole`, user account, and `ClusterRoleBinding`, switch to a context corresponding to the account, and then run the registration command. Assuming that any preparation is done, you can add your cluster:
 
-	$ slate-client cluster create --vo usnd-hoople hoople
+	$ slate cluster create --vo usnd-hoople hoople
 	Successfully created cluster hoople with ID Cluster_44db0317-601a-4d73-9392-4bfddf5cb4a2
 
 Note that you must specify the VO which will own the cluster because you as a user can potentially belong to more than one VO. At this point, your cluster is part of the SLATE platform, but only members of your VO can use it. You can verify this by listing the VOs allowed access:
 
-	$ slate-client cluster list-allowed hoople
+	$ slate cluster list-allowed hoople
 	Name        ID                                     
 	usnd-hoople VO_70dc4426-1f92-4b44-932b-7c4678c30a05
 
 Suppose that you also work with the Graphene Radiometry for Unified Multi-Messenger Blockchain Leveraged Exoplanet Searches (GRUMMBLES) project, which makes extensive use of distributed computing, and would like to deploy services with SLATE. We'll assume that they already have a VO, of which you are also a member:
 
-	$ slate-client vo list
+	$ slate vo list
 	Name        ID                                     
 	grummbles   VO_7855a495-cefd-420d-85e3-2a883fed2e44
 	usnd-hoople VO_70dc4426-1f92-4b44-932b-7c4678c30a05
 	
 You can easily grant the GRUMMBLES project access to use the new edge cluster:
 
-	$ slate-client cluster allow-vo hoople grummbles
+	$ slate cluster allow-vo hoople grummbles
 	Successfully granted VO grummbles access to cluster hoople
 	
 In order to run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES would like to deploy a caching HTTP proxy. To see whether SLATE has an application which suits your needs, you can list the applications in the catalog. You might see something like the following:
 
-	$ slate-client app list --dev
+	$ slate app list --dev
 	Name               App Version Chart Version Description                                       
 	jupyterhub         v0.8.1      v0.7-dev      Multi-user Jupyter installation                   
 	osg-frontier-squid squid-3     0.2.0         Open Science Grid's Frontier Squid application
@@ -94,7 +94,7 @@ In order to run computing jobs efficiently on resources at the Hoople Campus, GR
 
 `osg-frontier-squid` is such a proxy. You could just install it with default settings, but in many case you will want to use customized settings. That can be done by first fetching the default configuration into a local file:
 
-	$ slate-client app get-conf --dev osg-frontier-squid > grummbles-squid-hoople.yaml
+	$ slate app get-conf --dev osg-frontier-squid > grummbles-squid-hoople.yaml
 	
 Opening that file with you preferred editor, you should find that it contains something like the following:
 
@@ -125,12 +125,12 @@ Opening that file with you preferred editor, you should find that it contains so
 	
 At this point you should edit the file to set properties like the cache sizes and the allowed ranges of IP addresses which you will allow to use the proxy. With your changes save to the file, you are ready to deploy the application:
 
-	$ slate-client app install --dev osg-frontier-squid --vo grummbles --cluster hoople --conf grummbles-squid-hoople.yaml
+	$ slate app install --dev osg-frontier-squid --vo grummbles --cluster hoople --conf grummbles-squid-hoople.yaml
 	Successfully installed application osg-frontier-squid as instance grummbles-osg-frontier-squid-global with ID Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
 	
 This message indicates that your application instance has been launched on the Kubernetes cluster. You can double check by listing running instances:
 
-	$ slate-client instance list --vo grummbles --cluster hoople
+	$ slate instance list --vo grummbles --cluster hoople
 Name                                Started             VO        Cluster ID                                 
 grummbles-osg-frontier-squid-global 2018-Aug-23         grummbles hoople  Instance_d78f3751-4db8-410a-
                                     21:45:07 UTC                          b97c-3d1263c0e344                       
@@ -139,7 +139,7 @@ It is good form to limit instance listings by cluster and VO any time you don't 
 
 At this point the service should be running, but you have no way to use it. SLATE can provide you with more detailed information to solve this. Note that since you can deploy application instances with the same names on different clusters, to uniquely identify an instance you must specify its full ID:
 
-	$ slate-client instance info Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
+	$ slate instance info Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
 	Name                                Started             VO        Cluster ID                                 
 	grummbles-osg-frontier-squid-global 2018-Aug-23         grummbles hoople  Instance_d78f3751-4db8-410a-b97c-  
 	                                    21:45:07 UTC                          3d1263c0e344                       
@@ -162,5 +162,5 @@ The 'Services' section of the listing shows that your proxy is now running, and 
 
 If you want to stop an application instance, either because you plan to redeploy it with a new configuration or because you simply don't need it anymore, deleting is also simple:
 
-	$ slate-client instance delete Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
+	$ slate instance delete Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
 	Successfully deleted instance Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
