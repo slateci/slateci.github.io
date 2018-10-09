@@ -81,6 +81,16 @@ You can easily grant the GRUMMBLES project access to use the new edge cluster:
 	$ slate cluster allow-vo hoople grummbles
 	Successfully granted VO grummbles access to cluster hoople
 	
+An alternative method, which avoids repeated work when future VOs would like to access your cluster is to grant universal access to all SLATE VOs:
+
+	$ slate cluster allow-vo hoople '*'
+	Successfully granted VO * access to cluster hoople
+	$ slate cluster list-allowed hoople
+	Name  ID
+	<all> * 
+
+When universal access has been granted, individual VOs will not be listed by `slate cluster list-allowed`. Whether granting access to VOs one at a time or universally is a better fit for your use is mainly dependent on your institution or funding source's security and resource sharing policies. 
+	
 In order to run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES would like to deploy a caching HTTP proxy. To see whether SLATE has an application which suits your needs, you can list the applications in the catalog. You might see something like the following:
 
 	$ slate app list --dev
