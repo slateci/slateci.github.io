@@ -3,7 +3,7 @@ title: Quickstart
 overview: 
 index: true
 
-order: 90
+order: 5
 
 layout: docs
 type: markdown
