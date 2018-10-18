@@ -1,5 +1,5 @@
 ---
-title: Client Quickstart
+title: Quickstart
 overview: 
 index: true
 
