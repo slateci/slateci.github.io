@@ -1,14 +1,11 @@
 ---
 title: Quickstart Science Developers
-overview: 
-index: true
-
-order: 20
+overview: How to start as a SLATE Science Developer.
+order: 50
 
 layout: docs
 type: markdown
 ---
-
 {% include home.html %}
 
 Welcome Science Developer!  
