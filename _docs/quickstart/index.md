@@ -1,9 +1,9 @@
 ---
 title: Quickstart
-overview: 
+overview: Ready to go?
 index: true
 
-order: 5
+order: 10
 
 layout: docs
 type: markdown
@@ -14,7 +14,7 @@ type: markdown
 Welcome to SLATE's Quickstart page. From here you can learn all about SLATE by following
 the links below:
 
-- [Quickstart Science Users]({{home}}/docs/quickstart/quickstart-science-users/): How to get started as a SLATE Science User.
+- [Quickstart Science Users]({{home}}/docs/quickstart/quickstart-science-users.md): How to get started as a SLATE Science User.
 
 - [Quickstart Science Developers]({{home}}/docs/quickstart/quickstart-science-developers.md): How to get started as a SLATE Science Developer.
 
