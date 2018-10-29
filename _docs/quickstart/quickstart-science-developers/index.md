@@ -9,7 +9,7 @@ layout: docs
 type: markdown
 ---
 
-{% include section-index.html %}
+{% include home.html %}
 
 Welcome Science Developer!  
 
