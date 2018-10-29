@@ -1,13 +1,13 @@
 ---
 title: Quickstart Science Users
-overview: 
-index: true
+overview: How to get started as a SLATE science user.
 
-order: 10
+order: 40
 
 layout: docs
 type: markdown
 ---
+{% include home.html %}
 
 Welcome SLATE Science User!  Want to try out SLATE and see how fast you can roll a packaged SLATE application?
 
