@@ -5,7 +5,7 @@ index: true
 
 order: 20
 
-layout: quickstart
+layout: docs
 type: markdown
 ---
 
