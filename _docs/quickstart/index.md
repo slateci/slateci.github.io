@@ -12,7 +12,7 @@ type: markdown
 
 
 
-
+<hr>
 
 The SLATE Client is a command line interface (CLI) intended to give a convenient way for users of SLATE, primarily [edge administrators](http://slateci.io/docs/concepts/individual-roles/edge-administrator.html) and [application administrators](http://slateci.io/docs/concepts/individual-roles/application-administrator.html), to work with the platform. 
 
