@@ -9,4 +9,4 @@ type: markdown
 ---
 {% include home.html %}
 
-To install an application, please refer to the [client documentation](http://slateci.io/docs/client-quickstart/).
+To install an application, please refer to the [client documentation](home}/docs/quickstart/slate-client.md).
