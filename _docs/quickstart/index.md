@@ -10,8 +10,6 @@ type: markdown
 ---
 {% include home.html %}
 
-Welcome to SLATE's Quickstart page. From here you can learn all about SLATE by following
-the links below:
 
 
 
