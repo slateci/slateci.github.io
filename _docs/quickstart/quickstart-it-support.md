@@ -1,6 +1,6 @@
 ---
-title: Installation and Configuration
-overview: Notes on how to install a SLATE application
+title: Quickstart IT Support
+overview: What do you need to support a SLATE platform?
 
 order: 60
 
