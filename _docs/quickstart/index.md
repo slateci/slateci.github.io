@@ -13,11 +13,7 @@ type: markdown
 Welcome to SLATE's Quickstart page. From here you can learn all about SLATE by following
 the links below:
 
-- [Quickstart Science Users]({{home}}/docs/quickstart/quickstart-science-users.md): How to get started as a SLATE Science User.
 
-- [Quickstart Science Developers]({{home}}/docs/quickstart/quickstart-science-developers.md): How to get started as a SLATE Science Developer.
-
-- [Quickstart IT Support]({{home}}/docs/quickstart/quickstart-it.md): How to get started supporting a SLATE platform.
 
 
 The SLATE Client is a command line interface (CLI) intended to give a convenient way for users of SLATE, primarily [edge administrators](http://slateci.io/docs/concepts/individual-roles/edge-administrator.html) and [application administrators](http://slateci.io/docs/concepts/individual-roles/application-administrator.html), to work with the platform. 
