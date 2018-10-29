@@ -8,6 +8,9 @@ order: 5
 layout: docs
 type: markdown
 ---
+
+{% include section-index.html %}
+
 The SLATE Client is a command line interface (CLI) intended to give a convenient way for users of SLATE, primarily [edge administrators](http://slateci.io/docs/concepts/individual-roles/edge-administrator.html) and [application administrators](http://slateci.io/docs/concepts/individual-roles/application-administrator.html), to work with the platform. 
 
 Copies of the client executable itself and the credentials necessary for it to carry out actions on your behalf can be obtained from the [web portal](https://www-dev.slateci.io). To set up the client first log into the web portal, then go to the 'CLI Access' section, and run the provided script (which is specific to your account). You can then download and unpack the version of the client executable suitable for your system (Linux and Mac OS are supported). If when running the client you receive an error similar to `slate: Exception: Credentials file /Users/cnw4/.slate/token does not exist` it means that you either still need to run the token installation script from the portal, or that something has gone wrong with that script. 
