@@ -21,12 +21,35 @@ An example of this is the Frontier Squid Helm package. The values.yaml file (req
 # Enables unique instances of Frontier Squid in one namespace
 Instance: global
 
+### SLATE-START ###
+# Deployment specific information used for the SLATE methodology
+SLATE:
+  # ElasticSearch information for sending application logs
+  Logging:
+    Enabled: true
+    Server:
+      Name: atlas-kibana.mwt2.org
+      Port: 9200
+  # The name of the cluster that the application is being deployed on
+  Cluster:
+    Name: mini-SLATE
+  LocalStorage: false
+### SLATE-END ###
+
 Service:
   # Port that the service will utilize.
   Port: 3128
-  # Must be true/false
-  # Defines whether the service can be used globally, or only within the cluster.
-  ExternallyVisible: true
+  # Controls how your service is can be accessed. Valid values are:
+  # - LoadBalancer - This ensures that your service has a unique, externally
+  #                  visible IP address
+  # - NodePort - This will give your service the IP address of the cluster node 
+  #              on which it runs. If that address is public, the service will 
+  #              be externally accessible. Using this setting allows your 
+  #              service to share an IP address with other unrelated services. 
+  # - ClusterIP - Your service will only be accessible on the cluster's internal 
+  #               kubernetes network. Use this if you only want to connect to 
+  #               your service from other services running on the same cluster. 
+  ExternalVisibility: NodePort
 
 SquidConf:
   # The amount of memory (in MB) that Frontier Squid may use on the machine.
@@ -34,14 +57,17 @@ SquidConf:
   CacheMem: 128
   # The amount of disk space (in MB) that Frontier Squid may use on the machine.
   # The default is 10000 MB (10 GB), but more is advisable if the system supports it.
+  # Current limit is 999999 MB, a limit inherent to helm's number conversion system.
   CacheSize: 10000
-  # The range of external IP addresses that will be allowed to use the proxy.
+  # The range of incoming IP addresses that will be allowed to use the proxy.
   # Multiple ranges can be provided, each seperated by a space.
-  # Example: 255.255.0.0/16 255.256.1.1/32
+  # Example: 192.168.1.1/32 192.168.2.1/32
   # Use 0.0.0.0/0 for open access.
-  IPRange: 0.0.0.0/0
+  # The default set of ranges are those defined in RFC 1918 and typically used 
+  # within kubernetes clusters. 
+  IPRange: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
 ```  
-In this example you can see that there are only 6 settings to manipulate in order to deploy an instance of Frontier Squid. These are the settings most pertinent to the functionality of Frontier Squid, and provide enough flexibility for general users. 
+In this example you can see that there are only 6 non-SLATE settings to manipulate in order to deploy an instance of Frontier Squid. These are the settings most pertinent to the functionality of Frontier Squid, and provide enough flexibility for general users. The settings in the SLATE category are provided by the api at the time of deployment to appropriately reflect the environment that the application is being deployed to. These defaults are for localized testing purposes.
 
 Some notes about creating the Helm Chart and deciding on values:
 * Limit the number of variables a user must keep track of to only what is most important.
@@ -50,4 +76,15 @@ Some notes about creating the Helm Chart and deciding on values:
 * Avoid using technical terminology of kubernetes or docker. In the example we use `ExternallyVisible` rather than `LoadBalancer`.
 
 SLATE Standardization:
-* Include an `Instance` variable in your naming scheme such that each part of the deployment can by uniquely labeled by instance using the template `[Application name]-[Instance]-[Utility type]`. Ex) `osg-frontier-squid-global-configuration`.
+* An `Intance` variable is required for SLATE to deploy unique instances of the application. This should be included in the metadata names using the helper function below in the helpers file. If there is a resource associated with the deployment, it should be named as `{{ template "[chart].fullname" . }}-[resourceName]`
+```
+{% raw %}{{- define "[chart].fullname" -}} #replace the chart name with yours
+  {{- $name := default .Chart.Name .Values.Instance -}}
+  {{- if contains $name .Chart.Name -}}
+    {{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
+  {{- else -}}
+    {{- printf "%s-%s" .Chart.Name $name | trunc 63 | trimSuffix "-" -}}
+  {{- end -}}
+{{- end -}}{% endraw %}
+```
+* It is not required to include the SLATE set variables shown above in every chart, but they should be included if they will be used in your deployment.
