@@ -16,13 +16,20 @@ Developers can write these features directly into an application's container, or
 One common example of a sidecar feature may be to include a FluentBit container in your pod that sends log data to an Elastic Search database. This can be used for customizable metrics monitoring, or system debugging.
 
 Workflow for including FluentBit sidecar container:
-1. Download and customize the [FluentBit ConfigMap](https://github.com/fluent/fluent-bit-kubernetes-logging/blob/master/fluent-bit-config-kafka-rest.yml) for your deployment.
-  * Change metadata name to {% raw %}`fluent-bit-{{ .Values.Instance }}-configuration`{% endraw %}  
-  * Change namespace to {% raw %}`{{ .Release.Namespace }}`  {% endraw %}
+1. Download and customize the [Frontier Squid FluentBit ConfigMap](https://github.com/slateci/slate-catalog/blob/master/incubator/osg-frontier-squid/templates/fluentBitConfig.yaml) for your deployment.
+  * Change template name to your chart in the metadata 
   * Update Input `Path` to your container's log directory  
-  * Turn `off` Service `Daemon` and `Logstash Format`  
-  * Update Output `Host` and `Port` to your Elastic Search endpoint  
-2. Include the FluentBit container in your deployment, and mount a shared volume around the log files in your host container, and mount your configMap. Ex)  
+  * Include the SLATE specific values in your values.yaml, found under "Preparing a Helm chart", and set your defaults.  
+  * Create a custom parser using regular expressions to characterize your logs  
+2. Copy the namespace helper function into your helpers.tpl file  
+```
+{% raw %}
+{{- define "namespace" -}}
+  {{- .Release.Namespace | trimPrefix "slate-vo-" | printf " %s" -}}
+{{- end -}}
+{% endraw %}
+```  
+3. Include the FluentBit container in your deployment, and mount a shared volume around the log files in your host container, and mount your configMap. Ex)  
 {% raw %}
 ```
 ...
@@ -31,15 +38,15 @@ containers:
     image: fluent/fluent-bit:0.13.4
     imagePullPolicy: IfNotPresent
     volumeMounts:
-    - name: fluent-bit-{{ .Values.Instance }}-config
+    - name: {{ template "[chart].fullname" . }}-fluent-bit-config
       mountPath: /fluent-bit/etc/
     - name: varlog
       mountPath: /var/log
 ...
 volumes:
-  - name: fluent-bit-{{ .Values.Instance }}-config
+  - name: {{ template "[chart].fullname" . }}-fluent-bit-config
     configMap:
-      name: fluent-bit-{{ .Values.Instance }}-config
+      name: {{ template "[chart].fullname" . }}-fluent-bit-config
   - name: varlog
     emptyDir: {}
 ...
