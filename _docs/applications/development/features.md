@@ -22,13 +22,13 @@ Workflow for including FluentBit sidecar container:
   * Include the SLATE specific values in your values.yaml, found under "Preparing a Helm chart", and set your defaults.  
   * Create a custom parser using regular expressions to characterize your logs  
 2. Copy the namespace helper function into your helpers.tpl file  
-```
 {% raw %}
+```
 {{- define "namespace" -}}
   {{- .Release.Namespace | trimPrefix "slate-vo-" | printf " %s" -}}
 {{- end -}}
-{% endraw %}
 ```  
+{% endraw %}
 3. Include the FluentBit container in your deployment, and mount a shared volume around the log files in your host container, and mount your configMap. Ex)  
 {% raw %}
 ```

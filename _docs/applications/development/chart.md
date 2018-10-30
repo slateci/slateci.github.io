@@ -73,18 +73,20 @@ Some notes about creating the Helm Chart and deciding on values:
 * Limit the number of variables a user must keep track of to only what is most important.
 * Provide simple documentation for each variable within the file for ease of access.
 * Choose default values that are immediately functional for a general purpose.
-* Avoid using technical terminology of kubernetes or docker. In the example we use `ExternallyVisible` rather than `LoadBalancer`.
+* Avoid using technical terminology of kubernetes or docker.
 
 SLATE Standardization:
-* An `Intance` variable is required for SLATE to deploy unique instances of the application. This should be included in the metadata names using the helper function below in the helpers file. If there is a resource associated with the deployment, it should be named as `{{ template "[chart].fullname" . }}-[resourceName]`
+* An `Intance` variable is required for SLATE to deploy unique instances of the application. This should be included in the metadata names using the helper function below in the helpers file. If there is a resource associated with the deployment, it should be named as {% raw %} `{{ template "[chart].fullname" . }}-[resourceName]` {% endraw %}  
+{% raw %}
 ```
-{% raw %}{{- define "[chart].fullname" -}} #replace the chart name with yours
+{{- define "[chart].fullname" -}} #replace the chart name with yours
   {{- $name := default .Chart.Name .Values.Instance -}}
   {{- if contains $name .Chart.Name -}}
     {{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
   {{- else -}}
     {{- printf "%s-%s" .Chart.Name $name | trunc 63 | trimSuffix "-" -}}
   {{- end -}}
-{{- end -}}{% endraw %}
+{{- end -}}
 ```
+{% endraw %}
 * It is not required to include the SLATE set variables shown above in every chart, but they should be included if they will be used in your deployment.
