@@ -8,11 +8,9 @@ layout: docs
 type: markdown
 ---
 
-A collection of SLATE edge clusters managed as a single entity.
-There can be more than one SLATE platform and a SLATE edge provider (cluster operator) may
-decide to join more than one platform.
+A collection of SLATE edge clusters accessed as a single entity. A SLATE cluster may participate in more than one platform.
 
 Examples:
 * The SLATE Reference Platform.
 * A science collaboration uses SLATE to deploy a network of intelligent data delivery services. 
-* A university deploys a SLATE-enabled Kubernetes cluster to join a national research platform.
+* A research computing center deploys a SLATE-enabled Kubernetes cluster to join a national research platform.
