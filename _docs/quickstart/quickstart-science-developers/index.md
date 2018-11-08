@@ -1,5 +1,5 @@
 ---
-title: Quickstart Science Developers
+title: Quickstart SLATE Application Developers
 overview: How to start as a SLATE Application Developer.
 order: 50
 
