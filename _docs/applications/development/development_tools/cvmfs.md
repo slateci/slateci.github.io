@@ -9,7 +9,6 @@ type: markdown
 ---
 {% include home.html %}
 
-# CVMFS
 CVMFS is the CernVM File System, which is used to mount remote repositories as local read-only filesystems accessible through HTTP. This can be very useful in the case of computation of large datasets. Additionally, users often use an HTTP Proxy Cache such as Frontier Squid to cache accessed data from the repository.
 
 ## CVMFS Client on SLATE
