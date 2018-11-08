@@ -9,7 +9,6 @@ type: markdown
 ---
 {% include home.html %}
 
-# Persistent Local Storage
 By default, storage for a deployment exists within the container as ephemeral storage. For some applications, such as caches, persistent local storage may be important for optimizing application use.
 
 ## Local Storage Provisioning on SLATE
