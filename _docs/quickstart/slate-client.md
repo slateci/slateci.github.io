@@ -103,7 +103,7 @@ In order to run computing jobs efficiently on resources at the Hoople Campus, GR
 
 (Currently the `--dev` flag is needed as only the incubator catalog contains applications.)
 
-`osg-frontier-squid` is such a proxy. You could just install it with default settings, but in many case you will want to use customized settings. That can be done by first fetching the default configuration into a local file:
+`osg-frontier-squid` is such a proxy. You could just install it with default settings, but in many cases you will want to use customized settings. That can be done by first fetching the default configuration into a local file:
 
 	$ slate app get-conf --dev osg-frontier-squid > grummbles-squid-hoople.yaml
 	
