@@ -100,7 +100,7 @@ An alternative method, which avoids repeated work when future VOs would like to 
 
 When universal access has been granted, individual VOs will not be listed by `slate cluster list-allowed`. Whether granting access to VOs one at a time or universally is a better fit for your use is mainly dependent on your institution or funding source's security and resource sharing policies. 
 
-## Deploying an application
+## Deploying an Application
 	
 In order to run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES would like to deploy a caching HTTP proxy. To see whether SLATE has an application which suits your needs, you can list the applications in the catalog. You might see something like the following:
 
