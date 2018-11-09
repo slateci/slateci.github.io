@@ -9,9 +9,13 @@ type: markdown
 ---
 {% include home.html %}
 
+## Installing the SLATE Client
+
 The SLATE Client is a command line interface (CLI) intended to give a convenient way for users of SLATE, primarily [edge administrators](http://slateci.io/docs/concepts/individual-roles/edge-administrator.html) and [application administrators](http://slateci.io/docs/concepts/individual-roles/application-administrator.html), to work with the platform. 
 
 Copies of the client executable itself and the credentials necessary for it to carry out actions on your behalf can be obtained from the [web portal](https://www-dev.slateci.io). To set up the client first log into the web portal, then go to the 'CLI Access' section, and run the provided script (which is specific to your account). You can then download and unpack the version of the client executable suitable for your system (Linux and Mac OS are supported). If when running the client you receive an error similar to `slate: Exception: Credentials file /Users/cnw4/.slate/token does not exist` it means that you either still need to run the token installation script from the portal, or that something has gone wrong with that script. 
+
+## Basic Use
 
 Help information on using the client can be obtained by running it with the `--help` option:
 
@@ -50,6 +54,8 @@ The simplest uses of the client are to list objects which exist on the SLATE pla
 	
 In this (abbreviated) output, three edge clusters are listed. Each cluster has name associated with it for convenience, an automatically generated unique identifier, and an owning Virtual Organization (VO) which administers it (in this case all three clusters are administered by the SLATE team). All objects in the SLATE platform have unique IDs, and these must often be specified when using the client to indicate which objects you wish to manipulate. VOs and clusters have names which are globally unique as well, though, so when specifying a VO or cluster you can always use the name instead of the ID. 
 
+## Creating a Virtual Organization
+
 To do very much on the SLATE platform you must belong to a VO, as VOs are the foundation of SLATE's permissions model. You can either join a VO by asking a person who is already a member to add you, or you can create a new VO with the command `slate vo create`. Note that newly created VOs do not generally have access to any resources (edge clusters), but they *can* add resources of their own. 
 
 Let's suppose for the moment that you are a system administrator at the fictional University of Southern North Dakota at Hoople, and you want to add your Kubernetes cluster to the SLATE platform. You can begin by creating a VO: 
@@ -58,6 +64,8 @@ Let's suppose for the moment that you are a system administrator at the fictiona
 	Successfully created VO usnd-hoople with ID VO_70dc4426-1f92-4b44-932b-7c4678c30a05
 
 As the creator of the VO, you are automatically a member. You can add other users to the VO through the web portal. 
+
+## Registering a Cluster
 
 The `slate cluster create` command can register your Kubernetes cluster with the SLATE platform. Its behavior is currently rather simplistic: When run it will collect your current kubectl context and send it to the SLATE API server to be used when SLATE accesses your cluster. So, if you want to limit how SLATE accesses your cluster you should first create a suitable `ClusterRole`, user account, and `ClusterRoleBinding`, switch to a context corresponding to the account, and then run the registration command. Assuming that any preparation is done, you can add your cluster:
 
@@ -91,6 +99,8 @@ An alternative method, which avoids repeated work when future VOs would like to 
 	<all> * 
 
 When universal access has been granted, individual VOs will not be listed by `slate cluster list-allowed`. Whether granting access to VOs one at a time or universally is a better fit for your use is mainly dependent on your institution or funding source's security and resource sharing policies. 
+
+## Deploying an application
 	
 In order to run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES would like to deploy a caching HTTP proxy. To see whether SLATE has an application which suits your needs, you can list the applications in the catalog. You might see something like the following:
 
@@ -171,7 +181,37 @@ At this point the service should be running, but you have no way to use it. SLAT
 
 The 'Services' section of the listing shows that your proxy is now running, and should (hypothetically) be reachable at 96.14.44.108:3128. Only members of the VO which deployed an instance (and SLATE platform administrators) can query its information this way, so your services are nominally private (although this should not be relied upon for any serious security). 
 
+## Application Lifecycle
+
 If you want to stop an application instance, either because you plan to redeploy it with a new configuration or because you simply don't need it anymore, deleting is also simple:
 
 	$ slate instance delete Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
 	Successfully deleted instance Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
+
+While an application instance is running you can also check on what it is doing by viewing its logs:
+
+	$ slate instance logs Instance_d78f3751-4db8-410a-b97c-3d1263c0e344
+	========================================
+	Pod: osg-frontier-squid-global-587c9b766d-ml7hh Container: osg-frontier-squid
+	2018/11/09 18:30:03| HTCP Disabled.
+	2018/11/09 18:30:03| Squid plugin modules loaded: 0
+	2018/11/09 18:30:03| Adaptation support is off.
+	2018/11/09 18:30:03| Accepting HTTP Socket connections at local=[::]:3128 remote=[::] FD 17 flags=9
+	2018/11/09 18:30:03| Done scanning /var/cache/squid dir (0 entries)
+	2018/11/09 18:30:03| Finished rebuilding storage from disk.
+	2018/11/09 18:30:03|         0 Entries scanned
+	2018/11/09 18:30:03|         0 Invalid entries.
+	2018/11/09 18:30:03|         0 With invalid flags.
+	2018/11/09 18:30:03|         0 Objects loaded.
+	2018/11/09 18:30:03|         0 Objects expired.
+	2018/11/09 18:30:03|         0 Objects cancelled.
+	2018/11/09 18:30:03|         0 Duplicate URLs purged.
+	2018/11/09 18:30:03|         0 Swapfile clashes avoided.
+	2018/11/09 18:30:03|   Took 0.05 seconds (  0.00 objects/sec).
+	2018/11/09 18:30:03| Beginning Validation Procedure
+	2018/11/09 18:30:03|   Completed Validation Procedure
+	2018/11/09 18:30:03|   Validated 0 Entries
+	2018/11/09 18:30:03|   store_swap_size = 0.00 KB
+	2018/11/09 18:30:04| storeLateRelease: released 0 objects
+
+By default the logs for all containers (in all pods) which make up the instance are shown, but the logs from any single container can be displayed using the `--container` option. 
