@@ -24,3 +24,5 @@ the links below:
 - [Applications]({{home}}/docs/applications/): How to program for a SLATE platform: application preparation and deployment.
 
 - [Federation]({{home}}/docs/federation/): SLATE federation approaches.
+
+<a href="https://sandbox.slateci.io:5000"><button class="btn btn-slate">Try SLATE now!</button></a>
