@@ -1,7 +1,7 @@
 ---
 title: Quickstart
 overview: How to quick start your SLATE adventure
-index: true
+index: false
 
 order: 10
 
