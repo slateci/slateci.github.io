@@ -15,8 +15,6 @@ type: markdown
 Welcome to SLATE's latest documentation home page. From here you can learn all about SLATE by following
 the links below:
 
-- [Quickstart]({{home}}/docs/quickstart/) How to get started using SLATE. 
-
 - [Concepts]({{home}}/docs/concepts/) SLATE platform capabilities.
 
 - [SLATE Hardware]({{home}}/docs/slate-hardware/) Example hardware specifications.
