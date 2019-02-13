@@ -4,7 +4,7 @@ overview: How to get started as a SLATE science user.
 
 order: 40
 
-layout: docs
+layout: quickstart
 type: markdown
 ---
 {% include home.html %}
