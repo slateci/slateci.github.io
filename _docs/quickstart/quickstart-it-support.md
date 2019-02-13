@@ -4,7 +4,7 @@ overview: What do you need to support a SLATE platform?
 
 order: 60
 
-layout: docs
+layout: quickstart
 type: markdown
 ---
 {% include home.html %}
