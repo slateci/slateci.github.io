@@ -3,7 +3,7 @@ title: Quickstart SLATE Application Developers
 overview: How to start as a SLATE Application Developer.
 order: 50
 
-layout: docs
+layout: quickstart
 type: markdown
 ---
 {% include home.html %}
