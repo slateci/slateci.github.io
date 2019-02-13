@@ -4,7 +4,7 @@ overview: Notes on SLATE client
 
 order: 100
 
-layout: docs
+layout: quickstart
 type: markdown
 ---
 {% include home.html %}
