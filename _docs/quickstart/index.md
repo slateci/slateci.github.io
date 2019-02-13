@@ -5,7 +5,7 @@ index: false
 
 order: 10
 
-layout: docs
+layout: quickstart
 type: markdown
 ---
 
