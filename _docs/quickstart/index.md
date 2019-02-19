@@ -10,6 +10,7 @@ type: markdown
 ---
 
 {% include section-index.html %}
+
 SLATE wants to engage you the Science User, Science Application Developer, and IT Support. 
 See one of the sections above for details on how SLATE can work for your use-case, or click below for a short, guided tutorial on using SLATE:
 
