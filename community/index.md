@@ -57,6 +57,7 @@ Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slate
 
 <br />
 
-# > <img src="{{home}}/img/troubleshooting.svg" alt="Troubleshooting" title="Troubleshooting" style="width: 32px; display:inline" />
-# Hint: If you came to this page because you're looking for help with a problem, check out 
-# our [troubleshooting guide]({{home}}/troubleshooting).
+<!-- > <img src="{{home}}/img/troubleshooting.svg" alt="Troubleshooting" title="Troubleshooting" style="width: 32px; display:inline" />
+Hint: If you came to this page because you're looking for help with a problem, check out 
+our [troubleshooting guide]({{home}}/troubleshooting).
+-->
