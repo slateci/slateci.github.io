@@ -26,4 +26,4 @@ The reference platform includes dedicated network measurement hardware (a PerfSO
 
 
 
-{% include section-index.html %}
+<!--  {% include section-index.html %} -->
