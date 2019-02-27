@@ -1,5 +1,5 @@
 ---
-title: SLATE Big Node
+title: SLATE Reference Node
 overview: Describes the SLATE Container Host hardware configuration.
 
 order: 20
