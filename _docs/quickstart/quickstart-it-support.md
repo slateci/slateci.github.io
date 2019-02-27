@@ -1,5 +1,5 @@
 ---
-title: Quickstart IT Support
+title: Quickstart IT Administrators
 overview: What do you need to support a SLATE platform?
 
 order: 60
