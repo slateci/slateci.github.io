@@ -73,7 +73,7 @@ As the creator of the group, you are automatically a member. You can then use th
 
 The `slate cluster create` command can register your Kubernetes cluster with the SLATE platform. It will ask your permission to install components which will allow the SLATE platform and its users to access your cluster with limited permissions controlled by [Kubernetes Role-Based Access Control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/). Once the registration is completed, the SLATE platform will only be able to access Kubernetes objects within the namespace created during registration and namespaces (prefixed with `slate-`) that it creates:
 
-	$ slate cluster create --group usnd-hoople hoople
+	$ slate cluster create --group usnd-hoople --org "USND Hoople" hoople
 	Extracting kubeconfig from /Users/admin/.kube/config...
 	Checking for privilege level/deployment controller status...
 	It appears that the nrp-controller is not deployed on this cluster.
@@ -109,7 +109,7 @@ The `slate cluster create` command can register your Kubernetes cluster with the
 	Sending config to SLATE server...
 	Successfully created cluster hoople with ID cluster_G23mthSyhWm
 
-Note: You must specify the group which will administer the cluster, since you may belong to more than one group. Your cluster is now part of the SLATE platform, but only members of your group can use it. You can verify this by listing the groups allowed access:
+Note: You must specify the group which will administer the cluster with `--group`, since you may belong to more than one group, and the organization which formally owns the cluster with `--org`. Your cluster is now part of the SLATE platform, but only members of your group can use it. You can verify this by listing the groups allowed access:
 
 	$ slate cluster list-allowed hoople
 	Name        ID            
