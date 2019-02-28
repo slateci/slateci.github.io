@@ -1,4 +1,5 @@
 ---
+permalink: /docs/science-fields
 ---
 
 Fields of Science understood by the SLATE platform. 
