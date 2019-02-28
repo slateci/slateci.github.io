@@ -36,7 +36,9 @@ For help using the client, run it with the --help option:
 	  --output TEXT               The format in which to print output (can be specified as no-headers, json, jsonpointer, jsonpointer-file, custom-columns, or custom-columns-file)
 	
 	Subcommands:
-	  vo                          Manage SLATE VOs
+	  version                     Print version information
+	  completion                  Print a shell completion script
+	  group                       Manage SLATE groups
 	  cluster                     Manage SLATE clusters
 	  app                         View and install SLATE applications
 	  instance                    Manage SLATE application instances
@@ -47,29 +49,31 @@ The `--help` option can also be used with any of the client's subcommands to lea
 The client's simplest use is to list existing objects on the SLATE platform. For example, you can list the edge clusters currently participating in the platform:
 
 	$ ./slate cluster list
-	Name               Owner     ID             
+	Name               Admin     ID             
 	umich-prod         slate-dev cluster_WRb0f8mH9ak
 	uchicago-prod      slate-dev cluster_yZroQR5mfBk
 	uutah-prod         slate-dev cluster_eoqYk8lFmtk
 	
-In this (abbreviated) output, three edge clusters are listed. Each cluster has name associated with it for convenience, an automatically-generated unique identifier, and an owning Virtual Organization (VO) which administers it (here, all three clusters are administered by the SLATE team). All objects in the SLATE platform have unique IDs, and these must often be specified when using the client to indicate which objects you wish to manipulate. VOs and clusters have globally-unique names as well, though, so, when specifying a VO or cluster, you can always use the name instead of the ID.
+In this (abbreviated) output, three edge clusters are listed. Each cluster has name associated with it for convenience, an automatically-generated unique identifier, and a group which administers it (here, all three clusters are administered by the SLATE team). All objects in the SLATE platform have unique IDs, and these must often be specified when using the client to indicate which objects you wish to manipulate. Groups and clusters have globally-unique names as well, though, so, when specifying a group or cluster, you can always use the name instead of the ID.
 
-## Creating a Virtual Organization
+## Creating a Group
 
-To do much on the SLATE platform you must belong to a VO, since VOs are the foundation of SLATE's permissions model. You can either join a VO by asking a person who is already a member to add you, or you can create a new VO with the command`slate vo create`. Note that newly created VOs don't generally have access to any resources (edge clusters), but they can add resources of their own.
+To do much on the SLATE platform you must belong to a group, since groups are the foundation of SLATE's permissions model. You can either join a group by asking a person who is already a member to add you, or you can create a new group with the command`slate group create`. Note that newly created groups don't generally have access to any resources (edge clusters), but they can add resources of their own. A user can also belong to several groups. 
 
-If you're a system administrator at the fictional University of Southern North Dakota at Hoople, and you want to add your Kubernetes cluster to the SLATE platform, you would begin by creating a VO: 
+If you're a system administrator at the fictional University of Southern North Dakota at Hoople, and you want to add your Kubernetes cluster to the SLATE platform, you would begin by creating a group: 
 
-	$ slate vo create usnd-hoople
-	Successfully created VO usnd-hoople with ID vo_NUKQUeNjMMo
+	$ slate group create usnd-hoople --field "Resource Provider"
+	Successfully created group usnd-hoople with ID group_NUKQUeNjMMo
 
-As the creator of the VO, you are automatically a member. You can then use the web portal add other users. 
+When creating a group it is required that you specify the science field in which it works, or 'Resource Provider' if your group existing mainly to provide computing resources to the platform. For a full list of fields of science currently allowed by SLATE, see [this page](http://slateci.io/docs/science-fields.html). 
+
+As the creator of the group, you are automatically a member. You can then use the web portal add other users. 
 
 ## Registering a Cluster
 
 The `slate cluster create` command can register your Kubernetes cluster with the SLATE platform. It will ask your permission to install components which will allow the SLATE platform and its users to access your cluster with limited permissions controlled by [Kubernetes Role-Based Access Control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/). Once the registration is completed, the SLATE platform will only be able to access Kubernetes objects within the namespace created during registration and namespaces (prefixed with `slate-`) that it creates:
 
-	$ slate cluster create --vo usnd-hoople hoople
+	$ slate cluster create --group usnd-hoople hoople
 	Extracting kubeconfig from /Users/admin/.kube/config...
 	Checking for privilege level/deployment controller status...
 	It appears that the nrp-controller is not deployed on this cluster.
@@ -105,33 +109,33 @@ The `slate cluster create` command can register your Kubernetes cluster with the
 	Sending config to SLATE server...
 	Successfully created cluster hoople with ID cluster_G23mthSyhWm
 
-Note: You must specify the VO which will own the cluster, since a user may belong to more than one VO. Your cluster is now part of the SLATE platform, but only members of your VO can use it. You can verify this by listing the VOs allowed access:
+Note: You must specify the group which will administer the cluster, since you may belong to more than one group. Your cluster is now part of the SLATE platform, but only members of your group can use it. You can verify this by listing the groups allowed access:
 
 	$ slate cluster list-allowed hoople
 	Name        ID            
-	usnd-hoople vo_NUKQUeNjMMo
+	usnd-hoople group_NUKQUeNjMMo
 
-Suppose that you also work with the Graphene Radiometry for Unified Multi-Messenger Blockchain Leveraged Exoplanet Searches (GRUMMBLES) project, which makes extensive use of distributed computing, which wants to deploy services with SLATE. We'll assume that they already have a VO, of which you are also a member:
+Suppose that you also work with the Graphene Radiometry for Unified Multi-Messenger Blockchain Leveraged Exoplanet Searches (GRUMMBLES) project, which makes extensive use of distributed computing, which wants to deploy services with SLATE. We'll assume that they already have a group, of which you are also a member:
 
-	$ slate vo list
+	$ slate group list
 	Name        ID            
-	grummbles   vo_tHllvsT8fEk
-	usnd-hoople vo_NUKQUeNjMMo
+	grummbles   group_tHllvsT8fEk
+	usnd-hoople group_NUKQUeNjMMo
 	
 You can easily grant the GRUMMBLES project access to use the new edge cluster:
 
-	$ slate cluster allow-vo hoople grummbles
-	Successfully granted VO grummbles access to cluster hoople
+	$ slate cluster allow-group hoople grummbles
+	Successfully granted group grummbles access to cluster hoople
 	
-You can also grant universal access to all SLATE VOs:
+You can also grant universal access to all SLATE groups:
 
-	$ slate cluster allow-vo hoople '*'
-	Successfully granted VO * access to cluster hoople
+	$ slate cluster allow-group hoople '*'
+	Successfully granted group * access to cluster hoople
 	$ slate cluster list-allowed hoople
 	Name  ID
 	<all> * 
 
-When universal access is granted, individual VOs are not listed by `slate cluster list-allowed`. Granting access to VOs individually or universally is mainly dependent on your institution or funding source's security and resource sharing policies.
+When universal access is granted, individual groups are not listed by `slate cluster list-allowed`. Granting access to groups individually or universally is mainly dependent on your institution or funding source's security and resource sharing policies.
 
 ## Deploying an Application
 	
@@ -144,7 +148,7 @@ To run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES w
 	stashcache         0.9         0.1.0         StashCache is an xrootd based caching service
 	xcache             4.8.3       0.2.0         XCache is a xrootd based caching service for k8s
 
-osg-frontier-squid is such a proxy. You could just install it with default settings, but you'll probably want to customize settings. Start by first fetching the default configuration into a local file:
+osg-frontier-squid is such a proxy. You could just install it with default settings, but you'll probably want to customize them. Start by first fetching the default configuration into a local file:
 
 	$ slate app get-conf --dev osg-frontier-squid > grummbles-squid-hoople.yaml
 	
@@ -185,26 +189,26 @@ Opening that file with your preferred editor will show something like this:
 	
 Next, edit the file to set properties like cache sizes and allowed ranges of IP addresses you'll allow to use the proxy. Save your changes to the file, and you're ready to deploy the application:
 
-	$ slate app install --dev osg-frontier-squid --vo grummbles --cluster hoople --conf grummbles-squid-hoople.yaml
+	$ slate app install --dev osg-frontier-squid --group grummbles --cluster hoople --conf grummbles-squid-hoople.yaml
 	Successfully installed application osg-frontier-squid as instance grummbles-osg-frontier-squid-global with ID instance_wVsnbXs5cUw
 	
 This shows your application instance has been launched on the Kubernetes cluster. You can double check by listing running instances:
 
-	$ slate instance list --vo grummbles --cluster hoople
+	$ slate instance list --group grummbles --cluster hoople
 	Name                        ID                  
 	osg-frontier-squid-global   instance_wVsnbXs5cUw
 
-It's good form to limit instance listings by cluster and VO any time you don’t need a broader view, to reduce the load on SLATE infrastructure and the amount of information printed to your terminal.
+It's good form to limit instance listings by cluster and group any time you don’t need a broader view, to reduce the load on SLATE infrastructure and the amount of information printed to your terminal.
 
 The service is running, but you still have no way to use it. SLATE has more detailed information to solve this. Note that since you can deploy application instances with the same names on different clusters, to uniquely identify an instance you must specify its full ID:
 
 	$ slate instance info instance_wVsnbXs5cUw
-	Name                      Started      VO        Cluster ID
-	osg-frontier-squid-global 2018-Oct-17  slate-dev hoople  instance_wVsnbXs5cUw
+	Name                      Started      Group     Cluster ID
+	osg-frontier-squid-global 2018-Oct-17  grummbles hoople  instance_wVsnbXs5cUw
 	                          13:17:47 UTC                          
 
 	Services:
-	Name                      Cluster IP    External IP    Ports         
+	Name                      Cluster IP     External IP   Ports         
 	osg-frontier-squid-global 10.104.122.170 198.51.100.62 3128:30402/TCP
 	
 	Pods:
@@ -239,7 +243,7 @@ The service is running, but you still have no way to use it. SLATE has more deta
 	  CacheSize: 10000
 	  IPRange: 192.168.1.1/32
 
-The ‘Services’ section of the listing shows that your proxy is running, and should be reachable at 96.14.44.108:3128. Only members of the VO which deployed an instance (and SLATE platform administrators) can query its information this way, so your services are nominally private (although this should not be relied upon for any serious security). 
+The 'Services' section of the listing shows that your proxy is running, and should be reachable at 96.14.44.108:3128. Only members of the group which deployed an instance (and SLATE platform administrators) can query its information this way, so your services are nominally private (although this should not be relied upon for any serious security). 
 
 ## Application Lifecycle
 
