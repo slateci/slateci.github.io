@@ -1,6 +1,7 @@
 ---
+title: Fields of Science
 permalink: /docs/science-fields
-layout: docs
+layout: welcome
 ---
 
 Fields of Science understood by the SLATE platform. 
