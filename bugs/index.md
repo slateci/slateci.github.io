@@ -10,4 +10,4 @@ type: markdown
 
 Oh no! You found a bug? 
 
-Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss"> slateci-discuss</a> group to report a bug, post questions, and search for discussion topics.
+Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss" target="_blank"> slateci-discuss</a> group to report a bug, post questions, and search for discussion topics.
