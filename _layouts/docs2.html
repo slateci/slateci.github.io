@@ -1,0 +1,25 @@
+---
+layout: default
+---
+{% include home.html %}
+{% include doc-top-nav.html %}
+
+<script src="{{home}}/js/navtree.js"></script>
+
+<div class="container docs">
+  <div class="row">
+    <div class="col-md-11 nofloat center-block">
+      <div class="row">
+        <div id="content-container" class="thin-left-border col-sm-9 {{ page.type }}">
+          <div id="toc" class="toc"></div>
+          <div id="doc-content">
+            <h1>{{page.title}}</h1>
+            {{ content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{home}}/js/sidemenu.js"></script>
