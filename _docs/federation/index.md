@@ -5,7 +5,7 @@ index: true
 
 order: 80
 
-layout: docs
+layout: docs2
 type: markdown
 ---
 The concept of federated [SLATE Edge Clusters](http://slateci.io/docs/concepts/hardware-components/edge-cluster.html) is a fundamental tenet that eases deployment of scientific software and gateway services with minimal effort from local system administrators. With appropriate permissions, an [application developer](http://slateci.io/docs/concepts/individual-roles/application-developer.html) or [application administrator](http://slateci.io/docs/concepts/individual-roles/application-administrator.html) can deploy one or more instances of an application across multiple sites within the context of a specific [Virtual
