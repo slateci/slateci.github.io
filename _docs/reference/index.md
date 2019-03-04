@@ -11,7 +11,7 @@ type: markdown
 
 <strong>Journals or Juried Conference Papers</strong>
 
-<p>Breen, Joe and McKee, Shawn and Riedel, Benedikt and Stidd, Jason and Truong, Luan and Vukotic, Ilija and Bryant, Lincoln and Carcassi, Gabriele and Chen, Jiahui and Gardner, Robert W. and Harden, Ryan and Izdimirski, Martin and Killen, Robert and Kulbertis, Ben. (2018). Building the SLATE Platform. <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. Status=Deposited in NSF-PAR doi: 10.1145/3219104.3219144.</p>
+<p>Breen, Joe and McKee, Shawn and Riedel, Benedikt and Stidd, Jason and Truong, Luan and Vukotic, Ilija and Bryant, Lincoln and Carcassi, Gabriele and Chen, Jiahui and Gardner, Robert W. and Harden, Ryan and Izdimirski, Martin and Killen, Robert and Kulbertis, Ben. (2018). Building the SLATE Platform. <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. doi: 10.1145/3219104.3219144.</p>
 
 <p>Gardner, R and Breen, J and Bryant, L and McKee, S. (2017). SLATE and the Mobility of Capability. <i>Science Gateways 2017</i>.</p>
 
