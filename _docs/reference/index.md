@@ -15,9 +15,9 @@ type: markdown
 
 <p>Gardner, R and Breen, J and Bryant, L and McKee, S. (2017). SLATE and the Mobility of Capability. <i>Science Gateways 2017</i>.</p>
 
-<strong>Other Conference Presentations/Papers</strong>
-
-<p>Lincoln Bryant (2018). <i>A Service Layer at the Edge</i>. Annual Meeting of the Great Plains Network. Kansas City, MIssouri.</p>
+<strong>Other Conference Presentations/Papers</strong>    
+  
+<p>Lincoln Bryant (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. Kansas City, MIssouri.</p>
 
 <p>Joe Breen, <i>et. al.</i> (2018). <i>Building the SLATE Platform</i>. PEARC18. Pittsburgh, Pennsylvania.</p>
 
