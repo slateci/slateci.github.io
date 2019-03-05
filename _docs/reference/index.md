@@ -27,7 +27,7 @@ type: markdown
 
 <p>Gardner, R. (2017). <i>SLATE: Services Layer at the Edge</i>. US ATLAS Software and Computing Planning Meeting. Boston University.</p>
 
-<p>Gardner, R., McKee, S., & Breen, J. (2018). <i>SLATE: Services Layer at The Edge</i>. Open Science Grid All Hands Meeting. University of Utah.</p>
+<p>Gardner, R., McKee, S., & Breen, J. (2018). <i><a href="https://indico.fnal.gov/event/15344/session/11/contribution/20/material/slides/0.link">SLATE: Services Layer at The Edge</a></i>. Open Science Grid All Hands Meeting. University of Utah.</p>
 
 <p>Gardner, R. (2018). <i>SLATE: Services Layer at The Edge</i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
 
