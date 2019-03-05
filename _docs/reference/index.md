@@ -17,18 +17,18 @@ type: markdown
 
 <strong>Other Conference Presentations/Papers</strong>    
   
-<p>Lincoln Bryant (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. Kansas City, MIssouri.</p>
+<p>Bryant, L. (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. Kansas City, MIssouri.</p>
 
-<p>Joe Breen, <i>et. al.</i> (2018). <i>Building the SLATE Platform</i>. PEARC18. Pittsburgh, Pennsylvania.</p>
+<p>Breen, J. <i>et. al.</i> (2018). <i>Building the SLATE Platform</i>. PEARC18. Pittsburgh, Pennsylvania.</p>
 
-<p>Rob Gardner (2017). <i>SLATE and the Mobility of Capability</i>. Gateways 2017. Ann Arbor, Michigan.</p>
+<p>Gardner, R. (2017). <i>SLATE and the Mobility of Capability</i>. Gateways 2017. Ann Arbor, Michigan.</p>
 
 <p>Gardner, R., McKee, S., & Breen, J. (2017). <i>SLATE: Services Layer at the Edge</i>. First Meeting of the National Research Platform, Montana State University. Bozeman, Montana.</p>
 
-<p>Rob Gardner (2017). <i>SLATE: Services Layer at the Edge</i>. US ATLAS Software and Computing Planning Meeting. Boston University.</p>
+<p>Gardner, R. (2017). <i>SLATE: Services Layer at the Edge</i>. US ATLAS Software and Computing Planning Meeting. Boston University.</p>
 
 <p>Gardner, R., McKee, S., & Breen, J. (2018). <i>SLATE: Services Layer at The Edge</i>. Open Science Grid All Hands Meeting. University of Utah.</p>
 
-<p>Rob Gardner (2018). <i>SLATE: Services Layer at The Edge</i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
+<p>Gardner, R. (2018). <i>SLATE: Services Layer at The Edge</i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
 
-<p>Shawn McKee (2017). <i>The Machinery of Big Data Science</i>. Saturday Morning Physics Public Lecture. Ann Arbor, Michigan.</p>
+<p>McKee, S. (2017). <i>The Machinery of Big Data Science</i>. Saturday Morning Physics Public Lecture. Ann Arbor, Michigan.</p>
