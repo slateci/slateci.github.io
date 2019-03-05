@@ -31,4 +31,4 @@ type: markdown
 
 <p>Gardner, R. (2018). <i><a href="https://indico.cern.ch/event/692124/contributions/2899900/attachments/1612269/2561495/SLATE_for_ATLAS_Sites_Jamboree.pdf">SLATE: Services Layer at The Edge</a></i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
 
-<p>McKee, S. (2017). <i>The Machinery of Big Data Science</i>. Saturday Morning Physics Public Lecture. Ann Arbor, Michigan.</p>
+<p>McKee, S. (2017). <i><a href="https://youtu.be/yPUNcStouj0">The Machinery of Big Data Science</a></i>. Saturday Morning Physics Public Lecture. Ann Arbor, Michigan.</p>
