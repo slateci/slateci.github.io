@@ -11,9 +11,9 @@ type: markdown
 
 <strong>Journals or Juried Conference Papers</strong>
 
-<p>Breen, Joe and McKee, Shawn and Riedel, Benedikt and Stidd, Jason and Truong, Luan and Vukotic, Ilija and Bryant, Lincoln and Carcassi, Gabriele and Chen, Jiahui and Gardner, Robert W. and Harden, Ryan and Izdimirski, Martin and Killen, Robert and Kulbertis, Ben. (2018). Building the SLATE Platform. <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. doi: 10.1145/3219104.3219144.</p>
+<p>Breen, J., McKee, S., Riedel, B., Stidd, J., Truong, L., Vukotic, I., Bryant, L., Carcassi, G., Chen, J., Gardner, R.W., Harden, R., Izdimirski, M., Killen, R., & Kulbertis, B. (2018). Building the SLATE Platform. <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. doi: 10.1145/3219104.3219144.</p>
 
-<p>Gardner, R and Breen, J and Bryant, L and McKee, S. (2017). SLATE and the Mobility of Capability. <i>Science Gateways 2017</i>.</p>
+<p>Gardner, R., Breen, J., Bryant, L., & McKee, S. (2017). SLATE and the Mobility of Capability. <i>Science Gateways 2017</i>.</p>
 
 <strong>Other Conference Presentations/Papers</strong>    
   
@@ -23,11 +23,11 @@ type: markdown
 
 <p>Rob Gardner (2017). <i>SLATE and the Mobility of Capability</i>. Gateways 2017. Ann Arbor, Michigan.</p>
 
-<p>Rob Gardner, Shawn McKee, Joe Breen (2017). <i>SLATE: Services Layer at the Edge</i>. First Meeting of the National Research Platform, Montana State University. Bozeman, Montana.</p>
+<p>Gardner, R., McKee, S., & Breen, J. (2017). <i>SLATE: Services Layer at the Edge</i>. First Meeting of the National Research Platform, Montana State University. Bozeman, Montana.</p>
 
 <p>Rob Gardner (2017). <i>SLATE: Services Layer at the Edge</i>. US ATLAS Software and Computing Planning Meeting. Boston University.</p>
 
-<p>Rob Gardner, Shawn McKee, Joe Breen (2018). <i>SLATE: Services Layer at The Edge</i>. Open Science Grid All Hands Meeting. University of Utah.</p>
+<p>Gardner, R., McKee, S., & Breen, J. (2018). <i>SLATE: Services Layer at The Edge</i>. Open Science Grid All Hands Meeting. University of Utah.</p>
 
 <p>Rob Gardner (2018). <i>SLATE: Services Layer at The Edge</i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
 
