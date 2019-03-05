@@ -11,7 +11,7 @@ type: markdown
 
 <strong>Journals or Juried Conference Papers</strong>
 
-<p>Breen, J., McKee, S., Riedel, B., Stidd, J., Truong, L., Vukotic, I., Bryant, L., Carcassi, G., Chen, J., Gardner, R.W., Harden, R., Izdimirski, M., Killen, R., & Kulbertis, B. (2018). Building the SLATE Platform. <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. doi: 10.1145/3219104.3219144.</p>
+<p>Breen, J., McKee, S., Riedel, B., Stidd, J., Truong, L., Vukotic, I., Bryant, L., Carcassi, G., Chen, J., Gardner, R.W., Harden, R., Izdimirski, M., Killen, R., & Kulbertis, B. (2018). Building the SLATE Platform. <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. doi: <a href="http://delivery.acm.org/10.1145/3220000/3219144/a5-Breen.pdf?ip=141.213.175.93&id=3219144&acc=ACTIVE%20SERVICE&key=93447E3B54F7D979%2E0A17827594E6F2C8%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1551807133_370375274ebb7134e00314f2f5a41e3c">10.1145/3219104.3219144.</a></p>
 
 <p>Gardner, R., Breen, J., Bryant, L., & McKee, S. (2017). SLATE and the Mobility of Capability. <i>Science Gateways 2017</i>.</p>
 
