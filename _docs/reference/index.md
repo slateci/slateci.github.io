@@ -27,6 +27,8 @@ type: markdown
 
 <p>Rob Gardner (2017). <i>SLATE: Services Layer at the Edge</i>. US ATLAS Software and Computing Planning Meeting. Boston University.</p>
 
-<p>Rob Gardner (2018). <i>SLATE: Services Layer at the Edge</i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
+<p>Rob Gardner, Shawn McKee, Joe Breen (2018). <i>SLATE: Services Layer at The Edge</i>. Open Science Grid All Hands Meeting. University of Utah.</p>
+
+<p>Rob Gardner (2018). <i>SLATE: Services Layer at The Edge</i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
 
 <p>Shawn McKee (2017). <i>The Machinery of Big Data Science</i>. Saturday Morning Physics Public Lecture. Ann Arbor, Michigan.</p>
