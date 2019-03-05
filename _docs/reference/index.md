@@ -29,6 +29,6 @@ type: markdown
 
 <p>Gardner, R., McKee, S., & Breen, J. (2018). <i><a href="https://indico.fnal.gov/event/15344/session/11/contribution/20/material/slides/0.link">SLATE: Services Layer at The Edge</a></i>. Open Science Grid All Hands Meeting. University of Utah.</p>
 
-<p>Gardner, R. (2018). <i>SLATE: Services Layer at The Edge</i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
+<p>Gardner, R. (2018). <i><a href="https://indico.cern.ch/event/692124/contributions/2899900/attachments/1612269/2561495/SLATE_for_ATLAS_Sites_Jamboree.pdf">SLATE: Services Layer at The Edge</a></i>. ATLAS Sites Jamboree. CERN, Geneva, Switzerland.</p>
 
 <p>McKee, S. (2017). <i>The Machinery of Big Data Science</i>. Saturday Morning Physics Public Lecture. Ann Arbor, Michigan.</p>
