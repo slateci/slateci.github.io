@@ -139,7 +139,7 @@ When universal access is granted, individual groups are not listed by `slate clu
 
 ## Deploying an Application
 	
-To run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES would like to deploy a caching HTTP proxy. To see if SLATE has a suitable application, they need to list the applications in the catalog. They might see something like this:
+To run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES would like to deploy a caching HTTP proxy. To see if SLATE has a suitable application, they need to list the applications in the catalog (add the "--dev" flag to see applications in the development catalog). They might see something like this:
 
 	$ slate app list
 	Name               App Version Chart Version Description
