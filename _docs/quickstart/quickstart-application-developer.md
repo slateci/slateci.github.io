@@ -36,4 +36,4 @@ When you are familiar with the SLATE command-line, we suggest you look at the [S
     </div>
 </div>
 
-You will have a small version of the whole SLATE reference platform and you will be able to grab existing packages in the SLATE stable and dev catalogs.  If you are using the dev catalog, don't forget the "--dev" flag!
+You will have a small version of the whole SLATE reference platform and you will be able to grab existing packages in the SLATE stable and dev catalogs.  If you are using the dev catalog, don't forget the ["--dev" flag](http://slateci.io/docs/quickstart/slate-client.html#deploying-an-application)! 
