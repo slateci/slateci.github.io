@@ -12,7 +12,7 @@ type: markdown
 The second goal is to create a Kubernetes deployment that properly configures
 all the components of the application.
 
-In general, we recommend that users follow the [excellent Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for developing deployments.
+In general, we recommend that users follow the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/" target="_blank">excellent Kubernetes documentation</a> for developing deployments.
 
 SLATE applications can additionally expect the following to be available at every site:
   - Persistent Volumes
