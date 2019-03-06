@@ -1,5 +1,5 @@
 ---
-title: Quickstart IT Administrators
+title: Quickstart SLATE Cluster Operator
 overview: What do you need to support a SLATE platform?
 
 order: 60
