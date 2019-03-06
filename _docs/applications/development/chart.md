@@ -76,7 +76,7 @@ Some notes about creating the Helm Chart and deciding on values:
 * Avoid using technical terminology of kubernetes or docker.
 
 SLATE Standardization:
-* An `Intance` variable is required for SLATE to deploy unique instances of the application. This should be included in the metadata names using the helper function below in the _helpers.yaml file. If there is a resource associated with the deployment, it should be named as {% raw %} `{{ template "[chart].fullname" . }}-[resourceName]` {% endraw %}  
+* An `Intance` variable is required for SLATE to deploy unique instances of the application. This should be included in the metadata names using the helper function below in the _helpers.tpl file. If there is a resource associated with the deployment, it should be named as {% raw %} `{{ template "[chart].fullname" . }}-[resourceName]` {% endraw %}  
 {% raw %}
 ```
 {{- define "[chart].fullname" -}} #replace the chart name with yours
