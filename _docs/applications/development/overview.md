@@ -18,7 +18,7 @@ and a database backend) so they will be composed of multiple containers that wor
 
 * A **Kubernetes deployment** for the application. A Kubernetes deployment encapsulates the set of
 instructions that are needed to make the applications run. It will describe which containers need
-to run, how they need to be configured, requirements for network access and storage. 
+to run, how they need to be configured, and requirements for network access and storage. 
 
 * A **Helm chart** for the application. A Helm chart parametrizes the deployment so that
 multiple instances of the same application can be installed. It describes which
