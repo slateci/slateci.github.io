@@ -17,7 +17,7 @@ type: markdown
 
 <strong>Other Conference Presentations/Papers</strong>    
   
-<p>Bryant, L. (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. Kansas City, MIssouri.</p>
+<p>Bryant, L. (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. <a href="https://docs.google.com/presentation/d/1f-zNlxWe0eZJM6zDGurcjAK5fKuxt_RRLP73u1rGpN0/edit#slide=id.p">Presentation Slides</a>. Kansas City, Missouri.</p>
 
 <p>Breen, J. <i>et. al.</i> (2018). <i>Building the SLATE Platform</i>. PEARC18. <a href="https://docs.google.com/presentation/d/13F7BmDZkHi8K2LK_sbRJ8L-Ud-ieE0UbOnJumYLl6oU/edit?usp=sharing">Presentation Slides</a>. Pittsburgh, Pennsylvania.</p>
 
