@@ -45,13 +45,7 @@ Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slate
       </td>
     </tr>
 
-    <tr>
-      <td class="logo"><img src="{{home}}/img/stackoverflow.png" alt="Stack Overflow"/></td>
-      <td>
-        <a href="https://stackoverflow.com/questions/tagged/slateci">Stack Overflow</a> is for practical questions and curated answers
-        on deploying, configuring, and using SLATE.
-      </td>
-    </tr>
+    
   </tbody>
 </table>
 
