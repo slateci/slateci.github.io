@@ -19,7 +19,7 @@ type: markdown
   
 <p>Bryant, L. (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. Kansas City, MIssouri.</p>
 
-<p>Breen, J. <i>et. al.</i> (2018). <i>Building the SLATE Platform</i>. PEARC18. Pittsburgh, Pennsylvania.</p>
+<p>Breen, J. <i>et. al.</i> (2018). <i>Building the SLATE Platform</i>. PEARC18. <a href="https://docs.google.com/presentation/d/13F7BmDZkHi8K2LK_sbRJ8L-Ud-ieE0UbOnJumYLl6oU/edit?usp=sharing">Presentation Slides</a>. Pittsburgh, Pennsylvania.</p>
 
 <p>Gardner, R. (2017). <i>SLATE and the Mobility of Capability</i>. Gateways 2017. Ann Arbor, Michigan.</p>
 
