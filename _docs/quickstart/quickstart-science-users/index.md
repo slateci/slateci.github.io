@@ -29,8 +29,6 @@ For more information about using the SLATE command line client to deploy and man
 
 If you have an interest in understanding more about the development of SLATE applications, you can download a mini-SLATE development kit which has all of the SLATE software stack.  
 
-{% include_relative /slateci/slatelite/blob/master/README.md %}
-
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
