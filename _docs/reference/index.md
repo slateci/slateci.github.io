@@ -21,7 +21,7 @@ type: markdown
 
 <p>Breen, J. <i>et. al.</i> (2018). <i>Building the SLATE Platform</i>. PEARC18. <a href="https://docs.google.com/presentation/d/13F7BmDZkHi8K2LK_sbRJ8L-Ud-ieE0UbOnJumYLl6oU/edit?usp=sharing">Presentation Slides</a>. Pittsburgh, Pennsylvania.</p>
 
-<p>Gardner, R. (2017). <i>SLATE and the Mobility of Capability</i>. Gateways 2017. Ann Arbor, Michigan.</p>
+<p>Gardner, R., Breen, J., Bryant, L., & McKee, S. (2017). <i><a href="https://drive.google.com/file/d/0BzgiYUsbrz2TWHkzNzBlbzJyXzg/view?usp=sharing">SLATE and the Mobility of Capability</a></i>. Gateways 2017. Ann Arbor, Michigan.</p>
 
 <p>Gardner, R., McKee, S., & Breen, J. (2017). <i><a href="https://prp.ucsd.edu/presentations/nrp/S1.5%20Gardner_SLATE%20for%20NRP.pdf/at_download/file">SLATE: Services Layer at the Edge</a></i>. First Meeting of the National Research Platform, Montana State University. Bozeman, Montana.</p>
 
