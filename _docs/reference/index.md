@@ -25,7 +25,7 @@ type: markdown
 
 <p>Gardner, R., McKee, S., & Breen, J. (2017). <i><a href="https://prp.ucsd.edu/presentations/nrp/S1.5%20Gardner_SLATE%20for%20NRP.pdf/at_download/file">SLATE: Services Layer at the Edge</a></i>. First Meeting of the National Research Platform, Montana State University. Bozeman, Montana.</p>
 
-<p>Gardner, R. (2017). <i>SLATE: Services Layer at the Edge</i>. US ATLAS Software and Computing Planning Meeting. Boston University.</p>
+<p>Gardner, R. (2017). <i>SLATE: Services Layer at the Edge</i>. US ATLAS Software and Computing Planning Meeting. <a href=" https://docs.google.com/presentation/d/1s24-P8tmpfJoYl4VyFr4KzuPczgms_LJFSQONut6Ngk/edit?usp=sharing">Presentation Slides</a>. Boston University.</p>
 
 <p>Gardner, R., McKee, S., & Breen, J. (2018). <i><a href="https://indico.fnal.gov/event/15344/session/11/contribution/20/material/slides/0.link">SLATE: Services Layer at The Edge</a></i>. Open Science Grid All Hands Meeting. University of Utah.</p>
 
