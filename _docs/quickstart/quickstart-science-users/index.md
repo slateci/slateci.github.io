@@ -38,13 +38,3 @@ If you have an interest in understanding more about the development of SLATE app
         </div>
     </div>
 </div>
-
-  <div id="ajaxContent"></div>
-  <script>
-  var Webflow = Webflow || [];
-  Webflow.push(function() {
-    $.get('https://cdn.rawgit.com/aslateci/minislate/master/README.md', function(data) {
-      $('#ajaxContent').append(data);
-    });
-  });
-  </script>
