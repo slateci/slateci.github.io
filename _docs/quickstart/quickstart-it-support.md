@@ -35,4 +35,4 @@ If you're interested in exploring further, download SLATElite which provides a l
     </div>
 </div>
 
-For more information on using the SLATE command line client to manage a cluster you may wish to read our <a href="http://slateci.io/docs/quickstart/slate-client.html">SLATE Client Guide</a>, particularly the sections on <a href="http://slateci.io/docs/quickstart/slate-client.html#installing-the-slate-client">installation</a> and <a href="http://slateci.io/docs/quickstart/slate-client.html#registering-a-cluster">registering a cluster</a>
+For more information on using the SLATE command line client to manage a cluster you may wish to read our <a href="http://slateci.io/docs/quickstart/slate-client.html">SLATE Client Guide</a>, particularly the sections on <a href="http://slateci.io/docs/quickstart/slate-client.html#installing-the-slate-client">installation</a> and <a href="http://slateci.io/docs/quickstart/slate-client.html#registering-a-cluster">registering a cluster.</a>
