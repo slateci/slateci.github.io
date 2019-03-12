@@ -23,7 +23,7 @@ To get a sense of what users would expect to do on a cluster you might federate 
     </div>
 </div>
 
-If you're interested in exploring further, download SLATElite which provides a lightweight version of SLATE. SLATElite is a docker-compose standard SLATE deployment with performance	tweaks for personal machines.  It's lightweight nature makes it easy to install for testing or prototyping purposes.
+If you're interested in exploring further, download SLATElite which provides a lightweight version of SLATE. SLATElite is a docker-compose standard SLATE deployment with performance tweaks for personal machines.  It's lightweight nature makes it easy to install for testing or prototyping purposes.
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
