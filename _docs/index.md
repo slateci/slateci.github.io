@@ -19,7 +19,7 @@ the links below:
 
 - [SLATE Hardware]({{home}}/docs/slate-hardware/) Example hardware specifications.
 
-- [Applications]({{home}}/docs/applications/) How to program for the SLATE platform.
+- [Applications]({{home}}/docs/developers/) How to program for the SLATE platform.
 
 - [Federation]({{home}}/docs/federation/) SLATE federation approaches.
 
