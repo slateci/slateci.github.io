@@ -3,7 +3,7 @@ title: Federation
 overview: 
 index: true
 
-order: 80
+order: 70
 
 layout: docs2
 type: markdown
