@@ -1,8 +1,9 @@
 ---
 title: Application Development
 overview: Guidelines for SLATE application development
+index: true
 
-order: 60
+order: 90
 
 layout: docs
 type: markdown

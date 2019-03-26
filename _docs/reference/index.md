@@ -8,6 +8,7 @@ order: 100
 layout: docs2
 type: markdown
 ---
+{% include home.html %}
 
 <strong>Journals or Juried Conference Papers</strong>
 

@@ -17,19 +17,19 @@ th {text-align: center; vertical-align: bottom;}
 
 <table>
   <tr>
-        <th rowspan="2">Configuration</th>
-        <th rowspan="2">Vendor</th>
-        <th rowspan="2">Sockets/Cores/Threads</th>
-        <th rowspan="2">DRAM (GiB)</th>
-        <th rowspan="2">NICs</th>
-        <th colspan="3">Storage</th>
-        <th rowspan="2">Year</th>
+	<th rowspan="2">Configuration</th>
+	<th rowspan="2">Vendor</th>
+	<th rowspan="2">Sockets/Cores/Threads</th>
+	<th rowspan="2">DRAM (GiB)</th>
+	<th rowspan="2">NICs</th>
+	<th colspan="3">Storage</th>
+	<th rowspan="2">Year</th>
  </tr>
   <tr>
-        <th>Capacity</th>
-        <th>Performance</th>
-        <th>Boot/Other</th>
- </tr>
+	<th>Capacity</th>
+	<th>Performance</th>
+	<th>Boot/Other</th>
+ </tr>   
 <tr>
    <td><a href="/docs/slate-hardware/container-host.html">SLATE Reference</a></td>
    <td>Dell</td>
@@ -61,8 +61,5 @@ The reference platform includes dedicated network measurement hardware (a PerfSO
 |-----------------------|:------:|:---------------------:|------------|-------|------------|------|
 | [SLATE Management Node](/docs/slate-hardware/management-node.html) | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
 | [SLATE perfSONAR Node](/docs/slate-hardware/perfsonar-node.html)  | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
-
-
-
 
 <!--  {% include section-index.html %} -->
