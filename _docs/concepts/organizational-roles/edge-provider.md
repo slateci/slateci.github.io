@@ -10,7 +10,7 @@ type: markdown
 
 The organization that hosts a SLATE edge cluster.  
 An edge provider may join a particular SLATE-based platform to 
-define the scope and policies for supported VOs.  
+define the scope and policies for supported Groups.  
 The SLATE edge administrator would act as the outside 
 interface to the rest of the SLATE platform for the majority of circumstances.
 
