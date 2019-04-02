@@ -1,5 +1,5 @@
 ---
-title: Virtual Organization
+title: Groups
 overview: A community of researchers from a science domain on a SLATE platform.
               
 order: 60
@@ -9,8 +9,8 @@ type: markdown
 ---
 
 A community of researchers from a science domain on a SLATE platform.
-The SLATE Virtual Organization (VO) is the root of trust and authorization
-for a community working on a SLATE platform. The SLATE VO is also the unit of
+The SLATE Group is the root of trust and authorization
+for a community working on a SLATE platform. The SLATE Group is also the unit of
 resource allocation for SLATE edge clusters. For purpose of SLATE, we consider
 only the members that play a role in creating the computing infrastructure
 (i.e. develop/install/maintain software, manage data quality/storage/transfer, …)
