@@ -24,7 +24,6 @@ type: markdown
 | 403-BBPT | BOSS Controller card + with 2 M.2 Sticks 240G (RAID 1),FH                              | 1 |
 | 370-ADND | 16GB RDIMM 2666MT/s Dual Rank                                                          | 12 |
 | 400-AWIP | 12TB 7.2K RPM NLSAS 12Gbps 512e 3.5in Hot-plug Hard Drive                              | 12 |
-| 000-0000 | Samsung 2TB 970 EVO NVMe M.2 Internal SSD                                              | 1 |
 | 619-ABVR | No Operating System                                                                    | 1 | 
 | 421-5736 | No Media Required                                                                      | 1 |
 | 385-BBKT | iDRAC9,Enterprise                                                                      | 1 |
@@ -39,5 +38,12 @@ type: markdown
 | 770-BBBQ | ReadyRails Sliding Rails Without Cable Management Arm                                  | 1 |
 | 813-6068 | Dell Hardware Limited Warranty Plus On-Site Service                                    | 1 |
 | 813-6070 | Basic Hardware Services: Business Hours (5x10) Next Business Day On-Site Hardware Warranty Repair, 5 Years | 1 |
+
+This purchase additionally added in:
+
+| VENDOR PART NO. | ITEM | QUANTITY | 
+|--------- | -------------------------------------------------------------------------------------- | --- |
+| - | Samsung 2TB 970 EVO NVMe M.2 Internal SSD                                              | 4 |
+
 
 
