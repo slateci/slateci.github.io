@@ -18,7 +18,7 @@ type: markdown
 
 <strong>Other Conference Presentations/Papers</strong>    
   
-<p>Kulbertis, B. (2019) <i>Developing for a Services Layer at the Edge</i>. HEPiX Spring Meeting. <a href="https://docs.google.com/presentation/d/1MVUSRqvXkdcyMlXfqQX-QJGUUtpKr0A3W26mN8JbFEQ/edit?usp=sharing">Presentation Slides</a>. San Diego, California.</p>
+<p>Kulbertis, B. (2019). <i>Developing for a Services Layer at the Edge</i>. HEPiX Spring Meeting. <a href="https://docs.google.com/presentation/d/1MVUSRqvXkdcyMlXfqQX-QJGUUtpKr0A3W26mN8JbFEQ/">Presentation Slides</a>. San Diego, California.</p>
 
 <p>Bryant, L. (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. <a href="https://docs.google.com/presentation/d/1f-zNlxWe0eZJM6zDGurcjAK5fKuxt_RRLP73u1rGpN0/edit#slide=id.p">Presentation Slides</a>. Kansas City, Missouri.</p>
 
