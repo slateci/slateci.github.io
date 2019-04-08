@@ -44,6 +44,4 @@ This purchase additionally added in:
 | VENDOR PART NO. | ITEM | QUANTITY | 
 |--------- | -------------------------------------------------------------------------------------- | --- |
 | - | Samsung 2TB 970 EVO NVMe M.2 Internal SSD                                              | 4 |
-
-
-
+| - | Dell Ultra-Speed Drive Quad NVMe M.2 PCIe x16 Card                                     | 1 | 
