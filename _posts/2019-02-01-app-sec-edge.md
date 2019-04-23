@@ -31,8 +31,8 @@ To address all of these concerns, application image sources and Helm charts are 
 A continuous integration system detects the change, publishes an updated version of the catalog, and builds the image and publishes it to a Docker repository
 PAR performs a review of the contributed chart and image sources to determine whether they meet all requirements for inclusion in the stable catalog
 If requirements are met, PAR moves the chart and image sources to the stable section of the catalog
-The continuous integration system detects the change, publishes an updated version of the catalog, and builds the image and publishes it to a Docker repository
+The continuous integration system detects the change, publishes an updated version of the catalog, and builds the image and publishes it to a Docker repository. 
 
+It should be noted that the platform team cannot reasonably inspect all software to its lowest levels. Images typically build up from base sources like Linux distributions and major open-source software packages which are already widely trusted to be run at sites. It is expected that the platform team would maintain a public whitelist of trusted organizations whose images may be used by applications without being hosted as part of the catalog.
 
-	It should be noted that the platform team cannot reasonably inspect all software to its lowest levels. Images typically build up from base sources like Linux distributions and major open-source software packages which are already widely trusted to be run at sites. It is expected that the platform team would maintain a public whitelist of trusted organizations whose images may be used by applications without being hosted as part of the catalog. 
 
