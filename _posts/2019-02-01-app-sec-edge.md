@@ -15,7 +15,7 @@ This whitepaper how applications are managed on a federated research platform. T
  In order to provide security in the platform, SLATE users may only install applications  from a curated catalog (See this document for details). The remainder of this document describes the procedure for adding applications to the catalog, and the rationale behind the procedure. 
 
 
-![alt text](/_posts/images/app-sec-fig1.png "Fig 1")
+![The SLATE Application Install Process begins with a user sending an install request to the SLATE API server. The server fetches the requested application from the Application Catalog, and sends the detailed installation commands to the edge cluster. When the edge cluster starts the application it fetches the application's container images from the application catalog.](https://github.com/slateci/slateci.github.io/raw/master/_posts/images/app-sec-fig1.png "Fig 1")
 
 
 ## Catalog 
