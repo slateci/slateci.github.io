@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-overview: How to quick start your SLATE adventure
+overview: Getting started with SLATE
 index: false
 
 order: 10
@@ -11,8 +11,7 @@ type: markdown
 
 {% include section-index.html %}
 
-SLATE wants to engage you the Science User, Science Application Developer, and IT Support. 
-See one of the sections above for details on how SLATE can work for your use-case, or click below for a short, guided tutorial on using SLATE:
+See one of the sections above for details on how SLATE to do particular tasks with SLATE, or the link below for a short, guided tutorial on using SLATE to deploy an application:
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">

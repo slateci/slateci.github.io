@@ -1,6 +1,6 @@
 ---
 title: Installing a SLATE edge cluster
-overview: How to install a single-node cluster
+overview: How to install a single-node cluster, going from a fresh OS to joining SLATE
 
 order: 90
 

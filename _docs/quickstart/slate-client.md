@@ -1,6 +1,6 @@
 ---
 title: SLATE Client
-overview: Notes on SLATE client
+overview: Using SLATE from the command line
 
 order: 100
 
