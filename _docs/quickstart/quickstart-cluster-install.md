@@ -162,4 +162,4 @@ Install docker and kubernetes on the worker nodes, but stop at the point where `
 
 	kubeadm join <master ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 	
-substituting in the IP address of your master node, and the has and token provided by `kubeadm token create`. Note that the token remains valid for 24 hours, so if you wait longer than that to join a worker you will have to regenerate it. 
+substituting in the IP address of your master node, and the hash and token provided by `kubeadm token create`. Note that the token remains valid for 24 hours, so if you wait longer than that to join a worker you will have to regenerate it. 
