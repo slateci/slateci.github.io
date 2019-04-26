@@ -1,5 +1,8 @@
 ---
 title: Installing a SLATE edge cluster
+overview: How to install a single-node cluster
+
+order: 90
 
 layout: quickstart
 type: markdown
