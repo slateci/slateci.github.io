@@ -10,7 +10,7 @@ type: markdown
 
 ## Overview
 
-SLATE is designed for two different senses of multi-tenancy: First, to avoid interference between SLATE and non-SLATE users on participating Kubernetes clusters, and second prevent interference between SLATE users on the same clusters. 
+SLATE is designed for two different senses of multi-tenancy: First, to avoid interference between SLATE and non-SLATE users on participating Kubernetes clusters, and second to prevent interference between SLATE users on the same clusters. 
 
 ## SLATE sharing with non-SLATE uses
 
