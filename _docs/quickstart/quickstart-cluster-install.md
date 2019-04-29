@@ -13,7 +13,7 @@ type: markdown
 
 This guide describes a simple procedure to install a single-node kubernetes cluster and join it to the SLATE federation. There are many other possible options for installing Kubernetes; this is just one easy way to get started quickly. 
 
-## Prerequesites
+## Prerequisites
 
 This guide assumes a freshly installed CentOS 7 system. All techniques should generalize to other suitably modern Linux systems, but specific commands can differ. 
 
@@ -37,6 +37,12 @@ To check that the SLATE client is ready to use, you can run
 	slate cluster list
 
 This should list the various clusters which are already participating in the federation. 
+
+## Scripted version
+
+If you want a script which will do nearly all of the below, download a copy of [http://jenkins.slateci.io/artifacts/scripts/install-slate.sh](http://jenkins.slateci.io/artifacts/scripts/install-slate.sh). Note that you will need to read and modify its first section to set the names which are relevant for you installation. 
+
+Once the script has finished, you should have a working single-node Kubernetes cluster registered with SLATE. You can then jump to [allowing groups on your cluster](#allowing-groups-to-run-on-your-slate-cluster)
 
 ## System Configuration Tweaks
 
@@ -98,7 +104,7 @@ Configure the bridge filtering for kubernetes:
 	EOF
 	sysctl --system
 
-At this point it is time to initialize the Kubernetes cluster. The pod networking CIDR range must be configured to match the expectations of the networking plugin which we will install later. In this case, we will use Calico, so we use it's preferred setting of 192.168.0.0/16:
+At this point it is time to initialize the Kubernetes cluster. The pod networking CIDR range must be configured to match the expectations of the networking plugin which we will install later. In this case, we will use Calico, so we use its preferred setting of 192.168.0.0/16:
 
 	kubeadm init --pod-network-cidr=192.168.0.0/16
 
@@ -141,16 +147,14 @@ After this command completes your cluster should be joined to the federation. Yo
 As a service to users who are curious where your cluster is, it is helpful to also run
 
 	slate cluster update <cluster name> --location <latitude>,<longitude>
+	
+## Allowing groups to run on your SLATE cluster
 
 At this point your cluster is a fully working member of the SLATE platform. However, only your group has access to deploy applications to it. You can leave it in this state as long as you wish, for example to do testing and evaluation. If you want to grant other groups access, you can use
 
 	slate cluster allow-group <cluster name> '*'
 
 to grant access to _all_ groups participating in the platform, or replace `'*'` with the name of a particular group to grant access to just that group. 
-
-## Scripted version
-
-If you want a script which will do nearly all of the above (all except setting up your SLATE account and granting other groups access to your cluster) download a copy of [http://jenkins.slateci.io/artifacts/scripts/install-slate.sh](http://jenkins.slateci.io/artifacts/scripts/install-slate.sh). Note that you will need to read and modify its first section to set the names which are relevant for you installation. 
 
 ## Joining additional nodes
 
