@@ -176,3 +176,17 @@ Install docker and kubernetes on the worker nodes, but stop at the point where `
 	kubeadm join <master ip>:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 	
 substituting in the IP address of your master node, and the hash and token provided by `kubeadm token create`. Note that the token remains valid for 24 hours, so if you wait longer than that to join a worker you will have to regenerate it. 
+
+## In case of problems
+
+If setting up your Kubernetes cluster does not work properly, `kubeadm reset` can be used to revert the effects of `kubeadm init` (and eliminate anything which had been installed inside Kubernetes). 
+This is obviously a fairly destructive operation if you have gotten to the point of using the cluster for anything. 
+
+If you have a problem with SLATE, specifically, you can remove SLATE's access to your cluster by deleting the 'cluster' custom resource which defines its main namespace (called slate-system unless you picked a different name):
+
+	kubectl delete cluster slate-system
+
+Please note that this leaves SLATE in a somewhat confused state of expecting to be able to use the cluster but being unable to. 
+If possible, it is nicer to first inform SLATE that it should stop using the cluster: 
+
+	slate cluster delete <cluster name>
