@@ -105,7 +105,8 @@ Next, enable the kubelet (the per-node Kubernetes agent) to run automatically:
 
 	systemctl enable --now kubelet
 
-Configure the bridge filtering for kubernetes:
+Some Kubernetes networking plugins rely on using IPTables to filter traffic on the bridge netwrok, but CentOS has this turned off by default to better support virtual machine use cases. 
+So, we turn it back on:
 
 	cat <<EOF >  /etc/sysctl.d/k8s.conf
 	net.bridge.bridge-nf-call-ip6tables = 1
