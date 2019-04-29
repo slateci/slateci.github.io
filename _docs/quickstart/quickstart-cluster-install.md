@@ -17,6 +17,8 @@ This guide describes a simple procedure to install a single-node kubernetes clus
 
 This guide assumes a freshly installed CentOS 7 system. All techniques should generalize to other suitably modern Linux systems, but specific commands can differ. 
 
+This guide also assumes that your Kubernetes head node (or control plane) is on a publicly accessible IP with port 6443 open, in order for the SLATE API server to communicate with your cluster.
+
 ## Obtain a SLATE token
 
 If you have not done so already, go to [the SLATE portal](https://portal.slateci.io/) and create an account. 
