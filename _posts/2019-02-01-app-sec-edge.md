@@ -12,7 +12,9 @@ This whitepaper how applications are managed on a federated research platform. T
 
 <!--end_excerpt-->
 
- In order to provide security in the platform, SLATE users may only install applications  from a curated catalog (See this document for details). The remainder of this document describes the procedure for adding applications to the catalog, and the rationale behind the procedure. 
+A version of this article with comments from the community is available [here](http://bit.ly/app-sec-edge). 
+
+In order to provide security in the platform, SLATE users may only install applications  from a curated catalog (See this document for details). The remainder of this document describes the procedure for adding applications to the catalog, and the rationale behind the procedure. 
 
 
 ![The SLATE Application Install Process begins with a user sending an install request to the SLATE API server. The server fetches the requested application from the Application Catalog, and sends the detailed installation commands to the edge cluster. When the edge cluster starts the application it fetches the application's container images from the application catalog.](https://github.com/slateci/slateci.github.io/raw/master/_posts/images/app-sec-fig1.png "Fig 1")
@@ -42,5 +44,6 @@ To address all of these concerns, application image sources and Helm charts are 
 
 
 It should be noted that the platform team cannot reasonably inspect all software to its lowest levels. Images typically build up from base sources like Linux distributions and major open-source software packages which are already widely trusted to be run at sites. It is expected that the platform team would maintain a public whitelist of trusted organizations whose images may be used by applications without being hosted as part of the catalog.
+
 
 
