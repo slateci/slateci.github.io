@@ -23,4 +23,4 @@ the links below:
 
 - [Federation]({{home}}/docs/federation/) SLATE federation approaches.
 
-<a href="https://sandbox.slateci.io:5000"><button class="btn btn-slate">Try SLATE now!</button></a>
+<a href="https://sandbox.slateci.io"><button class="btn btn-slate">Try SLATE now!</button></a>
