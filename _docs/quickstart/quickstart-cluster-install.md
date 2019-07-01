@@ -17,7 +17,9 @@ This guide describes a simple procedure to install a single-node kubernetes clus
 
 This guide assumes a freshly installed CentOS 7 system. All techniques should generalize to other suitably modern Linux systems, but specific commands can differ. 
 
-This guide also assumes that your Kubernetes head node (or control plane) is on a publicly accessible IP with port 6443 open, in order for the SLATE API server to communicate with your cluster.
+This guide also assumes that your Kubernetes head node (or control plane) is on a publicly accessible IP address with port 6443 open, in order for the SLATE API server to communicate with your cluster.
+
+Finally, at least one additional publicly accessible IP address, not currently assigned to any specific machine. This is needed in order to install a kubernetes load balancer, which will in turn allocate an address to an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) which will provide convenient access to users' services. 
 
 ## Obtain a SLATE token
 
@@ -49,7 +51,7 @@ This should list the various clusters which are already participating in the fed
 
 ## Scripted version
 
-If you want a script which will do nearly all of the below, download a copy of [http://jenkins.slateci.io/artifacts/scripts/install-slate.sh](http://jenkins.slateci.io/artifacts/scripts/install-slate.sh). Note that you will need to read and modify its first section to set the names which are relevant for you installation. 
+If you want a script which will do nearly all of the below, download a copy of [https://github.com/slateci/slate-scripts/raw/master/install-slate-cvmfs.sh](https://github.com/slateci/slate-scripts/raw/master/install-slate-cvmfs.sh). Note that you will need to read and modify its first section to set the names which are relevant for you installation. 
 
 Once the script has finished, you should have a working single-node Kubernetes cluster registered with SLATE. You can then jump to [allowing groups on your cluster](#allowing-groups-to-run-on-your-slate-cluster)
 
@@ -67,7 +69,7 @@ Docker and Kubernetes can be picky about the state of the system on which they r
 	
 ## Install Docker
 
-For Cent OS, Docker CE should be used:
+For CentOS, Docker CE should be used:
 
 	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 	yum install docker-ce docker-ce-cli containerd.io -y
@@ -136,9 +138,38 @@ This command should show one node; the machine on which you are working. The nod
 	
 Running `kubectl get nodes` should now show the node as 'Ready'. 
 	
-Finally, since this Kubernetes has only one node (which must therefore be the master), remove the 'taint' which prevents user software from running on the master:
+Finally, since this Kubernetes cluster has only one node (which must therefore be the master), remove the 'taint' which prevents user software from running on the master:
 
 	kubectl taint nodes --all node-role.kubernetes.io/master-
+	
+## Set up your load balancer
+
+SLATE expects your cluster to provide a 'load balancer' which can assign IP addresses to services. [MetalLB](https://metallb.universe.tf) is such a load balancer and can be installed by using:
+
+	kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.7.3/manifests/metallb.yaml
+
+This will install the components of the load balancer itself (to its own namespace, `metallb-system`), but it will not yet be active, as it is not configured with any IP addresses it can allocate. MetalLB supports using Layer 2 protocols or BGP to advertise the address it assigns; Layer 2 is usually easier to set up and does not require interacting with networking hardware. Create a YAML config file like the following:
+
+	apiVersion: v1
+	kind: ConfigMap
+	metadata:
+	  namespace: metallb-system
+	  name: config
+	data:
+	  config: |
+	    address-pools:
+	    - name: default
+	      protocol: layer2
+	      addresses:
+	      - <Your address range here>
+
+Fill in the range of addresses you have available to use either as a range (e.g. `192.168.1.240-192.168.1.250`) or as a CIDR prefix (e.g. `192.168.10.0/24`). Note that you can use a single IP address in your pool, but doing so requires writing it as a range (like `192.168.1.240-192.168.1.240`). 
+
+After you have prepared your configuration file, install it for use by MetalLB by running:
+
+	kubectl create -f <your_config.yaml>
+	
+You may wish to refer to the [MetalLB configuration documentation](https://metallb.universe.tf/configuration/) if there are details you need to further customize. 
 
 ## Join the cluster to the SLATE federation
 
