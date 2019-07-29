@@ -17,4 +17,7 @@ Managing Privilege and Access on Federated Edge Platforms
 [https://pearc19.conference-program.com/presentation/?id=pap174&sess=sess189](https://pearc19.conference-program.com/presentation/?id=pap174&sess=sess189)
 <!--end_excerpt-->
 
+Development is hard enough.  Do I have to become a sysadmin and install the full SLATE environment?  
+No!  MiniSLATE allows a simple process to install SLATE on a Mac or Linux laptop so that the developer can focus on actual science application development.  Jason Still will present on how he has used MiniSLATE for packaging applications on the SLATE platform.
 
+The SLATE team is creating its architecture with security in mind.  Managing Privilege and Access on a Federated platform as well providing a curated catalog of applications are two of the strategies the SLATE team is using to approach security.  Chris Weaver will discuss more detail on these approaches in his slides. 
