@@ -8,18 +8,17 @@ layout: post
 type: markdown
 ---
 
-Jason Stidd and Chris Weaver of the SLATE team are both presenting papers at [PEARC19](https://www.pearc19.pearc.org/).  The talks will be on Tue. July 30 and July 31, respectively.
+Jason Stidd and Chris Weaver of the SLATE team both presented papers at [PEARC19](https://www.pearc19.pearc.org/).  The talks were on July 30 and July 31:
 
-Developing and Operation Edge Services on Federated Infrastructure Using MiniSLATE
-[https://pearc19.conference-program.com/presentation/?id=pap176&sess=sess197](https://pearc19.conference-program.com/presentation/?id=pap176&sess=sess197)
+Developing and Operating Edge Services on Federated Infrastructure Using MiniSLATE
+[(paper)](https://pearc19.conference-program.com/presentation/?id=pap176&sess=sess197)
 
 Managing Privilege and Access on Federated Edge Platforms
-[https://pearc19.conference-program.com/presentation/?id=pap174&sess=sess189](https://pearc19.conference-program.com/presentation/?id=pap174&sess=sess189)
+[(paper)](https://pearc19.conference-program.com/presentation/?id=pap174&sess=sess189)
 <!--end_excerpt-->
 
 ## Developing Science Apps on SLATE
-Development is hard enough.  Do I have to become a sysadmin and install the full SLATE environment?  
-No!  MiniSLATE allows a simple process to install SLATE on a Mac or Linux laptop so that the developer can focus on actual science application development.  Jason Still will present on how he has used MiniSLATE for packaging applications on the SLATE platform.
+Development of service containers for deployment on distributed environments is difficult. MiniSLATE can install a local copy of the SLATE developer's environment on a Mac or Linux. Jason Still presented on how to use MiniSLATE for packaging applications targeted for the SLATE platform.
 
 ## SLATE Security Architecture
-The SLATE team is creating its architecture with security in mind.  Managing Privilege and Access on a Federated platform as well providing a curated catalog of applications are two of the strategies the SLATE team is using to approach security.  Chris Weaver will discuss more detail on these approaches in his slides. 
+The SLATE team is creating its architecture with security in mind.  Managing Privilege and Access on a federated platform as well providing a curated catalog of applications are two of the strategies the SLATE team is using to approach security.  Chris Weaver presented these approaches in this paper. 
