@@ -11,10 +11,10 @@ type: markdown
 Jason Stidd and Chris Weaver of the SLATE team both presented papers at [PEARC19](https://www.pearc19.pearc.org/).  The talks were on July 30 and July 31:
 
 Developing and Operating Edge Services on Federated Infrastructure Using MiniSLATE
-[(paper)](https://pearc19.conference-program.com/presentation/?id=pap176&sess=sess197)
+[(presentation)](https://pearc19.conference-program.com/presentation/?id=pap176&sess=sess197)
 
 Managing Privilege and Access on Federated Edge Platforms
-[(paper)](https://pearc19.conference-program.com/presentation/?id=pap174&sess=sess189)
+[(presentation)](https://pearc19.conference-program.com/presentation/?id=pap174&sess=sess189)
 <!--end_excerpt-->
 
 ## Developing Science Apps on SLATE
