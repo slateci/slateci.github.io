@@ -171,6 +171,11 @@ After you have prepared your configuration file, install it for use by MetalLB b
 	
 You may wish to refer to the [MetalLB configuration documentation](https://metallb.universe.tf/configuration/) if there are details you need to further customize. 
 
+### MetalLB on OpenStack
+
+If your Kubernetes cluster is installed on one or more virtual machines run by OpenStack, there is one small, extra step required to enable MetalLB to route traffic properly. 
+See [the MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) for details; in short, OpenStack must be informed that traffic sent to IP addresses controlled by MetalLB has a valid reason to be going to the VMs which make up the Kubernetes cluster. 
+
 ## Join the cluster to the SLATE federation
 
 To join your cluster to the SLATE federation, you will need:
