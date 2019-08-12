@@ -1,7 +1,6 @@
 ---
 title: SLATE Hardware
 overview: 
-index: true
 
 order: 60
 
