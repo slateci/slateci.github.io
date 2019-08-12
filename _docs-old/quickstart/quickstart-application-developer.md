@@ -24,7 +24,7 @@ We suggest you follow the basic SLATE tutorial first:
     </div>
 </div>
 
-When you are familiar with the SLATE command-line, we suggest you look at the [SLATE Application Developer guide](http://slateci.io/docs/applications/development/overview.html). You can use this in conjunction with the mini-SLATE development environment.
+When you are familiar with the SLATE command-line, we suggest you look at the [SLATE Application Developer guide](https://slateci.io/docs/developers/). You can use this in conjunction with the mini-SLATE development environment.
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
