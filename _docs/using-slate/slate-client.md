@@ -1,8 +1,8 @@
 ---
-title: SLATE Client
-overview: Using SLATE from the command line
+title: SLATE Client CLI
+overview: Installation and usage of SLATE's Client Command Line 
 
-order: 100
+order: 10
 
 layout: docs 
 type: markdown

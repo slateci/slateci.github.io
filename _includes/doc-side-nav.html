@@ -21,18 +21,20 @@
         {% for d in docs %}
 	        {% assign components = d.path | downcase | split: '/' %}
 			{% if components[1] == section %}
-		        docs.push({path: [
-		        {% for comp in components %}
-        			{% if forloop.index > 2 %}
-        				"{{ comp }}",
-        			{% endif %}
-        		{% endfor %}
-				{% assign order = d.order %}
-				{% if d.order == nil %}
-				{% assign order = 9999 %}
+				{% if d.exclude != true %}
+					docs.push({path: [
+					{% for comp in components %}
+						{% if forloop.index > 2 %}
+							"{{ comp }}",
+						{% endif %}
+					{% endfor %}
+					{% assign order = d.order %}
+					{% if d.order == nil %}
+					{% assign order = 9999 %}
+					{% endif %}
+					{% assign url = d.url | remove: "index.html" %}
+					], url: "{{url}}", title: "{{d.title}}", order: {{order}}, overview: "{{d.overview}}"});
 				{% endif %}
-                {% assign url = d.url | remove: "index.html" %}
-        		], url: "{{url}}", title: "{{d.title}}", order: {{order}}, overview: "{{d.overview}}"});
 			{% endif %}
         {% endfor %}
 
