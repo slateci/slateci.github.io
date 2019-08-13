@@ -4,7 +4,7 @@ overview: Using SLATE from the command line
 
 order: 100
 
-layout: quickstart
+layout: docs 
 type: markdown
 ---
 {% include home.html %}
