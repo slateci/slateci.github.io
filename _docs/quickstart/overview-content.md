@@ -1,4 +1,3 @@
-{% include under-construction.md %}
 
 See one of the sections above for details on how SLATE to do particular tasks with SLATE, or the link below for a short, guided tutorial on using SLATE to deploy an application:
 

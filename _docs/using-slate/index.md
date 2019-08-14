@@ -3,7 +3,7 @@ title: Using Slate
 overview: 
 index: true
 
-order: 10 
+order: 30 
 
 layout: docs
 type: markdown

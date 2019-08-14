@@ -3,7 +3,7 @@ title: Application Development
 overview: Guidelines for SLATE application development
 index: true
 
-order: 90
+order: 50
 
 layout: docs
 type: markdown

@@ -3,7 +3,7 @@ title: Cluster Installation
 overview: 
 index: true
 
-order: 20 
+order: 40 
 
 layout: docs
 type: markdown
