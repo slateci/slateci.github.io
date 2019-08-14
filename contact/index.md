@@ -16,14 +16,6 @@ best approach for different cases.
 
 <table>
   <tbody>
-    <!-- 
-    <tr>
-      <td class="logo"><img src="{{home}}/img/group.png" alt="Mailing Lists"/></td>
-      <td>
-Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slateci-discuss@</a> mailing list to participate in discussions and get help troubleshooting problems.  Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slateci-news@</a> to receive news and updates about SLATE.      
-     </td>
-   </tr>
-   -->
 
     <tr>
       <td class="logo"><img src="https://cdn.brandfolder.io/5H442O3W/as/pl546j-7le8zk-4nzzs1/Slack_Mark_Web.png " alt="Slack"/></td>
@@ -40,13 +32,12 @@ Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slate
     </tr>
 
     <tr>
-      <td class="logo"><img src="{{home}}/img/docker.png" alt="Docker Hub"/></td>
+      <td class="logo"><img src="{{home}}/img/group.png" alt="Mailing Lists"/></td>
       <td>
-        View our catalog of applications on <a href="http://hub.docker.com/r/slateci">Docker Hub</a>
-      </td>
-    </tr>
+Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slateci-discuss@</a> mailing list to participate in discussions and get help troubleshooting problems.  Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slateci-news@</a> to receive news and updates about SLATE.      
+     </td>
+   </tr>
 
-    
   </tbody>
 </table>
 
