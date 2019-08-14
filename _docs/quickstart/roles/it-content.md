@@ -1,5 +1,5 @@
 ---
-title: SLATE Cluster Operator
+title: SLATE Cluster Adminstrator 
 overview: What do you need to support a SLATE platform?
 
 order: 20 
