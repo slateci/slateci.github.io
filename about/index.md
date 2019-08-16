@@ -8,7 +8,7 @@ layout: about
 type: markdown
 ---
 
-## SLATE's Purpose
+## Purpose
 
 Much of modern research is propelled by research collaborations across multiple institutions. These collaborations require computing environments that connect data and computational resources across combinations of university research computing centers, national-scale high performance computing facilities, and public cloud providers. The scale of the data and complexity of the science drive the need to aggregate resources from many sources into scalable computing systems.
 
