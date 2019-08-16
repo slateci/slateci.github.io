@@ -32,7 +32,7 @@
 					{% if d.order == nil %}
 					{% assign order = 9999 %}
 					{% endif %}
-					{% assign url = d.url | remove: "inde.html" %}
+					{% assign url = d.url | remove: "index.html" %}
 					], url: "{{url}}", title: "{{d.title}}", order: {{order}}, overview: "{{d.overview}}"});
 				{% endif %}
 			{% endif %}
