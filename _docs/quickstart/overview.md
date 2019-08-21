@@ -1,5 +1,5 @@
 ---
-title: General Quickstart 
+title: Getting Started 
 overview: Start learning SLATE! 
 
 order: 10
