@@ -6,7 +6,7 @@ To get a feel for how launching and running a service on the SLATE platform work
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
             <div class="col-sm-9 text-center nofloat center-block">
-                <a class="btn btn-slate" href="https://sandbox.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button">Try the SLATE tutorial</a>   
+                <a href="https://sandbox.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">Try the SLATE tutorial</button></a>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@ In order to use SLATE, you need to register an account. Account creation is hand
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
             <div class="col-sm-9 text-center nofloat center-block">
-                <a class="btn btn-slate" href="https://portal.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button">Go to the SLATE portal</a>   
+                <a href="https://portal.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">Go to the SLATE portal</button></a>
             </div>
         </div>
     </div>
