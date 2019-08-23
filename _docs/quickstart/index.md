@@ -1,13 +1,12 @@
 ---
-title: Quickstart
+title: Getting Started
 overview: Getting started with SLATE
-index: true
+index: false
 
 order: 10
 
-layout: docs
+layout: docs2
 type: markdown
 ---
 
-{% include home.html %}
 {% include_relative overview-content.md %}
