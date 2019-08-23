@@ -15,6 +15,8 @@ SLATElite is a utility used to create a single-node SLATE cluster joined to the 
 - [A SLATE management container](https://github.com/slateci/slatelite/blob/master/slate/Dockerfile)
 - [A storage container simulating an NFS share](https://hub.docker.com/r/itsthenetwork/nfs-server-alpine)
 
+SLATElite is a good option to quickly test out running an edge cluster. For heavier-duty use, particularly to build a cluster with multiple nodes, see the guide for [direct installation]({{home}}/docs/cluster-install/cluster-install.html). 
+
 ## Installation
 
 Installation instructions can be found on the [SLATElite development repository](https://github.com/slateci/slatelite).
