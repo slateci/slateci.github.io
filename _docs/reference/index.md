@@ -12,12 +12,19 @@ type: markdown
 
 <strong>Journals or Juried Conference Papers</strong>
 
+<p>Joe Breen, Lincoln Bryant, Jiahui Chen, Emerson Ford, Robert W. Gardner, Gage Glupker, Skyler Griffith, Ben Kulbertis, Shawn McKee, Rose Pierce, Benedikt Riedel, Mitchell Steinman, Jason Stidd, Luan Truong, Jeremy Van, Ilija Vukotic, and Christopher Weaver. 2019. Managing Privilege and Access on Federated Edge Platforms. In Proceedings of the Practice and Experience in Advanced Research Computing on Rise of the Machines (learning) (PEARC '19). ACM, New York, NY, USA, Article 45, 5 pages. DOI: <a href="https://doi.org/10.1145/3332186.3332234">10.1145/3332186.3332234.</a></p>
+  
+<p>Joe Breen, Lincoln Bryant, Jiahui Chen, Emerson Ford, Robert W. Gardner, Gage Glupker, Skyler Griffith, Ben Kulbertis, Shawn McKee, Rose Pierce, Benedikt Riedel, Mitchell Steinman, Jason Stidd, Luan Truong, Jeremy Van, Ilija Vukotic, and Christopher Weaver. 2019. Developing Edge Services for Federated Infrastructure Using MiniSLATE. In Proceedings of the Practice and Experience in Advanced Research Computing on Rise of the Machines (learning) (PEARC '19). ACM, New York, NY, USA, Article 35, 5 pages. DOI: <a href=" https://doi.org/10.1145/3332186.3332236">10.1145/3332186.3332236.</a></p>
+
 <p>Breen, J., McKee, S., Riedel, B., Stidd, J., Truong, L., Vukotic, I., Bryant, L., Carcassi, G., Chen, J., Gardner, R.W., Harden, R., Izdimirski, M., Killen, R., & Kulbertis, B. (2018). Building the SLATE Platform. <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. doi: <a href="https://dl.acm.org/citation.cfm?doid=3219104.3219144">10.1145/3219104.3219144.</a></p>
 
 <p>Gardner, R., Breen, J., Bryant, L., & McKee, S. (2017). <a href="https://drive.google.com/file/d/0BzgiYUsbrz2TWHkzNzBlbzJyXzg/view?usp=sharing">SLATE and the Mobility of Capability</a>. <i>Science Gateways 2017</i>.</p>
 
 <strong>Other Conference Presentations/Papers</strong>    
-  
+<p>Stidd, J. (2019). <i>Developing Edge Services for Federated Infrastructure Using MiniSlate</i>. PEARC 2019. <a href="https://docs.google.com/presentation/d/1lnbUeYe5fJgJmNFg3mKCqKkPSHGZAcaj_JsvwCvl4UI/edit#slide=id.g5df5dac487_0_0">Presentation Slides</a>. Chicago, Illinois.</p>
+
+<p>Weaver, C. (2019). <i>Managing Privilege and Access on Federated Edge Platforms</i>. PEARC 2019. <a href="https://docs.google.com/presentation/d/1QkOjaj5X1vS3-OZ4VTDYSyt5hCFc8KP4FO7EBWxfKQk/edit#slide=id.p">Presentation Slides</a>. Chicago, Illinois.</p>
+
 <p>Kulbertis, B. (2019). <i>Developing for a Services Layer at the Edge</i>. HEPiX Spring Meeting. <a href="https://docs.google.com/presentation/d/1MVUSRqvXkdcyMlXfqQX-QJGUUtpKr0A3W26mN8JbFEQ/">Presentation Slides</a>. San Diego, California.</p>
 
 <p>Bryant, L. (2018). <i>A Service Layer at The Edge</i>. Annual Meeting of the Great Plains Network. <a href="https://docs.google.com/presentation/d/1f-zNlxWe0eZJM6zDGurcjAK5fKuxt_RRLP73u1rGpN0/edit#slide=id.p">Presentation Slides</a>. Kansas City, Missouri.</p>
