@@ -1,18 +1,32 @@
-Many science workflows require specific applications and configurations, and properly deploying everything necessary for these workflows can be a time-consuming process for cluster administrators and IT professionals. When an application is developed or packaged and moved to the SLATE application catalog, deployment on a SLATE cluster takes just a handful of commands and far less time.
+## Learning To Use SLATE
 
-The online SLATE sandbox can be used to see just how quickly applications can be deployed to a SLATE cluster.
+To get a feel for how launching and running a service on the SLATE platform works, a guided tutorial is available on a real (small) instance of the platform:
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
             <div class="col-sm-9 text-center nofloat center-block">
-                <a href="https://sandbox.slateci.io"><button class="btn btn-slate">Try SLATE now!</button></a>    
+                <a class="btn btn-slate" href="https://sandbox.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button">Try the SLATE tutorial</a>   
             </div>
         </div>
     </div>
 </div>
 
-## Using SLATE
+## Making a SLATE Account
+
+In order to use SLATE, you need to register an account. Account creation is handled through the web portal, which also supports most SLATE workflows from managing groups and clusters to installing and checking the status of edge services. 
+
+<div id="doc-call" class="container-fluid doc-call-container ">
+    <div class="row doc-call-row">
+        <div class="col-md-10 nofloat center-block">
+            <div class="col-sm-9 text-center nofloat center-block">
+                <a class="btn btn-slate" href="https://portal.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button">Go to the SLATE portal</a>   
+            </div>
+        </div>
+    </div>
+</div>
+
+## Accessing SLATE
 
 The primary way to utilize SLATE is through the SLATE Client Command Line Interface, or Client CLI. The Client CLI allows users to configure and deploy applications at a number of SLATE production clusters with just a handful of commands. An installation and usage guide can be found below:
 
@@ -26,8 +40,6 @@ The primary way to utilize SLATE is through the SLATE Client Command Line Interf
     </div>
 </div>
 
-## SLATE Ecosystem
+## Joining a Site to SLATE
 
-The primary roles in the SLATE ecosystem are [SLATE Application Developers]() and [SLATE Cluster Administrators]().
-- [Application Developers]({{home}}/docs/quickstart/roles/dev-content.html) work to create new applications and package existing applications to be deployed on SLATE Clusters.
-- [Cluster Administrators]({{home}}/docs/quickstart/roles/it-content.html) spin up and maintain new SLATE clusters.
+If your site is interested in joining the SLATE federation as a Resource Provider, see the [cluster installation docs](https://slateci.io/docs/cluster-install/) for guidance on installing SLATE on a Kubernetes cluster (and installing the Kubernetes cluster as well, if necessary). 
