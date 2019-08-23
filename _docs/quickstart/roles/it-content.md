@@ -9,7 +9,7 @@ type: markdown
 ---
 {% include home.html %}
 
-SLATE is intended to make it easy for site IT administrators to grant science users controlled acces to a kubernetes cluster. The cluster may be anything from a dedicated setup built according to <a href="http://slateci.io/docs/slate-hardware/">our hardware recommendations</a>, a many node cluster already used by your organization, or a small cluster running on a single node. SLATE is designed to operate in a way which can be compatible with existing site security policies and not interfere with other uses of the base kubernetes cluster by running within its own collection of namespaces with minimal privileges. Site administrators have control over which users can access a cluster federated with SLATE and what applications they can deploy there. 
+SLATE is intended to make it easy for site IT administrators to grant science users controlled acces to a kubernetes cluster. The cluster may be anything from a dedicated setup built according to <a href="https://slateci.io/docs/slate-hardware/">our hardware recommendations</a>, a many node cluster already used by your organization, or a small cluster running on a single node. SLATE is designed to operate in a way which can be compatible with existing site security policies and not interfere with other uses of the base kubernetes cluster by running within its own collection of namespaces with minimal privileges. Site administrators have control over which users can access a cluster federated with SLATE and what applications they can deploy there. 
 
 To get a sense of what users would expect to do on a cluster you might federate with SLATE, you may want to try out our tutorial:
 
@@ -35,4 +35,4 @@ If you're interested in exploring further, download SLATElite which provides a l
     </div>
 </div>
 
-For more information on using the SLATE command line client to manage a cluster you may wish to read our <a href="https://slateci.io/docs/quickstart/slate-client.html">SLATE Client Guide</a>, particularly the sections on <a href="http://slateci.io/docs/quickstart/slate-client.html#installing-the-slate-client">installation</a> and <a href="http://slateci.io/docs/quickstart/slate-client.html#registering-a-cluster">registering a cluster.</a>
+For more information on using the SLATE command line client to manage a cluster you may wish to read our <a href="https://slateci.io/docs/quickstart/slate-client.html">SLATE Client Guide</a>, particularly the sections on <a href="https://slateci.io/docs/quickstart/slate-client.html#installing-the-slate-client">installation</a> and <a href="https://slateci.io/docs/quickstart/slate-client.html#registering-a-cluster">registering a cluster.</a>
