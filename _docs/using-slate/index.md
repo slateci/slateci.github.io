@@ -1,5 +1,5 @@
 ---
-title: Using Slate 
+title: Using SLATE 
 overview: 
 index: true
 
