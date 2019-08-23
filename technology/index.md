@@ -1,3 +1,4 @@
+---
 title: Technology
 overview: Technology used by SLATE
 
