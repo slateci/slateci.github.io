@@ -16,3 +16,6 @@ config_override.yml
 # Temporary files
 *~
 .jekyll-metadata
+
+# mac
+.DS_Store
