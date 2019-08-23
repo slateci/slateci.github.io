@@ -4,70 +4,51 @@ title: SLATE
 ---
 {% include home.html %}
 
+
 <div class="nav-hero-container">
-    <div class="hero">
-        <div class="container">
-            <img class="hero-logo" alt="SLATE" src="{{home}}/img/slate-logo-large.png" />
-            <h1 class="hero-lead">Services Layer at the Edge and the Mobility of Capability</br></br>
-               <a class="btn btn-slate" href="https://sandbox.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button">Try SLATE now!</a>
-            </h1>
-            <span class="hero-down-arrow fa fa-2 fa-caret-down"></span>
+    <div class="container" style="padding: 10px;">
+        <div class="row">
+
+            <div class="col-md-4"></div> 
+            <div class="col-md-4 col-centered">
+                <img class="img-fluid" style="width: 100%" alt="SLATE" src="{{home}}/img/slate-logo-large.png" />
+            </div>
+            <div class="col-lg-4"></div>
+
         </div>
     </div>
 </div>
 
 <section class="hero-wrapper">
-    <div class="jumbotron traffic">
-        <div class="container-fluid">
-            <img class="landing-image pull-left" src="{{home}}/img/slate-diagram.png" alt="SLATE Diagram">
-            <div class="section-content pull-right">
-                <h2>What is SLATE?</h2>
-                <p>
-                 A SLATE edge platform within a campus Science DMZ hosts trusted services operated by a central team which might be 
-                    operating a network of such services across several campuses.  Science “app” developers interact with the 
-                    SLATE platform service factory to define and launch elements of a science gateway, data cache, or local workflow 
-                    service. 
-                </p>
-                <a href="{{home}}/docs/concepts/what-is-slate/overview.html"><button class="btn btn-slate btn-read-more">READ MORE</button></a>
+    <div class="hero-container" style="padding: 50px">
+        <div class="row doc-col-row">
+            <div class="col-lg-6">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="img-fluid" style="width: 100%"  src="https://www.google.com/maps/d/u/0/embed?mid=1u3UjyhEIyq5UX1VbE7gKw_CSP_v_SCA2"></iframe>
+                </div>
             </div>
+            <div class="col-lg-5">
+                <div class="align-middle">
+                    <h2 class="text-center doc-call-title">What is SLATE?</h2>
+                    <p>
+                        A SLATE edge platform within a campus Science DMZ hosts trusted services operated by a central team which might be 
+                        operating a network of such services across several campuses.  Science “app” developers interact with the 
+                        SLATE platform service factory to define and launch elements of a science gateway, data cache, or local workflow 
+                        service. 
+                    </p>
+                    <br>
+                    
+                    <h2 class="text-center doc-call-title">Want to learn more?</h2>
+                    <ul class="list-group">
+                        <li><a href="{{home}}/docs/concepts"><button class="btn btn-slate">Docs</button></a></li>
+                        <li><a href="https://sandbox.slateci.io"><button class="btn btn-slate">Try SLATE now!</button></a></li>
+                        <li><a href="{{home}}/docs/quickstart/roles/dev-content.html"><button class="btn btn-slate">SLATE Application Development</button></a></li>
+                        <li><a href="{{home}}/docs/quickstart/roles/it-content.html"><button class="btn btn-slate">SLATE Cluster Administrator</button></a></li>
+                        <li><a href="https://github.com/slateci/minislate"><button class="btn btn-slate">MiniSLATE Dev Kit</button></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
         </div>
     </div>
 </section>
-
-
-<!--
-<section class="hero-wrapper">
-    <div class="jumbotron resilience">
-        <div class="container-fluid">
-            <img class="landing-image pull-right" src="{{home}}/img/XENON1T_data_distrib_use_case.png" alt="XENON1T Data Distribution Network Use Case">
-            <div class="section-content pull-left">
-                <h2>Why SLATE?</h2>
-                <p>
-                 Deploying science services across national and international distributed infrastructures is hard!  Rolling out hardware, Operating Systems, 
-                    science applications, and science tools at every geographically discrete site requires a significant IT presence at each site.  The IT
-                    personnel have to deal with the hardware, the IT software, AND the science software in order to make a science service function.  This 
-                    fact requires a lot of knowledge and time on the order of days, weeks, and months.  SLATE aims to make the job easier for the local IT 
-                    support person and to minimize the time to deployment for the science services.  
-                </p>
-                <a href="{{home}}/about"><button class="btn btn-slate btn-read-more">READ MORE</button></a>
-            </div>
-        </div>
-    </div>
-</section>
--->
-
-<div id="doc-call" class="container-fluid doc-call-container ">
-    <div class="row doc-call-row">
-        <div class="col-md-10 nofloat center-block">
-            <div class="col-sm-9 text-center nofloat center-block">
-                <h2 class="doc-call-title">Want to learn more?</h2>
-                <p class="doc-call-text">Get started by learning <a href="http://slateci.io/docs/concepts/">SLATE concepts</a>.</p>
-                <a href="{{home}}/_docs/concepts"><button class="btn btn-slate">Docs</button></a>
-                <a href="https://sandbox.slateci.io"><button class="btn btn-slate">Try SLATE now!</button></a>
-                <a href="{{home}}/docs/quickstart/roles/dev-content.html"><button class="btn btn-slate">SLATE Application Development</button></a>
-                <a href="{{home}}/docs/quickstart/roles/it-content.html"><button class="btn btn-slate">SLATE Cluster Administrator</button></a>
-                <a href="https://github.com/slateci/minislate"><button class="btn btn-slate">MiniSLATE Dev Kit</button></a>
-            </div>
-        </div>
-    </div>
-</div>
