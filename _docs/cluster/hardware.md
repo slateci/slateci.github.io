@@ -1,4 +1,6 @@
-SLATE can operate with various configurations, from a single virtual machine to large clusters. Below are known configurations that the SLATE project has tested and validated for a SLATE cluster node.
+SLATE is able to operate using a number of configurations, from the virtual machines used in SLATElite to large clusters with varied hardware specifications. The hardware configurations listed below have been tested and shown to operate either stable SLATE clusters or manage the operation of SLATE:
+
+### Cluster Hardware
 
 <style>
 th {text-align: center; vertical-align: bottom;}
@@ -44,7 +46,7 @@ th {text-align: center; vertical-align: bottom;}
 </tr>
 </table>
 
-The reference platform includes dedicated network measurement hardware (a PerfSONAR node) and an out-of-band management node that is able to bootstrap a SLATE cluster.
+### Support Hardware
 
 | Configuration         | Vendor | Sockets/Cores/Threads | DRAM (GiB) | NICs  | Boot/Other Storage    | Year |
 |-----------------------|:------:|:---------------------:|------------|-------|------------|------|
