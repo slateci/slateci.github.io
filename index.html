@@ -10,6 +10,66 @@ title: SLATE
    vertical-align: middle;
    float: none;
 }
+.list-menu-items {
+	display: flex;
+	justify-content: space-between;
+	margin: 25px 0 100px 0;
+}
+.try-slate a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: 100px;
+	border: 1px solid gray;
+	border-radius: 10px;
+	background: #7795c6;
+	color: white;
+	background: linear-gradient(0deg, rgba(41,75,202,1) 0%, rgba(119,149,198,1) 100%);
+	text-size: 2em;
+
+
+	
+}
+.list-menu-items a:hover {
+
+	background: white;
+	color: black;
+}
+.try-slate {
+	display: flex;
+	align-items: center;
+        justify-content: space-between;
+	background: white;
+	border-top: 1px solid lightgray;
+	width: 100%;
+	min-height: 500px;
+	
+}
+
+.try-slate .row {
+	width: 100% !important;
+}
+
+.try-slate-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+        justify-content: center;
+		margin: 25px 0;
+}
+
+.try-slate-center {
+	display: flex;
+	align-items: center;
+        justify-content: center;
+}
+.try-slate img {
+
+	display: relative;
+	margin: 25px 0;
+	max-width: 100%;
+}
 </style>
 
 <div class="slate-header" style="background: #7795C6;">
@@ -60,30 +120,66 @@ title: SLATE
             <div class="col-lg-1"></div>
         </div>
     </div>
+    <div class="container try-slate">
+	    <div class="row">
+		    <div class="col-lg-4 col-md-6 col-sm-12 try-slate-left">
+			    <div>
+				    <div class="col-lg-12 col-md-12 col-sm-12 try-slate-center">
+						<h1> Get Started with SLATE</h1>
+
+				    </div>
+			    </div>
+			    <div>
+				    <div class="col-lg-12 col-md-12 col-sm-12 try-slate-center">
+					    <a href="https://sandbox.slateci.io">
+						    Try SLATE
+					    </a>
+				    </div>
+			    </div>
+		    </div>
+		    <div class="col-lg-8 col-md-6 col-sm-12 try-slate-center">
+			    <img class="img-fluid" src="{{home}}/img/slate-diagram.png"></img>
+		    </div>
+	    </div>
+    </div>
+
+
+
+
+
+    <!--
     <div class="container">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <h2 class="text-center doc-call-title">Learn more</h2>
-                <div class="list-group">
-                    <a href="https://sandbox.slateci.io" class="list-group-item list-group-item-action">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="list-menu-items">
+			<div class="con">
+                    <a href="https://sandbox.slateci.io">
                         SLATE Online Tutorial
                     </a>
-                    <a href="{{home}}/docs/quickstart/" class="list-group-item list-group-item-action">
+			</div>
+			<div class="con">
+                    <a href="{{home}}/docs/quickstart/">
                         Quickstart
                     </a>
-                    <a href="{{home}}/docs/apps" class="list-group-item list-group-item-action">
+			</div>
+			<div class="con">
+                    <a href="{{home}}/docs/apps">
                         Application Development
                     </a>
-                    <a href="{{home}}/docs/cluster" class="list-group-item list-group-item-action">
+			</div>
+			<div class="con">
+                    <a href="{{home}}/docs/cluster">
                         Cluster Administration
                     </a>
-                    <a href="{{home}}/technology/" class="list-group-item list-group-item-action">
+			</div>
+			<div class="con">
+                    <a href="{{home}}/technology/">
                         Technology
                     </a>
+			</div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
     </div>
+    -->
 </section>
