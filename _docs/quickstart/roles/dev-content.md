@@ -10,7 +10,7 @@ type: markdown
 
 Developing a SLATE application, or packinging an existing application into SLATE, is essential in creating and maintaining a catalog of applications installable on any SLATE cluster at the push of a button.
 
-In order to develop SLATE applications, you should already be familiar with [how SLATE is used]() and the [concepts]() SLATE is built on.
+In order to develop SLATE applications, you should already be familiar with [how SLATE is used]({{home}}/docs/using-slate/) and the [concepts]({{home}}/docs/concepts) SLATE is built on.
 
 ## Essential Application Components
 
@@ -24,12 +24,12 @@ The typical SLATE application workflow is to create these components independent
 ## Development Tools and Environments
 
 Each one of the components above is built off of best-of-breed existing technologies, each with their own development processes and environments. To build on these tools and provide a testing environment for SLATE itself, two tools are available - **MiniSLATE** and **SLATElite**.
-- [MiniSLATE]() is a complete, self-contained SLATE environment that runs on your local machine, using containers and virtual machines to simulate the core components of a SLATE cluster.
-- [SLATElite]() is a utility that runs a single-node SLATE cluster on your local machine and connects it to the larger SLATE federation. This utility can be used to see how your application might interact with other SLATE clusters on the federation.
+- [MiniSLATE]({{home}}/docs/using-slate/minislate.html) is a complete, self-contained SLATE environment that runs on your local machine, using containers and virtual machines to simulate the core components of a SLATE cluster.
+- [SLATElite]({{home}}/docs/using-slate/slatelite.html) is a utility that runs a single-node SLATE cluster on your local machine and connects it to the larger SLATE federation. This utility can be used to see how your application might interact with other SLATE clusters on the federation.
 
 ## Application Catalog
 
-SLATE Applications are developed and maintained within the curated [SLATE Application Catalog](). The catalog consists of [stable]() and [incubator]() subcatalogs.
+SLATE Applications are developed and maintained within the curated [SLATE Application Catalog](https://github.com/slateci/slate-catalog). The catalog consists of [stable](https://github.com/slateci/slate-catalog/tree/master/stable) and [incubator](https://github.com/slateci/slate-catalog/tree/master/incubator) subcatalogs.
 
 The **incubator** is a repository of applications that are deployable, or close to being deployable, on SLATE clusters. These applications are typically under active development and testing. Once stable, they are moved to the **stable** catalog
 
