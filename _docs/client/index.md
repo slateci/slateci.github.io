@@ -1,5 +1,5 @@
 ---
-title: Commandline Client
+title: Client Command Line
 overview: 
 index: true
 
