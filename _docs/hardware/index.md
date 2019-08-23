@@ -1,12 +1,12 @@
 ---
-title: Basic Concepts
+title: Hardware 
 overview: 
 index: true
 
-order: 20 
+order: 80
 
 layout: docs2
 type: markdown
 
 ---
-
+{% include_relative hardware.md %}

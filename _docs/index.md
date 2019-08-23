@@ -1,9 +1,9 @@
 ---
 title: Documentation 
 overview: 
-index: false 
+index: false
 
-layout: welcome
+layout: docs2
 type: markdown
 
 ---
