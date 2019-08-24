@@ -2,9 +2,9 @@
 
 ## Installing the SLATE Client
 
-The SLATE Client is a command line interface (CLI) intended to give [edge administrators](http://slateci.io/docs/concepts/individual-roles/edge-administrator.html) and [application administrators](http://slateci.io/docs/concepts/individual-roles/application-administrator.html) a convenient way to work with the platform.
+The SLATE Client is a command line interface (CLI) intended to give edge administrators and application administrators a convenient way to work with the platform.
 
-You can get the client executable and credentials from the [web portal](https://portal.slateci.io). To set up the client, first log into the web portal, go to the 'CLI Access' section, and run the provided script (note that it's specific to your account). You can then download and unpack the version of the client executable suitable for your system—Linux and Mac OS are supported. If when running the client you receive an error similar to `slate: Exception: Credentials file /Users/cnw4/.slate/token does not exist`, you either still need to run the token installation script from the portal, or something has gone wrong with that script.
+You can get the client executable and credentials from the [web portal](https://portal.slateci.io). To set up the client, first log into the web portal, go to the 'CLI Access' section, and run the provided script (note that it's specific to your account). You can then download and unpack the version of the client executable suitable for your system—Linux and Mac OS are supported.
 
 ## Basic Use
 
@@ -270,3 +270,11 @@ While an application instance is running, you can check on what it is doing by v
 	2018/11/09 18:30:04| storeLateRelease: released 0 objects
 
 By default, the logs for all containers (in all pods) which make up the instance are shown, but the logs from any single container can be displayed using the `--container` option. 
+
+## Troubleshooting
+### Missing token
+When running the SLATE client, if you receive an error similar to the following: 
+
+`slate: Exception: Credentials file /Users/cnw4/.slate/token does not exist`
+
+You will need to visit the CLI access page on the [SLATE Dashboard](https://portal.slateci.io/cli) and run the script provided.
