@@ -22,7 +22,7 @@ th {text-align: center; vertical-align: bottom;}
 	<th>Boot/Other</th>
  </tr>   
 <tr>
-   <td><a href="/docs/slate-hardware/container-host.html">SLATE Reference</a></td>
+   <td><a href="{{home}}/docs/cluster/edge-node.html">SLATE Reference</a></td>
    <td>Dell</td>
    <td>2S/24C/48T</td>
    <td>384GB</td>
@@ -34,7 +34,7 @@ th {text-align: center; vertical-align: bottom;}
 </tr>
 
 <tr>
-   <td><a href="/docs/slate-hardware/atlas-node.html">ATLAS Tier 2</a></td>
+   <td><a href="{{home}}/docs/cluster/atlas-node.html">ATLAS Tier 2</a></td>
    <td>Dell</td>
    <td>2S/16C/32T</td>
    <td>192GB</td>
@@ -50,7 +50,7 @@ th {text-align: center; vertical-align: bottom;}
 
 | Configuration         | Vendor | Sockets/Cores/Threads | DRAM (GiB) | NICs  | Boot/Other Storage    | Year |
 |-----------------------|:------:|:---------------------:|------------|-------|------------|------|
-| [SLATE Management Node](/docs/slate-hardware/management-node.html) | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
-| [SLATE perfSONAR Node](/docs/slate-hardware/perfsonar-node.html)  | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
+| [SLATE Management Node]({{home}}/docs/docs/cluster/management-node.html) | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
+| [SLATE perfSONAR Node]({{home}}/docs/cluster/perfsonar-node.html)  | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
 
 <!--  {% include section-index.html %} -->
