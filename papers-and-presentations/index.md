@@ -1,18 +1,16 @@
 ---
-title: Reference
-overview: 
-index: true
+title: Technology
+overview: Technology used by SLATE
 
-order: 99
+order: 10
 
-layout: docs2
+layout: about
 type: markdown
-
 ---
 
-{% include home.html %}
+# Papers and Presentations 
 
-<strong>Journals or Juried Conference Papers</strong>
+## Journals or Juried Conference Papers
 
 <p>Joe Breen, Lincoln Bryant, Jiahui Chen, Emerson Ford, Robert W. Gardner, Gage Glupker, Skyler Griffith, Ben Kulbertis, Shawn McKee, Rose Pierce, Benedikt Riedel, Mitchell Steinman, Jason Stidd, Luan Truong, Jeremy Van, Ilija Vukotic, and Christopher Weaver. 2019. Managing Privilege and Access on Federated Edge Platforms. In Proceedings of the Practice and Experience in Advanced Research Computing on Rise of the Machines (learning) (PEARC '19). ACM, New York, NY, USA, Article 45, 5 pages. DOI: <a href="https://doi.org/10.1145/3332186.3332234">10.1145/3332186.3332234.</a></p>
   
@@ -22,7 +20,8 @@ type: markdown
 
 <p>Gardner, R., Breen, J., Bryant, L., & McKee, S. (2017). <a href="https://drive.google.com/file/d/0BzgiYUsbrz2TWHkzNzBlbzJyXzg/view?usp=sharing">SLATE and the Mobility of Capability</a>. <i>Science Gateways 2017</i>.</p>
 
-<strong>Other Conference Presentations/Papers</strong>    
+## Other Conference Presentations/Papers
+
 <p>Stidd, J. (2019). <i>Developing Edge Services for Federated Infrastructure Using MiniSlate</i>. PEARC 2019. <a href="https://docs.google.com/presentation/d/1lnbUeYe5fJgJmNFg3mKCqKkPSHGZAcaj_JsvwCvl4UI/edit#slide=id.g5df5dac487_0_0">Presentation Slides</a>. Chicago, Illinois.</p>
 
 <p>Weaver, C. (2019). <i>Managing Privilege and Access on Federated Edge Platforms</i>. PEARC 2019. <a href="https://docs.google.com/presentation/d/1QkOjaj5X1vS3-OZ4VTDYSyt5hCFc8KP4FO7EBWxfKQk/edit#slide=id.p">Presentation Slides</a>. Chicago, Illinois.</p>

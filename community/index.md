@@ -37,6 +37,12 @@ best approach for different cases.
 Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slateci-discuss@</a> mailing list to participate in discussions and get help troubleshooting problems.  Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slateci-news@</a> to receive news and updates about SLATE.      
      </td>
    </tr>
+  <tr>
+    <td class="logo"><img src="{{home}}/img/presentation.png" alt="Presentations and Papers" /></td>
+    <td>
+	<a href="/papers-and-presentations">Papers and Presentations</a>
+    </td>
+  </tr>
 
   </tbody>
 </table>
