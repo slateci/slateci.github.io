@@ -1,4 +1,4 @@
-SLATE is able to operate using a number of configurations, from the virtual machines used in SLATElite to large clusters with varied hardware specifications. The hardware configurations listed below have been tested and shown to operate either stable SLATE clusters or manage the operation of SLATE:
+SLATE works with a variety of cluster configurations, from single-node SLATELite virtual machines to large clusters of dedicated hardware. The following reference configurations are known to work as SLATE edge servers:
 
 ### Cluster Hardware
 
@@ -47,6 +47,7 @@ th {text-align: center; vertical-align: bottom;}
 </table>
 
 ### Support Hardware
+Some sites may opt to acquire some additional support hardware, such as a Management node to be used as a dedicated Kubernetes master, or a perfSonar node for dedicated testing:
 
 | Configuration         | Vendor | Sockets/Cores/Threads | DRAM (GiB) | NICs  | Boot/Other Storage    | Year |
 |-----------------------|:------:|:---------------------:|------------|-------|------------|------|

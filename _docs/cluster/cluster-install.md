@@ -2,7 +2,7 @@
 
 This guide describes a simple procedure to install a single-node kubernetes cluster and join it to the SLATE federation. There are many other possible options for installing Kubernetes; this is just one easy way to get started quickly. 
 
-## SLATE Hardware
+## SLATE Reference Hardware
 
 {% include_relative hardware.md %}
 
