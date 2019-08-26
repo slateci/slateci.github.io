@@ -7,7 +7,6 @@ order: 40
 layout: docs
 type: markdown
 ---
-{% include home.html %}
 
 Below is a parts manifest as quoted by Dell:
 

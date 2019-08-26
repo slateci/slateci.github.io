@@ -7,9 +7,6 @@ order: 40
 layout: docs
 type: markdown
 ---
-{% include home.html %}
-
-----
 
 | VENDOR PART NO. | ITEM | QUANTITY | 
 | ---- | ---- | ---- |
