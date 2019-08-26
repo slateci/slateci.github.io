@@ -51,7 +51,7 @@ Some sites may opt to acquire some additional support hardware, such as a Manage
 
 | Configuration         | Vendor | Sockets/Cores/Threads | DRAM (GiB) | NICs  | Boot/Other Storage    | Year |
 |-----------------------|:------:|:---------------------:|------------|-------|------------|------|
-| [SLATE Management Node]({{home}}/docs/docs/cluster/management-node.html) | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
+| [SLATE Management Node]({{home}}/docs/cluster/management-node.html) | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
 | [SLATE perfSONAR Node]({{home}}/docs/cluster/perfsonar-node.html)  | Dell | 1S/10C/20T | 32GB | 2x10 Gbps | 480 GB SSD | 2018 |
 
 <!--  {% include section-index.html %} -->
