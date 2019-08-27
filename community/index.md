@@ -38,7 +38,7 @@ Join the <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slate
      </td>
    </tr>
   <tr>
-    <td class="logo"><img src="{{home}}/img/presentation.png" alt="Presentations and Papers" /></td>
+    <td class="logo"><img src="{{home}}/img/presentation_.png" alt="Presentations and Papers" /></td>
     <td>
 	<a href="/papers-and-presentations">Papers and Presentations</a>
     </td>
