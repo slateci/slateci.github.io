@@ -7,6 +7,8 @@ order: 10
 layout: about
 type: markdown
 ---
+# SLATE Technology
+<hr>
 
 <div class="left-image">
 	<div class="logo-image"><img width="100%" src="/img/docker_logo.png" /></div>
