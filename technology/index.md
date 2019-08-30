@@ -21,7 +21,7 @@ type: markdown
 
 <div class="right-image">
 	<div class="tech-paragraph">
-		<p><a href="https://kubernetes.io/">Kubernetes</a> facilitates the underlying container orchestration done by SLATE. Kubernetes, sometimes abbreviated K8s, is the open-source leader in deployment, management, and automation of containers. Kubernetes abstracts container workloads into deployments and services that can be connected using a simple internal networking model. The SLATE client provides granular secure access to the Kubernetes control plane, and allows you to manage multiple geographically disparate clusters at once.</p>
+		<p><a href="https://kubernetes.io/">Kubernetes</a> facilitates the underlying container orchestration done by SLATE. Kubernetes, sometimes abbreviated K8s, is the open-source leader in deployment, management, and automation of containers. Kubernetes abstracts container workloads into deployments and services that can be connected using a simple internal networking model. The SLATE client provides granular secure access to the Kubernetes control plane, and allows the management of multiple geographically disparate clusters at once.</p>
 	</div>
 	<div class="logo-image"><img src="/img/Kubernetes-logo.png" /></div>
 </div>
