@@ -12,7 +12,13 @@ type: markdown
 
 ## Mission Statement
 
+
+
 ## Our Goals
+
+- Simplify the scientific application deployment process for IT personnel
+- Allow scientific collaborators to deploy services at a number of regions worldwide
+- Provide a curated catalog of stable, trusted, and secure science applications.
 
 ## Partners
 
