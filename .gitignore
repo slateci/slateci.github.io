@@ -19,3 +19,6 @@ config_override.yml
 
 # mac
 .DS_Store
+
+# VSCode artifacts
+.vscode/
