@@ -12,9 +12,11 @@ type: markdown
 
 ## Mission Statement
 
+<!-- In a time where research is an increasingly collaborative effort involving multiple teams all across the globe -->
 
+**Powering science collaborations through quick, simple, and secure service deployment**
 
-## Our Goals
+The SLATE Platform and Federation is designed to:
 
 - Simplify the scientific application deployment process for IT personnel
 - Allow scientific collaborators to deploy services at a number of regions worldwide
