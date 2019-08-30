@@ -43,6 +43,23 @@ High-performance networking utilized by SLATE is made possible by the ScienceDMZ
 </div>
 <hr>
 
+<div class="row">
+	<div class="col-lg-4 col-md-4 col-sm-12 text-centered">
+		<img class="img-fluid" style="width: 80%" src="/img/slate-logo.png" />
+	</div>
+	<div class="col-lg-8 col-md-8 col-sm-12 tech-paragraph">
+		<!-- <p>
+			The <a href="https://gitlab.com/ucsd-prp/nrp-controller">NRP-Controller</a> is a tool which enables federating Kubernetes clusters with limited permissions. This means that an external entity (like the SLATE federation) can be granted access to only part of a Kubernetes cluster, allowing both multi-tenancy, in that SLATE can coexist with other uses of the same clusters, and helping local cluster administrators retain full control of their clusters when participating in SLATE.
+		</p>
+		<br> -->
+		<p align="justify">
+				The SLATE Federation is tied together by a custom component called the <b>SLATE API Server</b>. This provides a uniform interface for all users of SLATE to make requests to use and manage resources participating in the Federation. It enforces access control rules so that resource providers can regulate which groups on SLATE can run services on their cluster, along with services they may run. SLATE provides both the <a href="/docs/tools/">SLATE Command Line Client</a> and the <a href="https://portal.slateci.io/dashboard">SLATE Dashboard</a> to interact with this API.
+		</p>
+	</div>
+</div>
+
+
+<hr>
 <div class="top-image-small">
 	<div><img src="/img/globus-250x90.svg" /></div>
 	<div class="tech-paragraph">

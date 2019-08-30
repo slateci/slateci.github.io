@@ -34,7 +34,7 @@ In addition to the dashboard, users may use SLATE Client, a commandline tool for
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
             <div class="col-sm-9 text-center nofloat center-block">
-                <a href="{{home}}/docs/client/tools"><button class="btn btn-slate">SLATE Client Guide</button></a>    
+                <a href="{{home}}/docs/tools"><button class="btn btn-slate">SLATE Client Guide</button></a>    
             </div>
         </div>
     </div>
