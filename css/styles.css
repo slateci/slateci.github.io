@@ -1,0 +1,50 @@
+.left-image {
+	display: flex;
+	justify-content: center;
+}
+
+.left-image p {
+	text-align: justify;
+}
+
+.right-image {
+	display: flex;
+	justify-content: center;
+}
+
+.right-image p {
+	text-align: justify;
+}
+
+.logo-image {
+	flex-shrink: 0;
+}
+
+.top-image {
+	width: 100%;
+}
+
+.top-image p {
+	text-align: justify;
+}
+
+.left-image img {
+	max-width: 200px;
+}
+
+.right-image img {
+	max-width: 200px;
+}
+
+
+.top-image-small {
+	display: flex;
+	justify-content: center;
+}
+
+.top-image-small img {
+	max-width: 200px;
+}
+.tech-paragraph {
+	padding: 0 25px;
+}
