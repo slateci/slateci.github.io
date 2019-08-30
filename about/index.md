@@ -22,13 +22,21 @@ type: markdown
 
 ## Partners
 
-## The Team
+- Utah
+- Umich
+- U Chic
+- Clemson
+- New Mexico State
 
-## Privacy/Security
+<!-- ## The Team -->
+
+<!-- ## Privacy/Security -->
 
 ## Grant Information
 
-This material is based upon work supported by the National Science Foundation under Grant No. 1724821.<br>Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+This material is based upon work supported by the National Science Foundation under [Grant No. 1724821.](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1724821&HistoricalAwards=false)
+
+Sponsored in 2017, 4-year grant
 
 ## Papers and Presentations
 
