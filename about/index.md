@@ -24,11 +24,13 @@ The SLATE Platform and Federation is designed to:
 
 ## Partners
 
-- Utah
-- Umich
-- U Chic
-- Clemson
-- New Mexico State
+A number of partners work as contributors of the SLATE Platform:
+
+- [University of Utah](https://www.chpc.utah.edu/)
+- [University of Michigan](https://www.umich.edu/)
+- [University of Chicago](https://www.uchicago.edu/)
+- [Clemson University, South Carolina](http://www.clemson.edu/)
+- [New Mexico State University](https://nmsu.edu/)
 
 <!-- ## The Team -->
 
@@ -38,7 +40,7 @@ The SLATE Platform and Federation is designed to:
 
 This material is based upon work supported by the National Science Foundation under [Grant No. 1724821.](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1724821&HistoricalAwards=false)
 
-Sponsored in 2017, 4-year grant
+The SLATE Project began in 2017 with a 4-year grant and is estimated to be completed in 2021.
 
 ## Papers and Presentations
 
