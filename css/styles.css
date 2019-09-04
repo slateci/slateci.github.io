@@ -1,3 +1,6 @@
+.technology-justify {
+	text-align: justify;
+}
 .left-image {
 	display: flex;
 	justify-content: center;
