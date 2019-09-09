@@ -61,3 +61,4 @@ exclude:
   - repos/*.html
   - repos/*.md
 
+url: "https://slateci.io"
