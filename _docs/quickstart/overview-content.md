@@ -42,7 +42,7 @@ In addition to the dashboard, users may use SLATE Client, a commandline tool for
 
 ### Add your site to SLATE
 
-If your site is interested in joining the SLATE federation as a Resource Provider, see the [cluster installation docs](https://slateci.io/docs/cluster-install/) for guidance on installing SLATE on a Kubernetes cluster (and installing the Kubernetes cluster as well, if necessary). 
+If your site is interested in joining the SLATE federation as a Resource Provider, see the [cluster installation docs](https://slateci.io/docs/cluster/) for guidance on installing SLATE on a Kubernetes cluster (and installing the Kubernetes cluster as well, if necessary). 
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
