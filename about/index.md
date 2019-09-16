@@ -8,9 +8,7 @@ layout: about
 type: markdown
 ---
 
-# Papers and Presentations 
-
-## Journals and Conference Papers
+## Journal and Conference Papers
 
 <p><i>Managing Privilege and Access on Federated Edge Platforms</i>,  Joe Breen, Lincoln Bryant, Jiahui Chen, Emerson Ford, Robert W. Gardner, Gage Glupker, Skyler Griffith, Ben Kulbertis, Shawn McKee, Rose Pierce, Benedikt Riedel, Mitchell Steinman, Jason Stidd, Luan Truong, Jeremy Van, Ilija Vukotic, and Christopher Weaver. 2019. In Proceedings of the Practice and Experience in Advanced Research Computing on Rise of the Machines (learning) (PEARC '19). ACM, New York, NY, USA, Article 45, 5 pages. DOI: <a href="https://doi.org/10.1145/3332186.3332234">10.1145/3332186.3332234.</a></p>
   
@@ -20,7 +18,7 @@ type: markdown
 
 <p><i><a href="https://drive.google.com/file/d/0BzgiYUsbrz2TWHkzNzBlbzJyXzg/view?usp=sharing">SLATE and the Mobility of Capability</a></i>, Gardner, R., Breen, J., Bryant, L., & McKee, S. in <i>Science Gateways 2017</i>.</p>
 
-## Other Conference Presentations/Papers
+## Presentations
 
 <p>Stidd, J. (2019). <i>Developing Edge Services for Federated Infrastructure Using MiniSlate</i>. PEARC 2019. <a href="https://docs.google.com/presentation/d/1lnbUeYe5fJgJmNFg3mKCqKkPSHGZAcaj_JsvwCvl4UI/edit#slide=id.g5df5dac487_0_0">Presentation Slides</a>. Chicago, Illinois.</p>
 
