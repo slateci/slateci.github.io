@@ -10,7 +10,7 @@ type: markdown
 
 # Papers and Presentations 
 
-## Journals or Juried Conference Papers
+## Journals and Conference Papers
 
 <p><i>Managing Privilege and Access on Federated Edge Platforms</i>,  Joe Breen, Lincoln Bryant, Jiahui Chen, Emerson Ford, Robert W. Gardner, Gage Glupker, Skyler Griffith, Ben Kulbertis, Shawn McKee, Rose Pierce, Benedikt Riedel, Mitchell Steinman, Jason Stidd, Luan Truong, Jeremy Van, Ilija Vukotic, and Christopher Weaver. 2019. In Proceedings of the Practice and Experience in Advanced Research Computing on Rise of the Machines (learning) (PEARC '19). ACM, New York, NY, USA, Article 45, 5 pages. DOI: <a href="https://doi.org/10.1145/3332186.3332234">10.1145/3332186.3332234.</a></p>
   
