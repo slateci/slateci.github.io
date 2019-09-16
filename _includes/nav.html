@@ -32,39 +32,44 @@
 }
 </style>
 
-<nav id="header-nav" class="navbar navbar-inverse" role="navigation">
-  <div class="container">
-      <div class="row">
-        <div class="col-md-11 nofloat center-block ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="img/slate-logo-medium.png" width="180" height="30" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-          <div class="navbar-header">
-            <button type="button" class="hamburger navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{home}}/">
-              <div>
-                <img src="{{home}}/img/slate-logo-medium.png" alt="SLATE"/>
-              </div>
-            </a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{home}}/about/" {% if current[1] == 'about' %}class='current'{% endif %}>About</a></li>
-              <li><a href="{{home}}/technology/" {% if current[1] == 'technology' %}class='current'{% endif %}>Technology</a></li>
-              <li><a href="{{home}}/docs/quickstart" {% if current[1] == 'docs' %}class='current'{% endif %}>Docs</a></li>
-              <li><a href="{{home}}/blog/" {% if current[1] == 'blog' %}class='current'{% endif %}>Blog</a></li>
-              <li><a href="{{home}}/community/" {% if current[1] == 'community' %}class='current'{% endif %}>Community</a></li>
-              <li style="padding-left: 25px;"><a class="btn dashboard-button" href="https://portal.slateci.io/" style="background-color: none; border: 1px solid white; color: white;" role="button"><b>Dashboard</b></a></li>
-	      
-              <!-- <li>{% include search-box.html %}</li> -->
-            </ul>
-          </div>
-
-        </div>
-      </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a href="{{home}}/about/">About</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{home}}/technology/">Technology</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{home}}/docs/quickstart">Docs</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{home}}/blog/">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{home}}/community/">Community</a>
+      </li>
+      <li class="nav-item" style="padding-left: 25px;">
+        <a class="btn dashboard-button" href="https://portal.slateci.io/" style="background-color: none; border: 1px solid white; color: white;" role="button"><b>Dashboard</b></a>
+      </li>
+    </ul>
   </div>
 </nav>
+
+<!--
+          <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+          </div>
+        -->
