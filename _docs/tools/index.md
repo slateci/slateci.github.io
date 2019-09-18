@@ -1,5 +1,5 @@
 ---
-title: Command-line Client
+title: slate CLI
 overview: 
 index: true
 

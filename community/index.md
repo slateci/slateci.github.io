@@ -20,7 +20,7 @@ best approach for different cases.
     <tr>
       <td class="logo"><img src="https://cdn.brandfolder.io/5H442O3W/as/pl546j-7le8zk-4nzzs1/Slack_Mark_Web.png " alt="Slack"/></td>
       <td>
-        Join the <a href="https://slateci.slack.com">SLATE Slack</a>
+        Join the <a href="https://slack.slateci.io/">SLATE Slack</a>
       </td>
     </tr>
 
