@@ -13,58 +13,48 @@
 {% if page.url == "/true-index.html" or page.url == "/index.html" or page.url == "/" %}
 <style type="text/css">
   /* hides the logo in the topleft on the landing page */
-  .navbar-header .navbar-brand{
+  .nothing .navbar-brand{
     display:none !important;
   }
 </style>
 {% endif %}
 <style>
 .dashboard-button {
-
-	padding: 10px !important;
-	margin-top: 5px !important;
+	
+	border-radius: 3px;
+	background: white!important;
+	color: #2e69c3 !important ;
+	text-decoration: none !important ;
 }
 .dashboard-button:hover {
 
-	background: white !important;
-	color: #296aca !important ;
+	background: #2e69c3 !important;
+	color: white !important ;
 	text-decoration: none !important ;
 }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="img/slate-logo-medium.png" width="180" height="30" alt="">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2e69c3;">
+	<div class="container-fluid" style="max-width: 1500px;">
+		  <a class="navbar-brand" href="/">
+		    <img src="/img/slate-logo-medium.png" alt="SLATE">
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a href="{{home}}/about/">About</a>
-      </li>
-      <li class="nav-item">
-        <a href="{{home}}/technology/">Technology</a>
-      </li>
-      <li class="nav-item">
-        <a href="{{home}}/docs/quickstart">Docs</a>
-      </li>
-      <li class="nav-item">
-        <a href="{{home}}/blog/">Blog</a>
-      </li>
-      <li class="nav-item">
-        <a href="{{home}}/community/">Community</a>
-      </li>
-      <li class="nav-item" style="padding-left: 25px;">
-        <a class="btn dashboard-button" href="https://portal.slateci.io/" style="background-color: none; border: 1px solid white; color: white;" role="button"><b>Dashboard</b></a>
-      </li>
-    </ul>
-  </div>
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			  <div class="navbar-nav ml-auto">
+				<a class="nav-item nav-link text-white" href="/">Home</span></a>
+				<a class="nav-item nav-link text-white" href="{{home}}/about/">About</a>
+				<a class="nav-item nav-link text-white" href="{{home}}/technology/">Technology</a>
+				<a class="nav-item nav-link text-white" href="{{home}}/docs/quickstart">Docs</a>
+				<a class="nav-item nav-link text-white" href="{{home}}/blog/">Blog</a>
+				<a class="nav-item nav-link text-white" href="{{home}}/community/">Community</a>
+				<a class="nav-item nav-link dashboard-button" href="https://portal.slateci.io/" style="background-color: none; border: 1px solid white; color: #2e69c3;" role="button"><b>Dashboard</b></a>
+			  </div>
+		  </div>
+	</div>
 </nav>
 
 <!--

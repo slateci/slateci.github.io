@@ -10,6 +10,7 @@ title: SLATE
    vertical-align: middle;
    float: none;
 }
+
 .list-menu-items {
 	display: flex;
 	justify-content: space-between;
@@ -21,7 +22,6 @@ title: SLATE
 	justify-content: center;
 	width: 200px;
 	height: 100px;
-	border: 1px solid gray;
 	border-radius: 10px;
 	background: #7795c6;
 	color: white;
@@ -70,97 +70,104 @@ title: SLATE
 	margin: 25px 0;
 	max-width: 100%;
 }
+.slate-header {
+	border-top: 1px solid white;
+}
 </style>
 
-<div class="slate-header" style="background: #7795C6;">
-	<div class="container">
-		<div class="row" style="padding: 50px 0;">
-			<div class="col-lg-6 col-md-6 col-sm-6 vcenter">
-				<img class="img-fluid" style="width: 100%" alt="SLATE" src="{{home}}/img/slate-logo-large.png" />
+<div class="slate-header" style="background: #7795c6;">
+	<div class="container h-100 p-3">
+		<div class="row align-items-center h-100">
+			<div class="col-md">
+				<img class="img-fluid" style="" alt="SLATE" src="{{home}}/img/slate-logo-large.png" />
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 vcenter">
-				<p class="lead" style="color: white;">
-					Powering science collaborations through quick, simple, and secure service deployment
+			<div class="col-md">
+				<p class="lead" style="color: white; line-height: 1.5;">
+				Powering science collaborations with flexible and secure service deployment
 				</p>
 			</div>
 		</div>
 	</div>
 </div>
 
-<section class="hero-wrapper">
-    <div class="hero-container" style="padding: 50px;">
-        <div class="row doc-col-row">
-			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="vertical-align: middle; display: inline-block;">
+<section class="container py-5 h-100">
+        <div class="row">
+		<div class="col-lg" style="vertical-align: middle; display: inline-block;">
 				<div class="embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item"  src="https://www.google.com/maps/d/u/0/embed?mid=1u3UjyhEIyq5UX1VbE7gKw_CSP_v_SCA2"></iframe>
 				</div>
 			</div>
-            <div class="col-lg-5 vcenter">
+		<div class="col-lg align-items-center h-100">
 
-				<h2 style="margin: 10px 0;">Quick App Deployment, Anywhere</h2>
+
+			<div class="pb-3">
+				<h2 style="margin: 10px 0;">Federated Operation of Science Platforms</h2>
 				<p align="justify">
-					Much of modern research is propelled by collaborations across multiple institutions. Massive data sets and complex research drive the need
-					to aggregate resources from many sources into scalable computing systems. A vast array of dependencies, specifications, and processes across
-					these sites can cause scientists to spend more time on the technical aspects of computation and data management than on the science itself.
+					Modern research requires collaboration across facilities, institutions and scientific domains. SLATE helps build multi-institution cyberinfrastructure using secure and declarative deployment tools.
 				</p>
 				<br>
 
 				<p align="justify">
-					Introducing the SLATE stack to your site enables science users to work on research rather than technicalities, saves support staff
-					significant amounts of time, and expands the reach of domain specific science gateways and multi-site research platforms.
+					SLATE enables a federated "NoOPs" operations model that give cyberinfrastructure developers the flexibility to innovate at scale, expanding the reach of domain specific science gateways and multi-site research platforms.
 				</p>
+			</div>
+				
 
-				<br>
+</div>
+	</div>
+</div>
 
-				<h2 style="margin: 10px 0;">Try SLATE</h2>
-				<div class="row">
 
-					<div class="col-lg-3 col-md-3 col-sm-6 text-center">
-						<a href="https://sandbox.slateci.io">
-							<p style="margin: 10px 0">Online Tutorial</p>
-							<i class="fa fa-terminal fa-5x"></i>
-						</a>
-					</div>
+<div class="container-fluid p-3 h-100 bg-light">
+	<div class="container">
+		<div class=" row d-flex justify-content-center p-2">
+			<h2 class="display-5">Try&nbspSLATE</h2>
+		</div>
+		<div class="row d-flex justify-content-between px-5">
 
-					<div class="col-lg-3 col-md-3 col-sm-6 text-center">
-						<a href="https://portal.slateci.io/dashboard">
-							<p style="margin: 10px 0">Dashboard</p>
-							<i class="fa fa-columns fa-5x"></i>
-						</a>
-					</div>
+			<div class="">
+				<a href="https://sandbox.slateci.io">
+					<p style="margin: 10px 0">Online Tutorial</p>
+					<i class="fa fa-terminal fa-5x"></i>
+				</a>
+			</div>
 
-					<div class="col-lg-3 col-md-3 col-sm-6 text-center">
-						<a href="{{home}}/docs/quickstart">
-							<p style="margin: 10px 0">Quickstart</p>
-							<i class="fa fa-rocket fa-5x"></i>
-						</a>
-					</div>
+			<div class="">
+				<a href="https://portal.slateci.io/dashboard">
+					<p style="margin: 10px 0">Dashboard</p>
+					<i class="fa fa-columns fa-5x"></i>
+				</a>
+			</div>
 
-					<div class="col-lg-3 col-md-3 col-sm-6 text-center">
-						<a href="{{home}}/docs/tools">
-							<p style="margin: 10px 0">Documentation</p>
-							<i class="fa fa-book fa-5x"></i>
-						</a>
-					</div>
-				</div>
-			<br>
+			<div class="">
+				<a href="{{home}}/docs/quickstart">
+					<p style="margin: 10px 0">Quickstart</p>
+					<i class="fa fa-rocket fa-5x"></i>
+				</a>
+			</div>
+
+			<div class="">
+				<a href="{{home}}/docs/tools">
+					<p style="margin: 10px 0">Documentation</p>
+					<i class="fa fa-book fa-5x"></i>
+				</a>
+			</div>
 		</div>
 	</div>
+</div>
 
-    <div class="container try-slate">
+    <div class="container p-5">
 	    <div class="row">
-		    <div class="col-lg-4 col-md-4 col-lg-offset-1 col-sm-12">
+		    <div class="col-md">
 
 				<h2 style="margin: 10px 0;">Secure Deployment via the ScienceDMZ</h2>
 				<p align="justify">
-					The SLATE (Services Layer At The Edge) platform provides trusted services operated by a central team. The SLATE platform operates a network of such services across
-					many campuses. Science application developers use SLATE to launch elements of a science gateway, data cache, or localworkflow service.
-					SLATE can be easily deployed within a campus Science DMZ.
+				The SLATE (Services Layer At The Edge) platform provides trusted services operated by a central team. The SLATE platform operates a network of such services across many campuses. Science application developers use SLATE to launch elements of a science gateway, data cache, or localworkflow service. SLATE can be easily deployed within a campus Science DMZ.
 				</p>
 
 		    </div>
-		    <div class="col-lg-5 col-md-5 col-sm-12 col-lg-offset-1">
-			    <img class="img-fluid" style="width: 100%" src="{{home}}/img/slate-diagram.png"></img>
+		    <div class="col-md">
+			    <img class="img-fluid w-100" src="{{home}}/img/slate-diagram.png"></img>
 			</div>
 	    </div>
     </div>

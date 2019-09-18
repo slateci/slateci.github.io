@@ -10,21 +10,18 @@ layout: default
   <div class="row">
     <div class="col-md-11 nofloat center-block">
       <div class="row">
-        <div id="sidebar-container" class="col-sm-3">
-          {% include doc-side-nav.html %}
-        </div>
 
-        <div id="tab-container" class="col-xs-1 tab-neg-margin pull-left">
-          <a id="sidebar-tab" class="glyphicon glyphicon-chevron-left" href="javascript:void 0;"></a>
-        </div>
-
-        <div id="content-container" class="thin-left-border col-sm-9 {{ page.type }}">
+        <div id="content-container" class="thin-right-border col-md-10 {{ page.type }}">
           <div id="toc" class="toc"></div>
           <div id="doc-content">
             <h1>{{page.title}}</h1>
             {{ content }}
           </div>
         </div>
+        <div id="" class="col-md-2" style="border-left: 1px solid lightgrey;">
+          {% include doc-side-nav.html %}
+        </div>
+
       </div>
     </div>
   </div>
