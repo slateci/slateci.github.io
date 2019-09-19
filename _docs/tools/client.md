@@ -13,27 +13,27 @@ For help using the client, run it with the --help option:
 	$ slate --help
 	SLATE command line interface
 	Usage: ./slate [OPTIONS] SUBCOMMAND
-	
+
 	Options:
-	  -h,--help                   Print this help message and exit
-	  --no-format                 Do not use ANSI formatting escape sequences in output
-	  --width UINT                The maximum width to use when printing tabular output
-	  --api-endpoint URL (Env:SLATE_API_ENDPOINT)
-	                              The endpoint at which to contact the SLATE API server
-	  --api-endpoint-file PATH (Env:SLATE_API_ENDPOINT_PATH)
-	                              The path to a file containing the endpoint at which to contact the SLATE API server. The contents of this file are overridden by --api-endpoint if that option is specified. Ignored if the specified file does not exist.
-	  --credential-file PATH (Env:SLATE_CRED_PATH)
-	                              The path to a file containing the credentials to be presented to the SLATE API server
-	  --output TEXT               The format in which to print output (can be specified as no-headers, json, jsonpointer, jsonpointer-file, custom-columns, or custom-columns-file)
-	
+		-h,--help                   Print this help message and exit
+		--no-format                 Do not use ANSI formatting escape sequences in output
+		--width UINT                The maximum width to use when printing tabular output
+		--api-endpoint URL (Env:SLATE_API_ENDPOINT)
+									The endpoint at which to contact the SLATE API server
+		--api-endpoint-file PATH (Env:SLATE_API_ENDPOINT_PATH)
+									The path to a file containing the endpoint at which to contact the SLATE API server. The contents of this file are overridden by --api-endpoint if that option is specified. Ignored if the specified file does not exist.
+		--credential-file PATH (Env:SLATE_CRED_PATH)
+									The path to a file containing the credentials to be presented to the SLATE API server
+		--output TEXT               The format in which to print output (can be specified as no-headers, json, jsonpointer, jsonpointer-file, custom-columns, or custom-columns-file)
+
 	Subcommands:
-	  version                     Print version information
-	  completion                  Print a shell completion script
-	  group                       Manage SLATE groups
-	  cluster                     Manage SLATE clusters
-	  app                         View and install SLATE applications
-	  instance                    Manage SLATE application instances
-	  secret                      Manage SLATE secrets
+		version                     Print version information
+		completion                  Print a shell completion script
+		group                       Manage SLATE groups
+		cluster                     Manage SLATE clusters
+		app                         View and install SLATE applications
+		instance                    Manage SLATE application instances
+		secret                      Manage SLATE secrets
 
 The `--help` option can also be used with any of the client's subcommands to learn about  particular options and arguments. A complete manual of all supported commands is maintained along with source code at [https://github.com/slateci/slate-client-server/blob/master/resources/docs/client_manual.md](https://github.com/slateci/slate-client-server/blob/master/resources/docs/client_manual.md). 
 
