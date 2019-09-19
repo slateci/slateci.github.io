@@ -5,7 +5,7 @@ index: false
 
 order: 10
 
-layout: docs2
+layout: docs
 type: markdown
 ---
 

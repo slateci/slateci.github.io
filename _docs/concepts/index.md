@@ -1,16 +1,14 @@
 ---
-title: Basic Concepts
+title: Roles
 overview: 
 index: true
 
 order: 20 
 
-layout: docs2
+layout: docs
 type: markdown
 
 ---
-
-## Roles
 
 There are several roles which are useful for describing how SLATE works and is used. 
 These are not exclusive; one person may fill several roles at different times. 

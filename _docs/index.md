@@ -3,7 +3,7 @@ title: Documentation
 overview: 
 index: false
 
-layout: docs2
+layout: docs
 type: markdown
 
 ---

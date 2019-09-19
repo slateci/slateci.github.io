@@ -4,27 +4,25 @@ layout: default
 {% include home.html %}
 {% include doc-top-nav.html %}
 
-<script src="{{home}}/js/navtree.js"></script>
+<script src="/js/navtree.js"></script>
+<script src="/js/sidemenu.js"></script>
 
-<div class="container docs">
-  <div class="row">
-    <div class="col-md-11 nofloat center-block">
-      <div class="row">
+<div class="container-fluid docs">
+	<div class="row">
+		<div class="col-md-2" style="">
+			<div id="slate-menu">
+				{% include doc-side-nav.html %}
+			</div>
+		</div>
 
-        <div id="content-container" class="thin-right-border col-md-10 {{ page.type }}">
-          <div id="toc" class="toc"></div>
-          <div id="doc-content">
-            <h1>{{page.title}}</h1>
-            {{ content }}
-          </div>
-        </div>
-        <div id="" class="col-md-2" style="border-left: 1px solid lightgrey;">
-          {% include doc-side-nav.html %}
-        </div>
-
-      </div>
-    </div>
-  </div>
+		<div id="content-container" class=" col-md-8 {{ page.type }}" style=" border-left: 1px solid #2e69c315; border-right: 1px solid #2e69c315">
+			<div id="doc-content" style="" class="mx-auto px-5">
+				<h1>{{page.title}}</h1>
+				{{ content }}
+			</div>
+		</div>
+		<div class="col-md-2 d-none-md">
+			<div id="toc" class="toc position-sticky"></div>
+		</div>
+	</div>
 </div>
-
-<script src="{{home}}/js/sidemenu.js"></script>

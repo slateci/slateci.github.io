@@ -18,6 +18,7 @@ $(document).ready(function() {
     // Sticky Nav on Scroll Up
     var iScrollPos = 0;
 
+    /*
     $window.scroll(function () {
       var iCurScrollPos = $(this).scrollTop();
         if (iCurScrollPos > iScrollPos) {
@@ -35,6 +36,7 @@ $(document).ready(function() {
         }
         iScrollPos = iCurScrollPos;
     });
+    */
     
     $('.toc').click(function(){
       setTimeout(function(){
