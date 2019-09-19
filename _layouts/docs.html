@@ -20,21 +20,23 @@ layout: default
 		});
 	</script>
 <div class="container-fluid docs">
-	<div class="row">
-		<div class="col-md-2" style="">
-			<div id="slate-menu">
-				{% include doc-side-nav.html %}
+	<div class="mx-auto" style="max-width: 2000px;">
+		<div class="row">
+			<div class="col-md-2" style="">
+				<div id="slate-menu">
+					{% include doc-side-nav.html %}
+				</div>
 			</div>
-		</div>
 
-		<div id="content-container" class=" col-md-10 col-xl-8 {{ page.type }}" style=" border-left: 1px solid #2e69c315; border-right: 1px solid #2e69c315">
-			<div id="doc-content" style="" class="mx-auto px-5">
-				<h1>{{page.title}}</h1>
-				{{ content }}
+			<div id="content-container" class=" col-md-10 col-xl-8 {{ page.type }}" style=" border-left: 1px solid #2e69c315; border-right: 1px solid #2e69c315">
+				<div id="doc-content" style="" class="mx-auto px-5">
+					<h1>{{page.title}}</h1>
+					{{ content }}
+				</div>
 			</div>
-		</div>
-		<div class="col-xl-2 d-none-md">
-			<div id="toc" class="toc d-none d-xl-block"></div>
+			<div class="col-xl-2 d-none-md">
+				<div id="toc" class="toc d-none d-xl-block"></div>
+			</div>
 		</div>
 	</div>
 </div>
