@@ -126,9 +126,8 @@ At this point you should be able to inspect the running kubernetes cluster:
 
 This command should show one node; the machine on which you are working. The node will, however, have a status of 'NotReady' because the networking plugin is not yet installed. To install it:
 
-	kubectl apply -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
-	kubectl apply -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
-	
+	kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml	
+
 Running `kubectl get nodes` should now show the node as 'Ready'. 
 	
 Finally, since this Kubernetes cluster has only one node (which must therefore be the master), remove the 'taint' which prevents user software from running on the master:
