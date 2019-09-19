@@ -36,49 +36,67 @@ $(document).ready(function() {
         }
         iScrollPos = iCurScrollPos;
     });
-    */
+    
+    
     
     $('.toc').click(function(){
       setTimeout(function(){
         $('#sticky-nav').addClass("on-page");
       }, 1000)
     });
-
+    */
+    
+    /*
     setTimeout(function(){
       if (document.URL.indexOf("#") != -1 && document.URL.indexOf("contribute") == -1 ) {
         $('#sticky-nav').addClass("on-page");
       }
     }, 1000);
+    */
 
+    /*
     // Scroll to sections
     $('.btn-floating').on('click', function(){
       $('html, body').scrollTo(('#' +($(this).data("target"))), 350);
     })
+    */
 
+    /* this line is needed */
     $('#toc').toc({ listType: 'ul' });
 
+    
+    /*
     $('.nav-toggle, .hamburger').on('click', function(){
       $('.top-nav').toggleClass('right');
     });
+    */
 
+    /*
     $('.nav-doc-toggle').on('click', function(){
       $('.doc-list').toggleClass('active');
     });
+    */
 
+    /*
     $(window).on('resize',function(){
       if ($(window).width() >= 768 && !($('.top-nav').hasClass('right'))) {
         $('.top-nav').addClass('right');
       }
     });
+    */
 
+    /*
     $('.toggle').on('click',function(){
       $(this).toggleClass('active');
     });
+    */
 
+    /*
     $('.hero-down-arrow').on('click', function(){
       var scrollToY = $('.hero-wrapper:eq(0)').position().top;
       $('html,body').animate({scrollTop:scrollToY}, 300);
     });
+    */
 
     if(window.Prism){
       window.Prism.hooks.add('complete', function(env){
@@ -87,7 +105,9 @@ $(document).ready(function() {
         $el.wrap($container);
       });
     }
+    
 });
+
 
 // Collapsible navbar menu, using https://github.com/jordnkr/collapsible
 $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
@@ -101,12 +121,15 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
   $.fn.toc = function(options) {
     var defaults = {
       noBackToTopLinks: false,
-      title: '',
-      minimumHeaders: 2,
-      headers: 'h2, h3, h4, h5, h6',
+      title: '<i>Jump to...</i>',
+      minimumHeaders: 3,
+      headers: 'h1, h2, h3, h4, h5, h6',
       listType: 'ol', // values: [ol|ul]
-      showEffect: 'none', // values: [show|slideDown|fadeIn|none]
-      showSpeed: '0' // set to 0 to deactivate effect
+      showEffect: 'show', // values: [show|slideDown|fadeIn|none]
+      showSpeed: 'slow', // set to 0 to deactivate effect
+      classes: { list: '',
+                 item: ''
+               }
     },
     settings = $.extend(defaults, options);
 
@@ -114,6 +137,11 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
       return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
         return '%' + c.charCodeAt(0).toString(16);
       });
+    }
+
+    function createLink (header) {
+      var innerText = (header.textContent === undefined) ? header.innerText : header.textContent;
+      return "<a href='#" + fixedEncodeURIComponent(header.id) + "'>" + innerText + "</a>";
     }
 
     var headers = $(settings.headers).filter(function() {
@@ -125,6 +153,7 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
       return this.id;
     }), output = $(this);
     if (!headers.length || headers.length < settings.minimumHeaders || !output.length) {
+      $(this).hide();
       return;
     }
 
@@ -133,22 +162,19 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
     }
 
     var render = {
-      show: function() {
-        $('#toc').addClass('toc');
-        output.hide().html(html).show(settings.showSpeed); 
-      },
+      show: function() { output.hide().html(html).show(settings.showSpeed); },
       slideDown: function() { output.hide().html(html).slideDown(settings.showSpeed); },
       fadeIn: function() { output.hide().html(html).fadeIn(settings.showSpeed); },
       none: function() { output.html(html); }
     };
 
-    var get_level = function(ele) { return parseInt(ele.nodeName.replace("H", ""), 10); }
+    var get_level = function(ele) { return parseInt(ele.nodeName.replace("H", ""), 10); };
     var highest_level = headers.map(function(_, ele) { return get_level(ele); }).get().sort()[0];
     var return_to_top = '<i class="icon-arrow-up back-to-top"> </i>';
 
     var level = get_level(headers[0]),
       this_level,
-      html = settings.title + " <"+settings.listType+">";
+      html = settings.title + " <" +settings.listType + " class=\"" + settings.classes.list +"\">";
     headers.on('click', function() {
       if (!settings.noBackToTopLinks) {
         window.location.hash = this.id;
@@ -161,18 +187,19 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
         $(header).addClass('top-level-header').after(return_to_top);
       }
       if (this_level === level) // same level as before; same indenting
-        html += "<li><a href='#" + fixedEncodeURIComponent(header.id) + "'>" + header.innerHTML + "</a>";
+        html += "<li class=\"" + settings.classes.item + "\">" + createLink(header);
       else if (this_level <= level){ // higher level than before; end parent ol
-        for(i = this_level; i < level; i++) {
+        for(var i = this_level; i < level; i++) {
           html += "</li></"+settings.listType+">"
         }
-        html += "<li><a href='#" + fixedEncodeURIComponent(header.id) + "'>" + header.innerHTML + "</a>";
+        html += "<li class=\"" + settings.classes.item + "\">" + createLink(header);
       }
       else if (this_level > level) { // lower level than before; expand the previous to contain a ol
         for(i = this_level; i > level; i--) {
-          html += "<"+settings.listType+"><li>"
+          html += "<" + settings.listType + " class=\"" + settings.classes.list +"\">" +
+                  "<li class=\"" + settings.classes.item + "\">"
         }
-        html += "<a href='#" + fixedEncodeURIComponent(header.id) + "'>" + header.innerHTML + "</a>";
+        html += createLink(header);
       }
       level = this_level; // update for the next one
     });

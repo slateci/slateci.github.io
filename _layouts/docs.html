@@ -4,9 +4,21 @@ layout: default
 {% include home.html %}
 {% include doc-top-nav.html %}
 
-<script src="/js/navtree.js"></script>
-<script src="/js/sidemenu.js"></script>
+<script src="/js/navtree.js"></script> 
+<!-- <script src="/js/sidemenu.js"></script> -->
 
+	<script>
+	 	$(document).ready(function() {
+			/* 
+				remove menu if the page has no subpages
+				children of ul = 3 if there are not other pages
+				if 3 or less, remove menu.
+			*/
+			if( $('#slate-menu ul').children().length <= 3 ) {
+				$('#slate-menu').hide();
+			}
+		});
+	</script>
 <div class="container-fluid docs">
 	<div class="row">
 		<div class="col-md-2" style="">
@@ -15,14 +27,14 @@ layout: default
 			</div>
 		</div>
 
-		<div id="content-container" class=" col-md-8 {{ page.type }}" style=" border-left: 1px solid #2e69c315; border-right: 1px solid #2e69c315">
+		<div id="content-container" class=" col-md-10 col-xl-8 {{ page.type }}" style=" border-left: 1px solid #2e69c315; border-right: 1px solid #2e69c315">
 			<div id="doc-content" style="" class="mx-auto px-5">
 				<h1>{{page.title}}</h1>
 				{{ content }}
 			</div>
 		</div>
-		<div class="col-md-2 d-none-md">
-			<div id="toc" class="toc position-sticky"></div>
+		<div class="col-xl-2 d-none-md">
+			<div id="toc" class="toc d-none d-xl-block"></div>
 		</div>
 	</div>
 </div>

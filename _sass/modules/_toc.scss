@@ -15,20 +15,14 @@ div.toc {
 }
 
 .toc {
-  background-color: $light-gray;
-  border: 1px solid $gray;
+  /* background-color: $light-gray; */
   border-radius: 6px;
-  display: none !important;
-  padding: 15px;
-  float: right;
+  padding: 30px;
   margin-top: 15px;
   z-index:1001;
-  position:relative;
-
-  @media (min-width: 1024px) {
-      display: block !important;
-      margin-left: 20px;
-  }
+  position: -webkit-sticky;
+  position: sticky;
+  top:0;
 
   ul {
     list-style-type: none !important;
@@ -40,8 +34,12 @@ div.toc {
     }
 
     a {
-        color: $dark-gray;
+        color: #466BB0;
         font-weight: normal;
+	&:hover {
+	    color: #9cb0d4;
+
+	}
     }
   }
 }
