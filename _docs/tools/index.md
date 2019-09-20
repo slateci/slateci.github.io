@@ -1,5 +1,5 @@
 ---
-title: slate CLI
+title: SLATE CLI
 overview: 
 index: true
 
