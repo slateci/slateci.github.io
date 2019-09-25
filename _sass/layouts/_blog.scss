@@ -17,16 +17,12 @@
   }
 
   .post-title {
-    color: $black;
-    font-size: 17px;
     font-weight: 500;
-    letter-spacing: 1px;
     margin: $spacing--xxxl 0 8px;
   }
 
   .post-date {
-    color: $black;
-    font-size: 11px;
+    font-size: 1em;
   }
 
   .post-thumbnail {
@@ -42,7 +38,7 @@
   .post-author, .post-company {
     color: $gray;
     display: block;
-    font-size: 13px;
+    font-size: 1em;
   }
 
   .post-author {
@@ -61,12 +57,12 @@
   .post-excerpt {
 
     h2 {
-      font-size: 15px;
+      font-size: 1em;
       margin-top: $spacing--m;
     }
 
     p {
-      font-size: 14px;
+      font-size: 1dm;
       margin-top: $spacing--m;
     }
   }

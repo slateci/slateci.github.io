@@ -72,22 +72,26 @@ title: SLATE
 }
 .slate-header {
 	border-top: 1px solid white;
+    /*background-image: url("/img/blue-connection.png");*/
+    background-color: #7795c6;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+}
+.slate-header p {
+    font-size: 3em;
+    color: white;
+    line-height: 1.5;
 }
 </style>
 
-<div class="slate-header" style="background: #7795c6;">
-	<div class="container h-100 p-3">
-		<div class="row align-items-center h-100">
-			<div class="col-md">
-				<img class="img-fluid" style="" alt="SLATE" src="{{home}}/img/slate-logo-large.png" />
-			</div>
-			<div class="col-md">
-				<p class="lead" style="color: white; line-height: 1.5;">
-				Powering science collaborations with flexible and secure service deployment
-				</p>
-			</div>
-		</div>
-	</div>
+<div class="slate-header" >
+    <div class="container p-3">
+        <p class="lead" >
+            Powering science collaborations with flexible and secure service deployment
+        </p>
+    </div>
 </div>
 
 <section class="container py-5 h-100">
