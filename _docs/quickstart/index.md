@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 overview: Getting started with SLATE
-index: false
+index: true
 
 order: 10
 

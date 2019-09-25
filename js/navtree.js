@@ -72,6 +72,7 @@ function outputNavBarTree(items) {
         if (item.children.length == 0) {
             if (item.doc.url == location.pathname) {
                 document.write("<li class='doc-side-nav-list-item'><a class='current' href='");
+
             }
             else {
                 document.write("<li class='doc-side-nav-list-item'><a href='");
@@ -81,7 +82,7 @@ function outputNavBarTree(items) {
             document.write("'>");
             document.write(item.doc.title);
             document.writeln("</a>");
-
+            
             if (item.doc.order == 9999) {
                 document.writeln('(please set order: front matter for this document)')
             }

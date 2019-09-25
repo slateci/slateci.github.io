@@ -84,11 +84,19 @@ layout: compress
     <script src="{{home}}/js/buttons.js"></script>
     <script src="{{home}}/js/search.js"></script>
     <script src="{{home}}/js/prism_.js"></script>
+<style>
+	#top-of-page {
+		margin-top: 76px;
+
+	}
+</style>
   </head>
 
-  <body class="language-">
+  <body class="language-*">
     <!-- this is a trick to avoid content shifting as the page loads. See https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page -->
-    {{ content }}
+    <div id="top-of-page">
+	    {{ content }}
+    </div>
 
   </body>
 </html>

@@ -121,7 +121,7 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
   $.fn.toc = function(options) {
     var defaults = {
       noBackToTopLinks: false,
-      title: '<i>Jump to...</i>',
+      title: '',
       minimumHeaders: 3,
       headers: 'h1, h2, h3, h4, h5, h6',
       listType: 'ol', // values: [ol|ul]

@@ -6,19 +6,18 @@ layout: default
 
 <script src="/js/navtree.js"></script> 
 <!-- <script src="/js/sidemenu.js"></script> -->
-
-	<script>
-	 	$(document).ready(function() {
-			/* 
-				remove menu if the page has no subpages
-				children of ul = 3 if there are not other pages
-				if 3 or less, remove menu.
-			*/
-			if( $('#slate-menu ul').children().length <= 3 ) {
-				$('#slate-menu').hide();
-			}
-		});
-	</script>
+<script>
+	$(document).ready(function() {
+		/* 
+			remove menu if the page has no subpages
+			children of ul = 3 if there are not other pages
+			if 3 or less, remove menu.
+		*/
+		if( $('#slate-menu ul').children().length <= 3 ) {
+			$('#slate-menu').hide();
+		}
+	});
+</script>
 <div class="container-fluid docs">
 	<div class="mx-auto" style="max-width: 2000px;">
 		<div class="row">
@@ -27,7 +26,6 @@ layout: default
 					{% include doc-side-nav.html %}
 				</div>
 			</div>
-
 			<div id="content-container" class=" col-md-10 col-xl-8 {{ page.type }}" style=" border-left: 1px solid #2e69c315; border-right: 1px solid #2e69c315">
 				<div id="doc-content" style="" class="mx-auto px-md-5 px-1">
 					<h1>{{page.title}}</h1>
@@ -35,7 +33,6 @@ layout: default
 				</div>
 			</div>
 			<div class="col-xl-2 d-none-md">
-				<div id="toc" class="toc d-none d-xl-block"></div>
 			</div>
 		</div>
 	</div>
