@@ -1,4 +1,4 @@
-### Try the SLATE demo sandbox
+## Try the SLATE demo sandbox
 
 To get a feel for how launching and running a service on the SLATE platform works, a guided tutorial is available on a real (small) instance of the platform:
 
@@ -6,13 +6,13 @@ To get a feel for how launching and running a service on the SLATE platform work
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
             <div class="col-sm-9 text-center nofloat center-block">
-                <a href="https://sandbox.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">SLATE Tutorial</button></a>
+                <a href="https://sandbox.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">SLATE Sandbox</button></a>
             </div>
         </div>
     </div>
 </div>
 
-### Create a SLATE account
+## Create a SLATE account
 
 In order to use SLATE, you need to register an account. Account creation is handled through the SLATE dashboard, which also supports most SLATE workflows from managing groups and clusters to installing and checking the status of edge services. 
 
@@ -20,13 +20,13 @@ In order to use SLATE, you need to register an account. Account creation is hand
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
             <div class="col-sm-9 text-center nofloat center-block">
-                <a href="https://portal.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">SLATE Dashboard</button></a>
+                <a href="https://portal.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">SLATE Console</button></a>
             </div>
         </div>
     </div>
 </div>
 
-### Use the SLATE Client
+## Use the SLATE Client
 
 In addition to the dashboard, users may use SLATE Client, a commandline tool for MacOS and Linux. The SLATE Client allows users to configure and deploy applications at a number of SLATE production clusters with just a handful of commands. An installation and usage guide can be found below:
 
@@ -40,7 +40,7 @@ In addition to the dashboard, users may use SLATE Client, a commandline tool for
     </div>
 </div>
 
-### Add your site to SLATE
+## Add your site to SLATE
 
 If your site is interested in joining the SLATE federation as a Resource Provider, see the [cluster installation docs](https://slateci.io/docs/cluster/) for guidance on installing SLATE on a Kubernetes cluster (and installing the Kubernetes cluster as well, if necessary). 
 
@@ -54,7 +54,7 @@ If your site is interested in joining the SLATE federation as a Resource Provide
     </div>
 </div>
 
-### Develop a SLATE Application
+## Develop a SLATE Application
 
 The SLATE Team is always looking for new applications that can be deployed through the platform to enable collaborative science. Below you will find a guide on Application Development using our Software Developnment Kit, MiniSLATE:
 <div id="doc-call" class="container-fluid doc-call-container ">
