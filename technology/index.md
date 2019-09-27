@@ -79,7 +79,7 @@ High-performance networking utilized by SLATE is made possible by the ScienceDMZ
 </div>
 	<div class="col-10">
 		<p class="technology-justify">
-Our portal and identity management are derived from the <a href="https://www.globus.org/">Globus</a> Modern Research Data Portal.
+Our Console and authorization backend was developed using the <a href="https://www.globus.org/">Globus</a> Modern Research Data Portal.  Special thanks to <a href="https://www.cilogon.org/">CI Logon</a> for integrated access and identity management.
 </p>
 	</div>
 </div>
