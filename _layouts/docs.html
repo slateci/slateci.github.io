@@ -5,18 +5,6 @@ layout: default
 {% include doc-top-nav.html %}
 
 <script src="/js/navtree.js"></script> 
-<!-- <script src="/js/sidemenu.js"></script> -->
-<script>
-	$(document).ready(function() {
-		/* 
-			remove menu if the page has no subpages
-			children of ul = 3 if there are not other pages
-			if 3 or less, remove menu.
-		*/
-		if( $('#slate-menu ul').children().length <= 3 ) {
-			$('#slate-menu').hide();
-		}
-	});
 </script>
 <div class="container-fluid docs">
 	<div class="mx-auto" style="max-width: 2000px;">
@@ -33,7 +21,26 @@ layout: default
 				</div>
 			</div>
 			<div class="col-xl-2 d-none-md">
+                <div id="toc" class="toc d-none d-xl-block"></div>
 			</div>
 		</div>
 	</div>
 </div>
+<!-- <script src="/js/sidemenu.js"></script> -->
+<script>
+/*https://stackoverflow.com/questions/11365091/jquery-scroll-to-anchor-minus-set-amount-of-pixels */
+$(function() {
+  $('a').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top-85
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>

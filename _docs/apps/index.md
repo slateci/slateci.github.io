@@ -32,4 +32,3 @@ deployments and test them in Minikube or on a test cluster. Finally parametrize 
 with a Helm chart.
 
 Once all components have been developed, one can request their application to be added to the catalog.
-

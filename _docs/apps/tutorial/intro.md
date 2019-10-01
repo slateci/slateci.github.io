@@ -10,10 +10,6 @@ type: markdown
 ---
 
 <html>
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
-  <title>Helm</title>
-</head>
 <body>
           <div class="content">
               <div>
@@ -24,4 +20,4 @@ type: markdown
               </div>
           </div>
      </body>
-</html>
+     </html>

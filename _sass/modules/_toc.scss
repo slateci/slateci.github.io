@@ -1,5 +1,20 @@
+
+a.page-anchor {
+    display: block;
+    position: relative;
+    top: 100px;
+    visibility: hidden;
+
+
+}
+
+
 div.toc {
-  padding: 0px;
+  padding: 0; 
+  background-color: white;
+  border-left: 1px solid gray;
+  margin-left: 10px;
+  height: auto;
 }
 
 #toc {
@@ -30,7 +45,7 @@ div.toc {
     }
 
     a {
-        color: #466BB0;
+        color: #333; 
         font-weight: normal;
 	&:hover {
 	    color: #9cb0d4;

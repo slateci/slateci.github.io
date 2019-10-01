@@ -122,7 +122,7 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
     var defaults = {
       noBackToTopLinks: false,
       title: '',
-      minimumHeaders: 3,
+      minimumHeaders: 1,
       headers: 'h1, h2, h3, h4, h5, h6',
       listType: 'ol', // values: [ol|ul]
       showEffect: 'show', // values: [show|slideDown|fadeIn|none]
@@ -141,7 +141,7 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
 
     function createLink (header) {
       var innerText = (header.textContent === undefined) ? header.innerText : header.textContent;
-      return "<a href='#" + fixedEncodeURIComponent(header.id) + "'>" + innerText + "</a>";
+      return "<a  href='#" + fixedEncodeURIComponent(header.id) + "'>" + innerText + "</a>";
     }
 
     var headers = $(settings.headers).filter(function() {
@@ -177,7 +177,9 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
       html = settings.title + " <" +settings.listType + " class=\"" + settings.classes.list +"\">";
     headers.on('click', function() {
       if (!settings.noBackToTopLinks) {
-        window.location.hash = this.id;
+        //window.location.hash = this.id;
+          //Jason added this line from: https://stackoverflow.com/questions/11365091/jquery-scroll-to-anchor-minus-set-amount-of-pixels
+        $('html,body').unbind().animate({scrollTop: $(this).offset().top-85},'slow');
       }
     })
     .addClass('clickable-header')

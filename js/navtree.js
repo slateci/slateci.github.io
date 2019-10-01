@@ -82,11 +82,16 @@ function outputNavBarTree(items) {
             document.write("'>");
             document.write(item.doc.title);
             document.writeln("</a>");
+
             
             if (item.doc.order == 9999) {
                 document.writeln('(please set order: front matter for this document)')
             }
             document.writeln("</li>");
+            //added by Jason to put onpage links to headings into menu
+            if (item.doc.url == location.pathname) {
+                document.write("<li><div id='toc' class='toc d-none d-xl-block'></div></li>")
+            }
         }
     }
 
