@@ -46,7 +46,7 @@ between the University of Chicago and the University of Michigan. You can find
 the endpoints with `slate cluster list` and a little grep action:
 
 	[09:43]:~ $ slate cluster list | grep -E uchicago\|umich
-        umich-prod           slate-dev             cluster_WRb0f8mH9ak
+	umich-prod           slate-dev             cluster_WRb0f8mH9ak
 	uchicago-its-fiona01 slate-dev             cluster_gWCytq-5yaU
 	uchicago-prod        slate-dev             cluster_yZroQR5mfBk
 	uchicago-river-v2    ssl                   cluster_iL8D7abxCM8
