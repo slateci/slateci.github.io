@@ -1,3 +1,13 @@
+---
+title: "Easy Network Diagnostics with SLATE"
+overview: Blog
+published: false
+permalink: blog/slate-perfsonar.html
+attribution: The SLATE Team
+layout: post
+type: markdown
+---
+
 Network testing is hugely important to diagnose problems within and between
 sites. We're trying to make network diagnostics dead simple with SLATE, and to
 do that we've SLATE-ified pieces of the excellent perfSONAR software stack
