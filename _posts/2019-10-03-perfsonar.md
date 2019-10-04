@@ -103,7 +103,7 @@ into it:
 
 Once you have a shell, you can ask pscheduler to start a test between the endpoints:
 
-	pscheduler task trace --source-node 192.41.231.237 --dest 192.170.227.156
+	sh-4.2# pscheduler task trace --source-node 192.41.231.237 --dest 192.170.227.156
 	Submitting task...
 	Task URL:
 	https://192.41.231.237/pscheduler/tasks/7b06b5b3-d13f-431a-b49b-83a27ade787c
