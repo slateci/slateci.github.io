@@ -15,6 +15,8 @@ do that we've SLATE-ified pieces of the excellent perfSONAR software stack
 SLATE stable catalog, and so we thought we would give you a little tour of this
 handy tool!
 
+<!--end_excerpt-->
+
 Let's dive right in - here's what the configuration looks like:
 
 	[09:31]:~ $ slate app get-conf perfsonar-testpoint
