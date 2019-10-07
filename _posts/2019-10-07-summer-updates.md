@@ -19,7 +19,7 @@ There have been a number of interesting SLATE updates this summer. Read on for a
 - perfSONAR testpoint application has been promoted to stable. Measure all the networks!
 - StashCache application has been promoted to stable
 - HTCondor Worker chart now supports priority classes
-- MinIO, HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are maturing in the catalog's incubator
+- MinIO, HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are incubating in the catalog. 
 
 ## Sites
 - Clemson University added a SLATE cluster, `clemson-dev`
