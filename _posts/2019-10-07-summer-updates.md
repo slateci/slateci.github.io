@@ -19,12 +19,13 @@ There have been a number of interesting SLATE updates this summer. Read on for a
 - perfSONAR testpoint application has been promoted to stable. Measure all the networks!
 - StashCache application has been promoted to stable
 - HTCondor Worker chart now supports priority classes
-- MinIO, HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are incubating in the catalog. 
+- The GridFTP and Globus-Connect applications can be used to transfer data into or out of Kubernetes Persistent Volume Claims 
+- MinIO, HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are incubating in the catalog
 
 ## Sites
 - Clemson University added a SLATE cluster, `clemson-dev`
 - University of Washington experimenting with SLATE
-- A number of Internet 2 testbed sites have been added.
+- A number of Internet 2 testbed sites have been added
 
 ## Minislate/Slatelite
 - CVMFS Support has been added to both environments
