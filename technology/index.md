@@ -79,7 +79,19 @@ High-performance networking utilized by SLATE is made possible by the ScienceDMZ
 </div>
 	<div class="col-10">
 		<p class="technology-justify">
-Our Console and authorization backend was developed using the <a href="https://www.globus.org/">Globus</a> Modern Research Data Portal.  Special thanks to <a href="https://www.cilogon.org/">CI Logon</a> for integrated access and identity management.
+Our Console and authorization backend was developed using the <a href="https://www.globus.org/">Globus</a> Modern Research Data Portal.  
 </p>
+	</div>
+</div>
+<hr>
+
+<div class="row p-2">
+    <div class="col-2 d-flex align-items-center">
+        <img src="/img/CILogon.png" />
+    </div>
+	<div class="col-10">
+		<p class="technology-justify">
+        The SLATE platform relies on <a href="https://www.cilogon.org/">CILogon</a> for integrated identity and access management.
+        </p>
 	</div>
 </div>
