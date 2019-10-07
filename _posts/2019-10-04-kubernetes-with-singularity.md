@@ -1,12 +1,12 @@
 ---
- title: "Setting up a Kubernetes Cluster based on Singularity"
- overview: Blog
- published: false
- permalink: blog/kubernetes-with-singularity.html
- attribution: The SLATE Team
- layout: post
- type: markdown
- ---
+title: "Setting up a Kubernetes Cluster based on Singularity"
+overview: Blog
+published: false
+permalink: blog/kubernetes-with-singularity.html
+attribution: The SLATE Team
+layout: post
+type: markdown
+---
 
 Kubernetes supports multiple container runtimes through its [Container Runtime Interface](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/) (CRI). As a result, besides the typical default choice of Docker (containerd) one can also use a variety of other drop-in replacements, such as [cri-o](https://cri-o.io). This article will discuss another option, namely Singularity. 
 <!--end_excerpt-->
