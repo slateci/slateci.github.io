@@ -25,3 +25,9 @@ There have been a number of interesting SLATE updates this summer. Read on for a
 - Clemson University added a SLATE cluster, `clemson-dev`
 - University of Washington experimenting with SLATE
 - A number of Internet 2 testbed sites have been added.
+
+## Minislate/Slatelite
+- CVMFS Support has been added to both environments
+- Slatelite now has an option to automatically join federation
+- Minislate builds will now be available on Dockerhub
+- Minislate deployment time has been reduced to 5 minutes
