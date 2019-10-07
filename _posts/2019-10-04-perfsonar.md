@@ -1,7 +1,7 @@
 ---
 title: "Easy Network Diagnostics with SLATE"
 overview: Blog
-published: false
+published: true
 permalink: blog/slate-perfsonar.html
 attribution: The SLATE Team
 layout: post
