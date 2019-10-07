@@ -180,7 +180,7 @@ infrastructure, but we were able to schedule and run tests between both sites
 and learn something about the connectivity between them. 
 
 If you want to try this out for yourself, you can find the perfSONAR testpoint
-application [here](https://portal.slateci.io/applications/perfsonar-testpoint).
+application [in the catalog](https://portal.slateci.io/applications/perfsonar-testpoint).
 There are many other tests you might want to run against sites, such as `rtt`,
-`latency`, `dns` and so on. You can find out more about pScheduler [here](
+`latency`, `dns` and so on. You can find out more about pScheduler [on the perfSONAR website](
 https://docs.perfsonar.net/pscheduler_intro.html).
