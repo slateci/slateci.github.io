@@ -10,8 +10,8 @@ type: markdown
 
 Network testing is hugely important to diagnose problems within and between
 sites. We're trying to make network diagnostics dead simple with SLATE, and to
-do that we've SLATE-ified pieces of the excellent perfSONAR software stack
-(https://www.perfsonar.net). This application has recently landed into the
+do that we've SLATE-ified pieces of the excellent [perfSONAR](https://www.perfsonar.net) 
+software stack. This application has recently landed into the
 SLATE stable catalog, and so we thought we would give you a little tour of this
 handy tool!
 
@@ -180,7 +180,7 @@ infrastructure, but we were able to schedule and run tests between both sites
 and learn something about the connectivity between them. 
 
 If you want to try this out for yourself, you can find the perfSONAR testpoint
-application here: https://portal.slateci.io/applications/perfsonar-testpoint
+application [here](https://portal.slateci.io/applications/perfsonar-testpoint).
 There are many other tests you might want to run against sites, such as `rtt`,
-`latency`, `dns` and so on. You can find out more about pScheduler here:
-https://docs.perfsonar.net/pscheduler_intro.html
+`latency`, `dns` and so on. You can find out more about pScheduler [here](
+https://docs.perfsonar.net/pscheduler_intro.html).
