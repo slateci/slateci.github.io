@@ -9,6 +9,7 @@
  ---
 
 Kubernetes supports multiple container runtimes through its [Container Runtime Interface](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/) (CRI). As a result, besides the typical default choice of Docker (containerd) one can also use a variety of other drop-in replacements, such as [cri-o](https://cri-o.io). This article will discuss another option, namely Singularity. 
+<!--end_excerpt-->
 
 Singularity has a few important advantages which make it an interesting choice as the basis for a Kubernetes cluster. Singularity is designed specifically to be usable by unprivileged users for reliable security, and to be suited to use in High Performance Computing. As a result, Singularity is already familiar to most HPC system administrators. Introducing new infrastructure software to a computing center is a potentially major step, so it is useful to leverage tools which are already available and whose possible pitfalls are already understood. 
 
