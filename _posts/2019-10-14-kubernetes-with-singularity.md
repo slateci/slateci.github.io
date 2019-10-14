@@ -1,7 +1,7 @@
 ---
 title: "Setting up a Kubernetes Cluster based on Singularity"
 overview: Blog
-published: false
+published: true
 permalink: blog/kubernetes-with-singularity.html
 attribution: The SLATE Team
 layout: post
