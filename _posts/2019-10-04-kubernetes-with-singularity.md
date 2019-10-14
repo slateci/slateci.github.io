@@ -17,6 +17,8 @@ At the time of writing, the Singularity CRI implementation is still in beta test
 
 Documentation for the Singularity CRI is located at [the main Sylabs documentation site](https://sylabs.io/guides/cri/1.0/user-guide/installation.html) and also in the [code repository](https://github.com/sylabs/singularity-cri). The instructions provided there are sufficient to set up a Kubernetes cluster when combined with a typical approach to using `kubeadm`, but for convenience we will show how to combine the two together into a single workflow. For simplicity this guide assumes a fresh CentOS 7 system, but the procedure should be applicable to other distributions with only minor adjustments. 
 
+Many of the following commands need to be run as superuser, so it is probably a good idea to `sudo su -` before beginning. 
+
 First, several packages must be installed, some of which are found in [EPEL](https://fedoraproject.org/wiki/EPEL). 
 
 	yum update -y # updating installed packages is a good first step, but can take a while
@@ -49,10 +51,22 @@ Then, create a systemd unit file to handle running the CRI for you:
 	WantedBy=multi-user.target
 	EOF
 	
-	sudo systemctl enable sycri
-	sudo systemctl start sycri
+	systemctl enable sycri
+	systemctl start sycri
 
 At this point all singularity components should be ready to go, and you are ready to start installing Kubernetes. 
+
+Kubernetes has strong opinions about how a system must be configured before it will run, so it may be necessary to make the following changes:
+
+	# Disable SELinux
+	setenforce 0
+	sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+	
+	# Disable swap
+	swapoff -a
+	sed -e '/swap/s/^/#/g' -i /etc/fstab
+	
+The kubernetes packages can be installed with `yum` after configuring the appropriate repository:
 
 	cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 	[kubernetes]
