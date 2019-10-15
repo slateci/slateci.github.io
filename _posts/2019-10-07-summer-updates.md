@@ -7,7 +7,7 @@ There have been a number of interesting SLATE updates this summer. Read on for a
 
 ## Client/Server:
 - The client and server now support both Helm 3 and Kubernetes v1.16
-- `zsh` and `fish' shell completions have been added for the client
+- `zsh` and `fish` shell completions have been added for the client
 - The `slate instance scale` option has now been implemented. You can scale an application like so:
   - `slate instance scale <instance id> --replicas=<N>`
   - You can also scale to 0 to set the number of running instances to zero while leaving the deployment objects on the target cluster. This can be a handy way to disable an application without removing it.
