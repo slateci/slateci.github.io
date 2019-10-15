@@ -2,7 +2,7 @@ There have been a number of interesting SLATE updates this summer. Read on for a
 
 # CHANGELOG
 ## Website
-- The [slateci.io](https://slateci.io) website has been revamped. We hope you will enjoy the more streamlined experience
+- The [slateci.io](https://slateci.io) website has been revamped. We hope you will enjoy the more streamlined experience.  We're still working to improve the training and content.  If you have suggestions for something we are missing, please pass them along!
 
 ## Client/Server:
 - The client and server now support both Helm 3 and Kubernetes v1.16
