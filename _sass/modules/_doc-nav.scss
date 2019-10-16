@@ -80,6 +80,7 @@
 	border-bottom: 10px solid #466BB0;
 	left: -250px;
 	transition: left .3s ease;
+	border-radius: 0 15px 15px 0;
 
 	@media (min-width: 1500px) {
 		left: 0;
@@ -88,8 +89,7 @@
 .doc-side-menu-inner-container {
 	height: 60vh;
 	overflow-y: auto;
-
-
+	padding-right: 40px;
 }
 
 .doc-side-menu-ham {
