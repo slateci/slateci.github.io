@@ -72,7 +72,6 @@
 	position: fixed;
 	width: 300px;	
 	top: 150px;
-	overflow-y: auto;
 	z-index: 10000;
 	background: #FAFAFA;
 	padding: 10px;
@@ -81,25 +80,20 @@
 	border-bottom: 10px solid #466BB0;
 	left: -250px;
 	transition: left .3s ease;
-	&:hover {
-		left: 0;
-	}
 
 	@media (min-width: 1500px) {
 		left: 0;
 	}
 }
+.doc-side-menu-inner-container {
+	height: 60vh;
+	overflow-y: auto;
 
 
-.doc-side-menu-ham {
-	margin-left: 250px;
 }
 
-
-.doc-side-nav-background {
-	background-color: white;
-	width: 100%;
-	height: 100%;
+.doc-side-menu-ham {
+	padding-left: 250px;
 }
 
 .doc-side-nav {

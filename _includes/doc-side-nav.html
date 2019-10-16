@@ -1,6 +1,6 @@
-<div class="doc-side-nav-background">
 <div class="doc-side-nav-container">
 <div class="doc-side-menu-ham"><i id="side-menu" class="fas fa-2x fa-bars"></i></div>
+<div class="doc-side-menu-inner-container">
 <ul class="doc-side-nav">
 
 	{% assign components = page.path | downcase | split: '/' %}
@@ -57,15 +57,15 @@
 	$(".doc-side-nav-container").hover( function() {
 			$(".doc-side-nav-container").css({left: "0px"});
 		}, function() {
-			$(".doc-side-nav-container").css({left: "-250px"});
+			if (window.innerWidth < 1500) {
+				$(".doc-side-nav-container").css({left: "-250px"});
+			}
 	});
 
 	$("#side-menu").click(function(){
 		if ($(".doc-side-nav-container").css("left") === "0px") {
-
 			$(".doc-side-nav-container").css({left: "-250px"});
 		} else {
-
 			$(".doc-side-nav-container").css({left: "0px"});
 		}
 	});
