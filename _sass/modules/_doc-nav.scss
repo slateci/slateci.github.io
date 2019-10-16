@@ -67,9 +67,39 @@
 }
 
 // Documentation Side Navigation
-.doc-side-nav {
-    margin-bottom: 20px;
+.doc-side-nav-container {
+	max-height: 70vh;
+	position: fixed;
+	width: 300px;	
+	top: 150px;
+	z-index: 10000;
+	background: #FAFAFA;
+	padding: 10px;
+	border-right: 1px solid #466BB0;
+	border-top: 10px solid #466BB0;
+	border-bottom: 10px solid #466BB0;
+	left: -250px;
+	transition: left .3s ease;
+	border-radius: 0 15px 15px 0;
 
+	@media (min-width: 1500px) {
+		left: 0;
+	}
+}
+.doc-side-menu-inner-container {
+	height: 60vh;
+	overflow-y: auto;
+	padding-right: 40px;
+}
+
+.doc-side-menu-ham {
+	padding-left: 250px;
+}
+
+.doc-side-nav {
+	margin-bottom: 20px;
+
+	
     @media (min-width: $tablet) {
         margin-bottom: 0;
         padding: $spacing--xs 0 $spacing--xl;

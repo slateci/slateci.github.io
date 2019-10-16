@@ -1,3 +1,6 @@
+<div class="doc-side-nav-container">
+<div class="doc-side-menu-ham"><i id="side-menu" class="fas fa-2x fa-bars"></i></div>
+<div class="doc-side-menu-inner-container">
 <ul class="doc-side-nav">
 
 	{% assign components = page.path | downcase | split: '/' %}
@@ -13,7 +16,7 @@
 			    {% assign foundSection = true %}
                 <li><a href="{{d.url}}" class="top-menu-item">{{d.title}}</a></li>
                 {% if d.path == page.path %}
-                    <li><div id="toc" class="toc d-none d-xl-block"></div></li>
+                    <li><div id="toc" class="toc "></div></li>
                 {% endif %}
 			{% endif %}
 		{% endif %}
@@ -48,3 +51,22 @@
 	</script>
 	{% endif %}
 </ul>
+</div>
+</div>
+<script>
+	$(".doc-side-nav-container").hover( function() {
+			$(".doc-side-nav-container").css({left: "0px"});
+		}, function() {
+			if (window.innerWidth < 1500) {
+				$(".doc-side-nav-container").css({left: "-250px"});
+			}
+	});
+
+	$("#side-menu").click(function(){
+		if ($(".doc-side-nav-container").css("left") === "0px") {
+			$(".doc-side-nav-container").css({left: "-250px"});
+		} else {
+			$(".doc-side-nav-container").css({left: "0px"});
+		}
+	});
+</script>
