@@ -9,20 +9,18 @@ layout: default
 <div class="container-fluid docs">
 	<div class="mx-auto" style="max-width: 2000px;">
 		<div class="row">
-			<div class="col-md-2" style="">
+			<div class="col-2">
 				<div id="slate-menu">
 					{% include doc-side-nav.html %}
 				</div>
 			</div>
-			<div id="content-container" class=" col-md-10 col-xl-8 {{ page.type }}" style=" border-left: 1px solid #2e69c315; border-right: 1px solid #2e69c315">
+			<div id="content-container" class=" col-10 col-xl-8 {{ page.type }}" >
 				<div id="doc-content" style="" class="mx-auto px-md-5 px-1">
 					<h1>{{page.title}}</h1>
 					{{ content }}
 				</div>
 			</div>
-			<div class="col-xl-2 d-none-md">
-                <div id="toc" class="toc d-none d-xl-block"></div>
-			</div>
+			<div class="col-0 col-xl-2"></div>
 		</div>
 	</div>
 </div>
@@ -37,7 +35,7 @@ $(function() {
       if (target.length) {
         $('html,body').animate({
           scrollTop: target.offset().top-85
-        }, 1000);
+        }, 100);
         return false;
       }
     }

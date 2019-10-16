@@ -90,7 +90,7 @@ function outputNavBarTree(items) {
             document.writeln("</li>");
             //added by Jason to put onpage links to headings into menu
             if (item.doc.url == location.pathname) {
-                document.write("<li><div id='toc' class='toc d-none d-xl-block'></div></li>")
+                document.write("<li><div id='toc' class='toc'></div></li>")
             }
         }
     }

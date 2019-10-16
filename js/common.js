@@ -125,8 +125,8 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
       minimumHeaders: 1,
       headers: 'h1, h2, h3, h4, h5, h6',
       listType: 'ol', // values: [ol|ul]
-      showEffect: 'show', // values: [show|slideDown|fadeIn|none]
-      showSpeed: 'slow', // set to 0 to deactivate effect
+      showEffect: 'none', // values: [show|slideDown|fadeIn|none]
+      showSpeed: 0, // set to 0 to deactivate effect
       classes: { list: '',
                  item: ''
                }
@@ -170,16 +170,16 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
 
     var get_level = function(ele) { return parseInt(ele.nodeName.replace("H", ""), 10); };
     var highest_level = headers.map(function(_, ele) { return get_level(ele); }).get().sort()[0];
-    var return_to_top = '<i class="icon-arrow-up back-to-top"> </i>';
+    var return_to_top = '';//'<i class="fas fa-caret-up back-to-top"> </i>';
 
     var level = get_level(headers[0]),
       this_level,
       html = settings.title + " <" +settings.listType + " class=\"" + settings.classes.list +"\">";
     headers.on('click', function() {
       if (!settings.noBackToTopLinks) {
-        //window.location.hash = this.id;
+        window.location.hash = this.id;
           //Jason added this line from: https://stackoverflow.com/questions/11365091/jquery-scroll-to-anchor-minus-set-amount-of-pixels
-        $('html,body').unbind().animate({scrollTop: $(this).offset().top-85},'slow');
+        $('html,body').unbind().animate({scrollTop: $(this).offset().top-85}, 100);
       }
     })
     .addClass('clickable-header')

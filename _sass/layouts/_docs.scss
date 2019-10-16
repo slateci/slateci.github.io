@@ -1,4 +1,8 @@
 .docs {
+
+  min-height: 80vh;
+  z-index: -1;
+
   .thin-left-border {
     border-left: 1px solid rgba(0, 0, 0, .15);
   }
@@ -25,7 +29,7 @@
   }
 
   #tab-container{
-    z-index:1000;
+    z-index: 1000;
   }
 
   #sidebar-container {
