@@ -68,7 +68,7 @@
 
 // Documentation Side Navigation
 .doc-side-nav-container {
-	max-height: 90vh;
+	max-height: 70vh;
 	position: fixed;
 	width: 300px;	
 	top: 150px;
@@ -76,9 +76,9 @@
 	z-index: 10000;
 	background: #FAFAFA;
 	padding: 10px;
-	border-right: 1px solid lightgray;
-	border-top: 1px solid lightgray;
-	border-bottom: 1px solid lightgray;
+	border-right: 1px solid #466BB0;
+	border-top: 10px solid #466BB0;
+	border-bottom: 10px solid #466BB0;
 	left: -250px;
 	transition: left .3s ease;
 	&:hover {
@@ -88,6 +88,12 @@
 	@media (min-width: 1500px) {
 		left: 0;
 	}
+}
+
+.doc-side-menu-bottom {
+	position: absolute;
+	display: block;
+	bottom: 0;
 }
 
 .doc-side-menu-ham {
