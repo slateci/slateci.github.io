@@ -1,3 +1,38 @@
+.docs-content-container {
+  transition: padding-left 0.3s ease;
+  @media (max-width: 820px) {
+    padding-left: 50px;
+  }
+  @media (min-width: 821px) {
+    padding-left: 280px;
+  }
+  @media (min-width: 1340px) {
+    padding-left: 220px;
+  }
+  @media (min-width: 1460px) {
+    padding-left: 150px;
+  }
+  @media (min-width: 1596px) {
+    padding-left: 80px;
+  }
+  @media(min-width: 1597px) {
+    padding-left: 80px;
+  }
+  @media(min-width: 1663px) {
+    padding-left: 60px;
+  }
+  @media(min-width: 1800px) {
+    padding-left: 0;
+  }
+}
+
+.docs-padding-left-0 {
+  padding-left: 50px !important;
+}
+.docs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .docs {
 
   min-height: 80vh;

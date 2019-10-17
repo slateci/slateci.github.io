@@ -1,5 +1,11 @@
 <div class="doc-side-nav-container">
-<div class="doc-side-menu-ham"><i id="side-menu" class="fas fa-2x fa-bars"></i></div>
+<div class="doc-side-menu-ham">
+<button id="doc-side-menu-x" class="hamburger hamburger--spring" type="button">
+	<span class="hamburger-box">
+	  <span class="hamburger-inner"></span>
+	</span>
+  </button> 
+</div>
 <div class="doc-side-menu-inner-container">
 <ul class="doc-side-nav">
 
@@ -54,19 +60,38 @@
 </div>
 </div>
 <script>
+	/*
 	$(".doc-side-nav-container").hover( function() {
 			$(".doc-side-nav-container").css({left: "0px"});
+			$(".doc-side-menu-ham").css({paddingLeft: "200px" });
+			$("#doc-side-menu-x").addClass("is-active");
 		}, function() {
-			if (window.innerWidth < 1500) {
+			if (window.innerWidth < 1200) {
 				$(".doc-side-nav-container").css({left: "-250px"});
+				$(".doc-side-menu-ham").css({paddingLeft: "250px" });
+			$("#doc-side-menu-x").removeClass("is-active");
 			}
 	});
+	*/
 
-	$("#side-menu").click(function(){
+	$("#doc-side-menu-x").click(function(){
 		if ($(".doc-side-nav-container").css("left") === "0px") {
-			$(".doc-side-nav-container").css({left: "-250px"});
+			$(".doc-side-nav-container").css({left: "-265px"});
+			$(".doc-side-menu-ham").css({paddingLeft: "260px" });
+			$("#doc-side-menu-x").removeClass("is-active");
+			if (window.innerWidth < 1800){
+				$(".docs-content-container").addClass("docs-padding-left-0");
+			}
 		} else {
 			$(".doc-side-nav-container").css({left: "0px"});
+			$(".doc-side-menu-ham").css({paddingLeft: "220px" });
+			$("#doc-side-menu-x").addClass("is-active");
+			$(".docs-content-container").removeClass("docs-padding-left-0");
+
 		}
 	});
+
+	if (window.innerWidth > 820) {
+			$("#doc-side-menu-x").addClass("is-active");
+	}
 </script>

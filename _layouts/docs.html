@@ -5,22 +5,14 @@ layout: default
 {% include doc-top-nav.html %}
 
 <script src="/js/navtree.js"></script> 
-</script>
-<div class="container-fluid docs">
-	<div class="mx-auto" style="max-width: 2000px;">
-		<div class="row">
-			<div class="col-2">
-				<div id="slate-menu">
-					{% include doc-side-nav.html %}
-				</div>
-			</div>
-			<div id="content-container" class=" col-10 col-xl-8 {{ page.type }}" >
-				<div id="doc-content" style="" class="mx-auto px-md-5 px-1">
-					<h1>{{page.title}}</h1>
-					{{ content }}
-				</div>
-			</div>
-			<div class="col-0 col-xl-2"></div>
+<div id="slate-menu"></div>
+	{% include doc-side-nav.html %}
+</div>
+<div class="docs-container docs">
+	<div id="content-container" class=" docs-content-container col {{ page.type }}" >
+		<div id="doc-content">
+			<h1>{{page.title}}</h1>
+			{{ content }}
 		</div>
 	</div>
 </div>
