@@ -20,6 +20,8 @@ type: markdown
 
 ## Presentations
 
+<p>Chris Weaver (2019). <i>Cybersecurity Challenges for Edge Platforms</i>, 2019 NSF Cybersecurity Summit for Large Facilities and Cyberinfrastructure. <a href="https://docs.google.com/presentation/d/1zwIA5sejgVV8CuMRXWlvHnUGwhE4gyJYpJORIk7BNSo/edit?usp=sharing">Presentation Slides</a></p>
+
 <p>Stidd, J. (2019). <i>Developing Edge Services for Federated Infrastructure Using MiniSlate</i>. PEARC 2019. <a href="https://docs.google.com/presentation/d/1lnbUeYe5fJgJmNFg3mKCqKkPSHGZAcaj_JsvwCvl4UI/edit#slide=id.g5df5dac487_0_0">Presentation Slides</a>. Chicago, Illinois.</p>
 
 <p>Weaver, C. (2019). <i>Managing Privilege and Access on Federated Edge Platforms</i>. PEARC 2019. <a href="https://docs.google.com/presentation/d/1QkOjaj5X1vS3-OZ4VTDYSyt5hCFc8KP4FO7EBWxfKQk/edit#slide=id.p">Presentation Slides</a>. Chicago, Illinois.</p>
