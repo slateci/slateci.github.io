@@ -91,6 +91,22 @@
 		}
 	});
 
+
+	$(".navbar-toggler").click(function() {
+		/* 
+			if statement backwards because the class is not present at the time of click,
+			only after the click it is added, about half a second later
+		*/
+		if (!$("#navbarSupportedContent").hasClass("show")) {
+			console.log("has class show");
+			if (!$(".doc-side-nav-container").hasClass("doc-side-menu-move-down")) {
+				$(".doc-side-nav-container").addClass("doc-side-menu-move-down");
+			}
+		} else {
+			$(".doc-side-nav-container").removeClass("doc-side-menu-move-down");
+		}
+	});
+
 	if (window.innerWidth > 820) {
 			$("#doc-side-menu-x").addClass("is-active");
 	}

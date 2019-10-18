@@ -80,13 +80,18 @@
 	border-bottom: 3px solid #466BB0;
 	
 	left: -265px;
-	transition: left .3s ease;
+	transition: left .3s ease, top .3s ease;
 	border-radius: 0 4px 4px 0;
 
 	@media (min-width: 820px) {
 		left: 0;
 	}
 }
+
+.doc-side-menu-move-down {
+	top: 320px !important;
+}
+
 .doc-side-menu-inner-container {
 	height: 60vh;
 	overflow-y: auto;
