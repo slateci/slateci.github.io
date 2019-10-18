@@ -98,6 +98,7 @@ $(document).ready(function() {
     });
     */
 
+    /*
     if(window.Prism){
       window.Prism.hooks.add('complete', function(env){
         var $el = $(env.element).closest('pre');
@@ -105,6 +106,7 @@ $(document).ready(function() {
         $el.wrap($container);
       });
     }
+    */
     
 });
 
