@@ -12,12 +12,12 @@ This is the first in our series of roughly quarterly release notes for activitie
 
 We encourage you to try things out and let us know what's working, what's not, what can be improved and so on. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
 
-# CHANGELOG
-## Website
+## CHANGELOG
+### Website
 - The [slateci.io](https://slateci.io) website has been revamped. We hope you will enjoy the more streamlined experience.  We're still working hard to improve the training and content.  If you have suggestions for something we are missing, please pass them along!
 - The [SLATE console](https://portal.slateci.io/) is now using AJAX configurations to load pages faster.  Several other functional and aesthetic improvements have happened too.
 
-## Client/Server:
+### Client/Server:
 - The client and server now support both Helm 3 and Kubernetes v1.16
 - `zsh` and `fish` shell completions have been added for the client
 - The `slate instance scale` option has now been implemented. You can scale an application like so:
@@ -28,13 +28,13 @@ We encourage you to try things out and let us know what's working, what's not, w
 - Various caching bugs have been fixed
 
 
-## Minislate/Slatelite
+### Minislate/Slatelite
 - CVMFS support has been added to both environments
 - Slatelite now has an option to automatically join federation
 - Minislate builds will now be available on Dockerhub
 - Minislate deployment time has been reduced to 5 minutes
 
-## Applications
+### Applications
 - Apps have been updated for Helm 3 compatibility
 - perfSONAR testpoint application has been promoted to stable. Measure all the networks!
 - Faucet SDN OpenFlow controller is now available in the stable catalog
@@ -44,7 +44,7 @@ We encourage you to try things out and let us know what's working, what's not, w
 - The GridFTP and Globus-Connect applications can be used to transfer data into or out of Kubernetes Persistent Volume Claims 
 - HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are incubating in the catalog
 
-## Sites
+### Sites
 - Clemson University added a SLATE cluster, `clemson-dev`
 - University of Washington experimenting with SLATE
 - A number of Internet 2 testbed sites have been added
