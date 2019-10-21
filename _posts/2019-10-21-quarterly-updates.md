@@ -8,7 +8,7 @@ layout: post
 type: markdown
 ---
 
-This is the first in our series of roughly quarterly release notes for activities in the SLATE project. We have a whole slew of changes across all aspects of SLATE, including a revamped web experience, client/server improvements, better tooling, more  applications, and new sites added to the Federation. 
+This is the first in our series of roughly quarterly release notes for activities in the SLATE project. We have a whole slew of changes across all aspects of SLATE, including a revamped web experience, client/server improvements, better tooling, more  applications, and new sites added to the Federation. <!--end_excerpt-->
 
 We encourage you to try things out and let us know what's working, what's not, what can be improved and so on. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
 
