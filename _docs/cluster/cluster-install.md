@@ -1,50 +1,46 @@
 # Creating a SLATE Cluster
 
-## Setting up a SLATE Node
-
 The foundation of every SLATE Cluster are a collection of SLATE nodes. Nodes can have a number of different functions, but the two largest roles of a SLATE node are Master and Worker.
 
 In addition to a number of different roles for a SLATE node, you can also create a node on either a CentOS virtual machine or physical hardware.
 
-### Operating System
+## Operating System Requirements
 
-SLATE currently requires a CentOS 7 install. There are many ways to provide boot media to your server. You may choose to use iPXE, physical USB drive, physical DVD drive, or another method. 
+SLATE currently requires [CentOS 7](http://isoredirect.centos.org/centos/7/isos/x86_64/) as the base operating system for new clusters. In order to reliably run Kubernetes and connect to the SLATE federation, a few changes are needed to the base CentOS install. The following prerequisite steps will need to be applied to all SLATE nodes in your cluster. 
 
-### OS Tweaks
-
-There are a few tweaks necessary before CentOS 7 can reliably run Kubernetes and connect to other SLATE nodes and the wider SLATE federation.
-
-#### Disable SELinux
-Disable SELinux as this generally causes conflicts with Kubernetes.
+### Disable SELinux
+First, you will need to disable SELinux as this generally conflicts with Kubernetes:
 
 ```
 setenforce 0
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 ```
 
-#### Disable Swap Memory
-Swap must be disabled for Kubernetes to run effectively. If you automatically partitioned your drive swap will be enabled. To disable it run:
+If you wish to retain the SELinux logging, you can alternatively use 'permissive' mode rather than enforcing.
+
+### Disable swap
+Swap must be disabled for Kubernetes to run effectively. Swap is typically enabled in a default CentOS installation where automatic partitioning has been selected. To disable swap:
 
 ```
 swapoff -a
 sed -e '/swap/s/^/#/g' -i /etc/fstab
 ```
 
-#### Disable FirewallD
-In order to properly communicate with other devices within the cluster, firewalld must be disabled.
+### Disable firewalld
+In order to properly communicate with other devices within the cluster, `firewalld` must be disabled:
 
 ```
 systemctl disable --now firewalld
 ```
 
-#### Disable Root Login over SSH
+### Disable root login over SSH
 While optional, we *strongly* reccomended disabling root login over SSH for security reasons.
 
 ```
 sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 ```
 
-#### Use IPTables for Bridged Network Traffic
+### Use iptables for Bridged Network Traffic
 Ensure that bridged network traffic goes through iptables.
 
 ```
@@ -55,20 +51,13 @@ EOF
 sysctl --system
 ```
 
-### Software
+## Installing Docker and Kubernetes
 
-SLATE requires a few different software pieces in order to run properly.
+The SLATE platform uses Kubernetes as its container orchestration system, and Docker as the container run-time. In this section we'll setup Docker and install the base Kubernetes software components.
 
-#### Prerequisite Tools
-In order to properly install future softwares, we use yum-utils to configure yum and device-mapper-persistent-data with lvm2 to configure the devicemapper storage driver.
+### Docker
 
-```
-yum install -y yum-utils device-mapper-persistent-data lvm2
-```
-
-#### Docker
-
-Because SLATE runs containerized applications, Docker is used as a containerization solution.
+We recommend using the Docker Community Edition runtime with Kubernetes and SLATE. It can be installed and activated like so: 
 
 ```
 # Add Docker stable repo to Yum
@@ -81,9 +70,9 @@ yum install docker-ce docker-ce-cli containerd.io -y
 systemctl enable --now docker
 ```
 
-#### Kubernetes
+### Kubernetes
 
-Add the Kubernetes repository to yum.
+The Kubernetes repository can be added to the node in the usual way:
 
 ```
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -97,25 +86,27 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 EOF
 ```
 
-The Kubernetes install includes a few different pieces: kubeadm, kubectl, and kubelet. kubeadm is a tool used to bootstrap kubernetes clusters, kubectl is the command line tool needed to interact with and control the cluster, and kubelet is the system daemon that allows the kubernetes api to control the cluster nodes
+The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, and `kubelet`. `kubeadm` is a tool used to bootstrap Kubernetes clusters, `kubectl` is the command-line tool needed to interact with and control the cluster, and `kubelet` is the system daemon that allows the Kubernetes api to control the cluster nodes. To install and enable these components:
 
 ```
-# Install the three necessary Kubenetes components
+# Install the three necessary Kubernetes components
 yum install -y kubeadm kubectl kubelet --disableexcludes=kubernetes
 
 # Enable Kubelet through systemctl.
 systemctl enable --now kubelet
 ```
 
+At this point the kubelet will be crash-looping as it has no configuration. That is okay for now.
+
 ## SLATE Master Node
 
 The first node you will add to your cluster will function as the SLATE Cluster Master Node. All possible SLATE topologies will utilize a master node.
 
-To configure a SLATE Master Node, you must first go through the "Setting up a SLATE Node" instructions listed above.
+To configure a SLATE Master Node, you must first go through the "Operating System Requirements" section above. 
 
-### KubeADM Init
+### Initialize the Kubernetes cluster with Kubeadm
 
-We want to initialize our cluster with the pod network CIDR specifically set to 192.168.0.0/16 this is the default range for Calico which will be our pod network. It is possible to set a different RFC1918 range during `kubeadm init` and configure Calico to use that range if needed.
+We want to initialize our cluster with the pod network CIDR specifically set to 192.168.0.0/16 as this is the default range utilized by the Calico network plugin. If needed, it is possible to set a different RFC1918 range during `kubeadm init` and configure Calico to use that range. 
 
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
@@ -134,18 +125,16 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 To enable kubeconfig for a single session instead simply run:
 
 ```
-export $KUBECONFIG=/etc/kubernets/admin.conf
+export KUBECONFIG=/etc/kubernets/admin.conf
 ```
 
 ### Pod Network
 
-In many cases, the master node will be managing a set of Kubernetes Pods. These pods must be networked to the master.
-
-We recommend using Calico for pod networking.
+In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well. 
 
 #### Calico
 
-Calico is one solution that clusters can use for pod networking.
+To install Calico, you will simply need to apply the appropriate Kubernetes manifest:
 
 ```
 kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
@@ -164,16 +153,15 @@ your-node.your-domain.edu   Ready   master  24m     v1.16.1
 
 Kubernetes clusters, in order to evenly distribute work across all worker nodes, require a load balancer. There are a few load balancer solutions. We recommend using MetalLB for load balancing on SLATE clusters.
 
-#### MetalLB
+### MetalLB
 
-
-Apply Metallb to our cluster. This command will create the relevant kubernetes componenents that will run our load balancer.
+Apply MetalLB to our cluster. This command will create the relevant kubernetes componenents that will run our load balancer.
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
 ```
 
-Create the metallb configuration and adjust the IP range to relect your environment. These must be unallocated public IP addresses available to the machine.
+Create the MetalLB configuration and adjust the IP range to reflect your environment. These must be unallocated public IP addresses available to the machine.
 
 ```
 cat <<EOF > metallb-config.yaml
@@ -192,13 +180,22 @@ data:
 EOF
 ```
 
-Finally, create the configmap for MetalLB on your cluster.
+Finally, create the ConfigMap for MetalLB on your cluster.
 
 ```
 kubectl apply -f metallb-config.yaml
 ```
 
 To read more about MetalLB installation and configuration, visit their [installation instructions](https://metallb.universe.tf/installation/).
+
+### (optional) Allowing user pods to run on the Master
+If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Master. This will allow general workloads to run along side of the Kubernetes master node processes. In the case of a dedicated Master and dedicated Workers, please skip to the next section.
+
+To remove the master taint:
+ 
+```
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
 
 ## SLATE Worker Node
 
