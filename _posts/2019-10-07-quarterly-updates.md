@@ -1,4 +1,6 @@
-There have been a number of interesting SLATE updates this summer. Read on for a summary of changes.
+This is the first in our series of roughly quarterly release notes for activities in the SLATE project. We have a whole slew of changes across all aspects of SLATE, including a revamped web experience, client/server improvements, better tooling, more  applications, and new sites added to the Federation. 
+
+We encourage you to try things out and let us know what's working, what's not, what can be improved and so on. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
 
 # CHANGELOG
 ## Website
@@ -15,22 +17,25 @@ There have been a number of interesting SLATE updates this summer. Read on for a
   - Users can expect to find services available at `<serivce name>.<clustername>.slateci.net` if they use the ingress controller.
 - Various caching bugs have been fixed
 
-## Applications
-- Apps have been updated for Helm 3 compatibility
-- perfSONAR testpoint application has been promoted to stable. Measure all the networks!
-- Faucet SDN OpenFlow controller is now available in the stable catalog
-- StashCache application has been promoted to stable
-- HTCondor Worker chart now supports priority classes
-- The GridFTP and Globus-Connect applications can be used to transfer data into or out of Kubernetes Persistent Volume Claims 
-- MinIO, HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are incubating in the catalog
-
-## Sites
-- Clemson University added a SLATE cluster, `clemson-dev`
-- University of Washington experimenting with SLATE
-- A number of Internet 2 testbed sites have been added
 
 ## Minislate/Slatelite
 - CVMFS Support has been added to both environments
 - Slatelite now has an option to automatically join federation
 - Minislate builds will now be available on Dockerhub
 - Minislate deployment time has been reduced to 5 minutes
+
+## Applications
+- Apps have been updated for Helm 3 compatibility
+- perfSONAR testpoint application has been promoted to stable. Measure all the networks!
+- Faucet SDN OpenFlow controller is now available in the stable catalog
+- StashCache application has been promoted to stable :tada: 
+- MinIO application has been promoted to stable :tada: 
+- HTCondor Worker chart now supports priority classes
+- The GridFTP and Globus-Connect applications can be used to transfer data into or out of Kubernetes Persistent Volume Claims 
+- HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are incubating in the catalog
+
+## Sites
+- Clemson University added a SLATE cluster, `clemson-dev`
+- University of Washington experimenting with SLATE
+- A number of Internet 2 testbed sites have been added
+
