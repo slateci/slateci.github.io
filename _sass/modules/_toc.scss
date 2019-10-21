@@ -24,28 +24,28 @@ div.toc {
 }
 
 .toc {
-  padding: 30px;
-  /* margin-top: 15px; top:125px; position: fixed; */
+  padding: 4px;
 
   ul {
-    list-style-type: none !important;
-    font-size: 90%;
+    list-style-type: '- ' !important;
+    font-size: 1em;
+    
     
     li {
       margin-bottom: 10px;
     }
 
     ul {
-        padding-left: 10px;
+        padding-left: 2px;
 
         li {
 
-          margin-bottom: 10px;
+          margin-bottom: 0;
         }
     }
 
     a {
-        color: #333; 
+        color: #666; 
         font-weight: normal;
 	&:hover {
 	    color: #9cb0d4;
