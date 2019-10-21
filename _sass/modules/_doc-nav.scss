@@ -21,6 +21,7 @@
 		}
 	}
 
+
 	.tab {
 		display: inline-block;
 
@@ -66,6 +67,14 @@
 	}
 }
 
+.doc-side-nav {
+
+    li {
+        list-style: none !important;
+        margin: 0;
+        padding: 0;
+    }
+}
 // Documentation Side Navigation
 .doc-side-nav-container {
 	max-height: 70vh;
@@ -100,10 +109,10 @@
 
 .doc-side-menu-ham {
 	transition: padding-left .3s ease;
-	padding-left: 260px;
+	padding-left: 280px;
 	z-index: -1;
 	@media (min-width: 820px) {
-		padding-left: 220px;
+		padding-left: 230px;
 	}
 }
 

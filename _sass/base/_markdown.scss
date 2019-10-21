@@ -1,6 +1,10 @@
 .markdown {
   padding-bottom: 60px;
   
+  ul, ol {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
   // Text Blocks
   p {
     margin: 10px 0;
