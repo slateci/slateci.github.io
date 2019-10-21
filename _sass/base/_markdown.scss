@@ -36,7 +36,7 @@
   // Lists
   ol,
   ul {
-    list-style: initial;
+    list-style-type: disc !important;
     font-size: $font-size--primary;
     margin: 0 20px;
 

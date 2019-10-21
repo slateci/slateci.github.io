@@ -3,6 +3,15 @@
   padding-top: $vpad;
 }
 
+ul, ol {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+button {
+    outline: none !important;
+}
+
 .page-title-bar {
   background-color: $thirdBrandColor;
   border-top: 3px solid $lightPopBrandColor;
