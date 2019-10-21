@@ -38,8 +38,8 @@ We encourage you to try things out and let us know what's working, what's not, w
 - Apps have been updated for Helm 3 compatibility
 - perfSONAR testpoint application has been promoted to stable. Measure all the networks!
 - Faucet SDN OpenFlow controller is now available in the stable catalog
-- StashCache application has been promoted to stable :tada: 
-- MinIO application has been promoted to stable :tada: 
+- StashCache application has been promoted to stable 
+- MinIO application has been promoted to stable
 - HTCondor Worker chart now supports priority classes
 - The GridFTP and Globus-Connect applications can be used to transfer data into or out of Kubernetes Persistent Volume Claims 
 - HTCondor Submit Node, OSG HostedCE, Rucio, NextFlow charts are incubating in the catalog
