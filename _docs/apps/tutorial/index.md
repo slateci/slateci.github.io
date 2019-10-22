@@ -17,5 +17,4 @@ Note that this doesn't mean that the topics covered here are all you'll ever use
 
 Throughout this tutorial, you will need to access some demo files. Those can be cloned from our github page via the link below. If you decide to use Minislate, which will be discussed further in the next section, this should be cloned into the Minislate container as opposed to your local system, for ease of access.
 
-https://github.com/slateci/tutorial-demo-files
-Github Demo Files
+[Github Demo Files](https://github.com/slateci/tutorial-demo-files)
