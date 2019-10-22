@@ -74,21 +74,34 @@
 	});
 	*/
 
-	$("#doc-side-menu-x").click(function(){
+    function toggleSideMenu() {
+
 		if ($(".doc-side-nav-container").css("left") === "0px") {
+            closeSideMenu();
+		} else {
+            openSideMenu();
+		}
+    }
+
+    function closeSideMenu(){
+
 			$(".doc-side-nav-container").css({left: "-265px"});
 			$(".doc-side-menu-ham").css({paddingLeft: "260px" });
 			$("#doc-side-menu-x").removeClass("is-active");
 			if (window.innerWidth < 1800){
 				$(".docs-content-container").addClass("docs-padding-left-0");
 			}
-		} else {
+    }
+
+    function openSideMenu() {
+
 			$(".doc-side-nav-container").css({left: "0px"});
 			$(".doc-side-menu-ham").css({paddingLeft: "230px" });
 			$("#doc-side-menu-x").addClass("is-active");
 			$(".docs-content-container").removeClass("docs-padding-left-0");
-
-		}
+    }
+	$("#doc-side-menu-x").click(function(){
+        toggleSideMenu();
 	});
 
 
@@ -109,4 +122,58 @@
 	if (window.innerWidth > 820) {
 			$("#doc-side-menu-x").addClass("is-active");
 	}
+
+    function getPositions(elem) {
+        var pos = elem.getBoundingClientRect();
+        return pos;
+    }
+    
+    $(document).ready(function (){
+
+        var footer = $("#footer").get();
+        var navCont = $(".doc-side-nav-container").get();
+        var initialHeight = parseInt($(".doc-side-nav-container").css("height"));
+        $(window).scroll(function(){
+
+            var diff = getPositions(footer[0]).top - getPositions(navCont[0]).bottom;
+            if (diff < 5) {
+                /* css returns with px added. ex: '400px' */
+                $(".doc-side-nav-container").css("top", "100px");
+                var currentHeight = parseInt($(".doc-side-nav-container").css("height"));
+                var newHeight = Math.floor(currentHeight - Math.abs(diff) );
+                $(".doc-side-nav-container").css("height", newHeight);
+                $(".doc-side-menu-inner-container").css("height", newHeight - 50);
+            } else if (diff > 25 && diff < 100 && getPositions(navCont[0]).height < initialHeight) {
+
+                var currentHeight = parseInt($(".doc-side-nav-container").css("height"));
+                var newHeight = Math.floor(currentHeight + Math.abs(diff));
+                if (newHeight > initialHeight) {
+                    $(".doc-side-nav-container").css("height", initialHeight);
+                    $(".doc-side-menu-inner-container").css("height", initialHeight - 50);
+                    
+                } else {
+                    $(".doc-side-nav-container").css("height", newHeight);
+                    $(".doc-side-menu-inner-container").css("height", newHeight - 50);
+                }
+            } 
+
+            if (diff > 100) {
+                $(".doc-side-nav-container").css("top", "200px");
+                $(".doc-side-nav-container").css("height", initialHeight);
+                $(".doc-side-menu-inner-container").css("height", initialHeight - 50);
+            }
+
+            /* Close side menu if open and the menu touches the footer */
+            /*
+            if (getPositions(footer[0]).top < getPositions(navCont[0]).bottom) {
+                if ($(".doc-side-nav-container").css("left") === "0px") {
+                    closeSideMenu();
+                }
+            }
+            */
+        });
+    });
+
+
+    
 </script>

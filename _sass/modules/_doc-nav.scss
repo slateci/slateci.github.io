@@ -67,10 +67,10 @@
 	}
 }
 
-.doc-side-nav {
+.doc-side-nav .toc {
 
     li {
-        list-style: none !important;
+        list-style: '- ' !important;
         margin: 0;
         padding: 0;
     }
@@ -89,7 +89,7 @@
 	border-bottom: 3px solid #466BB0;
 	
 	left: -265px;
-	transition: left .3s ease, top .3s ease;
+	transition: left .3s ease, top .3s ease, height .1s ease;
 	border-radius: 0 4px 4px 0;
 
 	@media (min-width: 820px) {
@@ -105,11 +105,13 @@
 	height: 60vh;
 	overflow-y: auto;
 	padding-right: 10px;
+	max-height: 95%;
+    transition: height .1s ease;
 }
 
 .doc-side-menu-ham {
 	transition: padding-left .3s ease;
-	padding-left: 280px;
+	padding-left: 260px;
 	z-index: -1;
 	@media (min-width: 820px) {
 		padding-left: 230px;
@@ -147,7 +149,7 @@
 }
 
 .tree li {
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .tree-toggle {
