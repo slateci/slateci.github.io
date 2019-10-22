@@ -125,7 +125,7 @@ $.getScript("{{ site.baseurl }}/js/jquery.collapsible.js", function(){
       noBackToTopLinks: false,
       title: '',
       minimumHeaders: 1,
-      headers: 'h1, h2, h3',
+      headers: 'h1, h2',
       listType: 'ol', // values: [ol|ul]
       showEffect: 'none', // values: [show|slideDown|fadeIn|none]
       showSpeed: 0, // set to 0 to deactivate effect
