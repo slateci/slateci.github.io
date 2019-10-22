@@ -1,8 +1,6 @@
-# Creating a SLATE Cluster
+The foundation of every SLATE Cluster is a collection of SLATE nodes. Nodes can have a number of different functions, but the two largest roles of a SLATE node are Master and Worker.
 
-The foundation of every SLATE Cluster are a collection of SLATE nodes. Nodes can have a number of different functions, but the two largest roles of a SLATE node are Master and Worker.
-
-In addition to a number of different roles for a SLATE node, you can also create a node on either a CentOS virtual machine or physical hardware.
+A SLATE node can be created on either a virtual machine or physical hardware.
 
 ## Operating System Requirements
 
@@ -249,4 +247,4 @@ slate cluster allow-group [YOUR-CLUSTER-NAME] '[GROUP-NAME]'
 
 ## Troubleshooting
 
-At this point, you should have a functioning and federated SLATE cluster. If you have any questions on this process, please [contact our team](#) for assistance.
+At this point, you should have a functioning and federated SLATE cluster. If you have any questions on this process, please [contact our team](/community/) for assistance.
