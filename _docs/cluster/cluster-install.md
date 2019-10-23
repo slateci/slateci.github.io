@@ -130,8 +130,6 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 
 In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well. 
 
-#### Calico
-
 To install Calico, you will simply need to apply the appropriate Kubernetes manifest:
 
 ```
