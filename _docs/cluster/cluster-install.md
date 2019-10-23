@@ -123,7 +123,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 To enable kubeconfig for a single session instead simply run:
 
 ```
-export KUBECONFIG=/etc/kubernets/admin.conf
+export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 
 ### Pod Network
