@@ -204,7 +204,7 @@ All SLATE Worker nodes should be set up using the "Setting Up a SLATE Node" inst
 On your Master node, run the following command to get a full join command for the Master's cluster:
 
 ```
-kubeadm create token --print-join-command
+kubeadm token create --print-join-command
 ```
 
 Run this generated join command on the worker node to join it to the cluster.
