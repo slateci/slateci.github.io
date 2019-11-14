@@ -232,7 +232,7 @@ slate cluster create [NEW-CLUSTER-NAME] --group [YOUR-GROUP-NAME] --org [YOUR-OR
 All SLATE clusters should have their geographic locations listed in the cluster's attributes.
 
 ```
-slate cluster update [YOUR-CLUSTER-NAME] --location [LATITUDE], [LONGITUDE]
+slate cluster update [YOUR-CLUSTER-NAME] --location [LATITUDE],[LONGITUDE]
 ```
 
 ### Allow Group Access
