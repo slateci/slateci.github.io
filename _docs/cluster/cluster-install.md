@@ -32,7 +32,7 @@ systemctl disable --now firewalld
 ```
 
 ### Disable root login over SSH
-While optional, we *strongly* reccomended disabling root login over SSH for security reasons.
+While optional, we *strongly* recommend disabling root login over SSH for security reasons.
 
 ```
 sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
@@ -215,7 +215,7 @@ At this point, you should have a SLATE-Ready Kubernetes cluster. You will now be
 
 ### SLATE CLI
 
-The SLATE Command Line Interface will let you to execute SLATE commands.
+The SLATE Command Line Interface will let you execute SLATE commands.
 
 On the Master node for your cluster, follow the [SLATE CLI](#) installation instructions.
 
@@ -237,7 +237,7 @@ slate cluster update [YOUR-CLUSTER-NAME] --location [LATITUDE],[LONGITUDE]
 
 ### Allow Group Access
 
-Cluster administrators can allow certain groups access to their 
+Cluster administrators can grant cluster access to specific groups.
 
 ```
 slate cluster allow-group [YOUR-CLUSTER-NAME] '[GROUP-NAME]'
