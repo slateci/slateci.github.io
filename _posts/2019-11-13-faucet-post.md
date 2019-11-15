@@ -1,3 +1,13 @@
+---
+title: "Faucet SDN with SLATE"
+overview: Blog
+published: false
+permalink: blog/slate-faucet-nov-2019.html
+attribution: The SLATE Team
+layout: post
+type: markdown
+---
+
 The [SLATE platform](http://www.slateci.io) is a multi-institution federated environment that supports a list of curated applications for different science disciplines. SLATE enables a federated “NoOPs” operations model for developers which allows the flexibility to innovate at scale and ease of deployment. This operations model allows the rapid reach of domain specific science gateways and multi-site research platforms. One of the curated applications that the [SLATE platform](http://www.slateci.io) supports is [Faucet](https://faucet.nz/), an [openflow controller](https://www.sdxcentral.com/networking/sdn/definitions/what-is-openflow/) which can quickly and easily set up, adjust, and control a [Software Defined Network](https://www.opennetworking.org/sdn-definition/) across multiple sites. Here we will explain the process of configuring, deploying, and connecting a [Faucet](https://faucet.nz/) controller through the SLATE platform.
 
   
