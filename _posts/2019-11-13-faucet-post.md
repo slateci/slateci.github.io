@@ -31,10 +31,11 @@ Next came building the actual network topology in GENI. To do this I fed the res
 With this Network built, I sshed into the vm named switch and installed open virtual switch using “apt install” I used the ovs commands to set up a bridge, shut down the interfaces that when to the host machines, and put interfaces onto the virtual bridge to run those connections. The details of this are all outlined in the [GENI Floodlight tutorial](https://groups.geni.net/geni/wiki/GENIExperimenter/Tutorials/OpenFlowOVS-Floodlight) .
 
 To complete the final step, I first needed to get some information out of the Faucet instance running in slate. I accomplished this task by running ```slate instance list```, pulling the instance ID for my faucet instance and running ```slate instance info <Instance ID>```. This command output a bunch of information about the instance, including the text of the config I had fed in earlier. At the very top was a block of text that read like this.
-
+```
 Name Cluster IP External IP Ports
 
 faucet-global 10.106.167.17 <none> 6653:31612/TCP
+```
 
 This gave me the IP of the cluster, 10.106.167.17, and the outward facing port on which Faucet was broadcasting: 31612. With these two pieces of information combined, I could run the commands ```ovs-vsctl set-controller <bridge name> tcp:10.106.167.17:31612``` and ```ovs-vsctl set-fail-mode <bridge name> secure```. These commands tell the virtual switch where to go to get OpenFlow instructions on its Control plane. These commands also tell the switch to not try to forward packets on its data plane without checking in with its controller. These two facts are important for validating Faucet’s functionality.
 
