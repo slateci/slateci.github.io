@@ -29,7 +29,7 @@ chart, we'll add the following at the top-level scope:
 
 Defining the HTTPLogger in this way gives us some room to add features later,
 such as an additional `Password` field that would allow user-specified
-passwords.
+passwords, handled by SLATE secrets. 
 
 Now that we've defined the HTTPLogger, we can start to work in the back-end.
 The logger will be running in a separate container (a "side car"), running the
