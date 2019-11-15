@@ -1,5 +1,5 @@
 ---
-title: "Faucet SDN with SLATE"
+title: "Orchestrating Networks with Faucet and SLATE"
 overview: Blog
 published: false
 permalink: blog/slate-faucet-nov-2019.html
