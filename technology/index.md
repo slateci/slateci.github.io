@@ -57,7 +57,7 @@ type: markdown
 	</div>
 	<div class="col-10">
 		<p>
-			<a href="https://sylabs.io/docs/">Singularity</a> can be run in place of Docker as the container run-time environment within SLATE. The application catalog, created with Docker and HELM, runs seamlessly on SLATE with Singularity. 
+		<a href="https://sylabs.io/singularity">Singularity</a> can be run in place of Docker as an alternative container run-time environment for Kubernetes. Singularity adds additional security and features that have made it popular in many environments including HPC. To learn more about running a Kubernetes cluster with Singularity checkout our recent blog post: <a href="/blog/kubernetes-with-singularity.html">Setting up a Kubernetes Cluster based on Singularity</a>. 
 		</p>
 	</div>
 </div>
