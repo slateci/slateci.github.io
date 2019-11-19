@@ -22,6 +22,8 @@ type: markdown
 
 	</div>
 </div>
+
+
 <hr>
 
 <div class="row p-2">
@@ -44,6 +46,19 @@ type: markdown
 </div>
 	<div class="col-10">
 	<p class="technology-justify"><a href="https://www.docker.com/">Docker</a> is the primary container runtime environment used in SLATE. Our clusters run docker containers orchestrated by Kubernetes. The Docker Engine provides the necessary operating system level abstractions to enable containers. Docker is the world leader in the containerization. With a strong open-source community, it was our choice for running containers in SLATE</p>
+	</div>
+</div>
+
+<hr>
+
+<div class="row p-2">
+	<div class="col-2">
+		<img src="/img/singularity.png">
+	</div>
+	<div class="col-10">
+		<p>
+			<a href="https://sylabs.io/docs/">Singularity</a> can be run in place of Docker as the container run-time environment within SLATE. The application catalog, created with Docker and HELM, runs seamlessly on SLATE with Singularity. 
+		</p>
 	</div>
 </div>
 
