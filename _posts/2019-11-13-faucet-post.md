@@ -114,6 +114,7 @@ two pieces of information, we ran the following command on OVS swtich:
 	ovs-vsctl set-controller <bridge name> tcp:10.106.167.17:31612
 
 and 
+
 	ovs-vsctl set-fail-mode <bridge name> secure
 
 These commands tell the virtual switch where to go to get OpenFlow instructions
