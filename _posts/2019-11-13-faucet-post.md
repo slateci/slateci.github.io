@@ -107,7 +107,7 @@ Name Cluster IP External IP Ports
 faucet-global 10.106.167.17 <none> 6653:31612/TCP
 ```
 
-From this output, we could retrieve the IP of the cluster, `10.106.167.17`, and
+From this output, we could retrieve the IP of the application, `10.106.167.17`, and
 the outward facing port on which Faucet was broadcasting: `31612`. With these
 two pieces of information, we ran the following command on OVS swtich:
 
