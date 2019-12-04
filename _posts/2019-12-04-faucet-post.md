@@ -2,7 +2,7 @@
 title: "Orchestrating Networks with Faucet and SLATE"
 overview: Blog
 published: true
-permalink: blog/slate-faucet-nov-2019.html
+permalink: blog/slate-faucet-dec-2019.html
 attribution: The SLATE Team
 layout: post
 type: markdown
