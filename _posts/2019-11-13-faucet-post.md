@@ -136,4 +136,7 @@ the ping will go through, and you will see successful output. If the ping
 fails, then we have to troubleshoot if Faucet has the correct configuration and
 if Faucet is able to talk on the control plane to the switch correctly.
 
-
+In summary, we were able to succesfully configure and control switches at the
+University of Texas via GENI through a SLATE instance running at the University
+of Michigan. The use of SLATE made the configuration and installation of the
+Faucet controller straightforward and simple.
