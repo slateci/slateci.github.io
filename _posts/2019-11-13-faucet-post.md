@@ -32,7 +32,7 @@ powerful networking solution than their physical
 counterparts.![](https://lh6.googleusercontent.com/dvHcVJ7djN0ez9sM4KVcImgAumLmPtgEICa2oxDbt3BFk0nAcmr3eaxFQF3222rWDFYCo4CRq95sqPC89kaZG_w9n4KsckJvD-jLL4Ja8kRY63vcXWci8CljOsoAHIvAvBXBxkpo)
 
 To accomplish all of this functionality, Faucet relies on a set of
-[.yaml](https://yaml.org/) files to define the network characteristics. The
+YAML files to define the network characteristics. The
 Faucet documentation includes
 [tutorials](https://docs.faucet.nz/en/latest/tutorials/index.html) that explain
 how to make these yaml files. If you were using Faucet without SLATE you would
