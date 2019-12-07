@@ -16,7 +16,7 @@ Papers, presentations, and other publications that feature work that relied on S
 
 In addition please include the following acknowledgement:
 
-<p><i>This work used the SLATE platform, which is supported by National Science Foundation grant number OAC-1724821.</i>
+<p><i>This work used the SLATE platform, which is supported by National Science Foundation grant number OAC-1724821.</i></p>
 
 
 ## Journal and Conference Papers
