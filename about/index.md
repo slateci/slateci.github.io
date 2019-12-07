@@ -6,7 +6,18 @@ order: 0
 
 layout: about
 type: markdown
----
+--- 
+
+## Acknowledging SLATE
+
+Papers, presentations, and other publications that feature work that relied on SLATE resources, services or expertise should cite the following publication:
+
+<p><i>Building the SLATE Platform</i>, Breen, J., McKee, S., Riedel, B., Stidd, J., Truong, L., Vukotic, I., Bryant, L., Carcassi, G., Chen, J., Gardner, R.W., Harden, R., Izdimirski, M., Killen, R., & Kulbertis, B. (2018). <i>Proceedings of the Practice and Experience on Advanced Research Computing</i>. 1 to 7. doi: <a href="https://dl.acm.org/citation.cfm?doid=3219104.3219144">10.1145/3219104.3219144.</a></p>
+
+In addition please include the following acknowledgement:
+
+<p><i>This work used the SLATE platform, which is supported by National Science Foundation grant number OAC-1724821.</a>
+
 
 ## Journal and Conference Papers
 
