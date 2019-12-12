@@ -23,9 +23,6 @@ container. You can look at the
 [container repositories](https://github.com/search?q=topic%3Acontainer+org%3Aslateci&type=Repositories)
 on SLATE GitHub for examples and guidance.
 
-Guidelines and conventions for SLATE developers
------------------------------------------------
-
 Each SLATE application should reside in a separate git repository in the
 GitHub slateci group. The name of the repository should be containter-appname.
 The directory structure should look like
