@@ -64,6 +64,7 @@ Docker and Kubernetes can be picky about the state of the system on which they r
 
 For CentOS, Docker CE should be used:
 
+	yum install -y yum-utils # for yum-config-manager
 	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 	yum install docker-ce docker-ce-cli containerd.io -y
 
