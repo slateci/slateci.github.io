@@ -1,17 +1,25 @@
 .post {
+
   .post-wrapper {
     padding-top: $spacing--xxxl;
   }
+
 
   .content p {
     line-height: 1.5; 
     margin-bottom: .5em;
     margin-top: .5em;
-  }
+}
 
   .content img {
+      display: block;
+      margin: 0 auto;
+      width: auto;
+  }
 
-      width: 100%;
+  .content p > img {
+
+     
   }
 
   .content
