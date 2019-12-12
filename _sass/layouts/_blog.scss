@@ -69,6 +69,11 @@
       font-size: 1dm;
       margin-top: $spacing--m;
     }
+
+    img {
+        display: block;
+        margin: 0 auto;
+    }
   }
 
   .read-more {
