@@ -187,7 +187,7 @@ And then set `Secret: logger-secret` in the values file.
 
 Once the application has launched, you should be able to retrieve its IP
 address from a `slate instance info <your instance>`, and visit
-http://<ip>:8080 in your browser to get to the log files. If you've predefined
+http://(ip address):8080 in your browser to get to the log files. If you've predefined
 a password via SLATE secret, you can use the username `logger` with the passwrd
 that you have supplied. Otherwise you'll want to use a
 	
