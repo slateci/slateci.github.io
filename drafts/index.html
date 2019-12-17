@@ -1,0 +1,34 @@
+---
+title: Blog
+overview: The SLATE blog.
+layout: blog
+sitemap: false
+---
+<h1>SLATE blog</h1>
+
+{% for post in site.posts %}
+	{% if post.tag contains 'draft' %}
+	<a href="{{home}}{{ post.url }}"><h4 id="{{post.id}}" class="post-title">{{ post.title }}</h4></a>
+
+	<div class="post-date">
+		{{ post.date | date: '%B %d, %Y' }}
+	</div>
+
+	<div class="post-author-company">
+		{% if post.author %}
+		<div class="post-author">
+			{{ post.author}}
+		</div>
+		{% endif %}
+	</div>
+
+	<div class="post-excerpt">
+		{{ post.excerpt }}
+	</div>
+
+	<div class="read-more">
+		<a href="{{home}}{{ post.url }}"><span class="read-more-text">Read More</span></a>
+	</div>
+	<hr>
+	{% endif %}
+{% endfor %}
