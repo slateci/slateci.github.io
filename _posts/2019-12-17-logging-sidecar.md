@@ -1,5 +1,5 @@
 ---
-title: "Add A Logging Sidecar To Any SLATE Or Helm application"
+title: "Add a Logging Sidecar to any SLATE or Helm application"
 overview: Blog
 published: true
 permalink: blog/slate-faucet-dec-2019.html
