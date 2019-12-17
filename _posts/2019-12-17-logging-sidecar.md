@@ -114,7 +114,6 @@ will randomly generate a password.
 	  start-nginx.sh: |+
 	    #!/bin/bash -e
 
-	    # not ideal
 	    apt-get update
 	    apt-get install openssl -y
 
