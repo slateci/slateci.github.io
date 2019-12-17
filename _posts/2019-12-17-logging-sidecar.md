@@ -191,7 +191,7 @@ address, via
 	slate instance info <your instance>
 	
 and visit http://(ip address):8080 in your browser to get to the log files. If you've predefined
-a password via SLATE secret, you can use the username `logger` with the passwrd
+a password via SLATE secret, you can use the username `logger` with the password
 that you have supplied. Otherwise you'll want to use
 	
 	slate instance logs --container logging-sidecar <instance id>
