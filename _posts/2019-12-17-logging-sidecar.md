@@ -9,11 +9,12 @@ type: markdown
 ---
 
 Sometimes when we run containerized applications, we want a little more than
-the usual stdout/stderr log aggregation that Kubernetes or SLATE gives us by default.
-For many applications, logs may be exceptionally verbose, or split across many
-files corresponding to different parts of the software. In this post we'll show
-you how to add a logging sidecar to your Helm chart, complete with HTTP basic
-auth and ingress for ease of access. 
+the usual stdout/stderr log aggregation that Kubernetes or SLATE gives us by
+default.  For many applications, logs may be exceptionally verbose, or split
+across many files corresponding to different parts of the software,
+necessitating some other mechanism by which to retrieve logs. In this post
+we'll show you how to add a logging sidecar to your Helm chart, complete with
+HTTP basic auth and ingress for ease of access. 
 <!--end_excerpt-->
 
 We'll be using our HTCondor application in the SLATE catalog, which has a
