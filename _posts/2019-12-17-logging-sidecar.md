@@ -82,7 +82,7 @@ under `spec.templates.spec.volumes`:
       {{ end }}
 
 We will additionally need to ensure that the application container mounts the
-shared `log-volume` defined above. Under `spec.templates.spec.containers`, we
+shared `log-volume` defined above. The mount point of `log-volume` Under `spec.templates.spec.containers`, we
 will modify our application to have the additional volumeMount as well. It
 should look something like the following, in addition to whatever other volumes
 already exist:
@@ -153,8 +153,34 @@ allow directory listing and change the default mimetype to plaintext, and adds
 the htpasswd file from above. Combined with the logging directory, this should
 be all that we need to start exposing our logs from a webserver. 
 
+In order to actually expose the logging sidecar to the internet, we will need to add a service object. For this application, I've created a new `service.yaml` entirely wrapped in the logging sidecar conditional, which will expose the NGINX server on a randomized port:
+
+``` 
+{{ if .Values.HTTPLogger.Enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "htcondor.fullname" . }}
+  labels:
+    app: {{ template "htcondor.name" . }}
+    chart: {{ template "htcondor.chart" . }}
+    release: {{ .Release.Name }}
+    instance: {{ .Values.Instance }}
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: logs
+    protocol: TCP
+    name: logs
+  selector:
+    app: {{ template "htcondor.name" . }}
+    instance: {{.Values.Instance }}
+{{ end }}
+```
+
 To wrap things up, we should add the ability to specify a password as a
-Kubernetes or SLATE secret. In our configmap above, we already added the
+Kubernetes or SLATE secret. In our configmap, we already added the
 ability to specify the HTPASSWD hashed password as an environment variable, so
 we just need to pipe that into the deployment and values files. First, in our
 Values file we will add
