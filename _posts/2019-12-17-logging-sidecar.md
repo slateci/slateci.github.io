@@ -190,8 +190,10 @@ Once the application has launched, you should be able to retrieve its IP
 address from a `slate instance info <your instance>`, and visit
 http://<ip>:8080 in your browser to get to the log files. If you've predefined
 a password via SLATE secret, you can use the username `logger` with the passwrd
-that you have supplied. Otherwise you'll want to use a `slate instance logs
---container logging-sidecar <instance id>` to get the randomly generated
-credentials. 
+that you have supplied. Otherwise you'll want to use a
+	
+	slate instance logs --container logging-sidecar <instance id>
+	
+to get the randomly generated credentials. 
 
 Hope that helps! Happy logging!
