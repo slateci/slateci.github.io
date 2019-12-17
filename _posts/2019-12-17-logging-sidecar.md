@@ -186,10 +186,13 @@ So, if the user wants to create and use their own password for the log server, t
 And then set `Secret: logger-secret` in the values file.
 
 Once the application has launched, you should be able to retrieve its IP
-address from a `slate instance info <your instance>`, and visit
-http://(ip address):8080 in your browser to get to the log files. If you've predefined
+address, via 
+
+	slate instance info <your instance>
+	
+and visit http://(ip address):8080 in your browser to get to the log files. If you've predefined
 a password via SLATE secret, you can use the username `logger` with the passwrd
-that you have supplied. Otherwise you'll want to use a
+that you have supplied. Otherwise you'll want to use
 	
 	slate instance logs --container logging-sidecar <instance id>
 	
