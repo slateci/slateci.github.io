@@ -9,7 +9,7 @@ type: markdown
 ---
 
 Sometimes when we run containerized applications, we want a little more than
-the standard stdout/stderr pipes that Kubernetes or SLATE gives us by default.
+the usual stdout/stderr log aggregation that Kubernetes or SLATE gives us by default.
 For many applications, logs may be exceptionally verbose, or split across many
 files corresponding to different parts of the software. In this post we'll show
 you how to add a logging sidecar to your Helm chart, complete with HTTP basic
