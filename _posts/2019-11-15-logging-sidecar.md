@@ -1,9 +1,20 @@
-# Adding an HTTP-based log exporter to any SLATE or Helm application
+---
+title: "Add A Logging Sidecar To Any SLATE Or Helm application"
+overview: Blog
+published: true
+permalink: blog/slate-faucet-dec-2019.html
+attribution: The SLATE Team
+layout: post
+type: markdown
+---
 
-When running a containerized application, it can be difficult or
-undesireable to pipe all log output to /dev/stdout and expose it via the normal
-Kubernetes or SLATE logging interface. In this post we'll show you how to add a
-logging sidecar, complete with HTTP basic auth and ingress for ease of access.
+Sometimes when we run containerized applications, we want a little more than
+the standard stdout/stderr pipes that Kubernetes or SLATE gives us by default.
+For many applications, logs may be exceptionally verbose, or split across many
+files corresponding to different parts of the software. In this post we'll show
+you how to add a logging sidecar to your Helm chart, complete with HTTP basic
+auth and ingress for ease of access. 
+<!--end_excerpt-->
 
 We'll be using our HTCondor application in the SLATE catalog, which has a
 number of log files, one for each daemon running under the HTCondor master
@@ -18,9 +29,9 @@ curl individual log files to their workstation or share them with others.
 In this post, we'll assume some knowledge about developing Helm applications.
 If you don't already have a copy of the SLATE catalog application, you can grab
 it [here](https://github.com/slateci/slate-catalog). However the technique
-shown here isn't restricted to SLATE, it should apply to any Helm app.
+shown here isn't restricted to SLATE, it should apply to any Helm chart.
 
-I like to add functionality to a Helm Chart by first defining the interface
+I like to add functionality to a Helm chart by first defining the interface
 that the application deployer will see in the Values file.  In our HTCondor
 chart, we'll add the following at the top-level scope:
 
@@ -28,8 +39,8 @@ chart, we'll add the following at the top-level scope:
       Enabled: false
 
 Defining the HTTPLogger in this way gives us some room to add features later,
-such as an additional `Password` field that would allow user-specified
-passwords, handled by SLATE secrets. 
+such as an additional `Secret` field that would allow user-specified
+passwords.
 
 Now that we've defined the HTTPLogger, we can start to work in the back-end.
 The logger will be running in a separate container (a "side car"), running the
@@ -39,7 +50,8 @@ we'll add an NGINX container if the HTTPLogger is enabled:
       {{ if .Values.HTTPLogger.Enabled }}
       - name: logging-sidecar
         image: "nginx:1.15.9"
-        command: ["/usr/local/bin/start-nginx.sh"]
+        command: ["/bin/bash"]
+        args: ["/usr/local/bin/start-nginx.sh"]
         imagePullPolicy: IfNotPresent
         ports:
         - name: logs
@@ -83,15 +95,11 @@ already exist:
         {{ end }}
 
 As the startup script refers to a configMap, we'll need to go and create that
-next. In `templates/configmap.yaml`, we'll add a shell script that will
-replace the default NGINX startup entrypoint. This script will check for the
-existence of an htpasswd(1)-like string and copy it in appropriately, otherwise
-it will randomly generate a password. Note that for the purposes of this blog
-post, we've intentionally kept things simple and have not implemented the
-ability for the user to specify a password, although the script does allow it.
+next. In `templates/configmap.yaml`, we'll add a shell script that will replace
+the default NGINX startup entrypoint. This script will check for the existence
+of a `openssl(1)` hashed password and copy it in appropriately, otherwise it
+will randomly generate a password. 
 
-	{{ if .Values.HTTPLogger.Enabled }}
-	---
 	apiVersion: v1
 	kind: ConfigMap
 	metadata:
@@ -102,25 +110,87 @@ ability for the user to specify a password, although the script does allow it.
 	    instance: {{ .Values.Instance }}
 	    release: {{ .Release.Name }}
 	data:
-          #!/bin/bash -e
+	  start-nginx.sh: |+
+	    #!/bin/bash -e
 
-          if [ -z $HTPASSWD ]; then
-            PASS=$(tr -dc 'a-f0-9' < /dev/urandom | head -c16) 
-            echo "Your randomly generated logger credentials are"
-            echo "**********************************************"
-            echo "logger:$PASS"
-            echo "**********************************************"
-            HTPASSWD=$(echo $PASS | md5sum | awk '{print "logger:"$1}')
-          fi
+	    # not ideal
+	    apt-get update
+	    apt-get install openssl -y
 
-          # maybe validate this
-          echo $HTPASSWD > /etc/nginx/auth/htpasswd
+	    if [ -z $HTPASSWD ]; then
+	      PASS=$(tr -dc 'a-f0-9' < /dev/urandom | head -c16)
+	      echo "Your randomly generated logger credentials are"
+	      echo "**********************************************"
+	      echo "logger:$PASS"
+	      echo "**********************************************"
+	      HTPASSWD="$(openssl passwd -apr1 $(echo -n $PASS))"
+	    fi
 
-          sed -i -e 's|\\(listen[^0-9]*\\)80|\\1 8080|' -e 's|index  index.html index.htm|autoindex  on|'  -e '/location \\/ {/ a\\        default_type         text/plain;\\\n\\        auth_basic           \"Restricted\";\\\n\\        auth_basic_user_file /etc/nginx/auth/htpasswd;' /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'
+	    mkdir -p /etc/nginx/auth
+	    echo "logger:$HTPASSWD" > /etc/nginx/auth/htpasswd
+
+	    echo 'server {
+	      listen       8080;
+	      server_name  localhost;
+	      location / {
+		default_type text/plain;
+		auth_basic "Restricted";
+		auth_basic_user_file /etc/nginx/auth/htpasswd;  
+		root   /usr/share/nginx/html;
+		autoindex  on;
+	      }
+	      error_page   500 502 503 504  /50x.html;
+	      location = /50x.html {
+		root   /usr/share/nginx/html;
+	      }
+	    }' > /etc/nginx/conf.d/default.conf
+	    exec nginx -g 'daemon off;'
+
 	{{ end }}
 
-After creating the htpasswd(1) file, the script does an in-place modification
-of the default NGINX configuration to allow directory listings, changes the
-default mimetype to plaintext, and adds the htpasswd file from above. Combined
-with the logging directory, this should be all that we need to start exposing
-our logs from a webserver.
+After creating the htpasswd(1) file, we insert a new nginx configuration to
+allow directory listing and change the default mimetype to plaintext, and adds
+the htpasswd file from above. Combined with the logging directory, this should
+be all that we need to start exposing our logs from a webserver. 
+
+To wrap things up, we should add the ability to specify a password as a
+Kubernetes or SLATE secret. In our configmap above, we already added the
+ability to specify the HTPASSWD hashed password as an environment variable, so
+we just need to pipe that into the deployment and values files. First, in our
+Values file we will add
+`HTTPLogger.Secret`, which will look as such:
+
+    HTTPLogger: 
+      Enabled: false
+      # Secret: my-secret
+
+We comment out the secret by default, so the user doesn't necessarily have to
+create a secret to start the application - in that case they will just get a
+randomly generated password. Over in `templates/deployment.yaml`, we will add a
+new block for the environment variable within `spec.template.spec.containers`:
+
+        {{ if .Values.HTTPLogger.Secret }}
+        env:
+          - name: HTPASSWD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.HTTPLogger.Secret }}
+                key: HTPASSWD
+        {{ end }}
+
+So, if the user wants to create and use their own password for the log server, they'll need to do the following:
+
+	openssl passwd -apr1
+	slate secret create --group <group name> --cluster <cluster name> --from-literal=HTPASSWD=<openssl output> logger-secret
+
+And then set `Secret: logger-secret` in the values file.
+
+Once the application has launched, you should be able to retrieve its IP
+address from a `slate instance info <your instance>`, and visit
+http://<ip>:8080 in your browser to get to the log files. If you've predefined
+a password via SLATE secret, you can use the username `logger` with the passwrd
+that you have supplied. Otherwise you'll want to use a `slate instance logs
+--container logging-sidecar <instance id>` to get the randomly generated
+credentials. 
+
+Hope that helps! Happy logging!
