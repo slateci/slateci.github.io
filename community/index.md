@@ -34,7 +34,7 @@ best approach for different cases.
     <tr>
       <td class="logo"><img src="{{home}}/img/group.png" alt="Mailing Lists"/></td>
       <td>
-Join the <a href="https://groups.google.com/forum/#!forum/slateci">slateci@</a> mailing list to participate in discussions and get help troubleshooting problems.  Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slateci-news@</a> to receive news and updates about SLATE.      
+Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slateci-news@</a> to receive news and updates about SLATE.      
      </td>
    </tr>
   <tr>
