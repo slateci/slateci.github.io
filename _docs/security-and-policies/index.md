@@ -7,4 +7,4 @@ layout: docs
 type: markdown
 ---
 
-Coming soon...
+[Acceptable Use Policy](/docs/security-and-policies/acceptable-use.html)

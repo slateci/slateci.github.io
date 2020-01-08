@@ -1,6 +1,14 @@
-## SLATE Acceptable Use Policy
+---
+title: SLATE Acceptable Use Policy
+overview: SLATE Acceptable Use Policy
 
-###December 6, 2019
+order: 10  
+
+layout: docs
+type: markdown
+---
+
+### December 6, 2019
 
 By using the SLATE platform<sup id="fnr1">[1]</sup>, you agree to comply with the following conditions of use.  For information regarding violations and enforcement, please refer to the SLATE Master Information Security Policies & Procedures located at [https://slateci.io/docs/security-and-policies/](https://slateci.io/docs/security-and-policies/). 
 
@@ -8,10 +16,8 @@ By using the SLATE platform<sup id="fnr1">[1]</sup>, you agree to comply with th
 2. You will not use SLATE resources for any unlawful purpose, nor attempt to breach or circumvent any SLATE administrative or security controls. You will comply with all applicable laws, working with your home institution, and with specific SLATE edge service providers utilized by your application, to determine what constraints may be placed on you by any relevant regulations such as export control law or HIPAA. 
 3. While using SLATE resources you will respect any intellectual property rights and observe confidentiality agreements.
 4. You will protect the access credentials (e.g., passwords, private keys, and/or tokens) issued to you or generated to access SLATE resources; these are issued to you for your sole use. Protecting these credentials includes the following requirements:
-
-	1. You must only place your SLATE token on trusted resources, i.e., secure systems maintained by the user or by organizations cooperating with SLATE. 
-	2. You must not share any of your SLATE credentials with any other person.
-
+  - You must only place your SLATE token on trusted resources, i.e., secure systems maintained by the user or by organizations cooperating with SLATE. 
+  - You must not share any of your SLATE credentials with any other person.
 5. You will immediately report any known or suspected security breach or loss or misuse of SLATE access credentials.  Reports should be emailed to [security@slateci.io](mailto:security@slateci.io). 
 6. You will have only one SLATE User account and will keep your profile information up-to-date.
 7. Use of resources and services through SLATE is at your own risk. There are no guarantees that resources and services will be available, that they will suit every purpose, or that data will never be lost or corrupted. Users are responsible for backing up critical data.
