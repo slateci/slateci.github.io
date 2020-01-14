@@ -64,6 +64,7 @@ we'll add an NGINX container if the HTTPLogger is enabled:
           mountPath: /usr/share/nginx/html
         - name: logger-startup
           mountPath: /usr/local/bin/start-nginx.sh
+	  subPath: start-nginx.sh
       {{ end }}
 
 This container definition additionally includes some volumeMounts, for which
