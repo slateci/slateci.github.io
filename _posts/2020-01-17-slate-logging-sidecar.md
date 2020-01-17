@@ -48,6 +48,7 @@ The logger will be running in a separate container (a "side car"), running the
 NGINX web server to serve up our files. Under *`spec.template.spec.containers`*,
 we'll add an NGINX container if the HTTPLogger is enabled:
 
+{% raw %}
       {{ if .Values.HTTPLogger.Enabled }}
       - name: logging-sidecar
         image: "nginx:1.15.9"
@@ -65,6 +66,7 @@ we'll add an NGINX container if the HTTPLogger is enabled:
           mountPath: /usr/local/bin/start-nginx.sh
           subPath: start-nginx.sh
       {{ end }}
+{% endraw %}
 
 This container definition additionally includes some volumeMounts, for which
 we'll need to define corresponding volumes. The first, `log-volume`, will be
@@ -74,6 +76,7 @@ will be our shell script that starts up NGINX. As in above, the volume
 definition will need to be wrapped with the conditional for the HTTP Logger,
 under `spec.template.spec.volumes`: 
 
+{% raw %}
       {{ if .Values.HTTPLogger.Enabled }}
       - name: log-volume
         emptyDir: {}
@@ -81,12 +84,14 @@ under `spec.template.spec.volumes`:
         configMap:
           name: htcondor-{{ .Values.Instance }}-logger-startup
       {{ end }}
+{% endraw %}
 
 We will additionally need to ensure that the application container mounts the
 shared `log-volume` defined above. The mount point of `log-volume` will point to the log path of our application, in this case `/var/log/condor`. It
 should look something like the following, in addition to whatever other volumes
 already exist:
 
+{% raw %}
       - name: htcondor-worker
         image: slateci/container-condor:latest
         volumeMounts:
@@ -94,6 +99,7 @@ already exist:
         - name: log-volume
           mountPath: /var/log/condor
         {{ end }}
+{% endraw %}
 
 As the startup script refers to a configMap, we'll need to go and create that
 next. In `templates/configmap.yaml`, we'll add a shell script that will replace
@@ -101,6 +107,7 @@ the default NGINX startup entrypoint. This script will check for the existence
 of a `openssl(1)` hashed password and copy it in appropriately, otherwise it
 will randomly generate a password. 
 
+{% raw %}
 	{{ if .Values.HTTPLogger.Enabled }}
 	apiVersion: v1
 	kind: ConfigMap
@@ -147,6 +154,7 @@ will randomly generate a password.
 	    }' > /etc/nginx/conf.d/default.conf
 	    exec nginx -g 'daemon off;'
 	{{ end }}
+{% endraw %}
 
 After creating the htpasswd(1) file, we insert a new nginx configuration to
 allow directory listing and change the default mimetype to plaintext, and adds
@@ -155,6 +163,7 @@ be all that we need to start exposing our logs from a webserver.
 
 In order to actually expose the logging sidecar to the internet, we will need to add a service object. For this application, I've created a new `service.yaml` entirely wrapped in the logging sidecar conditional, which will expose the NGINX server on a randomized port:
 
+{% raw %}
 ``` 
 {{ if .Values.HTTPLogger.Enabled }}
 apiVersion: v1
@@ -178,6 +187,7 @@ spec:
     instance: {{.Values.Instance }}
 {{ end }}
 ```
+{% endraw %}
 
 To wrap things up, we should add the ability to specify a password as a
 Kubernetes or SLATE secret. In our configmap, we already added the
@@ -195,6 +205,7 @@ create a secret to start the application - in that case they will just get a
 randomly generated password. Over in `templates/deployment.yaml`, we will add a
 new block for the environment variable within *`spec.template.spec.containers`*:
 
+{% raw %}
         {{ if .Values.HTTPLogger.Secret }}
         env:
           - name: HTPASSWD
@@ -203,6 +214,7 @@ new block for the environment variable within *`spec.template.spec.containers`*:
                 name: {{ .Values.HTTPLogger.Secret }}
                 key: HTPASSWD
         {{ end }}
+{% endraw %}
 
 So, if the user wants to create and use their own password for the log server, they'll need to do the following:
 
