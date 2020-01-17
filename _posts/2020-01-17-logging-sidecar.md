@@ -6,6 +6,7 @@ permalink: blog/slate-logging-jan-2020.html
 attribution: The SLATE Team
 layout: post
 type: markdown
+tag: draft
 ---
 
 Sometimes when we run containerized applications, we want a little more than
