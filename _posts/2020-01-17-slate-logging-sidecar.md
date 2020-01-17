@@ -28,7 +28,7 @@ well. A nice upshot to HTTP-based logging is that operators can additionally
 curl individual log files to their workstation or share them with others.
 
 In this post, we'll assume some knowledge about developing Helm applications.
-If you don't already have a copy of the SLATE catalog application, you can grab
+If you don't already have a copy of the SLATE application catalog, you can grab
 it [here](https://github.com/slateci/slate-catalog). However the technique
 shown here isn't restricted to SLATE, it should apply to any Helm chart.
 
