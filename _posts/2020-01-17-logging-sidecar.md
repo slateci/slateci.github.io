@@ -6,7 +6,6 @@ permalink: blog/slate-faucet-dec-2019.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 Sometimes when we run containerized applications, we want a little more than
