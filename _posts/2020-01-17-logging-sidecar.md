@@ -46,7 +46,7 @@ passwords.
 
 Now that we've defined the HTTPLogger, we can start to work in the back-end.
 The logger will be running in a separate container (a "side car"), running the
-NGINX web server to serve up our files. Under *`spec.templates.spec.containers`*,
+NGINX web server to serve up our files. Under *`spec.template.spec.containers`*,
 we'll add an NGINX container if the HTTPLogger is enabled:
 
       {{ if .Values.HTTPLogger.Enabled }}
@@ -73,7 +73,7 @@ the directory shared among containers that will allow us to write files in the
 HTCondor container, and serve it with the NGINX container. The second volume
 will be our shell script that starts up NGINX. As in above, the volume
 definition will need to be wrapped with the conditional for the HTTP Logger,
-under `spec.templates.spec.volumes`: 
+under `spec.template.spec.volumes`: 
 
       {{ if .Values.HTTPLogger.Enabled }}
       - name: log-volume
