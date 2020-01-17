@@ -2,7 +2,7 @@
 title: "Add a Logging Sidecar to any SLATE or Helm application"
 overview: Blog
 published: true
-permalink: blog/slate-faucet-dec-2019.html
+permalink: blog/slate-logging-jan-2020.html
 attribution: The SLATE Team
 layout: post
 type: markdown
