@@ -46,7 +46,7 @@ passwords.
 
 Now that we've defined the HTTPLogger, we can start to work in the back-end.
 The logger will be running in a separate container (a "side car"), running the
-NGINX web server to serve up our files. Under `spec.templates.spec.containers`,
+NGINX web server to serve up our files. Under *`spec.templates.spec.containers`*,
 we'll add an NGINX container if the HTTPLogger is enabled:
 
       {{ if .Values.HTTPLogger.Enabled }}
