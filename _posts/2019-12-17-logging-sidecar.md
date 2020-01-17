@@ -84,8 +84,7 @@ under `spec.templates.spec.volumes`:
       {{ end }}
 
 We will additionally need to ensure that the application container mounts the
-shared `log-volume` defined above. The mount point of `log-volume` Under `spec.templates.spec.containers`, we
-will modify our application to have the additional volumeMount as well. It
+shared `log-volume` defined above. The mount point of `log-volume` will point to the log path of our application, in this case `/var/log/condor`. It
 should look something like the following, in addition to whatever other volumes
 already exist:
 
@@ -103,6 +102,7 @@ the default NGINX startup entrypoint. This script will check for the existence
 of a `openssl(1)` hashed password and copy it in appropriately, otherwise it
 will randomly generate a password. 
 
+	{{ if .Values.HTTPLogger.Enabled }}
 	apiVersion: v1
 	kind: ConfigMap
 	metadata:
@@ -147,7 +147,6 @@ will randomly generate a password.
 	      }
 	    }' > /etc/nginx/conf.d/default.conf
 	    exec nginx -g 'daemon off;'
-
 	{{ end }}
 
 After creating the htpasswd(1) file, we insert a new nginx configuration to
@@ -195,7 +194,7 @@ Values file we will add
 We comment out the secret by default, so the user doesn't necessarily have to
 create a secret to start the application - in that case they will just get a
 randomly generated password. Over in `templates/deployment.yaml`, we will add a
-new block for the environment variable within `spec.template.spec.containers`:
+new block for the environment variable within *`spec.template.spec.containers`*:
 
         {{ if .Values.HTTPLogger.Secret }}
         env:
@@ -208,8 +207,8 @@ new block for the environment variable within `spec.template.spec.containers`:
 
 So, if the user wants to create and use their own password for the log server, they'll need to do the following:
 
-	openssl passwd -apr1
-	slate secret create --group <group name> --cluster <cluster name> --from-literal=HTPASSWD=<openssl output> logger-secret
+	openssl passwd -apr1 > HTPASSWD
+	slate secret create --group <group name> --cluster <cluster name> --from-file=HTPASSWD logger-secret
 
 And then set `Secret: logger-secret` in the values file.
 
@@ -218,7 +217,7 @@ address, via
 
 	slate instance info <your instance>
 	
-and visit http://(ip address):8080 in your browser to get to the log files. If you've predefined
+The location of your logging server will be in the "URL" field returned by `slate instance info`. Visit http://(ip address):<port number> in your browser to get to the log files. If you've predefined
 a password via SLATE secret, you can use the username `logger` with the password
 that you have supplied. Otherwise you'll want to use
 	
