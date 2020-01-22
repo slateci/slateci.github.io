@@ -1,0 +1,25 @@
+---
+layout: default
+---
+{% include home.html %}
+<div class="show-on-mobile-only">
+    {% include mobile-docs-menu.html %}
+</div>
+<div class="d-lg-flex">
+    <div class="p-2 doc-menu-fixed-width">
+        {% comment %}
+        {% endcomment %}
+            {% include doc-nav.html %}
+    </div> 
+
+    <div class="docs-container">
+        <div id="content-container" class=" docs-content-container col {{ page.type }}" >
+            <div id="doc-content">
+                <h1>{{page.title}}</h1>
+                {{ content }}
+            </div>
+        </div>
+    </div>
+    <div class="p-2 doc-menu-fixed-width-right">
+    </div>
+</div>

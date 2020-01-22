@@ -1,0 +1,73 @@
+toc:
+  - title: Getting Started
+    id: getting-started
+    subfolderitems:
+      - page: Getting Started
+        url: /docs/quickstart/index.html
+  - title: Roles 
+    id: roles
+    subfolderitems:
+      - page: SLATE Roles
+        url: /docs/concepts/index.html
+  - title: Cluster Installation
+    id: cluster-installation
+    subfolderitems:
+      - page: Installation
+        url: /docs/cluster/index.html
+      - page: SLATE Reference Node
+        url: /docs/cluster/example_hardware/edge-node.html
+      - page: SLATE ATLAS Tier 2 Node
+        url: /docs/cluster/example_hardware/atlas-node.html
+      - page: SLATE Management Node
+        url: /docs/cluster/example_hardware/management-node.html
+      - page: SLATE perfSONAR Node
+        url: /docs/cluster/example_hardware/perfsonar-node.html
+  - title: SLATE Tools 
+    id: slate-tools
+    url: /docs/tools/
+    subfolderitems:
+      - page: SLATE CLI
+        url: /docs/tools/index.html
+  - title: Application Development
+    id: applications-development
+    url: /docs/apps/
+    subfolderitems:
+      - page: Overview
+        url: /docs/apps/index.html
+      - page: Preparing a Docker Container
+        url: /docs/apps/container.html
+      - page: Preparing a Kubernetes Deployment
+        url: /docs/apps/deployment.html
+      - page: Preparing a Helm Chart
+        url: /docs/apps/chart.html
+      - page: Adding Additional Features
+        url: /docs/apps/features.html
+      - page: Adding the Application to the Catalog
+        url: /docs/apps/catalog.html
+      - page: Persistent Local Storage
+        url: /docs/apps/development_tools/local-storage.html
+      - page: CVMFS Repositories
+        url: /docs/apps/development_tools/cvmfs.html
+  - title: Developers Tutorial
+    id: developers-tutorial
+    subfolderitems:
+      - page: Welcome to the SLATE Stack
+        url: /docs/apps/tutorial/intro.html
+      - page: Background Knowledge
+        url: /docs/apps/tutorial/basics.html
+      - page: Setup Your Environment
+        url: /docs/apps/tutorial/setup.html
+      - page: Kubernetes
+        url: /docs/apps/tutorial/kubernetes.html
+      - page: Helm
+        url: /docs/apps/tutorial/helm.html
+      - page: SLATE
+        url: /docs/apps/tutorial/slate.html
+      - page: Application Catalog
+        url: https://portal.slateci.io/applications
+  - title: Security and Policies
+    id: security-and-policies
+    url: /docs/security-and-policies/
+    subfolderitems:
+      - page: SLATE Acceptable Use Policy 
+        url: /docs/security-and-policies/acceptable-use.html 
