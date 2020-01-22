@@ -4,7 +4,7 @@ overview: A community of researchers from a science domain on a SLATE platform.
               
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

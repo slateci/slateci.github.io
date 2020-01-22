@@ -4,7 +4,7 @@ overview: The organizations that come together within the SLATE platform
 
 order: 20
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

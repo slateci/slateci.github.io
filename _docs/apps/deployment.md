@@ -4,7 +4,7 @@ overview: The second step is to prepare and test a Kubernates deployment
 
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

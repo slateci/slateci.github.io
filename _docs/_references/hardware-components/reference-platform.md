@@ -4,7 +4,7 @@ overview: The SLATE platform managed by the SLATE team which serves as a referen
               
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

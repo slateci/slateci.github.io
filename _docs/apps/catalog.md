@@ -4,7 +4,7 @@ overview: How to add the application to the catalog
 
 order: 100
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

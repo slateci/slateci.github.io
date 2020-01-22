@@ -4,7 +4,7 @@ overview: Docker container for StashCache
 
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

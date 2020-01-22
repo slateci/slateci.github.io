@@ -4,7 +4,7 @@ overview: The physical entities that come together within the SLATE platform
 
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

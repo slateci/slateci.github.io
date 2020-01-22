@@ -4,7 +4,7 @@ overview: Navigating Kubernetes
 
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

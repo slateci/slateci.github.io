@@ -4,7 +4,7 @@ overview: The person/group who manages access and configuration for a SLATE plat
               
 order: 20
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

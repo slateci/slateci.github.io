@@ -4,7 +4,7 @@ overview: How to claim persistent local storage on a cluster for your applicatio
 
 order: 20
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

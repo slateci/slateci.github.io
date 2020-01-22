@@ -4,7 +4,7 @@ overview: Explanation of StashCache
 
 order: 10
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

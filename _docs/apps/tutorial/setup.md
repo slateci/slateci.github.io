@@ -4,7 +4,7 @@ overview: Setting Up Your Environment
 
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 <h2> Using a Developer SLATE Bundle </h2>

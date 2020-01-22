@@ -5,7 +5,7 @@ overview: A database service that stores stateful information that is external
               
 order: 80
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

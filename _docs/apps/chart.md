@@ -4,7 +4,7 @@ overview: The third step is to prepare and test a Helm chart
 
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

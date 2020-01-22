@@ -4,7 +4,7 @@ overview: SLATE applications that live in the SLATE application catalog that can
               
 order: 140
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

@@ -1,3 +1,77 @@
+#side-menu {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  @media (min-width: 0) and (max-width: 991px) {
+	  visibility: hidden;
+	background: white;
+	width: 100%;
+	height: 100vh;
+	z-index: 2000;
+	li {
+		border-bottom: 1px solid lightgray;
+		padding: 3px;
+	}
+
+  }
+
+}
+
+.show-on-mobile-only {
+	visibility: visible;
+	@media (min-width: 991px) {
+		visibility: hidden;
+	}	
+}
+
+.nav-in-front {
+	z-index: 100;
+	width: 100%;	
+	position: fixed;
+}
+
+#side-menu-bar-mobile {
+	position: fixed;
+	top: 75px;
+	height: 40px;
+	background: #aaa;
+	width: 100%;
+	z-index: 1000;
+	padding: 5px;
+	font-size: 1.25em;
+}
+
+/* https://stackoverflow.com/questions/46102630/bootstrap-4-layout-with-one-width-fixed-column */
+/* ---- */
+.doc-menu-fixed-width {
+	flex: 0 0 250px;
+}
+
+.doc-menu-fixed-width-right {
+	flex: 0 0 10%;
+}
+/* ---- */
+
+.make-sticky {
+  position: fixed;
+  top: 100px;
+  left: 10px; 
+  @media (min-width: 0) and (max-width: 991px) {
+	position: absolute;
+  }
+}
+
+.freeze-menu {
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+.active-menu-link {
+  color: blue !important;
+}
+
 // Bootstrap override - looks like this is missing?
 .nav-tabs>li.active>a {
     margin-right: 2px;
@@ -7,6 +81,21 @@
     border-radius: 4px 4px 0 0;
     background: #4686CD;
     color: white;
+}
+
+.doc-nav-top-link {
+
+    color: black;
+	font-size: 1em;
+	line-height: 2;
+}
+
+.doc-nav-sub-link {
+	color: #333;
+	margin-left: 10px;
+	font-weight: 300;
+	font-size: .85em;
+	line-height: 2;
 }
 
 // Documentation Navigation Bar
@@ -163,3 +252,4 @@
 		}
 	}
 }
+

@@ -4,7 +4,7 @@ overview: The software elements that come together within the SLATE platform
 
 order: 80
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

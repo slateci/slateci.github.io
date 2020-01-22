@@ -4,7 +4,7 @@ overview: The person who manages local deployment of a SLATE edge cluster.
               
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

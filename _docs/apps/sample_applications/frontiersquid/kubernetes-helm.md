@@ -4,7 +4,7 @@ overview: Docker container and Helm Chart for OSG Frontier Squid
 
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

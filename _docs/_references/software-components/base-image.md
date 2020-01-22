@@ -4,7 +4,7 @@ overview: The base slate images and the mechanism to provision a SLATE edge clus
               
 order: 20
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

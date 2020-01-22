@@ -4,7 +4,7 @@ overview: Explanation of OSG Frontier Squid
 
 order: 10
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

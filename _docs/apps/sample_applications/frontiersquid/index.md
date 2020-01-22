@@ -4,7 +4,7 @@ overview: Overview of OSG Frontier Squid as an example application
 
 order: 80
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

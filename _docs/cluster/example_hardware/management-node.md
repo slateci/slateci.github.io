@@ -4,7 +4,7 @@ overview: Describes the SLATE management node hardware configuration
 
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

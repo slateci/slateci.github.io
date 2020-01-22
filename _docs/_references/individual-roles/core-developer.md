@@ -4,7 +4,7 @@ overview: A member of the SLATE Core Team.
               
 order: 100
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

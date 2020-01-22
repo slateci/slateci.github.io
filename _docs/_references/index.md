@@ -5,7 +5,7 @@ index: true
 
 order: 1000
 
-layout: docs
+layout: docs2020
 type: markdown
 
 ---

@@ -4,7 +4,7 @@ overview: A portable commandline tool that communicates with the SLATE API Serve
               
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

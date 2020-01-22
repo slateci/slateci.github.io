@@ -4,7 +4,7 @@ overview: SLATE Acceptable Use Policy
 
 order: 10  
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

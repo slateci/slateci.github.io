@@ -4,7 +4,7 @@ overview: Overview of StashCache as an example application
 
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

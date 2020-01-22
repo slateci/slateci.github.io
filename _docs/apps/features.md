@@ -4,7 +4,7 @@ overview: Optional fourth step to include extra features
 
 order: 80
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

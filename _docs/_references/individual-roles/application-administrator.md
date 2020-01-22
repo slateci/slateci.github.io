@@ -4,7 +4,7 @@ overview: The person who administers a SLATE application service on a SLATE plat
               
 order: 80
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

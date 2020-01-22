@@ -4,7 +4,7 @@ overview: Development tools available through SLATE
 
 order: 60
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

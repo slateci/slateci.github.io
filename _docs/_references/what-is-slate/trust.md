@@ -4,7 +4,7 @@ overview: What SLATE and its users can and can't do within a cluster
 
 order: 80
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

@@ -4,7 +4,7 @@ overview: How to mount a CVMFS repository as a persistent read-only filesystem f
 
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

@@ -4,7 +4,7 @@ overview: SLATE Application Developer's Tutorial
 
 order: 15
 
-layout: docs
+layout: docs2020
 type: markdown
 
 ---

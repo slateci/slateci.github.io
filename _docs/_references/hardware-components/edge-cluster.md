@@ -4,7 +4,7 @@ overview: A SLATE installation at a particular site in a single administrative d
               
 order: 20
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

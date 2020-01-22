@@ -4,7 +4,7 @@ overview: The first step is to prepare and test a Docker container
 
 order: 20
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

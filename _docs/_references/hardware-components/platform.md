@@ -4,7 +4,7 @@ overview: A collection of SLATE edge clusters managed as a single entity.
               
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

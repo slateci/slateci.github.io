@@ -4,7 +4,7 @@ overview: The organization that hosts a SLATE edge cluster.
               
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

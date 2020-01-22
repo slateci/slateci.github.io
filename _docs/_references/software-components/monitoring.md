@@ -4,7 +4,7 @@ overview: Cluster metrics and application logs forwarding to a central SLATE dat
               
 order: 40
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

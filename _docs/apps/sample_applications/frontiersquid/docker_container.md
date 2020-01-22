@@ -4,7 +4,7 @@ overview: Docker container for OSG Frontier Squid
 
 order: 20
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 {% include home.html %}

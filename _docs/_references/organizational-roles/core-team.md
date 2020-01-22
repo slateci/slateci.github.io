@@ -4,7 +4,7 @@ overview: The organization that develops SLATE.
               
 order: 80
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 

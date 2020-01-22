@@ -4,7 +4,7 @@ overview: A service for storing deployment recipes/patterns/templates and applic
               
 order: 120
 
-layout: docs
+layout: docs2020
 type: markdown
 ---
 
