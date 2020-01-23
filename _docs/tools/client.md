@@ -277,4 +277,4 @@ When running the SLATE client, if you receive an error similar to the following:
 
 `slate: Exception: Credentials file /Users/cnw4/.slate/token does not exist`
 
-You will need to visit the CLI access page on the [SLATE Dashboard](https://portal.slateci.io/cli) and run the script provided.
+You will need to visit the CLI access page on the [SLATE Console](https://portal.slateci.io/cli) and run the script provided.
