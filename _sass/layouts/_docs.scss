@@ -7,3 +7,17 @@
   min-width: 0;
   overflow: auto;
 }
+
+/* hacked together with multiple solutions
+ * catches the target of an ID target (href="#heading")
+ * and adds space above it to move it below the header. 
+ * the space is hidden.
+ * https://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header
+ */
+:target::before {
+  content: '';
+  display: block;
+  height:      100px;
+  margin-top: -100px;
+  visibility: hidden;
+}
