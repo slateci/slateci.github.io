@@ -48,23 +48,23 @@ toc:
         url: /docs/apps/development_tools/local-storage.html
       - page: CVMFS Repositories
         url: /docs/apps/development_tools/cvmfs.html
-  - title: Developers Tutorial
-    id: developers-tutorial
-    subfolderitems:
-      - page: Welcome to the SLATE Stack
-        url: /docs/apps/tutorial/intro.html
-      - page: Background Knowledge
-        url: /docs/apps/tutorial/basics.html
-      - page: Setup Your Environment
-        url: /docs/apps/tutorial/setup.html
-      - page: Kubernetes
-        url: /docs/apps/tutorial/kubernetes.html
-      - page: Helm
-        url: /docs/apps/tutorial/helm.html
-      - page: SLATE
-        url: /docs/apps/tutorial/slate.html
-      - page: Application Catalog
-        url: https://portal.slateci.io/applications
+#  - title: Developers Tutorial
+#    id: developers-tutorial
+#    subfolderitems:
+#      - page: Welcome to the SLATE Stack
+#        url: /docs/apps/tutorial/intro.html
+#      - page: Background Knowledge
+#        url: /docs/apps/tutorial/basics.html
+#      - page: Setup Your Environment
+#        url: /docs/apps/tutorial/setup.html
+#      - page: Kubernetes
+#        url: /docs/apps/tutorial/kubernetes.html
+#      - page: Helm
+#        url: /docs/apps/tutorial/helm.html
+#      - page: SLATE
+#        url: /docs/apps/tutorial/slate.html
+#      - page: Application Catalog
+#        url: https://portal.slateci.io/applications
   - title: Security and Policies
     id: security-and-policies
     url: /docs/security-and-policies/
