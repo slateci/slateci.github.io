@@ -28,6 +28,8 @@ toc:
     subfolderitems:
       - page: SLATE CLI
         url: /docs/tools/index.html
+      - page: MiniSLATE
+        url: /docs/tools/minislate.html
   - title: Application Development
     id: applications-development
     url: /docs/apps/
