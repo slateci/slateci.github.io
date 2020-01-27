@@ -8,7 +8,7 @@ layout: docs2020
 type: markdown
 ---
 
-Below is a parts manifest as quoted by Dell:
+Below is a parts manifest as quoted by Dell for a recent purchase by an ATLAS Tier2 site.  This is meant to be suggestive only. SLATE makes no specific hardware requirements. 
 
 ---
 
