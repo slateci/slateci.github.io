@@ -1,5 +1,5 @@
 ---
-title: MiniSLATE 
+title: MiniSLATE Commands
 overview: 
 layout: docs2020
 type: markdown
@@ -12,7 +12,7 @@ type: markdown
 <script src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js'></script>
 <script>
 
-    $.get("https://raw.githubusercontent.com/slateci/minislate/master/README.md", function(data) {
+    $.get("https://raw.githubusercontent.com/slateci/minislate/master/COMMANDS.md", function(data) {
             var converter = new showdown.Converter(),
             html = converter.makeHtml(data);
             console.log(html);
