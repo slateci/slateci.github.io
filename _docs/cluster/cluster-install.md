@@ -184,6 +184,13 @@ kubectl apply -f metallb-config.yaml
 
 To read more about MetalLB installation and configuration, visit their [installation instructions](https://metallb.universe.tf/installation/).
 
+#### MetalLB on OpenStack
+
+If your Kubernetes cluster is installed on one or more virtual machines run by OpenStack, there is one small, extra step required to enable MetalLB to route traffic properly. 
+
+See [the MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) for details; in short, OpenStack must be informed that traffic sent to IP addresses controlled by MetalLB has a valid reason to be going to the VMs which make up the Kubernetes cluster. 
+
+
 ### (optional) Allowing user pods to run on the Master
 If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Master. This will allow general workloads to run along side of the Kubernetes master node processes. In the case of a dedicated Master and dedicated Workers, please skip to the next section.
 
