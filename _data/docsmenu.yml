@@ -75,5 +75,7 @@ toc:
     id: security-and-policies
     url: /docs/security-and-policies/
     subfolderitems:
+      - page: Overview
+        url: /docs/security-and-policies/index.html
       - page: SLATE Acceptable Use Policy 
         url: /docs/security-and-policies/acceptable-use.html 

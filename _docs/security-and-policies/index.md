@@ -1,9 +1,8 @@
 ---
 title: Security and Policies
-overview: Security and Policies
+overview: Overview 
 index: true
-order: 100
-layout: docs 
+layout: docs2020 
 type: markdown
 ---
 

@@ -16,11 +16,11 @@ $(document).ready(function() {
     $.get("https://raw.githubusercontent.com/slateci/minislate/master/COMMANDS.md", function(data) {
             var converter = new showdown.Converter(),
             html = converter.makeHtml(data);
-            console.log(html);
             html = html.replace(/<h1.+<\/h1>/, "");
             $("#minislate-content").html(html);
             /* Rerun Prism syntax highlighting on the current page */
             Prism.highlightAll();
+            
     });
 });
 
