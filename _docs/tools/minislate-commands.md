@@ -14,7 +14,7 @@ type: markdown
 
 $(document).ready(function() {
     $.get("https://raw.githubusercontent.com/slateci/minislate/master/COMMANDS.md", function(data) {
-            var converter = new showdown.Converter(),
+            var converter = new showdown.Converter({ghCompatibleHeaderId: true}),
             html = converter.makeHtml(data);
             html = html.replace(/<h1.+<\/h1>/, "");
             $("#minislate-content").html(html);

@@ -13,7 +13,7 @@ type: markdown
 <script>
 $(document).ready(function() {
     $.get("https://raw.githubusercontent.com/slateci/minislate/master/README.md", function(data) {
-            var converter = new showdown.Converter(),
+            var converter = new showdown.Converter({ghCompatibleHeaderId: true}),
             html = converter.makeHtml(data);
             console.log(html);
             html = html.replace(/<h1.+<\/h1>/, "");
