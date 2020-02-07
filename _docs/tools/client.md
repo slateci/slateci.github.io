@@ -141,7 +141,7 @@ To run computing jobs efficiently on resources at the Hoople Campus, GRUMMBLES w
 
 osg-frontier-squid is such a proxy. You could just install it with default settings, but you'll probably want to customize them. Start by first fetching the default configuration into a local file:
 
-	$ slate app get-conf --dev osg-frontier-squid > grummbles-squid-hoople.yaml
+	$ slate app get-conf osg-frontier-squid > grummbles-squid-hoople.yaml
 	
 Opening that file with your preferred editor will show something like this:
 
@@ -180,7 +180,7 @@ Opening that file with your preferred editor will show something like this:
 	
 Next, edit the file to set properties like cache sizes and allowed ranges of IP addresses you'll allow to use the proxy. Save your changes to the file, and you're ready to deploy the application:
 
-	$ slate app install --dev osg-frontier-squid --group grummbles --cluster hoople --conf grummbles-squid-hoople.yaml
+	$ slate app install osg-frontier-squid --group grummbles --cluster hoople --conf grummbles-squid-hoople.yaml
 	Successfully installed application osg-frontier-squid as instance grummbles-osg-frontier-squid-global with ID instance_wVsnbXs5cUw
 	
 This shows your application instance has been launched on the Kubernetes cluster. You can double check by listing running instances:
