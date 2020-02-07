@@ -9,7 +9,7 @@ type: markdown
 
 </div>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js'></script>
+<script src='{{home}}/js/showdown.min.js'></script>
 <script>
 $(document).ready(function() {
     $.get("https://raw.githubusercontent.com/slateci/minislate/master/README.md", function(data) {
