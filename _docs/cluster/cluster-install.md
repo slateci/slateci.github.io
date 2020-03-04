@@ -40,7 +40,7 @@ This should list the various clusters which are already participating in the fed
 
 ## Operating System Requirements
 
-SLATE currently requires [CentOS 7](http://isoredirect.centos.org/centos/7/isos/x86_64/) as the base operating system for new clusters. In order to reliably run Kubernetes and connect to the SLATE federation, a few changes are needed to the base CentOS install. The following prerequisite steps will need to be applied to all SLATE nodes in your cluster. 
+In order to reliably run Kubernetes and connect to the SLATE federation, a few changes are needed to the base CentOS install. The following prerequisite steps will need to be applied to all SLATE nodes in your cluster. 
 
 ### Disable SELinux
 First, you will need to disable SELinux as this generally conflicts with Kubernetes:
