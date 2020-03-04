@@ -29,7 +29,7 @@ Next, grab a copy of the Singularity CRI source code and compile it. This step w
 
 	git clone https://github.com/sylabs/singularity-cri.git
 	cd singularity-cri
-	git checkout tags/v1.0.0-beta.6 -b v1.0.0-beta.6
+	git checkout tags/v1.0.0-beta.7 -b v1.0.0-beta.7
 	make
 	make install
 
@@ -79,7 +79,7 @@ The kubernetes packages can be installed with `yum` after configuring the approp
 	exclude=kube*
 	EOF
 
-	yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+	yum install -y kubelet-1.16.7 kubeadm-1.16.7 kubectl-1.16.7 --disableexcludes=kubernetes
 	systemctl enable kubelet
 
 Next, it's necessary to tell the kubernetes kubelet that you want it to use the Singularity CRI:
@@ -112,6 +112,11 @@ You can then set the necessary network settings for Kubernetes:
 Finally, it is time to initialize the Kubernetes cluster itself. It's important to pick the correct CIDR range for the networking plugin you plan to use; here we use the range favored by Calico:
 
 	kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///var/run/singularity.sock
+	
+If you are running firewalld, it will need to be configured to open the ports used by Kubernetes:
+
+	firewall-cmd --permanent --add-port=6443/tcp
+	firewall-cmd --permanent --add-port=10250/tcp
 
 At this point there are only a few more steps to being able to use the cluster. First, tell kubectl where to find your administrator config so that you can use it to complete the set-up:
 
@@ -121,7 +126,7 @@ At this point you should be able to run `kubectl get nodes` to see that you have
 
 	kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 
-Your node should now enter the `Ready` state, but it will only accept pods concerned with running Kubernetes itself. To use the cluster more generally with just this single node, you can remove the taint which keeps away non-systme pods:
+Your node should now enter the `Ready` state, but it will only accept pods concerned with running Kubernetes itself. To use the cluster more generally with just this single node, you can remove the taint which keeps away non-system pods:
 
 	kubectl taint nodes --all node-role.kubernetes.io/master-
 
@@ -143,3 +148,5 @@ You can either use `curl` to request the resulting address, or, if your machine 
 When you are done with your nginx, you can shut it down with `kubectl delete pod hello; kubectl delete service hello`. 
 
 An interesting point to note here is that the [nginx image](https://hub.docker.com/_/nginx) used here is a *Docker* image, not a Singularity image. Singularity still ran it all the same, handling the necessary conversion completely transparently. 
+
+Updated 2020-03-04 to use the latest beta version of the Singularity CRI, and a slightly old, but known good version of Kubernetes. 
