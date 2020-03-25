@@ -14,7 +14,7 @@ To get a feel for how launching and running a service on the SLATE platform work
 
 ## Create a SLATE account
 
-In order to use SLATE, you need to register an account. Account creation is handled through the SLATE dashboard, which also supports most SLATE workflows from managing groups and clusters to installing and checking the status of edge services. 
+In order to use SLATE, you need to register an account. Account creation is handled through the SLATE console, which also supports most SLATE functions such as managing groups, clusters and services. 
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
@@ -28,7 +28,7 @@ In order to use SLATE, you need to register an account. Account creation is hand
 
 ## Use the SLATE Client
 
-In addition to the dashboard, users may use SLATE Client, a commandline tool for MacOS and Linux. The SLATE Client allows users to configure and deploy applications at a number of SLATE production clusters with just a handful of commands. An installation and usage guide can be found below:
+In addition to the console, users may use SLATE Client, a commandline tool for MacOS and Linux. The SLATE Client allows users to configure and deploy applications at a number of SLATE production clusters with just a handful of commands. An installation and usage guide can be found below:
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
@@ -40,9 +40,9 @@ In addition to the dashboard, users may use SLATE Client, a commandline tool for
     </div>
 </div>
 
-## Add your site to SLATE
+## Add your Kubernetes cluster to SLATE
 
-If your site is interested in joining the SLATE federation as a Resource Provider, see the [cluster installation docs](https://slateci.io/docs/cluster/) for guidance on installing SLATE on a Kubernetes cluster (and installing the Kubernetes cluster as well, if necessary). 
+See the [cluster installation docs](https://slateci.io/docs/cluster/) for guidance on installing SLATE on a Kubernetes cluster (and installing the Kubernetes cluster as well, if necessary). 
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
