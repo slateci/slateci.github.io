@@ -53,8 +53,7 @@ can be configured in the following format:
 | /var/scratch  | Temp dir (VOLUME)  | Temporary storage space that can be deleted when done. | -v /tmp/scratch:/var/scratch |
 
 Each image should be published through [Docker HUB](https://hub.docker.com/).
-Make sure you have an account on DockerHub and you are a member of the slateci
-organization on DockerHub. On DockerHub, logged in as the organization, create
+Make sure you have an account on DockerHub. On DockerHub, logged in as the organization, create
 a repository linked to the github repository.
 The name of the repository on DockerHub should match “slateci/appname” where
 appname matches the github repository “container-appname”.
