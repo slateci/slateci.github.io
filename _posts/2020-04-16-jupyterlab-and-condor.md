@@ -139,7 +139,7 @@ Inspect the instance's info to see the allocated URL and address for SSH service
 	your-group-jupyter-notebook 10.96.150.245 <IP-address>  8888:30712/TCP http://blogpostnotebook.slate-dev.slateci.net/
 	your-group-jupyter-notebook 10.96.150.245 <IP-address>  22:30033/TCP   <ip-address>:<port-number>
 
-In the above example, the JupyterLab application can be accessed at *http://blogpostnotebook.slate-dev.slateci.net/* using the token you generated above. The second line has the SSH access info under URL, so you can use it with the ssh command like this:
+In the above example, the JupyterLab application can be accessed at this address *blogpostnotebook.slate-dev.slateci.net using the token you generated above. The second line has the SSH access info under URL, so you can use it with the ssh command like this:
 
 	ssh -p <port-number> <username>@<ip-address>
 where <username> is what you chose above for the NB_USER configuration variable 	
