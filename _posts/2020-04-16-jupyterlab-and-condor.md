@@ -15,7 +15,7 @@ Jupyter has been a great tool for data analysis, data visualisation, machine lea
 <!--end_excerpt-->
 
 
-First, let’s go through the installation of an HTCondor Pool. Later, we'll show how you can deploy an instance of JupyterLab on the SLATE platform and submit condor jobs directly from there. The following steps and instructions assume that you have already signed up to use SLATE and installed the SLATE client on your environment. If you don't have that ready, you can do so by following the instructions on [The SLATE Homepage] (https://portal.slateci.io/slate_console)
+First, let’s go through the installation of an HTCondor Pool. Later, we'll show how you can deploy an instance of JupyterLab on the SLATE platform and submit condor jobs directly from there. The following steps and instructions assume that you have already signed up to use SLATE and installed the SLATE client on your environment. If you don't have that ready, you can do so by following the instructions on [The SLATE Homepage](https://portal.slateci.io/slate_console)
 
 ## Deploy HTCondor Pool
 
@@ -23,6 +23,7 @@ First, let’s go through the installation of an HTCondor Pool. Later, we'll sho
 We will start by setting up an HTCondor pool. First, get the configuration template of the central manager application:
 
 	$ slate app get-conf condor-manager --dev > manager.conf
+
 Edit the file by adding an instance name of your choice:
 
 	Instance: 'blogpostdemo'	
@@ -33,6 +34,7 @@ Then install the central manager:
 	Successfully installed application condor-manager as instance your-group-condor-manager with ID instance_1sGae98se
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again. 
+
 Once the application is successfully installed, SLATE will give you an instance ID, in our example *instance_1sGae98se*, which you will need in the next steps. Now we need to learn the address, and tokens for the deployed application instance. Inspect the instance's info:
 
 	$ slate instance info instance_1sGae98se
@@ -43,9 +45,10 @@ Once the application is successfully installed, SLATE will give you an instance 
 	Name                        Cluster IP   External IP   Ports          URL                
 	condor-manager-blogpostdemo 10.96.78.245 155.12.34.140 9618:32384/TCP 155.12.34.140:32384
 	...
+
 Note the external IP address and port number, in this case *155.12.34.140* and *32384*.
 
-Now, check the application's log to learn the tokens issued for the other condor components.
+Now, check the application's log to learn the tokens issued for the other condor components:
 
 	$ slate instance logs instance_1sGae98se
 	Fetching instance logs...
@@ -87,6 +90,7 @@ Edit the application's configuration to use a name of your choice as the **Insta
 		CollectorHost: 155.12.34.140
 		CollectorPort: 32384
 		AuthTokenSecret: worker-auth-token
+
 You can also customize the number of instances, the number of CPU cores requested for each instance, RAM requested for each instance, etc. Once you're done customizing the worker application, you can install it:
 
 	$ slate app install condor-worker --group <some group> --cluster <a cluster> --conf worker.conf
@@ -96,6 +100,7 @@ You can also customize the number of instances, the number of CPU cores requeste
 Download the base configurations:
 
 	$ slate app get-conf --dev jupyter-notebook > jupyter.conf
+
 Generate a random token:
 
 	$ openssl rand -base64 32
@@ -107,6 +112,7 @@ Edit the application configurations so that it has an **Instance** name and **NB
 	Jupyter:
 	  NB_USER: 'slate'
 	  Token: 'mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg='
+
 Choose a subdomain for the ingress(This will be used in the application's URL):
 
 		Ingress:
@@ -129,7 +135,9 @@ The last change is for the SSH service. Enable the service and add the SSH publi
 You're now ready to install the JupyterLab application on SLATE:
 
 	$ slate app install jupyter-notebook --dev --group <your-group> --cluster <a-cluster> --conf jupyter.conf
+
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again. 	
+
 Inspect the instance's info to see the allocated URL and address for SSH service:
 
 	$ slate instance info <instance-ID>
@@ -141,12 +149,14 @@ Inspect the instance's info to see the allocated URL and address for SSH service
 In the above example, the JupyterLab application can be accessed at this address *blogpostnotebook.slate-dev.slateci.net* using the token you generated above. The second line has the SSH access info under URL, so you can use it with the ssh command like this:
 
 	ssh -p <port-number> <username>@<ip-address>
+
 where &lt;username&gt; is what you chose above for the NB_USER configuration variable. 
 
 ## Testing	
 To test your deployed applications, log into your JupyterLab application\instance and submit a test job to the HTCondor pool from the terminal. First, create a file 'job.sub':
 
 	nano job.sub
+
 Copy the below job into it and save the changes:
 
 	Executable   = /bin/echo
