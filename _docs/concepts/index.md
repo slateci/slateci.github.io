@@ -22,12 +22,13 @@ A person who operates one or more service applications on SLATE is considered an
 
 ## Application Developer
 
-For SLATE purposes, this is a person who packages and maintains an application intended for use on SLATE. This does not require having written the application in the first place. New applications and changes made by an Application Developer are reviewed and approved by a Platform Application Reviewer. 
+For SLATE purposes, this is a person who packages and maintains an application intended for use on SLATE. This does not require having written the application in the first place. New applications and changes made by an Application Developer are reviewed and approved by an Application Reviewer. 
+
+## Application Reviewer
+
+Application Reviewers are responsible for examining additions and changes to the catalog of applications available to be run by SLATE to ensure that they work and have appropriate security considerations. At this time application review is performed by the SLATE developers. 
 
 ## Platform Administrator
 
 SLATE Platform Administrators operate a central SLATE API server and web console. For the reference platform this is done by the SLATE team. They are responsible for ensuring that these central services work correctly, and mediate among the concerns of other participants in the platform. 
 
-## Platform Application Reviewer
-
-Platform Application Reviewers are responsible for examining additions and changes to the catalog of applications available to be run by SLATE to ensure that they work and have appropriate security considerations. At this time application review is performed by the SLATE developers. 
