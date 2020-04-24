@@ -163,7 +163,7 @@ Then, submit the job:
 	Submitting job(s).
 	1 job(s) submitted to cluster 1.
 
-A successful run will generate the file *job.out* with the "Hello World" message in it.
+A successful run will create in your local directory the file *job.out* with the "Hello World" message in it.
 
 ## Uninstall 
 
