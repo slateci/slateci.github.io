@@ -73,8 +73,7 @@ Then, create new SLATE secrets using the two files from above:
 	Successfully created secret submit-auth-token with ID secret_dHiGnjAgR2A
 	$ slate secret create worker-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=worker-token
 	Successfully created secret worker-auth-token with ID secret_Hhjy43uyNsP
-The names of the two SLATE secrets being created above are *submit-auth-token* and *worker-auth-token*.
-
+<The names of the two SLATE secrets being created above are *submit-auth-token* and *worker-auth-token*.>
 You're now ready to set up a worker component. Download the base configurations for the condor-worker application:
 
 	$ slate app get-conf condor-worker > worker.conf
@@ -142,7 +141,7 @@ Inspect the instance's info to see the allocated URL and address for SSH service
 In the above example, the JupyterLab application can be accessed at this address *blogpostnotebook.slate-dev.slateci.net* using the token you generated above. The second line has the SSH access info under URL, so you can use it with the ssh command like this:
 
 	ssh -p <port-number> <username>@<ip-address>
-where <username> is what you chose above for the NB_USER configuration variable 	
+where &lt;username&gt; is what you chose above for the NB_USER configuration variable 	
 Finally, log into your JupyterLab application\instance and submit a test job to the HTCondor pool from the terminal. Create a file job.sub:
 
 	nano job.sub
