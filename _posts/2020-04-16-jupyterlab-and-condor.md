@@ -15,7 +15,7 @@ Jupyter has been a great tool for data analysis, data visualisation, machine lea
 <!--end_excerpt-->
 
 
-First, let’s go through the installation of the HTCondor Pool. Later, we'll show how you can deploy an instance of JupyterLab on the SLATE platform and submit condor jobs directly from there. The following steps and instructions assume that you have already signed up to use SLATE and installed the SLATE client on your environment. If you don't have that ready, you can do so by following the instructions on [The SLATE Homepage] (https://portal.slateci.io/slate_console)
+First, let’s go through the installation of an HTCondor Pool. Later, we'll show how you can deploy an instance of JupyterLab on the SLATE platform and submit condor jobs directly from there. The following steps and instructions assume that you have already signed up to use SLATE and installed the SLATE client on your environment. If you don't have that ready, you can do so by following the instructions on [The SLATE Homepage] (https://portal.slateci.io/slate_console)
 
 ## Deploy HTCondor Pool
 
@@ -73,8 +73,8 @@ Then, create new SLATE secrets using the two files from above:
 	Successfully created secret submit-auth-token with ID secret_dHiGnjAgR2A
 	$ slate secret create worker-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=worker-token
 	Successfully created secret worker-auth-token with ID secret_Hhjy43uyNsP
-<The names of the two SLATE secrets being created above are *submit-auth-token* and *worker-auth-token*.>
-You're now ready to set up a worker component. Download the base configurations for the condor-worker application:
+
+You're now ready to set up a worker node. Download the base configurations for the condor-worker application:
 
 	$ slate app get-conf condor-worker > worker.conf
 	
@@ -110,7 +110,7 @@ Edit the application configurations so that it has an **Instance** name and **NB
 Choose a subdomain for the ingress(This will be used in the application's URL):
 
 		Ingress:
-	     Subdomain: 'blogpostnotebook'
+			Subdomain: 'blogpostnotebook'
 
 Update the **CondorConfig** to be enabled, and use the the manager's external IP address as the **CollectorHost**, the manager's external port as the **CollectorPort** and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
 
@@ -141,8 +141,10 @@ Inspect the instance's info to see the allocated URL and address for SSH service
 In the above example, the JupyterLab application can be accessed at this address *blogpostnotebook.slate-dev.slateci.net* using the token you generated above. The second line has the SSH access info under URL, so you can use it with the ssh command like this:
 
 	ssh -p <port-number> <username>@<ip-address>
-where &lt;username&gt; is what you chose above for the NB_USER configuration variable 	
-Finally, log into your JupyterLab application\instance and submit a test job to the HTCondor pool from the terminal. Create a file job.sub:
+where &lt;username&gt; is what you chose above for the NB_USER configuration variable. 
+
+## Testing	
+To test your deployed applications, log into your JupyterLab application\instance and submit a test job to the HTCondor pool from the terminal. First, create a file 'job.sub':
 
 	nano job.sub
 Copy the below job into it and save the changes:
@@ -161,7 +163,7 @@ Then, submit the job:
 	Submitting job(s).
 	1 job(s) submitted to cluster 1.
 
-A successful run will generate the file job.out with the "Hello World" message in it.
+A successful run will generate the file *job.out* with the "Hello World" message in it.
 
 ## Uninstall 
 
