@@ -11,7 +11,7 @@ tag: draft
 ---
 
 
-Jupyter has been a great tool for data analysis, data visualisation, machine learning, training and much more. It allows users to run their processes interactively through a user-friendly web interface that's easily accessible, and also be able to share and reproduce their experiments for greater productivity. Many of those users usually need to access high-performance computing clusters and resources to run some CPU-intensive algorithms on some data sets that cannot be run locally due to the limited computing resources. An example for such clusters is HTCondor which is a high-throughput computing framework used for running distributed computationally-intensive tasks in parallel. In this blog post, we show how you can use SLATE platform to deploy a JupyterLab application that can communicate with an external HTCondor pool. The deployed application allows its users to import their code (e.g. from GitHub), run it on JupyterLab, and submit CPU-intensive jobs to an HTCondor pool for processing.  
+Jupyter has been a great tool for data analysis, data visualization, machine learning, training and much more. It allows users to run their processes interactively through a user-friendly web interface that's easily accessible, and also be able to share and reproduce their experiments for greater productivity. Many of those users usually need to access high-performance computing clusters and resources to run some CPU-intensive algorithms on some data sets that cannot be run locally due to the limited computing resources. An example for such clusters is HTCondor which is a high-throughput computing framework used for running distributed computationally-intensive tasks in parallel. In this blog post, we show how you can use SLATE platform to deploy a JupyterLab application that can communicate with an external HTCondor pool. The deployed application allows its users to import their code (e.g. from GitHub), run it on JupyterLab, and submit CPU-intensive jobs to an HTCondor pool for processing.  
 <!--end_excerpt-->
 
 
@@ -68,7 +68,7 @@ Now, check the application's log to learn the tokens issued for the other condor
 	**** Condor Worker Token ****
 	eyJhbGciOiJIUzI1NiIsImtpZCI6IlBPT0wifQ.eyJpYXQiOjE1ODc1MjQwNTQsImlzcyI6ImNvbmRvci1tYW5hZ2VyLWJsb2dwb3N0ZGVtby02NjlmN2I4NTgtdGRrYm4iLCJzdWIiOiJ3b3JrZXJAcG9vbCJ9.jzWdHy3NRwfedViPSCUR1jfwkucFzanwL9IiX2ypPL8
 
-Copy the one line token after **** Condor Submit Token ****, paste it into a file called &lt;submit-token&gt; and add one trailing new line character (\n) to it. Now we need to repeat the same process for the other token. Copy the one line token after **** Condor Worker Token ****, paste it into a file called &lt;worker-token&gt; and add one trailing new line character (\n) to it.
+Copy the one-line token after **** Condor Submit Token ****, paste it into a file called &lt;submit-token&gt; and add one trailing new line character (\n) to it. Now we need to repeat the same process for the other token. Copy the one-line token after **** Condor Worker Token ****, paste it into a file called &lt;worker-token&gt; and add one trailing new line character (\n) to it.
 
 Then, create new SLATE secrets using the two files from above:
 	
@@ -113,7 +113,7 @@ Edit the application configurations so that it has an **Instance** name and **NB
 	  NB_USER: 'slate'
 	  Token: 'mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg='
 
-Choose a subdomain for the ingress(This will be used in the application's URL):
+Choose a subdomain for the ingress (This will be used in the application's URL):
 
 		Ingress:
 			Subdomain: 'blogpostnotebook'
@@ -183,4 +183,4 @@ If you need to uninstall an application you previously deployed on SLATE, run th
 
 ## Summary
 
-In summary, we were able to successfully deploy a JupyterLab application on SLATE and use the application as a submit enviroment to an HTCondor pool. The JupyterLab setup can be easily configured to work with any large HTCondor pool. 
+In summary, we were able to successfully deploy a JupyterLab application on SLATE and use the application as a submit environment to an HTCondor pool. The JupyterLab setup can be easily configured to work with any large HTCondor pool. 
