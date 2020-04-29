@@ -30,7 +30,7 @@ Edit the file by adding an instance name of your choice:
 
 Then install the central manager:
 
-	$ slate app install --dev condor-manager --group <your-group> --cluster <a-cluster> --conf manager.yaml 
+	$ slate app install --dev condor-manager --group <your-group> --cluster <a-cluster> --conf manager.conf 
 	Successfully installed application condor-manager as instance your-group-condor-manager with ID instance_1sGae98se
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again. 
@@ -39,14 +39,38 @@ Once the application is successfully installed, SLATE will give you an instance 
 
 	$ slate instance info instance_1sGae98se
 	Name                        Started                         Group         Cluster     ID                  
-	condor-manager-blogpostdemo 2020-Apr-22 02:53:53.464299 UTC <your-group>  <a-cluster> instance_1sGae98se
+	condor-manager-blogpostdemo 2020-Apr-27 20:25:14.445249 UTC <your-group>  <a-cluster> instance_1sGae98se
 
 	Services:
 	Name                        Cluster IP   External IP   Ports          URL                
 	condor-manager-blogpostdemo 10.96.78.245 155.12.34.140 9618:32384/TCP 155.12.34.140:32384
 	...
+	Pods:
+		condor-manager-blogpostdemo-768c87f4d4-z66k7
+    		Status: Running
+    		Created: 2020-04-27T20:25:26Z
+    		Host: ...
+    		Host IP: ...
+    		Conditions: [2020-04-27T20:25:26Z] Initialized
+                [2020-04-27T20:25:26Z] PodScheduled
+                [2020-04-27T20:25:28Z] Ready
+                [2020-04-27T20:25:28Z] ContainersReady
+    		Events: 
+    			Scheduled: Successfully assigned slate-group-slate-dev/condor-manager...
+    			...
+             [2020-04-27T20:25:27Z] Created: Created container condor-manager
+             [2020-04-27T20:25:27Z] Started: Started container condor-manager
+    Containers:
+      condor-manager
+        State: running since 2020-04-27T20:25:27Z
+        Ready: true
+        Restarts: 0
+        Image: slateci/condor-manager:latest
 
-Note the external IP address and port number, in this case *155.12.34.140* and *32384*.
+	Configuration:
+		...
+
+Note the external IP address and port number, in this case *155.12.34.140* and *32384*. You should confirm that the above output shows that the `condor-manager` container is running and ready before proceeding to the next steps.
 
 Now, check the application's log to learn the tokens issued for the other condor components:
 
@@ -106,7 +130,7 @@ Generate a random token:
 	$ openssl rand -base64 32
 	mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg=
 
-Edit the application configurations so that it has an **Instance** name and **NB_USER** of your choice, and a **Token** set to the token you just generated in the previous step. In our example, those values are:
+Edit the Jupyter application configuration file, in this case `jupyter.conf`, so that it has an **Instance** name and **NB_USER** of your choice, and a **Token** set to the token you just generated in the previous step. In our example, those values are:
 
 	Instance: 'blogpostjupyter' 	
 	Jupyter:
@@ -175,6 +199,37 @@ Then, submit the job:
 
 A successful run will create in your local directory the file *job.out* with the "Hello World" message in it.
 
+You can also use HTCondor Python Bindings instead of `condor_submit` to communicate with an HTCondor cluster. To do that, let's use a simple job example from the [HTCondor Python Bindings Tutorial](https://htcondor.readthedocs.io/en/v8_9_5/apis/python-bindings/index.html "HTCondor Python Bindings") for our testing purpose.
+
+Open a new Python notebook, and import the below two modules:
+	
+	import htcondor
+	import classad
+	
+Create a `Submit` object for your job:
+
+	hostname_job = htcondor.Submit({
+    "executable": "/bin/hostname",  # The program to run on the execute node
+    "output": "hostname.out",       # Anything the job prints to standard output will end up in this file
+    "error": "hostname.err",        # Anything the job prints to standard error will end up in this file
+    "log": "hostname.log",          # This file will contain a record of what happened to the job
+    "request_cpus": "1",            # How many CPU cores we want
+    "request_memory": "128MB",      # How much memory we want
+    "request_disk": "128MB",        # How much disk space we want
+	})
+
+	print(hostname_job)
+	
+Then, create a transaction and add your job to the transaction's queue:
+
+	schedd = htcondor.Schedd()          # get the Python representation of the scheduler
+	with schedd.transaction() as txn:   # open a transaction, represented by `txn`
+		cluster_id = hostname_job.queue(txn)     # queues one job in the current transaction; 	returns job's ClusterID
+		
+	print(cluster_id)	
+
+Once the job is run successfully, you should find the file `hostname.out` containing the worker node's hostname.
+ 
 ## Uninstall 
 
 If you need to uninstall an application you previously deployed on SLATE, run this command:
