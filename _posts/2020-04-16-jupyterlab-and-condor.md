@@ -137,7 +137,7 @@ Edit the Jupyter application configuration file, in this case `jupyter.conf`, so
 	  NB_USER: 'slate'
 	  Token: 'mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg='
 
-Choose a subdomain for the ingress(This will be used in the application's URL):
+Choose a subdomain for the ingress (This will be used in the application's URL):
 
 		Ingress:
 			Subdomain: 'blogpostnotebook'
