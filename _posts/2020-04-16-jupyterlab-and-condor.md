@@ -56,10 +56,10 @@ Once the application is successfully installed, SLATE will give you an instance 
                 [2020-04-27T20:25:28Z] Ready
                 [2020-04-27T20:25:28Z] ContainersReady
     		Events: 
-    			Scheduled: Successfully assigned slate-group-slate-dev/condor-manager...
-    			...
-             [2020-04-27T20:25:27Z] Created: Created container condor-manager
-             [2020-04-27T20:25:27Z] Started: Started container condor-manager
+				Scheduled: Successfully assigned slate-group-slate-dev/condor-manager...
+				...
+				[2020-04-27T20:25:27Z] Created: Created container condor-manager
+				[2020-04-27T20:25:27Z] Started: Started container condor-manager
     Containers:
       condor-manager
         State: running since 2020-04-27T20:25:27Z
