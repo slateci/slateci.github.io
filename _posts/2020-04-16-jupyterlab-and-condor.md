@@ -228,7 +228,7 @@ Then, create a transaction and add your job to the transaction's queue:
 		
 	print(cluster_id)	
 
-Once the job is run successfully, you should find the file `hostname.out` containing the worker node's hostname.
+Once the job is run successfully, you should find the file `hostname.out` in your local work directory containing the worker node's hostname.
  
 ## Uninstall 
 
