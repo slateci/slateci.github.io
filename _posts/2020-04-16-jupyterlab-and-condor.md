@@ -70,7 +70,7 @@ Once the application is successfully installed, SLATE will give you an instance 
 	Configuration:
 		...
 
-Note the external IP address and port number, in this case *155.12.34.140* and *32384*. You should confirm that the above output shows that the `condor-manager` is running and ready before proceeding to the next steps.
+Note the external IP address and port number, in this case *155.12.34.140* and *32384*. You should confirm that the above output shows that the `condor-manager` container is running and ready before proceeding to the next steps.
 
 Now, check the application's log to learn the tokens issued for the other condor components:
 
