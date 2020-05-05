@@ -1,8 +1,8 @@
 ---
-title: How to Post a Blog to the SLATE Website
-overview: How to Post a Blog to the SLATE Website
-published: true
-permalink: blog/how-to-post-a-blog.html
+title: Network Policy
+overview: Network Policy
+published: false
+permalink: blog/network-policy.html
 attribution: The SLATE Team
 layout: post
 type: markdown
