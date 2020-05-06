@@ -28,7 +28,7 @@ Edit the file by adding an instance name of your choice:
 
 	Instance: 'blogpostdemo'	
 
-Then install the central manager:
+Then install the central manager using the below SLATE command <small>(Please change &lt;your-group&gt; in the command to your SLATE group name, and &lt;a-cluster&gt; to the target cluster name that you want to use for your deployment)</small>:
 
 	$ slate app install --dev condor-manager --group <your-group> --cluster <a-cluster> --conf manager.conf 
 	Successfully installed application condor-manager as instance your-group-condor-manager with ID instance_1sGae98se
