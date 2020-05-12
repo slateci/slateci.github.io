@@ -16,7 +16,8 @@ The SLATE team and collaborators continue to target security as a major focus.  
 A Kubernetes NetworkPolicy is a special object which allows an administrator to provide constraints to a service or set of services deployed in a pod. The main use case for these in SLATE is to allow the creation of a white list of CIDRs that can access or be accessed by this application. Detailed below are instructions on how to implement such a thing in your application. Full details about network policies can be found here [kubernetes documentation page](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
 ## Building a Network Policy
-To explain how to build a Network Policy for a SLATE application, we use the nginx application from the SLATE catalog as an example.  The first changes are to the NGINX Values file, where the following is added somewhere to `values.yaml`. ```NetworkPolicy:
+To explain how to build a Network Policy for a SLATE application, we use the nginx application from the SLATE catalog as an example.  The first changes are to the NGINX Values file, where the following is added somewhere to `values.yaml`. 
+```NetworkPolicy:
   Enabled: false
   AllowedCIDRs: 
     - 0.0.0.0/0```
