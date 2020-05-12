@@ -17,10 +17,12 @@ A Kubernetes NetworkPolicy is a special object which allows an administrator to 
 
 ## Building a Network Policy
 To explain how to build a Network Policy for a SLATE application, we use the nginx application from the SLATE catalog as an example.  The first changes are to the NGINX Values file, where the following is added somewhere to `values.yaml`. 
-```NetworkPolicy:
+```
+NetworkPolicy:
   Enabled: false
   AllowedCIDRs: 
-    - 0.0.0.0/0```
+    - 0.0.0.0/0
+   ```
 The first setting, Enabled, defines wether or not a network policy is actually made. By default this is false and no policy is created. The second setting is the list of CIDRs whitelisted by a policy if one is actually created. The default CIDR of `0.0.0.0/0` creates a policy that allows all traffic, so as to avoid any default settings that break the application.
     
 The other piece of building a Network Policy for a SLATE application is the Network Policy template. This entire template is wrapped in the following go templating if statement: `{{ if .Values.NetworkPolicy.Enabled }}` This is what makes the enabled setting work the way it does. If enabled is set to false, the rest of this template will not be built. Next comes the metadata for the policy. This will largely be based on your application metadata, but an example of the basic structure can be found below. ```apiVersion: networking.k8s.io/v1
