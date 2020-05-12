@@ -9,7 +9,7 @@ layout: post
 type: markdown
 ---
 
-A major priority of SLATE is ensuring that our clusters and applications are secure. In order to better secure the applications there is an ongoing effort to ensure that they all have built in Network Policies. This allows a user or site administrator to more strictly limit who exactly 
+A major priority of SLATE is ensuring that our clusters and applications are secure. In order to better secure the applications there is an ongoing effort to ensure that they all have built in Network Policies. This allows a user or site administrator to more strictly limit who exactly has access to a given application.
 <!--end_excerpt-->
 
 ## Network Policy Definition
