@@ -9,9 +9,9 @@ layout: post
 type: markdown
 ---
 
-By default, Kubernetes does not restrict network access to applications upon deployment. Applications provisioned with Helm will listen to all configured ports from any remote site. But what if your service requires restrictions?
-
 The SLATE team and collaborators continue to target security as a major focus.  The SLATE team is configuring all the offered  applications in the SLATE stable catalog with Kubernetes Network Policy hooks in the Helm deployment charts.  Though initially open, these hooks should allow an administrator to quickly add different ranges for restricting their applications.
+
+By default, Kubernetes does not restrict network access to applications upon deployment. Applications provisioned with Helm will listen to all configured ports from any remote site. But what if your service requires restrictions?
 <!--end_excerpt-->
 
 ## Network Policy Definition
