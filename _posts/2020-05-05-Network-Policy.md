@@ -69,12 +69,13 @@ The go templating `range` piece can be thought of as a for loop over the list cr
 ## Using a Network Policy
 To activate the network policy of a given application some alterations to that app’s configuration must be made. To do this you will need to go onto the SLATE cluster you want to install the app on and type the following 
 ```slate app <app-name> get-conf > conf.yaml```
-This will give you the default configuration file for this application. Somewhere in that file you will find the following default settings ```
+This will give you the default configuration file for this application. Somewhere in that file you will find the following default settings       
+```
 NetworkPolicy:
   Enabled: false
   AllowedCIDRs: 
     - 0.0.0.0/0
-    ```
+```
 Set the `Enabled` option to `true` to make the application make a Network policy upon deployment. Than replace the `0.0.0.0/0` CIDR with the one you want to whitelist. If you want to add more than one CIDR you can, based on the following example.
  ```
   NetworkPolicy:
