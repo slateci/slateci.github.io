@@ -13,6 +13,7 @@ type: markdown
 By default, Kubernetes does not restrict applications upon deployment.  Applications provisioned correctly with Helm should deploy without issue and listen to all configured ports from any remote site.  But what if your service requires restrictions?
 
 The SLATE team and collaborators continue to target security as a major focus.  The SLATE team is configuring all the offered  applications in the SLATE stable catalog with Kubernetes Network Policy hooks in the Helm deployment charts.  Though initially open, these hooks should allow an administrator to quickly add different ranges for restricting their applications.
+<!--end_excerpt-->
 
 ## Network Policy Definition
 A Kubernetes NetworkPolicy is a special object which allows an administrator to provide constraints to a service or set of services deployed in a pod. The main recommended use of this feature is to add a way to limit what IP ranges and sites can access the instance of a given application. Detailed below are instructions on how to implement such a thing in your application. Full details about network policies can be found in this [kubernetes documentation page](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
