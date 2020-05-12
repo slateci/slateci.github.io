@@ -9,7 +9,7 @@ layout: post
 type: markdown
 ---
 
-The SLATE team and collaborators continue to target security as a major focus.  The SLATE team is configuring all the offered  applications in the SLATE stable catalog with Kubernetes Network Policy hooks in the Helm deployment charts.  Though initially open, these hooks should allow an administrator to quickly add different ranges for restricting their applications.
+The SLATE team and collaborators continue to target security as a major focus.  The SLATE team is configuring all the offered  applications in the SLATE stable catalog with Kubernetes Network Policy hooks in the Helm deployment charts.  Though initially open, these hooks should allow an administrator to quickly define a set of IP ranges to restrict access to an application.
 <!--end_excerpt-->
 
 ## Network Policy Definition
