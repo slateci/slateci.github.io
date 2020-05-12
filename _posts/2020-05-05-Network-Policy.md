@@ -87,6 +87,6 @@ Set the `Enabled` option to `true` to make the application make a Network policy
     - 192.168.0.0/16
  ```
 Finally to use this network policy instead of the default use this modify the installation command like so
-    ```
-    slate app install <app name> --cluster=<cluster name> --group=<group name> --conf=conf.yaml
-    ```
+```
+slate app install <app name> --cluster=<cluster name> --group=<group name> --conf=conf.yaml
+```
