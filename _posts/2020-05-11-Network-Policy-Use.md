@@ -17,9 +17,8 @@ A Kubernetes NetworkPolicy is a special object which allows an administrator to 
 
 ## Using a Network Policy
 To activate the network policy of a given application some alterations to that app’s configuration must be made. To do this you will need to go onto the SLATE cluster you want to install the app on and type the following 
-```
-slate app <app-name> get-conf > conf.yaml
-```
+            
+            slate app <app-name> get-conf > conf.yaml
 This will give you the application’s default configuration file where you will find the following settings:     
 
     NetworkPolicy:
@@ -36,6 +35,6 @@ Set the `Enabled` option to `true` to make the application make a Network policy
         - 192.168.0.0/16
 
 Run the application with the new conf file using the following command:
-```
-slate app install <app name> --cluster=<cluster name> --group=<group name> --conf=conf.yaml
-```
+
+     slate app install <app name> --cluster=<cluster name> --group=<group name> --conf=conf.yaml
+
