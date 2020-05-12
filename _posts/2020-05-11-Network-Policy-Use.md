@@ -3,7 +3,7 @@ tag: draft
 title: Using Kubernetes Network Policies for SLATE applications
 overview: Network Policy Creation
 published: true
-permalink: blog/network-policy-creation.html
+permalink: blog/network-policy-use.html
 attribution: The SLATE Team
 layout: post
 type: markdown
@@ -19,7 +19,9 @@ A Kubernetes NetworkPolicy is a special object which allows an administrator to 
 To activate the network policy of a given application some alterations to that app’s configuration must be made. To do this you will need to go onto the SLATE cluster you want to install the app on and type the following 
             
     slate app <app-name> get-conf > conf.yaml
+
 This will give you the application’s default configuration file where you will find the following settings:     
+
 
     NetworkPolicy:
       Enabled: false
