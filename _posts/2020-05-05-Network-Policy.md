@@ -68,7 +68,9 @@ Above is the pod selector for the nginx network policy. It uses a set of labels 
 The go templating `range` piece can be thought of as a for loop over the list created in the values file. The `{{ . }}` section is replaced by whatever the current object in the list being itterated over is, in this case the current CIDR being looked at. Therefor this part of the network policy creates an ipBlock for each cidr listed in the values file for ingress and egress, making it only possible to access this application if you are operating from an IP address in the specified CIDR.
 ## Using a Network Policy
 To activate the network policy of a given application some alterations to that app’s configuration must be made. To do this you will need to go onto the SLATE cluster you want to install the app on and type the following 
-```slate app <app-name> get-conf > conf.yaml```
+```
+slate app <app-name> get-conf > conf.yaml
+```
 This will give you the default configuration file for this application. Somewhere in that file you will find the following default settings       
 ```
 NetworkPolicy:
@@ -85,4 +87,6 @@ Set the `Enabled` option to `true` to make the application make a Network policy
     - 192.168.0.0/16
  ```
 Finally to use this network policy instead of the default use this modify the installation command like so
-    ```slate app install <app name> --cluster=<cluster name> --group=<group name> --conf=conf.yaml```
+    ```
+    slate app install <app name> --cluster=<cluster name> --group=<group name> --conf=conf.yaml
+    ```
