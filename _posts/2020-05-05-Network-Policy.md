@@ -2,7 +2,7 @@
 tag: draft
 title: Implementing Kubernetes Network Policies for SLATE applications
 overview: Network Policy
-published: false
+published: true
 permalink: blog/network-policy.html
 attribution: The SLATE Team
 layout: post
