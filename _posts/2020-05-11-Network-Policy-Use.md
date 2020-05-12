@@ -22,10 +22,12 @@ slate app <app-name> get-conf > conf.yaml
 ```
 This will give you the application’s default configuration file where you will find the following settings:     
 ...
-NetworkPolicy:
-  Enabled: false
-  AllowedCIDRs: 
-    - 0.0.0.0/0
+
+    NetworkPolicy:
+      Enabled: false
+      AllowedCIDRs: 
+        - 0.0.0.0/0
+
 ...
 Set the `Enabled` option to `true` to make the application make a Network policy upon deployment. Than replace the `0.0.0.0/0` CIDR with the one you want to whitelist. If you want to add more than one CIDR you can, based on the following example.
 ...
