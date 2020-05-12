@@ -21,16 +21,13 @@ To activate the network policy of a given application some alterations to that a
 slate app <app-name> get-conf > conf.yaml
 ```
 This will give you the application’s default configuration file where you will find the following settings:     
-...
 
     NetworkPolicy:
       Enabled: false
       AllowedCIDRs: 
         - 0.0.0.0/0
 
-...
 Set the `Enabled` option to `true` to make the application make a Network policy upon deployment. Than replace the `0.0.0.0/0` CIDR with the one you want to whitelist. If you want to add more than one CIDR you can, based on the following example.
-...
 
     NetworkPolicy:
       Enabled: true
@@ -38,7 +35,6 @@ Set the `Enabled` option to `true` to make the application make a Network policy
         - 10.0.0.0/8
         - 192.168.0.0/16
 
-...
 Run the application with the new conf file using the following command:
 ```
 slate app install <app name> --cluster=<cluster name> --group=<group name> --conf=conf.yaml
