@@ -1,3 +1,4 @@
+## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Obtain a SLATE token](#obtain-a-slate-token)
 - [Operating System Requirements](#operating-system-requirements)
