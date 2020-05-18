@@ -288,4 +288,28 @@ slate cluster allow-group [YOUR-CLUSTER-NAME] '[GROUP-NAME]'
 
 ## Troubleshooting
 
-At this point, you should have a functioning and federated SLATE cluster. If you have any questions on this process, please [contact our team](/community/) for assistance.
+At this point, you should have a functioning and federated SLATE cluster. If you have any questions on this process, please [contact our team](/community/) for assistance. Below we have provided some solutions to problems that folks have occasionally come across.
+
+### "slate cluster create" command hangs and times out
+Sometimes the "slate cluster create" command will hang for a period of time and then fail. This is usually because the underlying `kubectl` command used by the SLATE client is misconfigured. You may want to check to see if `kubectl` commands can complete normally. If you get an error the type:
+``` (post Kubernetes v1.18)
+error: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
+```
+or 
+``` (pre Kubernetes v1.18)
+Could not connect to localhost:6443
+```
+
+Try setting the `KUBECONFIG` environment variable to the correct location (usually `/etc/kubernetes/admin.conf` or `~/.kube/config`) 
+
+### Cluster registration never completes ("infinite dots")
+If the cluster registration process was interrupted, things may be left in an inconsistent state, and cluster registration will never complete. 
+
+It may be helpful to try deleting the SLATE 'cluster' from the NRP controller:
+```
+kubectl delete cluster slate-system
+```
+
+And then run the `slate cluster create` command again.
+
+
