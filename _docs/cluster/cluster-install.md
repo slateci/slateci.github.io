@@ -315,5 +315,5 @@ or
 ```
 The connection to the server localhost:8080 was refused - did you specify the right host or port?
 ```
-#### Problem Solution
+#### Possible Solution
 Try setting the `KUBECONFIG` environment variable to the correct location (usually `/etc/kubernetes/admin.conf` or `~/.kube/config`) 
