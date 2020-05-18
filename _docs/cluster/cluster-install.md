@@ -1,3 +1,5 @@
+The foundation of every SLATE Cluster is a collection of SLATE nodes. In this guide, we will walk you through the process of setting up Kubernetes with the `kubeadm` tool and registering your cluster with the SLATE Platform. 
+
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Obtain a SLATE token](#obtain-a-slate-token)
@@ -8,13 +10,9 @@
 - [Cluster Federation](#cluster-federation)
 - [Troubleshooting](#troubleshooting)
 
-The foundation of every SLATE Cluster is a collection of SLATE nodes. Nodes can have a number of different functions, but the two largest roles of a SLATE node are Master and Worker.
-
-A SLATE node can be created on either a virtual machine or physical hardware.
-
 ## Prerequisites
 
-This guide assumes a freshly installed CentOS 7 system. All techniques should generalize to other suitably modern Linux systems, but specific commands can differ.
+This guide assumes a freshly installed CentOS 7 system on either physical hardware or a virtual machine. All techniques should generalize to other suitably modern Linux systems, but specific commands can differ.
 
 This guide also assumes that your Kubernetes head node (or control plane) is on a publicly accessible IP address with port 6443 open, in order for the SLATE API server to communicate with your cluster.
 
