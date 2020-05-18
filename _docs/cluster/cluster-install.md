@@ -308,15 +308,3 @@ Could not connect to localhost:6443
 ```
 
 Try setting the `KUBECONFIG` environment variable to the correct location (usually `/etc/kubernetes/admin.conf` or `~/.kube/config`) 
-
-### Cluster registration never completes ("infinite dots")
-If the cluster registration process was interrupted, things may be left in an inconsistent state, and cluster registration will never complete. 
-
-It may be helpful to try deleting the SLATE 'cluster' from the NRP controller:
-```
-kubectl delete cluster slate-system
-```
-
-And then run the `slate cluster create` command again.
-
-
