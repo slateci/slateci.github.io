@@ -292,11 +292,18 @@ At this point, you should have a functioning and federated SLATE cluster. If you
 
 ### "slate cluster create" command hangs and times out
 Sometimes the "slate cluster create" command will hang for a period of time and then fail. This is usually because the underlying `kubectl` command used by the SLATE client is misconfigured. You may want to check to see if `kubectl` commands can complete normally. If you get an error the type:
-``` (post Kubernetes v1.18)
+
+(starting with Kubernetes v1.18)
+
+``` 
 error: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
 ```
-or 
-``` (pre Kubernetes v1.18)
+
+or
+
+ (pre Kubernetes v1.18)
+ 
+```
 Could not connect to localhost:6443
 ```
 
