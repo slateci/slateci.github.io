@@ -62,13 +62,13 @@ Above is the pod selector for the nginx network policy. It uses a set of labels 
 	  - to:
 	    {{- range .Values.NetworkPolicy.AllowedCIDRs}}
 	    - ipBlock:
-		cidr: {{ . }} 
+		  cidr: {{ . }} 
 	    {{- end }}
 	  ingress:
 	  - from:
 	    {{- range .Values.NetworkPolicy.AllowedCIDRs}}
 	    - ipBlock:
-		cidr: {{ . }}
+		  cidr: {{ . }}
 	    {{- end }}
 {% endraw %}
 
