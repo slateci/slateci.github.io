@@ -304,7 +304,7 @@ or
  (pre Kubernetes v1.18)
  
 ```
-Could not connect to localhost:6443
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
 ```
 
 Try setting the `KUBECONFIG` environment variable to the correct location (usually `/etc/kubernetes/admin.conf` or `~/.kube/config`) 
