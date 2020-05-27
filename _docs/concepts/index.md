@@ -12,9 +12,9 @@ type: markdown
 
 There are several roles which are useful for describing how SLATE works. These are not exclusive; one person may fill several roles at different times. 
 
-## Cluster Administrator
+## Edge Administrator
 
-A person who runs an edge Kubernetes cluster that is registered with a SLATE federation. SLATE is granted only limited access to participating clusters, so cluster administrators retain overall control of their resources. Cluster administrators are responsible for keeping their clusters running and accessible to SLATE (as long as they choose to participate in the federation). 
+A person who runs an edge Kubernetes cluster that is registered with a SLATE federation. SLATE is granted only limited access to participating clusters, so cluster administrators retain overall control of their resources. Edge administrators are responsible for keeping their clusters running and accessible to SLATE (as long as they choose to participate in the federation). 
 
 ## Application Administrator
 
