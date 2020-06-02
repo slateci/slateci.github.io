@@ -79,3 +79,5 @@ toc:
         url: /docs/security-and-policies/index.html
       - page: SLATE Acceptable Use Policy 
         url: /docs/security-and-policies/acceptable-use.html 
+      - page: Supported Software Versions
+        url: /docs/security-and-policies/supported-versions.html
