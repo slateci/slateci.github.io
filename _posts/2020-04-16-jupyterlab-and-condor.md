@@ -239,3 +239,9 @@ If you need to uninstall an application you previously deployed on SLATE, run th
 ## Summary
 
 In summary, we were able to successfully deploy a test HTCondor pool, a JupyterLab instance, and demonstrate job submission to the HTCondor pool in two ways.  The setup can be easily configured to work with any HTCondor pool, for example a production-scale high-throughput cluster using HTCondor or the Open Science Grid. 
+
+
+## Questions?
+
+As always, we encourage you to try this out and let us know what's working, what's not, what can be improved and so on. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
+
