@@ -1,5 +1,5 @@
 ---
-title: "SLATE for Condor-Enabled JupyterLab Application"
+title: "A Condor-Enabled JupyterLab with SLATE"
 overview: Blog
 published: true
 permalink: blog/slate-jupyter-condor-april-2020.html
@@ -17,8 +17,7 @@ Jupyter has been a great tool for data analysis, data visualization, machine lea
 
 First, let’s go through the installation of an HTCondor Pool. Later, we'll show how you can deploy an instance of JupyterLab on the SLATE platform and submit condor jobs directly from there. The following steps and instructions assume that you have already signed up to use SLATE and installed the SLATE client on your environment. If you don't have that ready, you can do so by signing up at the [New SLATE Users](https://portal.slateci.io/signup "SLATE Sign up Page") webpage and then installing the SLATE client from [here](https://slateci.io/docs/tools/#installing-the-slate-client "Installing the SLATE Client"). For learning more about the SLATE platform project, you can visit the [SLATE Homepage](https://portal.slateci.io "SLATE Homepage") and the [SLATE Console](https://portal.slateci.io/slate_console "SLATE Console").
 
-## Deploy HTCondor Pool
-
+## Deploy a HTCondor Pool
 
 We will start by setting up an HTCondor pool. First, get the configuration template of the central manager application:
 
