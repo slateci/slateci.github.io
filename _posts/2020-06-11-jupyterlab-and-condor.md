@@ -6,8 +6,6 @@ permalink: blog/slate-jupyter-condor-june-2020.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
-
 ---
 
 
