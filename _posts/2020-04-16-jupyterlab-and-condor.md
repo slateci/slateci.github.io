@@ -18,7 +18,7 @@ JupyterLab is a great tool for data analysis, visualization, machine learning an
 First, we'll install a test HTCondor pool. Later, we'll deploy a JupyterLab instance and submit jobs to this pool from the notebook, from both the Unix command line (within the notebook) and with HTCondor Python bindings.  We assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster.
 
 
-# Table of Contents
+## Table of Contents
 - [Deploy a HTCondor Pool](#deploy-a-htcondor-pool)
 - [Deploy JupyterLab](#deploy-jupyterlab)
 - [Testing](#testing)
