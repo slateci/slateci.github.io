@@ -2,7 +2,7 @@
 title: "JupyterLab and HTCondor with SLATE"
 overview: Blog
 published: true
-permalink: blog/slate-jupyter-condor-april-2020.html
+permalink: blog/slate-jupyter-condor-june-2020.html
 attribution: The SLATE Team
 layout: post
 type: markdown
