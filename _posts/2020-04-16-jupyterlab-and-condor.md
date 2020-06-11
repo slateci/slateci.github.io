@@ -1,5 +1,5 @@
 ---
-title: "A Condor-Enabled JupyterLab with SLATE"
+title: "JupyterLab and HTCondor with SLATE"
 overview: Blog
 published: true
 permalink: blog/slate-jupyter-condor-april-2020.html
@@ -11,11 +11,11 @@ tag: draft
 ---
 
 
-Jupyter has been a great tool for data analysis, data visualization, machine learning, training and much more. It allows users to run their processes interactively through a user-friendly web interface that's easily accessible, and also be able to share and reproduce their experiments for greater productivity. Many of those users usually need to access high-performance computing clusters and resources to run some CPU-intensive algorithms on some data sets that cannot be run locally due to the limited computing resources. An example for such clusters is HTCondor which is a high-throughput computing framework used for running distributed computationally-intensive tasks in parallel. In this blog post, we show how you can use SLATE platform to deploy a JupyterLab application that can communicate with an external HTCondor pool. The deployed application allows its users to import their code (e.g. from GitHub), run it on JupyterLab, and submit CPU-intensive jobs to an HTCondor pool for processing.  
+Jupyter is a great tool for data analysis, visualization, machine learning and much more. It allows users to run code interactively via its web notebook interface and thus iterate changes quickly.  Often users need to scale up their work and thus require submission abilities to a backend cluster from the notebook. In this blog post, we show how this can be done with a HTCondor pool using SLATE. 
 <!--end_excerpt-->
 
 
-First, let’s go through the installation of an HTCondor Pool. Later, we'll show how you can deploy an instance of JupyterLab on the SLATE platform and submit condor jobs directly from there. The following steps and instructions assume that you have already signed up to use SLATE and installed the SLATE client on your environment. If you don't have that ready, you can do so by signing up at the [New SLATE Users](https://portal.slateci.io/signup "SLATE Sign up Page") webpage and then installing the SLATE client from [here](https://slateci.io/docs/tools/#installing-the-slate-client "Installing the SLATE Client"). For learning more about the SLATE platform project, you can visit the [SLATE Homepage](https://portal.slateci.io "SLATE Homepage") and the [SLATE Console](https://portal.slateci.io/slate_console "SLATE Console").
+First, let’s install a HTCondor Pool. Later, we'll deploy a JupyterLab instance and submit jobs to this pool from the notebook.  We assume you have a SLATE account and client installed on your laptop.  (c.f. [New SLATE Users](https://portal.slateci.io/signup "SLATE Sign up Page") webpage and then installing the SLATE client from [here](https://slateci.io/docs/tools/#installing-the-slate-client "Installing the SLATE Client"). 
 
 ## Deploy a HTCondor Pool
 
