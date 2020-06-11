@@ -11,11 +11,13 @@ tag: draft
 ---
 
 
-Jupyter is a great tool for data analysis, visualization, machine learning and much more. It allows users to run code interactively via its web notebook interface and thus iterate changes quickly.  Often users need to scale up their work and thus require submission abilities to a backend cluster from the notebook. In this blog post, we show how this can be done with a HTCondor pool using SLATE. 
+Jupyter is a great tool for data analysis, visualization, machine learning and much more. It allows users to run code interactively via its web notebook interface and thus iterate changes quickly.  Often users need to scale up their work and thus require submission to a backend cluster from the notebook. We show how this can be done with HTCondor using SLATE. 
 <!--end_excerpt-->
 
 
-First, let’s install a HTCondor Pool. Later, we'll deploy a JupyterLab instance and submit jobs to this pool from the notebook.  We assume you have a SLATE account and client installed on your laptop.  (c.f. [New SLATE Users](https://portal.slateci.io/signup "SLATE Sign up Page") webpage and then installing the SLATE client from [here](https://slateci.io/docs/tools/#installing-the-slate-client "Installing the SLATE Client"). 
+First, let’s install a HTCondor pool. Later, we'll deploy a JupyterLab instance and submit jobs to this pool from the notebook.  We assume you have a SLATE account and client installed on your laptop.  (c.f. the SLATE  
+[quickstart](https://slateci.io/docs/quickstart/)).
+
 
 ## Deploy a HTCondor Pool
 
