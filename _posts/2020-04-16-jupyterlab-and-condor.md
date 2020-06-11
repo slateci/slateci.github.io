@@ -11,7 +11,7 @@ tag: draft
 ---
 
 
-Jupyter is a great tool for data analysis, visualization, machine learning and much more. It allows users to run code interactively via its web notebook interface and thus iterate changes quickly.  Often users need to scale up their work and thus require submission to a backend cluster from the notebook. We show how this can be done with HTCondor using SLATE. 
+JupyterLab is a great tool for data analysis, visualization, machine learning and much more. It allows users to run code interactively via its web notebook interface and thus iterate changes quickly.  Often users need to scale up their work and thus require submission to a backend cluster from the notebook. We show how this can be done with HTCondor using SLATE. 
 <!--end_excerpt-->
 
 
@@ -20,7 +20,7 @@ First, let’s install a HTCondor pool. Later, we'll deploy a JupyterLab instanc
 
 ## Deploy a HTCondor Pool
 
-We will start by setting up an HTCondor pool. First, get the configuration template of the central manager application:
+First, get the configuration template of the central manager:
 
 	$ slate app get-conf condor-manager --dev > manager.conf
 
@@ -35,7 +35,7 @@ Then install the central manager using the below SLATE command <small>(Please ch
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again. 
 
-Once the application is successfully installed, SLATE will give you an instance ID, in our example *instance_1sGae98se*, which you will need in the next steps. Now we need to learn the address, and tokens for the deployed application instance. Inspect the instance's info:
+Once the application is successfully installed, SLATE will give you an instance ID, in our example *instance_1sGae98se*, which you will need in following steps. Now we need to learn the address, and tokens for the deployed application instance. Inspect the instance's info:
 
 	$ slate instance info instance_1sGae98se
 	Name                        Started                         Group         Cluster     ID                  
@@ -130,7 +130,7 @@ Generate a random token:
 	$ openssl rand -base64 32
 	mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg=
 
-Edit the Jupyter application configuration file, in this case `jupyter.conf`, so that it has an **Instance** name and **NB_USER** of your choice, and a **Token** set to the token you just generated in the previous step. In our example, those values are:
+Edit the JupyterLab application configuration file, in this case `jupyter.conf`, so that it has an **Instance** name and **NB_USER** of your choice, and a **Token** set to the token you just generated in the previous step. In our example, those values are:
 
 	Instance: 'blogpostjupyter' 	
 	Jupyter:
@@ -238,4 +238,4 @@ If you need to uninstall an application you previously deployed on SLATE, run th
 
 ## Summary
 
-In summary, we were able to successfully deploy a JupyterLab application on SLATE and use the application as a submit environment to an HTCondor pool. The JupyterLab setup can be easily configured to work with any large HTCondor pool. 
+In summary, we were able to successfully deploy HTCondor pool, a JupyterLab instance, and demonstrate job submission to the deployed HTCondor pool. The setup can be easily configured to work with any HTCondor pool, for example a production-scale HTCondor cluster. 
