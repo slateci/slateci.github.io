@@ -15,7 +15,7 @@ Jupyter is a great tool for data analysis, visualization, machine learning and m
 <!--end_excerpt-->
 
 
-First, let’s install a HTCondor pool. Later, we'll deploy a JupyterLab instance and submit jobs to this pool from the notebook.  We assume you have a SLATE account and client installed on your laptop.  (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)).
+First, let’s install a HTCondor pool. Later, we'll deploy a JupyterLab instance and submit jobs to this pool from the notebook.  We assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)).
 
 
 ## Deploy a HTCondor Pool
