@@ -92,7 +92,13 @@ Now, check the application's log to learn the tokens issued for the other condor
 	**** Condor Worker Token ****
 	eyJhbGciOiJIUzI1NiIsImtpZCI6IlBPT0wifQ.eyJpYXQiOjE1ODc1MjQwNTQsImlzcyI6ImNvbmRvci1tYW5hZ2VyLWJsb2dwb3N0ZGVtby02NjlmN2I4NTgtdGRrYm4iLCJzdWIiOiJ3b3JrZXJAcG9vbCJ9.jzWdHy3NRwfedViPSCUR1jfwkucFzanwL9IiX2ypPL8
 
-Copy the one-line token after **** Condor Submit Token ****, paste it into a file called &lt;submit-token&gt; and add one trailing new line character (\n) to it. Now we need to repeat the same process for the other token. Copy the one-line token after **** Condor Worker Token ****, paste it into a file called &lt;worker-token&gt; and add one trailing new line character (\n) to it.
+Copy the one-line token after `**** Condor Submit Token ****`, paste it into a file (such as `submit-token`) and add one trailing new line character (\n) to it. For example:
+
+	$ echo "eyJhbGciOiJIUzI1NiIsImtpZCI6IlBPT0wifQ.eyJpYXQiOjE1ODc1MjQwNTQsImlzcyI6ImNvbmRvci1tYW5hZ2VyLWJsb2dwb3N0ZGVtby02NjlmN2I4NTgtdGRrYm4iLCJzdWIiOiJzdWJtaXRAcG9vbCJ9.I5qvyMdtRvFunqNvX5-foq2Pq7xp1zsJJAuEtgrMN0w" > submit-token 
+
+Now we need to repeat the same process for the other token. Copy the one-line token after `**** Condor Worker Token ****`, paste it into another new file, (e.g. `worker-token`); and add one trailing new line character (\n) to it.
+
+	$ echo "eyJhbGciOiJIUzI1NiIsImtpZCI6IlBPT0wifQ.eyJpYXQiOjE1ODc1MjQwNTQsImlzcyI6ImNvbmRvci1tYW5hZ2VyLWJsb2dwb3N0ZGVtby02NjlmN2I4NTgtdGRrYm4iLCJzdWIiOiJ3b3JrZXJAcG9vbCJ9.jzWdHy3NRwfedViPSCUR1jfwkucFzanwL9IiX2ypPL8" > worker-token
 
 Then, create new SLATE secrets using the two files from above:
 	
