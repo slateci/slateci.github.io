@@ -20,9 +20,7 @@ First, we'll install a test HTCondor pool. Later, we'll deploy a JupyterLab inst
 
 # Table of Contents
 - [Deploy a HTCondor Pool](#deploy-a-htcondor-pool)
-        * [Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again.](#note--if-deployment-fails-due-to-an-instance-name-that-s-already-been-chosen-by-another-user--please-choose-a-different-instance-name-and-try-running-the-above-command-again)
 - [Deploy JupyterLab](#deploy-jupyterlab)
-        * [Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again.](#note--if-deployment-fails-due-to-an-instance-name-that-s-already-been-chosen-by-another-user--please-choose-a-different-instance-name-and-try-running-the-above-command-again-1)
 - [Testing](#testing)
 - [Uninstall](#uninstall)
 - [Summary](#summary)
