@@ -13,6 +13,7 @@ In case of any security related incident involving SLATE or its infrastructure, 
 ## SLATE Security Policies
 
 [Acceptable Use Policy](/docs/security-and-policies/acceptable-use.html)
+
 [Privacy Policy](/docs/security-and-policies/privacy.html)
 
 ## Other Policies
