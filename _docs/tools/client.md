@@ -278,3 +278,14 @@ When running the SLATE client, if you receive an error similar to the following:
 `slate: Exception: Credentials file /Users/cnw4/.slate/token does not exist`
 
 You will need to visit the CLI access page on the [SLATE Console](https://portal.slateci.io/cli) and run the script provided.
+
+### SLATE fails to create cluster with 'not authorized' error
+You may see an error like this:
+
+```
+Sending config to SLATE server...
+90% done...
+Failed to create cluster lincolnb-gke-europe: Not authorized
+```
+
+This error indicates that the group with which you wish to associate with this cluster either does not exist or you do not belong to it.
