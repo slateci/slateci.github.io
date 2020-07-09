@@ -39,7 +39,7 @@ Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slatec
    </tr>
 
     <tr>
-      <td class="logo"><!--<img src="{{home}}/img/group.png" alt="Security Contact"/>--></td>
+      <td class="logo"><img src="{{home}}/img/shield-icon.png" alt="Security Contact"/></td>
       <td>
 To report any type of security issue involving SLATE, contact the Security Operations Staff at <a href="mailto:security@slateci.io">security@slateci.io</a>.
      </td>
