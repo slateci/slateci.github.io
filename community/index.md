@@ -37,6 +37,14 @@ best approach for different cases.
 Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slateci-news@</a> to receive news and updates about SLATE.      
      </td>
    </tr>
+
+    <tr>
+      <td class="logo"><!--<img src="{{home}}/img/group.png" alt="Security Contact"/>--></td>
+      <td>
+To report any type of security issue involving SLATE, contact the Security Operations Staff at <a href="mailto:security@slateci.io">security@slateci.io</a>.
+     </td>
+   </tr>
+   
   <tr>
     <td class="logo"><img src="{{home}}/img/presentation_.png" alt="Presentations and Papers" /></td>
     <td>
