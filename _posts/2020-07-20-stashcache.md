@@ -9,7 +9,7 @@ type: markdown
 tag: draft
 ---
 
-One of the challenges of distributed high-throughput computing is efficiently moving data to and from jobs across a national fabric of resources. To tackle this problem, the Open Science Grid developed a data caching technology known as StashCache. Sites who are already providing compute resources to the OSG can streamline data access by deploying a cache at their site. Thanks to nice fail-over properties, caches are an excellent way to get started with SLATE at your site while streamlining data access and reducing overall bandwidth consumed by OSG jobs. In this blog post, we'll fully deploy an OSG StashCache service and link it up to the federation. 
+One of the challenges of distributed high-throughput computing is efficiently moving data to and from jobs across a national fabric of resources. To tackle this problem, the Open Science Grid developed a data caching technology known as StashCache. Sites who are already providing compute resources to the OSG can streamline data access by deploying a cache at their site. Thanks to the low-risk nature of caches, StashCache is an excellent way to get started with SLATE at your site while streamlining data access and reducing overall bandwidth consumed by OSG jobs. In this blog post, we'll fully deploy an OSG StashCache service and link it up to the federation. 
 
 ## Prerequisites
 
