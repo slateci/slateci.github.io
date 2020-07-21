@@ -14,14 +14,20 @@ toc:
     subfolderitems:
       - page: Installation
         url: /docs/cluster/index.html
-      - page: SLATE Reference Node
-        url: /docs/cluster/example_hardware/edge-node.html
-      - page: SLATE ATLAS Tier 2 Node
-        url: /docs/cluster/example_hardware/atlas-node.html
-      - page: SLATE Management Node
-        url: /docs/cluster/example_hardware/management-node.html
-      - page: SLATE perfSONAR Node
-        url: /docs/cluster/example_hardware/perfsonar-node.html
+      - page: Obtain a SLATE Token
+        url: /docs/cluster/slate-token.html
+      - page: Operating System Requirements
+        url: /docs/cluster/operating-system-requirements.html
+      - page: Docker and Kubernetes
+        url: /docs/cluster/docker-kubernetes.html
+      - page: SLATE Master Node
+        url: /docs/cluster/slate-master-node.html
+      - page: SLATE Worker Node
+        url: /docs/cluster/slate-worker-node.html
+      - page: Cluster Federation
+        url: /docs/cluster/cluster-federation.html
+      - page: Troubleshooting
+        url: /docs/cluster/troubleshooting.html
   - title: SLATE Tools 
     id: slate-tools
     url: /docs/tools/
@@ -54,6 +60,17 @@ toc:
         url: /docs/apps/development_tools/local-storage.html
       - page: CVMFS Repositories
         url: /docs/apps/development_tools/cvmfs.html
+  - title: SLATE Reference Node
+    id: slate-reference-node
+    subfolderitems:
+      - page: SLATE Reference Node
+        url: /docs/cluster/example_hardware/edge-node.html
+      - page: SLATE ATLAS Tier 2 Node
+        url: /docs/cluster/example_hardware/atlas-node.html
+      - page: SLATE Management Node
+        url: /docs/cluster/example_hardware/management-node.html
+      - page: SLATE perfSONAR Node
+        url: /docs/cluster/example_hardware/perfsonar-node.html
 #  - title: Developers Tutorial
 #    id: developers-tutorial
 #    subfolderitems:
