@@ -1,7 +1,7 @@
     <div id="side-menu">
         {% for item in site.data.docsmenu.toc %}
         <ul>
-            <li class="parent-li"><a data-toggle="collapse" href="#{{item.id}}" role="button" aria-expanded="false" aria-controls="{{item.id}}" class="doc-nav-top-link">{{ item.title }}</a>
+            <li class="parent-li"><a href="{{item.subfolderitems[0].url}}" role="button" aria-expanded="false" aria-controls="{{item.id}}" class="doc-nav-top-link">{{ item.title }}</a>
                 <div class="collapse collapsable-parent" id="{{item.id}}">
                     <ul>
                         {% for entry in item.subfolderitems %}
