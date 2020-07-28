@@ -28,7 +28,7 @@ This will give you the application’s default configuration file where you will
       AllowedCIDRs: 
         - 0.0.0.0/0
 
-Set the `Enabled` option to `true` to make the application make a Network policy upon deployment. Than replace the `0.0.0.0/0` CIDR with the one you want to whitelist. If you want to add more than one CIDR you can, based on the following example.
+Set the `Enabled` option to `true` to have the application create a network policy upon deployment. Than replace the `0.0.0.0/0` CIDR with the one you want to whitelist. If you want to add more than one CIDR you can, based on the following example.
 
     NetworkPolicy:
       Enabled: true
