@@ -27,7 +27,7 @@ NetworkPolicy:
 
 The first setting, Enabled, defines wether or not a network policy is created. By default this is false and no policy is created. The second setting is the list of CIDRs whitelisted by the network policy. The default CIDR of `0.0.0.0/0` creates a policy that allows all traffic.
     
-The other piece of building a Network Policy for a SLATE application is the Network Policy template. This entire template is wrapped in the following go templating if statement: `{% raw %} {{ if .Values.NetworkPolicy.Enabled }} {% endraw %}` This is what makes the enabled setting work the way it does. If enabled is set to false, the rest of this template will not be built. Next comes the metadata for the policy. This will largely be based on your application metadata, but an example of the basic structure can be found below. 
+The other piece of building a Network Policy for a SLATE application is the Network Policy template. This entire template is wrapped in the following go templating if statement: {% raw %}`{{ if .Values.NetworkPolicy.Enabled }}`{% endraw %} This is what makes the enabled setting work the way it does. If enabled is set to false, the rest of this template will not be built. Next comes the metadata for the policy. This will largely be based on your application metadata, but an example of the basic structure can be found below. 
 
 {% raw %}
 	apiVersion: networking.k8s.io/v1
