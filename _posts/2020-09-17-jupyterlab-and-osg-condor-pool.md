@@ -8,6 +8,7 @@ layout: post
 type: markdown
 tag: draft
 ---
+
 In this blog post, we demonstrate how you can deploy a JupyterLab from the SLATE catalog, and then use it to submit HTCondor jobs to the OSG's central pool.
 
 In this blog post, we assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster.
