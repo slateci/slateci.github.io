@@ -74,7 +74,7 @@ The last change is for the SSH service. Enable the service and add the SSH publi
 	  Enabled: true
 	  SSH_Public_Key: 'ssh-rsa AAAAB3NzaC1yc2......i0pRTQgD5h1l+UvL/udO+IUYvvi slate'
 
-Considering the number of jobs we'll be submitting in this demo, and the local processes created by condor, we recommend increasing the resource limit in the config file as follows:
+Considering the number of jobs we'll be submitting in this demo, and local processes created by condor to handle that, we recommend increasing the resource limit in the config file as follows:
 
 	Resources:
 	# The maximum amount of CPU resources the notebook should be able to use
