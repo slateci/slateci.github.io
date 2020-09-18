@@ -6,6 +6,7 @@ kramdown:
   hard_wrap: false
   syntax_highlighter_opts:
     disable : true
+  parse_block_html: true
 
 baseurl:
 

@@ -183,8 +183,10 @@ Open a new Python notebook, and import the below two modules:
 Then, create a `Submit` object for your job:
 <img src="/img/posts/jupyter-osg-pb-s.png"> 
 
-<details><summary>Click here for above sourcecode</summary>
-<p>
+<details>
+  <summary>
+  	Click here for above sourcecode
+  </summary>
 
 ```python
 short_transfer_job = htcondor.Submit({
@@ -204,15 +206,16 @@ short_transfer_job = htcondor.Submit({
 print(short_transfer_job)
 ```
 
-</p>
 </details>
 
 The last command prints the job so that you can verify that it has right specifications you want. Please note that you'd need to add in your OSG project name, where it says `<my-project-name>`, to the job.
 
 The last step is to queue your job like this:
 <img src="/img/posts/jupyter-osg-pb-q.png"> 
-<details><summary>Click here for above sourcecode</summary>
-<p>
+<details>
+  <summary>
+  	Click here for above sourcecode
+  </summary>
 
 ```python
 schedd = htcondor.Schedd()          # get the Python representation of the scheduler
@@ -221,8 +224,6 @@ with schedd.transaction() as txn:   # open a transaction, represented by `txn`
 	
 print(cluster_id)
 ```
-
-</p>
 </details>
 
 
