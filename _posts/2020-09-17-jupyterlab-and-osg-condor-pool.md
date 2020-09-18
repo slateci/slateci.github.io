@@ -178,10 +178,10 @@ A successful run will create in your local directory the file *output.txt*  with
 If you prefer to use python to submit your jobs to the pool, you can do that using HTCondor Python Bindings. Here is how you can do that:
 
 Open a new Python notebook, and import the below two modules:
-<img src="jupyter-osg-pb-i.png"> 
+<img src="/img/posts/jupyter-osg-pb-i.png"> 
 
 Then, create a `Submit` object for your job:
-<img src="jupyter-osg-pb-s.png"> 
+<img src="/img/posts/jupyter-osg-pb-s.png"> 
 
 <details><summary>Click here for above sourcecode</summary>
 <p>
@@ -210,7 +210,7 @@ print(short_transfer_job)
 The last command prints the job so that you can verify that it has right specifications you want. Please note that you'd need to add in your OSG project name, where it says `<my-project-name>`, to the job.
 
 The last step is to queue your job like this:
-<img src="jupyter-osg-pb-q.png"> 
+<img src="/img/posts/jupyter-osg-pb-q.png"> 
 <details><summary>Click here for above sourcecode</summary>
 <p>
 
