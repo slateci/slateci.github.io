@@ -180,10 +180,9 @@ If you prefer to use python to submit your jobs to the pool, you can do that usi
 Open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
 
-Then, create a `Submit` object for your job:
-<img src="/img/posts/jupyter-osg-pb-s.png"> 
+Then, create a `Submit` object for your job: 
 
-<details><summary>Click here for above sourcecode</summary>
+<details><summary>Click here to <strong>copy below sourcecode</strong></summary>
 <p>
 
 ```python
@@ -206,12 +205,14 @@ print(short_transfer_job)
 
 </p>
 </details>
+<img src="/img/posts/jupyter-osg-pb-s.png">
+
 
 The last command prints the job so that you can verify that it has right specifications you want. Please note that you'd need to add in your OSG project name, where it says `<my-project-name>`, to the job.
 
 The last step is to queue your job like this:
-<img src="/img/posts/jupyter-osg-pb-q.png"> 
-<details><summary>Click here for above sourcecode</summary>
+
+<details><summary>Click here to <strong>copy below sourcecode</strong></summary>
 <p>
 
 ```python
@@ -224,6 +225,7 @@ print(cluster_id)
 
 </p>
 </details>
+<img src="/img/posts/jupyter-osg-pb-q.png"> 
 
 
 The time it would take for your jobs to finish depends on resource availability within the pool and the processing time your jobs need. To check the status of your job submission, you can run the command `condor_q` from the terminal to see your jobs that are pending, running or done, as you can see in this output example:
