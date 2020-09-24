@@ -21,7 +21,7 @@ In this blog post, we assume you have a SLATE account and client installed on yo
 
 To be able to submit jobs to OSG, you'll need an authentication token and a project name in OSG. If you're already have that, you can proceed to Step 2. 
 
-If you don't already have access, you can submit a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) requesting access to the OSG Central Pool and mention in your ticket that you'll be submitting jobs from the `slateci.io` domain. Once your request is processed and approved, you should have a submit authentication token and project name that you can use in the next steps.
+If you don't already have access, you can submit a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) requesting access to the OSG Central Pool and mention in your ticket that you'll be submitting jobs from the `slateci.io` domain. Once your request is processed and approved, you should have a submit authentication token and project name that you can use in the next steps. For us, the access request was processed by the OSG team within one business day.
 
 ## Step 2
 
@@ -59,13 +59,14 @@ Choose a subdomain for the ingress (This will be used in the application's URL):
 		Ingress:
 			Subdomain: 'blogpostnotebook'
 
-Update the **CondorConfig** to be enabled, and use hostname `flock.opensciencegrid.org` as the **CollectorHost**, port `9618` as the **CollectorPort**, a port number between 30000-32767 as the **ExternalCondorPort** and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
+Update the **CondorConfig** to be enabled, and use hostname `flock.opensciencegrid.org` as the **CollectorHost**, port `9618` as the **CollectorPort**, a port number between 30000-32767 as the **ExternalCondorPort**, the **IsExternalPool** to be true, and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
 
 	CondorConfig:
       Enabled: true
       CollectorHost: flock.opensciencegrid.org
       CollectorPort: 9618
       ExternalCondorPort: 32676
+      IsExternalPool: true
       AuthTokenSecret: submit-auth-token
       
 The last change is for the SSH service. Enable the service and add the SSH public key you want to use to SSH into the JupyterLab instance:
@@ -114,7 +115,7 @@ To test your deployed applications, log into your JupyterLab application\instanc
 
 For our testing purpose, we use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
 
-First, create a test script to be executed as your job:
+First, open a new terminal window in your JupyterLab and create a test script to be executed as your job:
 
 	nano short_transfer.sh
 	
@@ -141,7 +142,7 @@ Then, create a condor submit file 'job.sub':
 
 	nano job.sub
 
-Copy the below job into the submit file and save it:
+Copy the below job into the submit file, substitute the `<your-project-name>` below with the name of your project in OSG, and then save the file:
 
 	executable = short_transfer.sh
 	arguments = input.txt
@@ -159,30 +160,31 @@ Copy the below job into the submit file and save it:
 	# Let's queue a 1000 jobs with the above specifications
 	queue 1000
 
-######Note: Please note that you'd need to subsititute `<your-project-name>` above with the name of your project in OSG. 
 
 Then, create a log directory:
 
 	mkdir log 
 
-and submit the job: 
+and submit the job using the `condor-submit` command: 
 
 	$ condor_submit job.sub
 	Submitting job(s).
 	1000 job(s) submitted to cluster 15.
 
 
-A successful run will create in your local directory the file *output.txt*  with the "Hello World from SLATE" message in it. Addionally, you should see inside the log directory all the `output`, `error` and `log` files for the individual jobs.
+A successful run will create in your local directory the file *output.txt*  with the "Hello World from SLATE" message in it. Addionally, you should see inside the log directory all the `output`, `error` and `log` files for the individual jobs. In our experience with this job submission to OSG, it took around one hour for all the jobs to finish. 
+
+To check the status of your jobs, you can use the `condor_q` command as shown in the `Checking Job Status` section below.
 
 #### Submiting your Jobs from a Python Notebook
 If you prefer to use python to submit your jobs to the pool, you can do that using HTCondor Python Bindings. Here is how you can do that:
 
-Open a new Python notebook, and import the below two modules:
+Create the `short_transfer.sh` and `input.txt` files and the log directory. Then, open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
 
-Then, create a `Submit` object for your job: 
+Then, create a `Submit` object for your job as show under the below sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
 
-<details><summary>Click here to <strong>copy below sourcecode</strong></summary>
+<details><summary><strong>Sourcecode:</strong> Click here to copy</summary>
 <p>
 
 ```python
@@ -197,7 +199,7 @@ short_transfer_job = htcondor.Submit({
 "request_cpus": "1",          # How many CPU cores we want
 "request_memory": "1MB",      # How much memory we want
 "request_disk": "1MB",        # How much disk space we want
-"+ProjectName": classad.quote("<my-project-name>"),
+"+ProjectName": classad.quote("<your-project-name>"),
 })
 
 print(short_transfer_job)
@@ -205,14 +207,15 @@ print(short_transfer_job)
 
 </p>
 </details>
+<strong>Snapshot:</strong>
 <img src="/img/posts/jupyter-osg-pb-s.png">
 
 
-The last command prints the job so that you can verify that it has right specifications you want. Please note that you'd need to add in your OSG project name, where it says `<my-project-name>`, to the job.
+The last command prints the job so that you can verify that it has right specifications you want.
 
 The last step is to queue your job like this:
 
-<details><summary>Click here to <strong>copy below sourcecode</strong></summary>
+<details><summary><strong>Sourcecode:</strong> Click here to copy</summary>
 <p>
 
 ```python
@@ -225,10 +228,13 @@ print(cluster_id)
 
 </p>
 </details>
+<strong>Snapshot:</strong>
 <img src="/img/posts/jupyter-osg-pb-q.png"> 
 
 
-The time it would take for your jobs to finish depends on resource availability within the pool and the processing time your jobs need. To check the status of your job submission, you can run the command `condor_q` from the terminal to see your jobs that are pending, running or done, as you can see in this output example:
+#### Checking Job Status
+
+The time it would take for your jobs to finish depends on resource availability within the pool and the processing time your jobs need. To check the status of your job submission, you can run the command `condor_q` from the terminal to see your jobs that are pending, running or done, as you can see in the below output example. The command might take a moment before it prints the output, especially when submitting a large number of jobs.
 
 	OWNER  BATCH_NAME    SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
 	jovyan ID: 4        9/18 02:43    825     14    161   1000 4.132-952
