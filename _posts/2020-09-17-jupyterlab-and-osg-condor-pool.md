@@ -11,7 +11,7 @@ tag: draft
 
 In our previous blog post on [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/slate-jupyter-condor-june-2020.html), we showed how a user can leverage multiple SLATE catalog applications to deploy a JupyterLab instance and a test HTCondor pool on SLATE.
  
-In this blog post, however, we demonstrate how you can deploy a JupyterLab from the SLATE catalog, and then use it to submit HTCondor jobs to the OSG's central pool. We thought this would be very helpful for those users who work with such a production-scale high-throughput cluster and would like to use the condor-submit feature that's integrated within the SLATE JupyterLab application to submit their jobs.
+In this blog post, however, we demonstrate how you can deploy a JupyterLab from the SLATE catalog, and then use it to submit HTCondor jobs to the OSG's Central Pool. We thought this would be very helpful for those users who work with such a production-scale high-throughput cluster and would like to use the condor-submit feature that's integrated within the SLATE JupyterLab application to submit their jobs.
 
 In this blog post, we assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster.
 
@@ -25,9 +25,7 @@ If you don't already have access, you can submit a ticket to the [OSG Research F
 
 ## Step 2
 
-The next step is to create a SLATE secret for your submit token. 
-
-Copy the token and paste it into a file named `submit-token`.
+The next step is to create a SLATE secret for your submit token. Copy the token and paste it into a file named `submit-token`.
 
 Then, create a secret using the below SLATE command and the above token file you created<small>(Please change &lt;your-group&gt; in the command to your SLATE group name, and &lt;a-cluster&gt; to the target cluster name that you want to use for your deployment)</small>:
 
@@ -59,7 +57,7 @@ Choose a subdomain for the ingress (This will be used in the application's URL):
 		Ingress:
 			Subdomain: 'blogpostnotebook'
 
-Update the **CondorConfig** to be enabled, and use hostname `flock.opensciencegrid.org` as the **CollectorHost**, port `9618` as the **CollectorPort**, a port number between 30000-32767 as the **ExternalCondorPort**, the **IsExternalPool** to be true, and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
+Update the **CondorConfig** to be enabled, and use hostname `flock.opensciencegrid.org` as the **CollectorHost**, port `9618` as the **CollectorPort**, a port number between 30000-32767 as the **ExternalCondorPort**, the value `true` for the **IsExternalPool** variable, and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
 
 	CondorConfig:
       Enabled: true
@@ -113,11 +111,11 @@ where &lt;username&gt; is what you chose above for the NB_USER configuration var
 To test your deployed applications, log into your JupyterLab application\instance and submit a test job to the OSG HTCondor pool from either a terminal window or notebook.
 
 
-For our testing purpose, we use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
+For our testing purpose, we're going to use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
 
 First, open a new terminal window in your JupyterLab and create a test script to be executed as your job:
 
-	nano short_transfer.sh
+	$ nano short_transfer.sh
 	
 Copy the below code into it and save the file:
 
@@ -136,11 +134,11 @@ Copy the below code into it and save the file:
 
 The above script takes an input file as an argument so we need to create one. A quick way to do that is:
 
-	echo "Hello World from SLATE" > input.txt
+	$ echo "Hello World from SLATE" > input.txt
 
 Then, create a condor submit file 'job.sub':
 
-	nano job.sub
+	$ nano job.sub
 
 Copy the below job into the submit file, substitute the `<your-project-name>` below with the name of your project in OSG, and then save the file:
 
@@ -163,7 +161,7 @@ Copy the below job into the submit file, substitute the `<your-project-name>` be
 
 Then, create a log directory:
 
-	mkdir log 
+	$ mkdir log 
 
 and submit the job using the `condor-submit` command: 
 
@@ -182,7 +180,7 @@ If you prefer to use python to submit your jobs to the pool, you can do that usi
 Create the `short_transfer.sh` and `input.txt` files and the log directory. Then, open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
 
-Then, create a `Submit` object for your job as show under the below sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
+Then, create a `Submit` object for your job as shown below under the sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
 
 <strong>Sourcecode:</strong>
 
@@ -239,7 +237,7 @@ The time it would take for your jobs to finish depends on resource availability 
 
 ## Uninstall 
 
-If you need to uninstall an application you previously deployed on SLATE, run this command:
+If you need to uninstall an application you previously deployed on SLATE, run the below commands:
 
 	$ slate instance delete <instance-ID>
 	$ slate secret delete <secret-ID>
