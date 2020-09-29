@@ -184,8 +184,7 @@ Create the `short_transfer.sh` and `input.txt` files and the log directory. Then
 
 Then, create a `Submit` object for your job as show under the below sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
 
-<details><summary><strong>Sourcecode:</strong> Click here to copy</summary>
-<p>
+<strong>Sourcecode:</strong>
 
 ```python
 short_transfer_job = htcondor.Submit({
@@ -205,8 +204,8 @@ short_transfer_job = htcondor.Submit({
 print(short_transfer_job)
 ```
 
-</p>
-</details>
+
+
 <strong>Snapshot:</strong>
 <img src="/img/posts/jupyter-osg-pb-s.png">
 
@@ -215,8 +214,7 @@ The last command prints the job so that you can verify that it has right specifi
 
 The last step is to queue your job like this:
 
-<details><summary><strong>Sourcecode:</strong> Click here to copy</summary>
-<p>
+<strong>Sourcecode:</strong>
 
 ```python
 schedd = htcondor.Schedd()          # get the Python representation of the scheduler
@@ -226,8 +224,6 @@ with schedd.transaction() as txn:   # open a transaction, represented by `txn`
 print(cluster_id)
 ```
 
-</p>
-</details>
 <strong>Snapshot:</strong>
 <img src="/img/posts/jupyter-osg-pb-q.png"> 
 
