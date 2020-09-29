@@ -204,8 +204,6 @@ short_transfer_job = htcondor.Submit({
 print(short_transfer_job)
 ```
 
-
-
 <strong>Snapshot:</strong>
 <img src="/img/posts/jupyter-osg-pb-s.png">
 
