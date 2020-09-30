@@ -3,6 +3,7 @@
   overflow-y: auto;
   padding-right: 15px;
   padding-bottom: 10px;
+  max-width: 250px;
   @media (min-width: 0) and (max-width: 991px) {
 	  visibility: hidden;
 	background: white;
@@ -54,7 +55,7 @@
 /* ---- */
 
 .docs-page-height {
-	min-height: 500px;
+	min-height: 750px;
 }
 .make-sticky {
   position: fixed;
@@ -95,10 +96,13 @@
 
 .doc-nav-sub-link {
 	color: #333;
-	margin-left: 10px;
 	font-weight: 300;
 	font-size: .85em;
-	line-height: 2;
+	line-height: 1.25;
+}
+
+.sub-item-li {
+	padding: 0 0 7px 10px;
 }
 
 // Documentation Navigation Bar
