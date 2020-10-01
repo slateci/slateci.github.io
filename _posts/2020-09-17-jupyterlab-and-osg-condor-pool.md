@@ -193,7 +193,7 @@ A successful run will create in your local directory the file *output.txt*  with
 To check the status of your jobs, you can use the `condor_q` command as shown in the `Checking Job Status` section below.
 
 ## Submitting your Jobs from a Python Notebook
-If you prefer to use python to submit your jobs to the pool, you can do that using HTCondor Python Bindings. Here is how you can do that:
+If you prefer to use python to submit your jobs to the pool, you can do that using HTCondor Python Bindings as follows:
 
 - Create the `short_transfer.sh` and `input.txt` files and the `log` directory, as shown above. Then, open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
