@@ -11,9 +11,9 @@ tag: draft
 
 In our previous blog post on [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/slate-jupyter-condor-june-2020.html), we showed how a user can leverage multiple SLATE catalog applications to deploy a JupyterLab instance and a test HTCondor pool on SLATE.
  
-In this blog post, however, we demonstrate how you can deploy a JupyterLab from the SLATE catalog, and then use it to submit HTCondor jobs to the OSG's Central Pool. We thought this would be very helpful for those users who work with such a production-scale high-throughput cluster and would like to use the condor-submit feature that's integrated within the SLATE JupyterLab application to submit their jobs.
+In this blog post, however, we demonstrate how you can deploy a JupyterLab from the SLATE catalog, and then use it to submit HTCondor jobs to the OSG's Open Science Pool(c.f. the [Open Science Grid help desk](support.opensciencegrid.org)). We thought this would be very helpful for those users who work with such a production-scale high-throughput cluster and would like to use the condor-submit feature that's integrated within the SLATE JupyterLab application to submit their jobs.
 
-In this blog post, we assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster.
+In this blog post, we assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster. However, if you don't have an account, you can sign up at the [SLATE Portal](https://portal.slateci.io/slate_portal) and then follow the instructions for [installing the SLATE Client](https://slateci.io/docs/tools/#installing-the-slate-client). You can also find in the previous link, right after the Basic Use section, information on how to join or create a group so that you can deploy applications on SLATE.
 
 <!--end_excerpt-->
 
@@ -21,13 +21,17 @@ In this blog post, we assume you have a SLATE account and client installed on yo
 
 To be able to submit jobs to OSG, you'll need an authentication token and a project name in OSG. If you're already have that, you can proceed to Step 2. 
 
-If you don't already have access, you can submit a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) requesting access to the OSG Central Pool and mention in your ticket that you'll be submitting jobs from the `slateci.io` domain. Once your request is processed and approved, you should have a submit authentication token and project name that you can use in the next steps. For us, the access request was processed by the OSG team within one business day.
+If you don't already have access, you can submit a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) requesting access to the Open Science Pool and mention in your ticket that you'll be submitting jobs from the `slateci.io` domain. An example request would be:
+
+*I am submitting this ticket to request a submit-token for the Open Science Pool and a project name so that I can test job submission to the OSG from SLATE. My jobs will be coming from the "slateci.io" domain. If you need any other information to process this request, please let me know* 
+
+
+Once your request is processed and approved, you should have a submit authentication token and project name that you can use in the next steps. For us, the access request was processed by the OSG team within one business day.
 
 ## Step 2
 
-The next step is to create a SLATE secret for your submit token. Copy the token and paste it into a file named `submit-token`.
-
-Then, create a secret using the below SLATE command and the above token file you created<small>(Please change &lt;your-group&gt; in the command to your SLATE group name, and &lt;a-cluster&gt; to the target cluster name that you want to use for your deployment)</small>:
+Copy the submit token and paste it into a file named `submit-token`. 
+Then, create a secret using the below SLATE command as show below (where &lt;your-group&gt; in the command is the SLATE group you want to use, and &lt;a-cluster&gt; is the name of the target cluster you want to use for your deployment):
 
 	$ slate secret create submit-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=submit-token
 	Successfully created secret submit-auth-token with ID secret_dHiGnjAgR2A 
@@ -40,7 +44,7 @@ Download the base configurations:
 
 	$ slate app get-conf --dev jupyter-notebook > jupyter.conf
 
-Generate a random token:
+Generate a random token for your JupyterLab instance:
 
 	$ openssl rand -base64 32
 	mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg=
@@ -49,7 +53,7 @@ Edit the JupyterLab application configuration file, in this case `jupyter.conf`,
 
 	Instance: 'blogpostjupyter' 	
 	Jupyter:
-	  NB_USER: 'slate'
+	  NB_USER: 'demo_user'
 	  Token: 'mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg='
 
 Choose a subdomain for the ingress (This will be used in the application's URL):
@@ -73,7 +77,7 @@ The last change is for the SSH service. Enable the service and add the SSH publi
 	  Enabled: true
 	  SSH_Public_Key: 'ssh-rsa AAAAB3NzaC1yc2......i0pRTQgD5h1l+UvL/udO+IUYvvi slate'
 
-Considering the number of jobs we'll be submitting in this demo, and local processes created by condor to handle that, we recommend increasing the resource limit in the config file as follows:
+Considering the number of jobs submitted in this demo, and local processes created by condor to handle that, we recommend increasing the resource limit in the config file as follows:
 
 	Resources:
 	# The maximum amount of CPU resources the notebook should be able to use
@@ -107,11 +111,8 @@ where &lt;username&gt; is what you chose above for the NB_USER configuration var
 
 
 ## Step 4
-### Testing	
-To test your deployed applications, log into your JupyterLab application\instance and submit a test job to the OSG HTCondor pool from either a terminal window or notebook.
-
-
-For our testing purpose, we're going to use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
+	
+We'll show you here how you can submit a test job to the OSG HTCondor pool via two different ways a terminal window and a Python notebook. For our testing purpose, we're going to use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
 
 First, open a new terminal window in your JupyterLab and create a test script to be executed as your job:
 
@@ -170,21 +171,21 @@ and submit the job using the `condor-submit` command:
 	1000 job(s) submitted to cluster 15.
 
 
-A successful run will create in your local directory the file *output.txt*  with the "Hello World from SLATE" message in it. Addionally, you should see inside the log directory all the `output`, `error` and `log` files for the individual jobs. In our experience with this job submission to OSG, it took around one hour for all the jobs to finish. 
+A successful run will create in your local directory the file *output.txt*  with the "Hello World from SLATE" message in it. Additionally, you should see inside the log directory all the `output`, `error` and `log` files for the individual jobs. In our experience with this job submission to OSG, it took around one hour for all the jobs to finish. 
 
 To check the status of your jobs, you can use the `condor_q` command as shown in the `Checking Job Status` section below.
 
-#### Submiting your Jobs from a Python Notebook
+## Submitting your Jobs from a Python Notebook
 If you prefer to use python to submit your jobs to the pool, you can do that using HTCondor Python Bindings. Here is how you can do that:
 
-Create the `short_transfer.sh` and `input.txt` files and the log directory. Then, open a new Python notebook, and import the below two modules:
+1. Create the `short_transfer.sh` and `input.txt` files and the log directory, as shown above. Then, open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
 
-Then, create a `Submit` object for your job as shown below under the sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
+2. Create a `Submit` object for your job as shown below under the sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
 
-<strong>Sourcecode:</strong>
+ <strong>Sourcecode:</strong>
 
-```python
+ ```python
 short_transfer_job = htcondor.Submit({
 "executable": "short_transfer.sh",  # The program to run on the execute node
 "arguments": "input.txt",
@@ -198,41 +199,39 @@ short_transfer_job = htcondor.Submit({
 "request_disk": "1MB",        # How much disk space we want
 "+ProjectName": classad.quote("<your-project-name>"),
 })
-
 print(short_transfer_job)
 ```
 
-<strong>Snapshot:</strong>
+ <strong>Snapshot:</strong>
 <img src="/img/posts/jupyter-osg-pb-s.png">
 
 
-The last command prints the job so that you can verify that it has right specifications you want.
+ The last command prints the job so that you can verify that it has right specifications you want.
 
-The last step is to queue your job like this:
+3. The last step is to queue your job like this:
 
-<strong>Sourcecode:</strong>
+ <strong>Sourcecode:</strong>
 
-```python
+ ```python
 schedd = htcondor.Schedd()          # get the Python representation of the scheduler
 with schedd.transaction() as txn:   # open a transaction, represented by `txn`
 	cluster_id = short_transfer_job.queue(txn,1000)     # queues 1000 job in the current transaction;
-	
-print(cluster_id)
+	print(cluster_id)
 ```
 
-<strong>Snapshot:</strong>
+ <strong>Snapshot:</strong>
 <img src="/img/posts/jupyter-osg-pb-q.png"> 
 
 
-#### Checking Job Status
+### Checking Job Status
 
 The time it would take for your jobs to finish depends on resource availability within the pool and the processing time your jobs need. To check the status of your job submission, you can run the command `condor_q` from the terminal to see your jobs that are pending, running or done, as you can see in the below output example. The command might take a moment before it prints the output, especially when submitting a large number of jobs.
 
-	OWNER  BATCH_NAME    SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
-	jovyan ID: 4        9/18 02:43    825     14    161   1000 4.132-952
+	OWNER  	BATCH_NAME    SUBMITTED   DONE   RUN    IDLE  TOTAL JOB_IDS
+	demo_user ID: 4        9/18 02:43    825     14    161   1000 4.132-952
 
 	Total for query: 175 jobs; 0 completed, 0 removed, 161 idle, 14 running, 0 held, 0 suspended
-	Total for jovyan: 175 jobs; 0 completed, 0 removed, 161 idle, 14 running, 0 held, 0 suspended
+	Total for demo_user: 175 jobs; 0 completed, 0 removed, 161 idle, 14 running, 0 held, 0 suspended
 	Total for all users: 175 jobs; 0 completed, 0 removed, 161 idle, 14 running, 0 held, 0 suspended
 
 ## Uninstall 
