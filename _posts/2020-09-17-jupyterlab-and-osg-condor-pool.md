@@ -1,6 +1,6 @@
 ---
-title: How to Use JupyterLab to Submit Jobs to the OSG's Central Pool
-overview: How to Use JupyterLab to Submit Jobs to the OSG's Central Pool
+title: How to Use JupyterLab to Submit Jobs to the OSG's Open Science Pool
+overview: How to Use JupyterLab to Submit Jobs to the OSG's Open Science Pool
 published: true
 permalink: blog/jupyterlab-and-osg-condor-pool.html
 attribution: The SLATE Team
