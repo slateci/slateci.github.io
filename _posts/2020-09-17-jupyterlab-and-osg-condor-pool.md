@@ -33,8 +33,9 @@ Once your request is processed and approved, you should have a submit authentica
 - Copy the submit token and paste it into a file named `submit-token`. 
 - Then, create a secret using the below SLATE command as show below (where &lt;your-group&gt; in the command is the SLATE group you want to use, and &lt;a-cluster&gt; is the name of the target cluster you want to use for your deployment):
 
-	$ slate secret create submit-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=submit-token
-	Successfully created secret submit-auth-token with ID secret_dHiGnjAgR2A 
+
+		$ slate secret create submit-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=submit-token
+		Successfully created secret submit-auth-token with ID secret_dHiGnjAgR2A 
 	
 
 ## Step 3
@@ -62,8 +63,8 @@ Edit the JupyterLab application configuration file, in this case `jupyter.conf`,
 
 Choose a subdomain for the ingress (This will be used in the application's URL):
 
-		Ingress:
-			Subdomain: 'blogpostnotebook'
+	Ingress:
+		Subdomain: 'blogpostnotebook'
 
 
 Update the **CondorConfig** to be enabled, and use hostname `flock.opensciencegrid.org` as the **CollectorHost**, port `9618` as the **CollectorPort**, a port number between 30000-32767 as the **ExternalCondorPort**, the value `true` for the **IsExternalPool** variable, and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
@@ -87,14 +88,14 @@ The last change is for the SSH service. Enable the service and add the SSH publi
 Considering the number of jobs submitted in this demo, and local processes created by condor to handle that, we recommend increasing the resource limit in the config file as follows:
 
 	Resources:
-	# The maximum amount of CPU resources the notebook should be able to use
-	# in units of thousandths of a CPU core, e.g. 1000 == 1 CPU core. 
-	CPU: 2000
-	# The maximum amount of memory the notebook should be able to use, 
-	# in megabytes. 
-	# Note that jupyter and other built-in components use some memory,	# so somewhat less than the value specified here will be available 
-	# to user code. 
-	Memory: 4096
+		# The maximum amount of CPU resources the notebook should be able to use
+		# in units of thousandths of a CPU core, e.g. 1000 == 1 CPU core. 
+		CPU: 2000
+		# The maximum amount of memory the notebook should be able to use, 
+		# in megabytes. 
+		# Note that jupyter and other built-in components use some memory,		# so somewhat less than the value specified here will be available 
+		# to user code. 
+		Memory: 4096
 
 
 You're now ready to install the JupyterLab application on SLATE:
