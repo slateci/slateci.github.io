@@ -124,7 +124,7 @@ where &lt;username&gt; is what you chose above for the NB_USER configuration var
 
 ## Step 4
 	
-We'll show you here how you can submit a test job to the OSG HTCondor pool via two different ways a terminal window and a Python notebook. For our testing purpose, we're going to use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
+We show here how you can submit a test job via two different ways: a terminal window and a Python notebook. For our testing purpose, we're going to use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
 
 First, open a new terminal window in your JupyterLab and create a test script to be executed as your job:
 
