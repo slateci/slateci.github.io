@@ -158,7 +158,8 @@ Then, create a log directory:
 	$ mkdir log 
 
 
-Create a condor submit file 'job.sub':
+
+Create a condor submit file `job.sub`:
 
 	$ nano job.sub
 
