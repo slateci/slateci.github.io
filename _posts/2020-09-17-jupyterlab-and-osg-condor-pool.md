@@ -200,9 +200,9 @@ If you prefer to use python to submit your jobs to the pool, you can do that usi
 
 - Create a `Submit` object for your job as shown below under sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
 
- <strong>Sourcecode:</strong>
+  <strong>Sourcecode:</strong>
 
- ```python
+  ```python
 short_transfer_job = htcondor.Submit({
 "executable": "short_transfer.sh",  # The program to run on the execute node
 "arguments": "input.txt",
@@ -219,25 +219,25 @@ short_transfer_job = htcondor.Submit({
 print(short_transfer_job)
 ```
 
- <strong>Snapshot:</strong>
-<img src="/img/posts/jupyter-osg-pb-s.png">
+  <strong>Snapshot:</strong>
+  <img src="/img/posts/jupyter-osg-pb-s.png">
 
 
- The last command prints the job so that you can verify that it has right specifications you want.
+  The last command prints the job so that you can verify that it has right specifications you want.
 
 - The last step is to queue your job like this:
 
- <strong>Sourcecode:</strong>
+  <strong>Sourcecode:</strong>
 
- ```python
+  ```python
 schedd = htcondor.Schedd()          # get the Python representation of the scheduler
 with schedd.transaction() as txn:   # open a transaction, represented by `txn`
 	cluster_id = short_transfer_job.queue(txn,1000)     # queues 1000 job in the current transaction;
 	print(cluster_id)
 ```
 
- <strong>Snapshot:</strong>
-<img src="/img/posts/jupyter-osg-pb-q.png"> 
+  <strong>Snapshot:</strong>
+  <img src="/img/posts/jupyter-osg-pb-q.png"> 
 
 
 ### Checking Job Status
