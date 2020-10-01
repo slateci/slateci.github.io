@@ -153,7 +153,12 @@ The above script takes an input file as an argument so we need to create one. A 
 	$ echo "Hello World from SLATE" > input.txt
 
 
-Then, create a condor submit file 'job.sub':
+Then, create a log directory:
+
+	$ mkdir log 
+
+
+Create a condor submit file 'job.sub':
 
 	$ nano job.sub
 
@@ -176,10 +181,6 @@ Copy the below job into the submit file, substitute the `<your-project-name>` be
 	# Let's queue a 1000 jobs with the above specifications
 	queue 1000
 
-
-Then, create a log directory:
-
-	$ mkdir log 
 
 
 and submit the job using the `condor-submit` command: 
