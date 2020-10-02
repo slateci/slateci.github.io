@@ -35,8 +35,10 @@ Once your request is processed and approved, you should have a submit authentica
 
 
 		$ slate secret create submit-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=submit-token
-		Successfully created secret submit-auth-token with ID secret_dHiGnjAgR2A 
+		Successfully created secret submit-auth-token with ID secret_dHiGnjAgR2A
+
 	
+<button class="copy-to-clipboard" id="copy-command" data-clipboard-text="slate secret create submit-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=submit-token"> Copy to Clipboard </button>
 
 ## Step 3
 
@@ -57,8 +59,8 @@ Edit the JupyterLab application configuration file, in this case `jupyter.conf`,
 
 	Instance: 'blogpostjupyter' 	
 	Jupyter:
-	  NB_USER: 'demo_user'
-	  Token: 'mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg='
+	NB_USER: 'demo_user'
+	Token: 'mO6KJvhomZ733r/UUW6i1VXuuWgXV/gVN3VrXOgNwEg='
 
 
 Choose a subdomain for the ingress (This will be used in the application's URL):
@@ -70,19 +72,19 @@ Choose a subdomain for the ingress (This will be used in the application's URL):
 Update the **CondorConfig** to be enabled, and use hostname `flock.opensciencegrid.org` as the **CollectorHost**, port `9618` as the **CollectorPort**, a port number between 30000-32767 as the **ExternalCondorPort**, the value `true` for the **IsExternalPool** variable, and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
 
 	CondorConfig:
-      Enabled: true
-      CollectorHost: flock.opensciencegrid.org
-      CollectorPort: 9618
-      ExternalCondorPort: 32676
-      IsExternalPool: true
-      AuthTokenSecret: submit-auth-token
-      
+	Enabled: true
+	CollectorHost: flock.opensciencegrid.org
+	CollectorPort: 9618
+	ExternalCondorPort: 32676
+	IsExternalPool: true
+	AuthTokenSecret: submit-auth-token
+	
 
 The last change is for the SSH service. Enable the service and add the SSH public key you want to use to SSH into the JupyterLab instance:
 
 	SSH:  
-	  Enabled: true
-	  SSH_Public_Key: 'ssh-rsa AAAAB3NzaC1yc2......i0pRTQgD5h1l+UvL/udO+IUYvvi slate'
+	Enabled: true
+	SSH_Public_Key: 'ssh-rsa AAAAB3NzaC1yc2......i0pRTQgD5h1l+UvL/udO+IUYvvi slate'
 
 
 Considering the number of jobs submitted in this demo, and local processes created by condor to handle that, we recommend increasing the resource limit in the config file as follows:
@@ -203,7 +205,7 @@ If you prefer to use python to submit your jobs to the pool, you can do that usi
 
 - Create a `Submit` object for your job as shown below under sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
 
- <strong>Sourcecode:</strong>
+<strong>Sourcecode:</strong>
 
 ```python
 short_transfer_job = htcondor.Submit({
@@ -222,15 +224,15 @@ short_transfer_job = htcondor.Submit({
 print(short_transfer_job)
 ```
 
- <strong>Snapshot:</strong>
- <img src="/img/posts/jupyter-osg-pb-s.png">
+<strong>Snapshot:</strong>
+<img src="/img/posts/jupyter-osg-pb-s.png">
 
 
-  The last command prints the job so that you can verify that it has right specifications you want.
+The last command prints the job so that you can verify that it has right specifications you want.
 
 - The last step is to queue your job like this:
 
- <strong>Sourcecode:</strong>
+<strong>Sourcecode:</strong>
 
 ```python
 schedd = htcondor.Schedd()          # get the Python representation of the scheduler
@@ -269,3 +271,14 @@ In summary, we were able to successfully deploy a JupyterLab instance on SLATE, 
 ## Questions?
 
 As always, we encourage you to try this out and let us know what's working, what's not, what can be improved and so on. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
+
+
+<script>
+	var clipboard = new ClipboardJS('.copy-to-clipboard');
+	clipboard.on('success', function(e) {
+		document.getElementById("copy-command").innerText = "Copied";
+		setTimeout(function() {
+			document.getElementById("copy-command").innerText = "Copy to Clipboard";
+			}, 1000);
+		});
+</script>
