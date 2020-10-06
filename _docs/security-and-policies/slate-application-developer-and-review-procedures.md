@@ -1,5 +1,5 @@
 ---
-title: SLATE Application Developer and Review Procedures
+title: Application Developer and Review Procedures
 overview: SLATE Application Developer and Review Procedures
 
 order: 10  
