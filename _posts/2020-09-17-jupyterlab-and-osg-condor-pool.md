@@ -23,10 +23,10 @@ To be able to submit jobs to OSG, you'll need an authentication token and a proj
 
 If you don't already have access, you can submit a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) requesting access to the Open Science Pool and mention in your ticket that you'll be submitting jobs from the `slateci.io` domain. An example request would be:
 
-*I am submitting this ticket to request a submit-token for the Open Science Pool and a project name so that I can test job submission to the OSG from SLATE. My jobs will be coming from the "slateci.io" domain. If you need any other information to process this request, please let me know.* 
+*I am submitting this ticket to request a submit-token for the Open Science Pool so that I can test job submission to the OSG from SLATE. My jobs will be coming from the "slateci.io" domain. If you need any other information to process this request, please let me know.* 
 
 
-Once your request is processed and approved, you should have a submit authentication token and project name that you can use in the next steps. For us, the access request was processed by the OSG team within one business day.
+Once your request is processed and approved, you should have a submit authentication token that you can use, along with the project name **"SLATECI"**, to do the next steps. For us, it took one business day for the OSG team to process our access request.
 
 ## Step 2
 
@@ -166,7 +166,7 @@ Create a condor submit file `job.sub`:
 	$ nano job.sub
 
 
-Copy the below job into the submit file, substitute the `<your-project-name>` below with the name of your project in OSG, and then save the file:
+Copy the below job into the submit file, and then save the file (For those who have their own OSG project name, please substitute the `SLATECI` below with the name of your project):
 
 	executable = short_transfer.sh
 	arguments = input.txt
@@ -180,7 +180,7 @@ Copy the below job into the submit file, substitute the `<your-project-name>` be
 	request_cpus = 1
 	request_memory = 1 MB
 	request_disk = 1 MB
-	+ProjectName = "<your-project-name>"
+	+ProjectName = "SLATECI"
 	# Let's queue a 1000 jobs with the above specifications
 	queue 1000
 
@@ -203,7 +203,7 @@ If you prefer to use python to submit your jobs to the pool, you can do that usi
 - Create the `short_transfer.sh` and `input.txt` files and the `log` directory, as shown above. Then, open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
 
-- Create a `Submit` object for your job as shown below under sourcecode and snapshot (Please note that you'd need to add in your OSG project name, where it says `<your-project-name>`, to the job.): 
+- Create a `Submit` object for your job as shown below under sourcecode and snapshot (For those who have their own OSG project name, please substitute the `SLATECI` below with the name of your project): 
 
 <strong>Sourcecode:</strong>
 
@@ -219,7 +219,7 @@ short_transfer_job = htcondor.Submit({
 "request_cpus": "1",          # How many CPU cores we want
 "request_memory": "1MB",      # How much memory we want
 "request_disk": "1MB",        # How much disk space we want
-"+ProjectName": classad.quote("<your-project-name>"),
+"+ProjectName": classad.quote("SLATECI"),
 })
 print(short_transfer_job)
 ```
