@@ -19,7 +19,7 @@ In this blog post, we assume you have a SLATE account and client installed on yo
 
 ## Step 1
 
-To be able to submit jobs to OSG, you'll need an authentication token and a project name in OSG. If you're already have that, you can proceed to **Step 2**. 
+To be able to submit jobs to OSG, you'll need an authentication token and a project name in OSG. If you already have that, you can proceed to **Step 2**. 
 
 If you don't already have access, you can submit a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) requesting access to the Open Science Pool and mention in your ticket that you'll be submitting jobs from the `slateci.io` domain. An example request would be:
 
@@ -186,14 +186,14 @@ Copy the below job into the submit file, and then save the file (For those who h
 
 
 
-and submit the job using the `condor-submit` command: 
+and submit the job using the `condor_submit` command: 
 
 	$ condor_submit job.sub
 	Submitting job(s).
 	1000 job(s) submitted to cluster 15.
 
 
-A successful run will create in your local directory the file *output.txt*  with the "Hello World from SLATE" message in it. Additionally, you should see inside the log directory all the `output`, `error` and `log` files for the individual jobs. In our experience with this job submission to OSG, it took around one hour for all the jobs to finish. 
+In our experience with this job submission to OSG, it took around one hour for all the jobs to finish. A successful run will create in your local directory the file *output.txt*  with the "Hello World from SLATE" message in it. Additionally, you should see inside the log directory all the `output`, `error` and `log` files for the individual jobs. 
 
 To check the status of your jobs, you can use the `condor_q` command as shown in the `Checking Job Status` section below.
 
