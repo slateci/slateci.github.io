@@ -18,8 +18,8 @@ The following summary document is intended to give a general overview of the sec
 
 ## SLATE Security Policies
 
-[Acceptable Use Policy](/docs/security-and-policies/acceptable-use.html)
-[Incident Response Policy](/docs/security-and-policies/incident-response-policy.html)
+* [Acceptable Use Policy](/docs/security-and-policies/acceptable-use.html)
+* [Incident Response Policy](/docs/security-and-policies/incident-response-policy.html)
 
 [Privacy Policy](/docs/security-and-policies/privacy.html)
 
