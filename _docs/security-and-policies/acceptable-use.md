@@ -1,5 +1,5 @@
 ---
-title: SLATE Acceptable Use Policy
+title: Acceptable Use Policy
 overview: SLATE Acceptable Use Policy
 
 order: 10  
