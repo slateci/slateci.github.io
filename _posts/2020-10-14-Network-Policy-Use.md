@@ -1,5 +1,4 @@
 ---
-tag: draft
 title: Using Kubernetes Network Policies for SLATE applications
 overview: Network Policy Creation
 published: true
