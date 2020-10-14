@@ -1,5 +1,5 @@
 ---
-title: SLATE Application Developer Obligations 
+title: Application Developer Obligations 
 overview: SLATE Application Developer Obligations 
 
 order: 10  
