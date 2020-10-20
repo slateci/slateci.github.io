@@ -94,7 +94,8 @@ Considering the number of jobs submitted in this demo, and local processes creat
 		CPU: 2000
 		# The maximum amount of memory the notebook should be able to use, 
 		# in megabytes. 
-		# Note that jupyter and other built-in components use some memory,		# so somewhat less than the value specified here will be available 
+		# Note that jupyter and other built-in components use some memory,		
+		# so somewhat less than the value specified here will be available 
 		# to user code. 
 		Memory: 4096
 
