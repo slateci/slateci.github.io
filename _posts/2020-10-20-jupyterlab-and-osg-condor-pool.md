@@ -6,7 +6,6 @@ permalink: blog/jupyterlab-and-osg-condor-pool.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 In our previous blog post on [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/slate-jupyter-condor-june-2020.html), we showed how a user can leverage multiple SLATE catalog applications to deploy a JupyterLab instance and a test HTCondor pool on SLATE.
