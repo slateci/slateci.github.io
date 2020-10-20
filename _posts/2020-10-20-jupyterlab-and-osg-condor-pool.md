@@ -16,18 +16,18 @@ In this blog post, we assume you have a SLATE account and client installed on yo
 
 <!--end_excerpt-->
 
-## Step 1
+## Get an OSG token
 
-To be able to submit jobs to OSG, you'll need an authentication token and a project name in OSG. If you already have that, you can proceed to **Step 2**. 
+To be able to submit jobs to OSG, you'll need an authentication token and a project name in OSG. If you already have that, you can proceed to **Create a Secret**. 
 
-If you don't already have access, you can submit a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) requesting access to the Open Science Pool and mention in your ticket that you'll be submitting jobs from the `slateci.io` domain. An example request would be:
+Request a token by submitting a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) with the following request: 
 
 *I am submitting this ticket to request a submit-token for the Open Science Pool so that I can test job submission to the OSG from SLATE. My jobs will be coming from the "slateci.io" domain. If you need any other information to process this request, please let me know.* 
 
 
-Once your request is processed and approved, you should have a submit authentication token that you can use, along with the project name **"SLATECI"**, to do the next steps. For us, it took one business day for the OSG team to process our access request.
+When your request is approved you'll be given an authentication token you will use with a Project Name **"SLATECI"**, more below. For us, it took one business day for the OSG team to process our access request.
 
-## Step 2
+## Create a Secret
 
 - Copy the submit token and paste it into a file named `submit-token`. 
 - Then, create a secret using the below SLATE command as show below (where &lt;your-group&gt; in the command is the SLATE group you want to use, and &lt;a-cluster&gt; is the name of the target cluster you want to use for your deployment):
@@ -39,9 +39,8 @@ Once your request is processed and approved, you should have a submit authentica
 	
 <button class="copy-to-clipboard" id="copy-command" data-clipboard-text="slate secret create submit-auth-token --group <your-group> --cluster <a-cluster> --from-file condor_token=submit-token"> Copy to Clipboard </button>
 
-## Step 3
 
-### Deploy JupyterLab
+## Deploy JupyterLab
 
 Download the base configurations:
 
@@ -125,9 +124,11 @@ where &lt;username&gt; is what you chose above for the NB_USER configuration var
 
 
 
-## Step 4
+## Job Submission to the OSG
 	
-We show here how you can submit a test job via two different ways: a terminal window and a Python notebook. For our testing purpose, we're going to use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with some modifications. 
+We can submit jobs with either a JupyterLab terminal (using the Unix command line) or from a Jupyter notebook.  We'll use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with a few modifications. 
+
+### From a JupyterLab terminal
 
 First, open a new terminal window in your JupyterLab and create a test script to be executed as your job:
 
@@ -197,8 +198,9 @@ In our experience with this job submission to OSG, it took around one hour for a
 
 To check the status of your jobs, you can use the `condor_q` command as shown in the `Checking Job Status` section below.
 
-## Submitting your Jobs from a Python Notebook
-If you prefer to use python to submit your jobs to the pool, you can do that using HTCondor Python Bindings as follows:
+## From a Jupyter notebook
+
+If you prefer to use a notebook to submit your jobs to the pool, you can do that using HTCondor Python Bindings as follows:
 
 - Create the `short_transfer.sh` and `input.txt` files and the `log` directory, as shown above. Then, open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
