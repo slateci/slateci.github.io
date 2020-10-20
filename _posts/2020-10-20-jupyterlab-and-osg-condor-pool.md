@@ -267,7 +267,7 @@ If you need to uninstall an application you previously deployed on SLATE, run th
 
 ## Summary
 
-In summary, we were able to successfully deploy a JupyterLab instance on SLATE, and demonstrate job submission to a production-scale high-throughput cluster using the Open Science Grid. 
+We deployed a JupyterLab application on a Kubernetes cluster registered with the SLATE platform.  After getting the proper approval and authorization token, the deployed app can be used to submit jobs to the opportunistic pool of the Open Science Grid in either conventional ways (via a terminal command line) or from a notebook.  
 
 
 ## Questions?
