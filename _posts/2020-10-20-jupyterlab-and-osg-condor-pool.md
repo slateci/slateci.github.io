@@ -43,7 +43,7 @@ When your request has been approved you'll be given an authentication token you.
 
 ## Deploy JupyterLab
 
-Download the base configurations:
+Download the base configuration of the [application](https://github.com/slateci/slate-catalog/tree/master/incubator/jupyter-notebook/jupyter-notebook):
 
 	$ slate app get-conf --dev jupyter-notebook > jupyter.conf
 
