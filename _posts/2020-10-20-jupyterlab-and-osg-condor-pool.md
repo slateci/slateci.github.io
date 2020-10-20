@@ -20,12 +20,12 @@ In this blog post, we assume you have a SLATE account and client installed on yo
 
 To be able to submit jobs to OSG, you'll need an authentication token and a project name in OSG. If you already have that, you can proceed to **Create a Secret**. 
 
-Request a token by submitting a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) with the following request: 
+Request a token by submitting a ticket to the [OSG Research Facilitation team](https://support.opensciencegrid.org/support/tickets/new) with the following request (copy and past the below into the Description field of the ticket form): 
 
-*I am submitting this ticket to request a submit-token for the Open Science Pool so that I can test job submission to the OSG from SLATE. My jobs will be coming from the "slateci.io" domain. If you need any other information to process this request, please let me know.* 
+>I am submitting this ticket to request a submit-token for the Open Science Pool so that I can test job submission to the OSG from a Kubernetes cluster registered to SLATE. My jobs will be coming from the "slateci.io" domain. If you need any other information to process this request, please let me know.
 
 
-When your request is approved you'll be given an authentication token you will use with a Project Name **"SLATECI"**, more below. For us, it took one business day for the OSG team to process our access request.
+When your request has been approved you'll be given an authentication token you.  For us, it took one business day for the OSG team to process our access request.
 
 ## Create a Secret
 
@@ -167,7 +167,7 @@ Create a condor submit file `job.sub`:
 	$ nano job.sub
 
 
-Copy the below job into the submit file, and then save the file (For those who have their own OSG project name, please substitute the `SLATECI` below with the name of your project):
+Copy the below into the submit file and save. (If you already have an OSG project, replace the `SLATECI` =+ProjectName= string with the name of your project):
 
 	executable = short_transfer.sh
 	arguments = input.txt
