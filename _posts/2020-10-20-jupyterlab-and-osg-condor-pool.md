@@ -16,7 +16,7 @@ Our previous post [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/s
 
 We assume you have a [SLATE account](https://portal.slateci.io/slate_portal) and access to a Kubernetes cluster [registered with the SLATE federation](https://portal.slateci.io/clusters).  You will also need a local copy of the [SLATE client installed](https://slateci.io/docs/tools/index.html).  See [SLATE quickstart](https://slateci.io/docs/quickstart/) or contact us if you need help getting started.
 
-> __Note: this post is a technical preview of things to come, and primarily intended for demonstration purposes.__
+> __Note: this post is a technical preview of things to come, and primarily intended for early adopters.__
 
 
 ## Get an OSG token
