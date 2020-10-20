@@ -201,9 +201,9 @@ In our experience with this job submission to OSG, it took around one hour for a
 
 To check the status of your jobs, you can use the `condor_q` command as shown in the `Checking Job Status` section below.
 
-## From a Jupyter notebook
+### From a Jupyter notebook
 
-If you prefer to use a notebook to submit your jobs to the pool, you can do that using HTCondor Python Bindings as follows:
+If you prefer to use a notebook to submit your jobs to the pool, you can do that using [HTCondor Python Bindings](https://htcondor.readthedocs.io/en/latest/apis/python-bindings/) as follows:
 
 - Create the `short_transfer.sh` and `input.txt` files and the `log` directory, as shown above. Then, open a new Python notebook, and import the below two modules:
 <img src="/img/posts/jupyter-osg-pb-i.png"> 
