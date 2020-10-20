@@ -40,6 +40,11 @@ toc:
         url: /docs/tools/minislate.html
       - page: MiniSLATE Commands
         url: /docs/tools/minislate-commands.html
+  - title: Fields of Science
+    id: fields-of-Science
+    subfolderitems:
+      - page: Fields of Science
+        url: /docs/science-fields
   - title: Application Development
     id: applications-development
     url: /docs/apps/
