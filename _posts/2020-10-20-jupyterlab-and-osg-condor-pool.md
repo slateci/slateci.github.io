@@ -1,5 +1,5 @@
 ---
-title: How to Use JupyterLab to Submit Jobs to the OSG's Open Science Pool
+title: How to Use JupyterLab to Submit Jobs to the Open Science Grid with SLATE
 overview: How to Use JupyterLab to Submit Jobs to the OSG's Open Science Pool
 published: true
 permalink: blog/jupyterlab-and-osg-condor-pool.html
@@ -8,13 +8,14 @@ layout: post
 type: markdown
 ---
 
-In our previous blog post on [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/slate-jupyter-condor-june-2020.html), we showed how a user can leverage multiple SLATE catalog applications to deploy a JupyterLab instance and a test HTCondor pool on SLATE.
- 
-In this blog post, however, we demonstrate how you can deploy a JupyterLab from the SLATE catalog, and then use it to submit HTCondor jobs to the OSG's Open Science Pool (c.f. the [Open Science Grid help desk](support.opensciencegrid.org)). We thought this would be very helpful for those users who work with such a production-scale high-throughput cluster and would like to use the condor-submit feature that's integrated within the SLATE JupyterLab application to submit their jobs.
-
-In this blog post, we assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster. However, if you don't have an account, you can sign up at the [SLATE Portal](https://portal.slateci.io/slate_portal) and then follow the instructions for [installing the SLATE Client](https://slateci.io/docs/tools/#installing-the-slate-client). You can also find in the previous link, right after the Basic Use section, information on how to join or create a group so that you can deploy applications on SLATE.
+Our previous post [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/slate-jupyter-condor-june-2020.html) described a deployment of HTCondor pool on a SLATE-registered Kubernetes cluster with job submission provided by a JupyterLab application.  But what if you want just a JupyterLab capable of submitting jobs to the [Open Science Grid](www.opensciencegrid.org))? 
 
 <!--end_excerpt-->
+
+## Assumptions
+
+We assume you have a SLATE account (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a Kubernetes cluster registered with the SLATE federation.  You will also need a local copy of the client installed, see [installing the SLATE Client](https://slateci.io/docs/tools/#installing-the-slate-client). 
+
 
 ## Get an OSG token
 
