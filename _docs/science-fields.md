@@ -10,7 +10,7 @@ type: markdown
 
 {% include section-index.html %}
 
-When creating a group it is required that you specify the science field in which it works, or ‘Resource Provider’ if your group existing mainly to provide computing resources to the platform. For more information about creating groups within SLATE please review [SLATE Tools: CLI](http://localhost:4000/docs/tools/index.html).
+When creating a group it is required that you specify the science field in which it works, or ‘Resource Provider’ if your group existing mainly to provide computing resources to the platform. For more information about creating groups within SLATE please review [SLATE Tools: CLI](http://slateci.io/docs/tools/index.html).
 
 - *Resource Provider* (For groups whose main role is providing computing resources to the SLATE platform)
 - Accelerator Physics
