@@ -20,6 +20,8 @@ toc:
         url: /docs/cluster/operating-system-requirements.html
       - page: Docker and Kubernetes
         url: /docs/cluster/docker-kubernetes.html
+      #- page: Installing Kubernetes with Ansible and Kubespray
+      #  url: /docs/cluster/install-kubernetes-with-kubespray.html
       - page: SLATE Master Node
         url: /docs/cluster/slate-master-node.html
       - page: SLATE Worker Node
@@ -42,9 +44,10 @@ toc:
         url: /docs/tools/minislate-commands.html
   - title: Fields of Science
     id: fields-of-Science
+    url: /docs/science-fields
     subfolderitems:
       - page: Fields of Science
-        url: /docs/science-fields
+        url: /docs/science-fields/science-fields.html
   - title: Application Development
     id: applications-development
     url: /docs/apps/
