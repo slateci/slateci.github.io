@@ -36,7 +36,7 @@ jobs:
           export PATH=$PATH:/home/runner/work/slateci.github.io/slateci.github.io/ >> ~/.profile
           # ls
           # pwd
-      - name: Download tests
+      - name: Download Tests
         run: |
           git clone https://github.com/lzhang666/slateci-unit-tests.git
       - name: Run Selenium Tests
