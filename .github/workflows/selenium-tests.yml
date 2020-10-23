@@ -1,0 +1,44 @@
+name: slateci.io Selenium Tests
+
+# Run this workflow on push and pull request to all branch
+# on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # TESTS
+      - uses: actions/checkout@v2
+      # set up Python 3.8
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+
+      # Install Selenium Python Bindings
+      - name: Install Selenium Python Bindings
+        run: pip install -U selenium
+      # install chrome web driver
+      - name: Install Chrome web driver
+        run: |
+          google-chrome --version
+          wget https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          rm chromedriver_linux64.zip
+          export PATH=$PATH:/home/runner/work/slateci.github.io/slateci.github.io/ >> ~/.profile
+          # ls
+          # pwd
+      - name: Download Tests
+        run: |
+          git clone https://github.com/lzhang666/slateci-unit-tests.git
+      - name: Run Selenium Tests
+        run:
+          python slateci-unit-tests/main.py
