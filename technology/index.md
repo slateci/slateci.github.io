@@ -17,7 +17,7 @@ type: markdown
 	<div class="col-10">
 
 		<p align="justify">
-				The SLATE Federation is tied together by a custom component called the <b>SLATE API Server</b>. This provides a uniform interface for all users of SLATE to make requests to use and manage resources participating in the Federation. It enforces access control rules so that resource providers can regulate which groups on SLATE can run services on their cluster, along with services they may run. SLATE provides both the <a href="/docs/tools/">SLATE Command Line Client</a> and the <a href="https://portal.slateci.io/dashboard">SLATE Dashboard</a> to interact with this API.
+				The SLATE Federation is tied together by a custom component called the <b>SLATE API Server</b>. This provides a uniform interface for all users of SLATE to make requests to use and manage resources participating in the Federation. It enforces access control rules so that resource providers can regulate which groups on SLATE can run services on their cluster, along with services they may run. SLATE provides both the <a href="/docs/tools/">SLATE Command Line Client</a> and the <a href="https://portal.slateci.io/slate_portal">SLATE Dashboard</a> to interact with this API.
 		</p>
 
 	</div>
