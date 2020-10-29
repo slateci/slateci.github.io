@@ -45,7 +45,7 @@ All communication regarding security incidents should be marked in accordance wi
 
 ## Escalation Paths
 
-The primary contact address for security issues is [security@slateci.io](security@slateci.io). 
+The primary contact address for security issues is [security@slateci.io](mailto:security@slateci.io). 
 
 Members of the SLATE team who observe a problem which they believe indicates a possible security incident should also promptly contact the Security Operations Staff. This may be done either via the above email address, or through other project-internal communications channels, such as Slack. 
 
