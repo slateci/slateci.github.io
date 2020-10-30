@@ -9,7 +9,7 @@ type: markdown
 tag: draft
 ---
 
-Telegraf provides a powerful plugin-driven environment to set up a variety of monitoring solutions. 
+Telegraf provides a powerful plugin-driven environment to set up a variety of monitoring solutions.
 In this application, we use Telegraf to monitor an array of hosts with SNMP.
 These metrics are aggregated and sent to a database at GlobalNOC.
 
