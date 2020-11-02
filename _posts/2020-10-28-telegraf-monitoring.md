@@ -70,6 +70,23 @@ The default configuration file includes two `hostGroup` sections to illustrate t
 If only one configuration is required, delete the second `hostGroup` section.
 
 
+**Database Configuration**
+
+*Not yet fully implemented*
+
+
+**Additional Parameters**
+
+There are two other parameters that can be configured. The first of these is `writeToStdout`.
+When set to true, Telegraf will additionally write its metrics to stdout inside its container.
+This can be useful for debugging, but is not necessary. Set this as needed.
+
+The second parameter is `interval`. This controls the frequency at which Telegraf collects SNMP metrics.
+Specify your desired value here by combining an integer with a time unit. 
+Valid time units include "ns", "us", "ms", "s", "m" and "h".
+
+
+
 ### Installation
 
 Once the application has been properly configured, we must deploy it.
@@ -86,8 +103,8 @@ The following table lists the configurable parameters of the Telegraf monitoring
 
 |           Parameter           |           Description           |           Default           |
 |-------------------------------|---------------------------------|-----------------------------|
-|`telegrafConfig.useCustomConfig`| Whether to use a custom configuration file. |`false`|
-|`telegrafConfig.configPath`| Path to optional custom configuration file. |`files/telegraf.conf`|
+|`writeToStdout`| Optionally write to stdout in container |`true`|
+|`interval`| Data collection interval |`5s`|
 |`targets.hostGroup.community`| Community string of `hostGroup` |`public`|
 |`targets.hostGroup.hosts`| Target hosts list |`127.0.0.1:161`|
 |`targets.hostGroup.oids`| SNMP OIDs to poll |*telegraf configuration monitoring system uptime*|
