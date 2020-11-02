@@ -84,7 +84,10 @@ This can be useful for debugging, but is not necessary. Set this as needed.
 The second parameter is `interval`. This controls the frequency at which Telegraf collects SNMP metrics.
 Specify your desired value here by combining an integer with a time unit. 
 Valid time units include "ns", "us", "ms", "s", "m" and "h".
-
+For example, to collect metrics every five seconds, enter the following:
+```yaml
+interval: 5s
+```
 
 
 ### Installation
