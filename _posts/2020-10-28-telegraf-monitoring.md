@@ -1,6 +1,6 @@
 ---
-title: "SNMP Monitoring With Telegraf"
-overview: How to Monitor Hosts with SNMP and Telegraf
+title: "Using SLATE to Deploy Telegraf Monitoring"
+overview: A guide to using SLATE to monitor hosts with Telegraf.
 published: true
 permalink: blog/telegraf-monitoring.html
 attribution: The SLATE Team
@@ -9,20 +9,33 @@ type: markdown
 tag: draft
 ---
 
-Telegraf provides a powerful plugin-driven environment to set up a variety of monitoring solutions.
-In this application, we use Telegraf to monitor an array of hosts with SNMP.
-These metrics are aggregated and sent to a database at GlobalNOC.
+The SLATE platform provides a powerful, simple way to deploy a large variety of applications.
+In this blog post, we will demonstrate how SLATE can be leveraged to quickly deploy a monitoring solution for ScienceDMZ network infrastructure. 
+We will assume collected metrics will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).  
+With some additional configuration explained below, metrics can also be sent to a separate InfluxDB database.
+
+This application uses Telegraf to monitor a group of hosts with the Simple Network Management Protocol, primarily referred to as SNMP.
+More information about SNMP can be found [here](http://www.net-snmp.org/).
+
 
 
 <!--end_excerpt-->
-
 
 ### Prerequisites
 
 It is assumed that you already have access to a SLATE-registered Kubernetes cluster, and that you already have installed and set up the SLATE client.
 If not, instructions can be found at [SLATE Quickstart](https://slateci.io/docs/quickstart/).
+Additionally, it is assumed that you have configured an SNMP daemon (responds to SNMP requests) on one or more target hosts.
 
+On CentOS 7, a simple SNMP setup can be installed by running the following commands:
+```bash
+yum install net-snmp net-snmp-utils
+systemctl enable snmpd
+systemctl restart snmpd
+```
+More detail can be found [here](https://support.managed.com/kb/a2390/how-to-install-snmp-and-configure-the-community-string-for-centos.aspx).
 
+ 
 ### Configuration
 
 First, a configuration file for the application must be fetched.
