@@ -1,6 +1,6 @@
 ---
-title: Installing Kubernetes with Ansible & Kubepsray
-overview: Installing Kubernetes with Ansible & Kubepsray
+title: Installing Kubernetes with Ansible & Kubespray
+overview: Installing Kubernetes with Ansible & Kubespray
 
 order: 10  
 layout: docs2020
