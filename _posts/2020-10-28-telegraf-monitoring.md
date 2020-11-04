@@ -12,14 +12,13 @@ tag: draft
 The SLATE platform provides a powerful, simple way to deploy a large variety of applications.
 In this blog post, we will demonstrate how SLATE can be leveraged to quickly deploy a monitoring solution for ScienceDMZ network infrastructure. 
 We will assume collected metrics will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).  
-With some additional configuration explained below, metrics can also be sent to a separate InfluxDB database.
+However, with some additional configuration, metrics can also be sent to a separate [InfluxDB](https://www.influxdata.com/) database.
 
-This application uses Telegraf to monitor a group of hosts with the Simple Network Management Protocol, primarily referred to as SNMP.
+This application uses [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) to monitor a group of hosts with the Simple Network Management Protocol, primarily referred to as SNMP.
 More information about SNMP can be found [here](http://www.net-snmp.org/).
 
-
-
 <!--end_excerpt-->
+
 
 ### Prerequisites
 
@@ -33,12 +32,12 @@ yum install net-snmp net-snmp-utils
 systemctl enable snmpd
 systemctl restart snmpd
 ```
-More detail can be found [here](https://support.managed.com/kb/a2390/how-to-install-snmp-and-configure-the-community-string-for-centos.aspx).
+More details can be found [here](https://support.managed.com/kb/a2390/how-to-install-snmp-and-configure-the-community-string-for-centos.aspx).
 
  
 ### Configuration
 
-First, a configuration file for the application must be fetched.
+To begin, a configuration file for the application must be fetched.
 The SLATE client provides a simple way to do this with the command below:
 ```bash
 slate app get-conf telegraf > telegraf.yaml
@@ -83,7 +82,12 @@ The default configuration file includes two `hostGroup` sections to illustrate t
 If only one configuration is required, delete the second `hostGroup` section.
 
 
-**Database Configuration**
+**GlobalNOC Database Configuration**
+
+*Not yet fully implemented*
+
+
+**InfluxDB Configuration**
 
 *Not yet fully implemented*
 
@@ -124,5 +128,6 @@ The following table lists the configurable parameters of the Telegraf monitoring
 |`targets.hostGroup.community`| Community string of `hostGroup` |`public`|
 |`targets.hostGroup.hosts`| Target hosts list |`127.0.0.1:161`|
 |`targets.hostGroup.oids`| SNMP OIDs to poll |*telegraf configuration monitoring system uptime*|
-|`endpoint`| Database endpoint |`http://127.0.0.1:9999`|
-|`database`| Database name |`telegraf`|
+|`influxOutput.enabled`| Whether to write to InfluxDB |`true`|
+|`influxOutput.endpoint`| Database endpoint |`http://127.0.0.1:9999`|
+|`influxOutput.database`| Database name |`telegraf`|
