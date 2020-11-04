@@ -10,12 +10,12 @@ tag: draft
 ---
 
 The SLATE platform provides a powerful, simple way to deploy a large variety of applications.
-In this blog post, we will demonstrate how SLATE can be leveraged to quickly deploy a monitoring solution for ScienceDMZ network infrastructure. 
-We will assume collected metrics will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).  
+In this blog post, we will demonstrate how SLATE can be leveraged to quickly deploy a monitoring solution for ScienceDMZ network infrastructure.
+Our monitoring solution will use [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) to monitor a group of hosts with the Simple Network Management Protocol, primarily referred to as SNMP.
+More information about SNMP can be found [here](http://www.net-snmp.org/).
+We will assume collected metrics will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).
 However, with some additional configuration, metrics can also be sent to a separate [InfluxDB](https://www.influxdata.com/) database.
 
-This application uses [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) to monitor a group of hosts with the Simple Network Management Protocol, primarily referred to as SNMP.
-More information about SNMP can be found [here](http://www.net-snmp.org/).
 
 <!--end_excerpt-->
 
@@ -86,6 +86,8 @@ If only one configuration is required, delete the second `hostGroup` section.
 
 *Not yet fully implemented*
 
+To push to GlobalNOC's databases, credentials must be obtained.
+
 
 **InfluxDB Configuration**
 
@@ -115,6 +117,24 @@ To install the application onto a SLATE cluster, simply run the command below:
 slate app install telegraf --group <group_name> --cluster <cluster_name> --conf telegraf.yaml
 ```
 This installs the Telegraf application onto the cluster specified, with the configuration previously specified.
+
+
+### Testing
+
+If you want to quickly test the application without setting up a database, `netcat` can be used as an improvised database endpoint.
+On the machine you want to receive metrics on, enter the command:
+```bash
+nc -lk 9999
+```
+This will listen for any incoming data on port 9999.
+Then, configure the InfluxDB endpoint to point to port 9999 on this machine. Enter something like this:
+```yaml
+influxOutput:
+  enabled: true
+  endpoint: "http://<machine_ip_here>:9999"
+  database: "telegraf"
+```
+
 
 
 ### Configuration Notes
