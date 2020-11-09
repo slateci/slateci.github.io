@@ -10,12 +10,12 @@ tag: draft
 ---
 
 The SLATE platform provides a powerful, simple way to deploy a large variety of applications.
-In this blog post, we will demonstrate how SLATE can be leveraged to quickly deploy a monitoring solution for ScienceDMZ network infrastructure. 
-We will assume collected metrics will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).  
+In this blog post, we will demonstrate how SLATE can be leveraged to quickly deploy a monitoring solution for ScienceDMZ network infrastructure.
+Our monitoring solution will use [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) to monitor a group of hosts with the Simple Network Management Protocol, primarily referred to as SNMP.
+More information about SNMP can be found [here](http://www.net-snmp.org/).
+We will assume collected metrics will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).
 However, with some additional configuration, metrics can also be sent to a separate [InfluxDB](https://www.influxdata.com/) database.
 
-This application uses [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) to monitor a group of hosts with the Simple Network Management Protocol, primarily referred to as SNMP.
-More information about SNMP can be found [here](http://www.net-snmp.org/).
 
 <!--end_excerpt-->
 
@@ -84,8 +84,20 @@ If only one configuration is required, delete the second `hostGroup` section.
 
 **GlobalNOC Database Configuration**
 
-*Not yet fully implemented*
+To push to GlobalNOC's databases, credentials must be obtained.
 
+*Process for getting credentials here*
+
+Next, configure the database endpoint by filling out the `grnocOutput` section with the hostname, username, and password obtained earlier. 
+Additionally, make sure that the `enabled` flag is set to true.
+This section will look like this:
+```yaml
+grnocOutput:
+  enabled: true
+  hostname: "tsds.hostname.net"
+  username: "tsds username"
+  password: "tsds password"
+```
 
 **InfluxDB Configuration**
 
@@ -98,7 +110,7 @@ There are two other parameters that can be configured. The first of these is `wr
 When set to true, Telegraf will additionally write its metrics to stdout inside its container.
 This can be useful for debugging, but is not necessary. Set this as needed.
 
-The second parameter is `interval`. This controls the frequency at which Telegraf collects SNMP metrics.
+The second parameter is `interval`. This controls the frequency at which Telegraf collects metrics.
 Specify your desired value here by combining an integer with a time unit. 
 Valid time units include "ns", "us", "ms", "s", "m" and "h".
 For example, to collect metrics every five seconds, enter the following:
@@ -117,6 +129,56 @@ slate app install telegraf --group <group_name> --cluster <cluster_name> --conf 
 This installs the Telegraf application onto the cluster specified, with the configuration previously specified.
 
 
+### Testing
+
+**Testing with Netcat**
+
+If you want to quickly test the application without setting up a database, `netcat` can be used as an improvised database endpoint.
+On the machine you want to receive metrics on, enter the command:
+```bash
+nc -lk 9999
+```
+This will listen for any incoming data on port 9999.
+Then, configure the InfluxDB endpoint to point to port 9999 on this machine. Enter something like this:
+```yaml
+influxOutput:
+  enabled: true
+  endpoint: "http://<machine_ip_here>:9999"
+  database: "telegraf"
+```
+
+
+**Testing with InfluxDB**
+
+Alternately, an InfluxDB endpoint can be simply set up using Docker.
+Configure Docker on the machine you want to receive metrics on, and pull the InfluxDB image with:
+```bash
+docker pull influxdb
+```
+Next, run the image in a container with the appropriate ports and volumes:
+```bash
+docker run -p 9999:9999 -v $PWD:/var/lib/influxdb influxdb
+```
+
+
+
+### Troubleshooting
+
+In the event that something is not working properly, logs from the container running Telegraf can be printed with the following command:
+```bash
+slate instance logs <instance_id>
+```
+An `instance_id` is a unique, randomly-generated string prefaced with "instance" that SLATE assigns to each running experiment.
+This ID is printed on app installation. 
+Additionally, a list of running applications and their IDs can be printed with the command:
+```bash
+slate instance list
+```
+
+*list common errors and their solutions* 
+
+
+
 ### Configuration Notes
 
 The following table lists the configurable parameters of the Telegraf monitoring application and their default values.
@@ -125,9 +187,17 @@ The following table lists the configurable parameters of the Telegraf monitoring
 |-------------------------------|---------------------------------|-----------------------------|
 |`writeToStdout`| Optionally write to stdout in container |`true`|
 |`interval`| Data collection interval |`5s`|
+|`flushInterval`| Output flush interval |`300s`|
 |`targets.hostGroup.community`| Community string of `hostGroup` |`public`|
 |`targets.hostGroup.hosts`| Target hosts list |`127.0.0.1:161`|
 |`targets.hostGroup.oids`| SNMP OIDs to poll |*telegraf configuration monitoring system uptime*|
+|`grnocOutput.enabled`| Whether to write to GlobalNOC database |`true`|
+|`grnocOutput.hostname`| Database endpoint |`tsds.hostname.net`|
+|`grnocOutput.username`| Database username |`tsds username`|
+|`grnocOutput.password`| Database password |`tsds password`|
 |`influxOutput.enabled`| Whether to write to InfluxDB |`true`|
 |`influxOutput.endpoint`| Database endpoint |`http://127.0.0.1:9999`|
 |`influxOutput.database`| Database name |`telegraf`|
+|`influxOutput.httpBasicAuth.enabled`| Whether http basic authentication is enabled |`false`|
+|`influxOutput.httpBasicAuth.username`| Database username |`telegraf`|
+|`influxOutput.httpBasicAuth.password`| Database password |`metrics`|
