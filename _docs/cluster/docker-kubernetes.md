@@ -18,6 +18,7 @@ We recommend using the Docker Community Edition runtime with Kubernetes and SLAT
 ```
 # Add the yum-config-manager tool if you don't already have it
 yum install yum-utils -y
+
 # Add Docker stable repo to Yum
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
