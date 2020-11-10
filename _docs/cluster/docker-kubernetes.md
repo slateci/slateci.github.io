@@ -16,6 +16,8 @@ The SLATE platform uses Kubernetes as its container orchestration system, and Do
 We recommend using the Docker Community Edition runtime with Kubernetes and SLATE. It can be installed and activated like so: 
 
 ```
+# Add the yum-config-manager tool if you don't already have it
+yum install yum-utils -y
 # Add Docker stable repo to Yum
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
