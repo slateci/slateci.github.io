@@ -106,7 +106,7 @@ grnocOutput:
 
 **Additional Parameters**
 
-There are two other parameters that can be configured. The first of these is `writeToStdout`.
+There are three other parameters that can be configured. The first of these is `writeToStdout`.
 When set to true, Telegraf will additionally write its metrics to stdout inside its container.
 This can be useful for debugging, but is not necessary. Set this as needed.
 
@@ -117,6 +117,9 @@ For example, to collect metrics every five seconds, enter the following:
 ```yaml
 interval: 5s
 ```
+
+The third parameter is 'flushInterval`. This control the frequency at which Telegraf flushes its output plugins, or writes to the specified databases.
+Set this in the same fashion as the `interval` parameter.
 
 
 ### Installation
