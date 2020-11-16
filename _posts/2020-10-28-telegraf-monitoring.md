@@ -92,6 +92,7 @@ targets:
 **Hosts**
 
 Under `hosts`, replace the placeholder IP address with the IP address or full DNS name of the host you want to monitor.
+Additionally, specify the default SNMP port (161) by appending a colon followed by this number.
 Add as many additional hosts underneath as wanted. As per yaml syntax, preface them with a hyphen and surround with quotes to reduce ambiguity.
 
 **Community String**
@@ -118,27 +119,6 @@ The default configuration file includes two `hostGroup` sections to illustrate t
 If only one host group is required, delete the second `hostGroup` section.
 
 
-### InfluxDB Configuration
-
-To enable InfluxDB output, navigate to the `influxOutput` section of the configuration file. It will look like this:
-'''yaml
-influxOutput:
-  enabled: false
-  endpoint: "http://127.0.0.1:9999"
-  database: "telegraf"
-  httpBasicAuth:
-    enabled: false
-    username: "telegraf"
-    password: "metrics"
-'''
-First, set `enabled` to true. 
-Next, set `endpoint` to the endpoint of the database you wish to push to.
-Make sure to specify the proper protocol and port.
-Then, specify the database name as the `database` parameter.
-If basic http authentication has been enabled on your database, you will need to set the `httpBasicAuth` flag to true, and supply the proper username and password. 
-If not, this section can be left disabled.
-
-
 ### Additional Parameters
 
 There are three other parameters that can be configured. The first of these is `writeToStdout`.
@@ -155,6 +135,28 @@ interval: 5s
 
 The third parameter is 'flushInterval`. This control the frequency at which Telegraf flushes its output plugins, or writes to the specified databases.
 Set this in the same fashion as the `interval` parameter.
+
+
+### InfluxDB Configuration
+
+To enable InfluxDB output, navigate to the `influxOutput` section of the configuration file. It will look like this:
+```yaml
+influxOutput:
+  enabled: false
+  endpoint: "http://127.0.0.1:9999"
+  database: "telegraf"
+  httpBasicAuth:
+    enabled: false
+    username: "telegraf"
+    password: "metrics"
+```
+
+First, set `enabled` to true. 
+Next, set `endpoint` to the endpoint of the database you wish to push to.
+Make sure to specify the proper protocol and port.
+Then, specify the database name as the `database` parameter.
+If basic http authentication has been enabled on your database, you will need to set the `httpBasicAuth` flag to true, and supply the proper username and password. 
+If not, this section can be left disabled.
 
 
 ## Installation
@@ -214,6 +216,8 @@ Additionally, a list of running applications and their IDs can be printed with t
 ```bash
 slate instance list
 ```
+
+For additional help, or to report a bug, please contact the SLATE team.
 
 
 
