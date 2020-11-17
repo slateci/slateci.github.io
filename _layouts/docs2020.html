@@ -2,6 +2,7 @@
 layout: default
 ---
 {% include home.html %}
+
 <div class="show-on-mobile-only">
     {% include mobile-docs-menu.html %}
 </div>
@@ -10,7 +11,7 @@ layout: default
         {% comment %}
         {% endcomment %}
             {% include doc-nav.html %}
-    </div> 
+    </div>
 
     <div class="docs-container flex-fill">
         <div id="content-container" class=" docs-content-container col {{ page.type }}" >
@@ -23,3 +24,6 @@ layout: default
     <div class="p-2 doc-menu-fixed-width-right">
     </div>
 </div>
+
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/copy.js"></script>
