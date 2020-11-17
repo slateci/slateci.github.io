@@ -51,3 +51,10 @@
 .tech-paragraph {
 	padding: 0 25px;
 }
+
+:not(pre) > code {
+	user-select: all;
+	-webkit-user-select: all;
+	-moz-user-select: all;
+	-ms-user-select: all;
+}
