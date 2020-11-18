@@ -8,6 +8,14 @@ type: markdown
 
 ---
 
+Kubespray is an Ansible playbook used to automate Kubernetes cluster deployments.
+We have found Kubespray to be significantly less painful than tools like `kubeadm` for cluster deployments and recommend new cluster installs using these playbooks.
+
+Further, Kubespray has the added benefit of being able to handle scenarios like adding/replacing nodes to the cluster, upgrading your Kubernetes cluster version, and configuring Kubernetes with different runtimes.
+For more information, please see the [Kubespray wiki](https://kubespray.io/).
+
+SLATE builts on top of Kubespray by providing a playbook that works with the created Kubespray inventory file to automate cluster registration.
+
 These instructions assume you are installing a Kubernetes cluster with MetalLB and Calico.
 To configure the cluster without these or with other parameters, please read [Additional Configurations](#additional-configurations) first.
 
@@ -18,6 +26,7 @@ To configure the cluster without these or with other parameters, please read [Ad
 - Must have Python's netaddr library installed on the host that is running Ansible.
 
 ## Kubernetes Cluster Creation
+
 Replace everything in `<>` brackets with your own strings.
 
 ### Setup
@@ -156,12 +165,14 @@ Try pulling the newest release of kubespray and try again.
 For a full list of variables you can configure, please read [Configurable Parameters in Kubespray](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/vars.md).
 
 ### Set specific Kubernetes versions
+
 In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` set
 ```yaml
 kube_version: v1.18.10
 ```
 
 ### Set specific Docker and Calico versions
+
 In your `inventory/<CLUSTER_NAME>/hosts.yaml` add the `docker_version` and `calico_version` variables like so:
 ```yaml
 k8s-cluster:
@@ -171,6 +182,7 @@ k8s-cluster:
 ```
 
 ### Disable MetalLB
+
 - Skip steps 3 and 4 in [Kubernetes Cluster Creation](#kubernetes-cluster-creation).
 - Add flag `-e 'slate_enable_ingress=false'` to your `ansible-playbook` command in [SLATE Cluster Creation](#slate-cluster-creation).
 
@@ -188,6 +200,7 @@ cert_manager_enabled: true
 {:data-add-copy-button='true'}
 
 ### Setup Calico on a multi-homed box
+
 If your box has multiple NICs, you will want to specify which NIC Calico uses for BGP peering with other nodes.
 For more information, read [IP autodetection methods](https://docs.projectcalico.org/reference/node/configuration#ip-autodetection-methods).
 
