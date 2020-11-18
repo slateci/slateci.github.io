@@ -194,6 +194,6 @@ For more information, read [IP autodetection methods](https://docs.projectcalico
 In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-net-calico.yml` set
 
 ```yaml
-calico_ip_auto_method: "can-reach={{ ip }}" # Defaults to the interface that has the address specified in `ip:` in hosts.yaml
+calico_ip_auto_method: "cidr={% raw %}{{ ip }}{% endraw %}/32" # Defaults to the address specified in `ip:` in hosts.yaml
 ```
 {:data-add-copy-button='true'}
