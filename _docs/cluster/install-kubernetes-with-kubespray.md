@@ -63,8 +63,12 @@ Replace everything in `<>` brackets with your own strings.
             slate_org_name: <SLATE_CLUSTER_ORG>
       hosts:
         node1:
+          # Necessary when the public IP is routed through a NAT, e.g. AWS EC2 instances.
+          # This can be set to the same as ansible_host if the public IP is set directly on the host's NIC.
           access_ip: <ACCESS_IP> (can be same as HOST_IP)
+          # The IP to use for SSH connections to this host.
           ansible_host: <HOST_IP>
+          # The IP to use for binding services.
           ip: <HOST_IP>
     ```
     {:data-add-copy-button='true'}
@@ -149,6 +153,8 @@ For version number changes, you must verify that the current version of kubespra
 If you get an error along the lines of "'dict object' has no attribute 'v1.18.10'", it means your checked out version of kubespray does not support the version you specified.
 Try pulling the newest release of kubespray and try again.
 
+For a full list of variables you can configure, please read [Configurable Parameters in Kubespray](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/vars.md).
+
 ### Set specific Kubernetes versions
 In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` set
 ```yaml
@@ -178,5 +184,16 @@ to
 
 ```yaml
 cert_manager_enabled: true
+```
+{:data-add-copy-button='true'}
+
+### Setup Calico on a multi-homed box
+If your box has multiple NICs, you will want to specify which NIC Calico uses for BGP peering with other nodes.
+For more information, read [IP autodetection methods](https://docs.projectcalico.org/reference/node/configuration#ip-autodetection-methods).
+
+In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-net-calico.yml` set
+
+```yaml
+calico_ip_auto_method: "can-reach={{ ip }}" # Defaults to the interface that has the address specified in `ip:` in hosts.yaml
 ```
 {:data-add-copy-button='true'}
