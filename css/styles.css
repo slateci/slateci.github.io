@@ -58,3 +58,24 @@
 	-moz-user-select: all;
 	-ms-user-select: all;
 }
+
+/* Code block copy button */
+.copy-btn-container {
+  display: flex;
+  flex-direction: row-reverse;
+  background: #f5f2f0;
+  font-size: .8em;
+  margin-top: 1em;
+}
+
+.copy-btn {
+  color: #FFFFFF;
+  background-color: #007bff;
+  border: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background-color: #0099FF;
+}

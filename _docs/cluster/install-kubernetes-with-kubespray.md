@@ -2,32 +2,41 @@
 title: Installing Kubernetes with Ansible & Kubespray
 overview: Installing Kubernetes with Ansible & Kubespray
 
-order: 10  
+order: 10
 layout: docs2020
 type: markdown
 
 ---
 
+These instructions assume you are installing a Kubernetes cluster with MetalLB and Calico.
+To configure the cluster without these or with other parameters, please read [Additional Configurations](#additional-configurations) first.
+
 ## Prerequisites
 
-- On each remote machine, you have some user with SSH access *and* passwordless sudo access.
+- On each machine to be configured, you have a user with key-based SSH access *and* passwordless sudo access.
+- Must have Ansible version 2.9+ installed on the host that is running Ansible.
+- Must have Python's netaddr library installed on the host that is running Ansible.
 
 ## Kubernetes Cluster Creation
+Replace everything in `<>` brackets with your own strings.
 
 ### Setup
 
 1. Install Ansible and Python3 on your local machine:
 `sudo yum install ansible python3 python3-pip`
 2. Clone kubespray:
-`git clone https://github.com/kubernetes-sigs/kubespray.git && cd kubespray && git checkout v2.14.1`
+`git clone https://github.com/kubernetes-sigs/kubespray.git && cd kubespray && git checkout v2.14.2`
 3. Install kubespray Python dependencies:
 `sudo pip3 install -r requirements.txt`
 
 ### Deploy
 
 1. Create a kubespray inventory directory:
-`cp -rfp inventory/sample inventory/<CLUSTERNAME>`
-2. Create `inventory/<CLUSTERNAME>/hosts.yaml` with the contents:
+    ```bash
+    cp -rfp inventory/sample inventory/<CLUSTER_NAME>
+    ```
+    {:data-add-copy-button='true'}
+2. Create `inventory/<CLUSTER_NAME>/hosts.yaml` with the contents:
 
     ```yaml
     all:
@@ -48,6 +57,7 @@ type: markdown
             kube-master:
             kube-node:
           vars:
+            # dns_min_replicas: 1 # UNCOMMENT THIS ONLY IF YOU HAVE A SINGLE NODE CLUSTER
             slate_cluster_name: <SLATE_CLUSTER_NAME>
             slate_group_name: <SLATE_CLUSTER_GROUP>
             slate_org_name: <SLATE_CLUSTER_ORG>
@@ -57,10 +67,11 @@ type: markdown
           ansible_host: <HOST_IP>
           ip: <HOST_IP>
     ```
+    {:data-add-copy-button='true'}
 
-    You can add additional nodes under `hosts:` and add them to either `kube-master` and/or `kube-node` similar to how it is done with `node1`.
+    You can add additional nodes under `hosts:` and add them to `kube-master` and/or `kube-node` similar to how it is done with `node1`.
 
-3. Configure MetalLB by changing lines 123 in `inventory/<CLUSTERNAME>/group_vars/k8s-cluster/addons.yml` from
+3. Configure MetalLB by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` from
 
     ```yaml
     ...
@@ -77,19 +88,21 @@ type: markdown
     ```yaml
     metallb_enabled: true
     metallb_ip_range:
-      - "YOUR_IP/YOUR_SUBNET"
+      - "<YOUR_IP>/<YOUR_SUBNET>"
     metallb_version: v0.9.3
     ```
+    {:data-add-copy-button='true'}
 
     You can alternatively set `metallb_ip_range` like so:
 
     ```yaml
     metallb_ip_range:
-      - "YOUR_IP/32" # Single IP
-      - "YOUR_IP_START-YOUR_IP_END" # Range of IPs
+      - "<YOUR_IP>/32" # Single IP
+      - "<YOUR_IP_START>-<YOUR_IP_END>" # Range of IPs
     ```
+    {:data-add-copy-button='true'}
 
-4. Configure Kubernetes by changing line 115 of `inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml` from
+4. Configure Kubernetes by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` from
 
     ```yaml
     kube_proxy_strict_arp: false
@@ -100,23 +113,70 @@ type: markdown
     ```yaml
     kube_proxy_strict_arp: true # Required for MetalLB
     ```
-
-    You can also configure other parameters such as `kube_version`, `kube_service_addresses`, `kube_pods_subnet`, etc in this file if you desire.
+    {:data-add-copy-button='true'}
 
 5. Run kubespray:
-`ansible-playbook -i inventory/<CLUSTERNAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml`
+    ```bash
+    ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
+    ```
+    {:data-add-copy-button='true'}
 
 ## SLATE Cluster Creation
 
 ### Setup
 
 1. Clone SLATE registration playbook (outside of the kubespray folder):
-`git clone https://github.com/slateci/slate-ansible.git && cd slate-ansible`
+    ```bash
+    git clone https://github.com/slateci/slate-ansible.git && cd slate-ansible
+    ```
+    {:data-add-copy-button='true'}
 
-#### Deploy
+### Deploy
 
 1. Run the SLATE registration playbook:
 
-`ansible-playbook -i /path/to/kubespray/inventory/<CLUSTERNAME>/hosts.yaml -u <SSH_USER> --become --become-user=root -e 'slate_cli_token=<SLATE_CLI_TOKEN>' -e 'slate_cli_endpoint=https://api.slateci.io:443' site.yml`
+    ```bash
+    ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <SSH_USER> --become --become-user=root \
+      -e 'slate_cli_token=<SLATE_CLI_TOKEN>' \
+      -e 'slate_cli_endpoint=https://api.slateci.io:443' \
+      site.yml
+    ```
+    {:data-add-copy-button='true'}
 
-You can register a non-MetalLB enabled cluster with SLATE by passing `-e 'slate_enable_ingress=false'` as an additional flag to this command.
+## Additional Configurations
+
+For version number changes, you must verify that the current version of kubespray supports the versions you specify.
+If you get an error along the lines of "'dict object' has no attribute 'v1.18.10'", it means your checked out version of kubespray does not support the version you specified.
+Try pulling the newest release of kubespray and try again.
+
+### Set specific Kubernetes versions
+In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` set
+```yaml
+kube_version: v1.18.10
+```
+
+### Set specific Docker and Calico versions
+In your `inventory/<CLUSTER_NAME>/hosts.yaml` add the `docker_version` and `calico_version` variables like so:
+```yaml
+k8s-cluster:
+  vars:
+    docker_version: latest
+    calico_version: "v3.16.4"
+```
+
+### Disable MetalLB
+- Skip steps 3 and 4 in [Kubernetes Cluster Creation](#kubernetes-cluster-creation).
+- Add flag `-e 'slate_enable_ingress=false'` to your `ansible-playbook` command in [SLATE Cluster Creation](#slate-cluster-creation).
+
+### Enable Cert Manager
+In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` set
+```yaml
+cert_manager_enabled: false
+```
+
+to
+
+```yaml
+cert_manager_enabled: true
+```
+{:data-add-copy-button='true'}
