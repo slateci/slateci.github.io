@@ -52,6 +52,13 @@
 	padding: 0 25px;
 }
 
+:not(pre) > code {
+	user-select: all;
+	-webkit-user-select: all;
+	-moz-user-select: all;
+	-ms-user-select: all;
+}
+
 /* Code block copy button */
 .copy-btn-container {
   display: flex;
