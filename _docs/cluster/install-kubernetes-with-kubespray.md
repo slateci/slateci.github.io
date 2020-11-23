@@ -42,43 +42,43 @@ Replace everything in `<>` brackets with your own strings.
 
 1. Create a kubespray inventory directory:
     ```bash
-    cp -rfp inventory/sample inventory/<CLUSTER_NAME>
+   cp -rfp inventory/sample inventory/<CLUSTER_NAME>
     ```
     {:data-add-copy-button='true'}
 2. Create `inventory/<CLUSTER_NAME>/hosts.yaml` with the contents:
 
     ```yaml
-    all:
-      children:
-        calico-rr:
-          hosts: {}
-        etcd:
-          hosts:
-            node1:
-        kube-master:
-          hosts:
-            node1:
-        kube-node:
-          hosts:
-            node1:
-        k8s-cluster:
-          children:
-            kube-master:
-            kube-node:
-          vars:
-            # dns_min_replicas: 1 # UNCOMMENT THIS ONLY IF YOU HAVE A SINGLE NODE CLUSTER
-            slate_cluster_name: <SLATE_CLUSTER_NAME>
-            slate_group_name: <SLATE_CLUSTER_GROUP>
-            slate_org_name: <SLATE_CLUSTER_ORG>
-      hosts:
-        node1:
-          # Necessary when the public IP is routed through a NAT, e.g. AWS EC2 instances.
-          # This can be set to the same as ansible_host if the public IP is set directly on the host's NIC.
-          access_ip: <ACCESS_IP> (can be same as HOST_IP)
-          # The IP to use for SSH connections to this host.
-          ansible_host: <HOST_IP>
-          # The IP to use for binding services.
-          ip: <HOST_IP>
+   all:
+     children:
+       calico-rr:
+         hosts: {}
+       etcd:
+         hosts:
+           node1:
+       kube-master:
+         hosts:
+           node1:
+       kube-node:
+         hosts:
+           node1:
+       k8s-cluster:
+         children:
+           kube-master:
+           kube-node:
+         vars:
+           # dns_min_replicas: 1 # UNCOMMENT THIS ONLY IF YOU HAVE A SINGLE NODE CLUSTER
+           slate_cluster_name: <SLATE_CLUSTER_NAME>
+           slate_group_name: <SLATE_CLUSTER_GROUP>
+           slate_org_name: <SLATE_CLUSTER_ORG>
+     hosts:
+       node1:
+         # Necessary when the public IP is routed through a NAT, e.g. AWS EC2 instances.
+         # This can be set to the same as ansible_host if the public IP is set directly on the host's NIC.
+         access_ip: <ACCESS_IP> (can be same as HOST_IP)
+         # The IP to use for SSH connections to this host.
+         ansible_host: <HOST_IP>
+         # The IP to use for binding services.
+         ip: <HOST_IP>
     ```
     {:data-add-copy-button='true'}
 
@@ -87,50 +87,50 @@ Replace everything in `<>` brackets with your own strings.
 3. Configure MetalLB by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` from
 
     ```yaml
-    ...
-    # MetalLB deployment
-    metallb_enabled: false
-    # metallb_ip_range:
-    #   - "10.5.0.50-10.5.0.99"
-    # metallb_version: v0.9.3
-    ...
+   ...
+   # MetalLB deployment
+   metallb_enabled: false
+   # metallb_ip_range:
+   #   - "10.5.0.50-10.5.0.99"
+   # metallb_version: v0.9.3
+   ...
     ```
 
     to
 
     ```yaml
-    metallb_enabled: true
-    metallb_ip_range:
-      - "<YOUR_IP>/<YOUR_SUBNET>"
-    metallb_version: v0.9.3
+   metallb_enabled: true
+   metallb_ip_range:
+     - "<YOUR_IP>/<YOUR_SUBNET>"
+   metallb_version: v0.9.3
     ```
     {:data-add-copy-button='true'}
 
     You can alternatively set `metallb_ip_range` like so:
 
     ```yaml
-    metallb_ip_range:
-      - "<YOUR_IP>/32" # Single IP
-      - "<YOUR_IP_START>-<YOUR_IP_END>" # Range of IPs
+   metallb_ip_range:
+     - "<YOUR_IP>/32" # Single IP
+     - "<YOUR_IP_START>-<YOUR_IP_END>" # Range of IPs
     ```
     {:data-add-copy-button='true'}
 
 4. Configure Kubernetes by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` from
 
     ```yaml
-    kube_proxy_strict_arp: false
+   kube_proxy_strict_arp: false
     ```
 
     to
 
     ```yaml
-    kube_proxy_strict_arp: true # Required for MetalLB
+   kube_proxy_strict_arp: true # Required for MetalLB
     ```
     {:data-add-copy-button='true'}
 
 5. Run kubespray:
     ```bash
-    ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
+   ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
     ```
     {:data-add-copy-button='true'}
 
@@ -140,7 +140,7 @@ Replace everything in `<>` brackets with your own strings.
 
 1. Clone SLATE registration playbook (outside of the kubespray folder):
     ```bash
-    git clone https://github.com/slateci/slate-ansible.git && cd slate-ansible
+   git clone https://github.com/slateci/slate-ansible.git && cd slate-ansible
     ```
     {:data-add-copy-button='true'}
 
@@ -149,10 +149,10 @@ Replace everything in `<>` brackets with your own strings.
 1. Run the SLATE registration playbook:
 
     ```bash
-    ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <SSH_USER> --become --become-user=root \
-      -e 'slate_cli_token=<SLATE_CLI_TOKEN>' \
-      -e 'slate_cli_endpoint=https://api.slateci.io:443' \
-      site.yml
+   ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <SSH_USER> --become --become-user=root \
+     -e 'slate_cli_token=<SLATE_CLI_TOKEN>' \
+     -e 'slate_cli_endpoint=https://api.slateci.io:443' \
+     site.yml
     ```
     {:data-add-copy-button='true'}
 
