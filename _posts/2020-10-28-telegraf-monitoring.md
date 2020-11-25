@@ -20,6 +20,18 @@ However, metrics can also be sent to a separate [InfluxDB](https://www.influxdat
 <!--end_excerpt-->
 
 
+## GlobalNOC Time-Series Data Services
+
+Metrics marked for export using the `tsds` Telegraf output plugin are send to the GlobalNOC Time-Series Data Services (TSDS) endpoint, given that correct credentials are provided. 
+Metrics exported to the database join metrics for devices at many research institutions on the Internet2 network. 
+This wealth of data exposes possibilities for many interesting applications. 
+One such application is the Parallel Traceroute Visualization Project being developed at the [University of Utah Center for High Performance Computing](https://www.chpc.utah.edu/).
+The project aims to be a tool for researchers to better understand data transfer nodes and the links between them by running and displaying a visualization of traceroutes between pairs of specified hosts. 
+Once a traceroute is visualized, a user is able to hover over a host to display more information about network conditions at that host. 
+Additionally, the GlobalNOC TSDS enables researchers to view graphs of historical network data for that specific host.
+This can be useful for reasoning about data transfer node performance and other troubleshooting. 
+The Parallel Traceroute Visualization Project and others like it are able to use the data stored in the TSDS to create more informative tools for researchers and research institutions.
+
 
 ## Prerequisites
 
