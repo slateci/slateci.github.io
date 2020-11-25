@@ -101,26 +101,33 @@ targets:
           name = "uptime"
 ```
 
+
 **Hosts**
 
 Under `hosts`, replace the placeholder IP address with the IP address or full DNS name of the host you want to monitor.
 Additionally, specify the default SNMP port (161) by appending a colon followed by this number.
 Add as many additional hosts underneath as wanted. As per yaml syntax, preface them with a hyphen and surround with quotes to reduce ambiguity.
 
+
 **Community String**
 
 Next, change the `community` parameter to the appropriate SNMP community string.
+
 
 **Counter Type**
 
 The `counter64Bit` parameter is only relevant if GRNOC output has been enabled.
 The `counter64Bit` flag switches between two different sets of OIDs, one for hosts with 64-bit SNMP counters, and one for hosts with 32-bit SNMP counters.
+You will need to find out which type of counter the machines you are attempting to monitor are using, and set this flag accordingly. 
+(Set to "true" if you have 64-bit counters, and "false" if you have 32-bit counters.)
+
 
 **OIDs**
 
 Following this, configure the appropriate OIDs to monitor.
 The `oids` parameter is formatted a little differently than the rest of the file.
 To provide fine-grained control over these parameters, this section inherits from the Telegraf service's syntax. Specify the OIDs you want to monitor by following documentation [here](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/snmp).
+
 
 **Host Groups**
 
@@ -229,7 +236,7 @@ Additionally, a list of running applications and their IDs can be printed with t
 slate instance list
 ```
 
-For additional help, or to report a bug, please contact the SLATE team.
+For additional help, or to report a bug, please contact the [SLATE team](https://slateci.io/community/).
 
 
 
