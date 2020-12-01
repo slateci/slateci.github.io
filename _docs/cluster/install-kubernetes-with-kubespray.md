@@ -8,10 +8,10 @@ type: markdown
 
 ---
 
-Kubespray is an Ansible playbook used to automate Kubernetes cluster deployments.
+Kubespray is an Ansible playbook used to automate Kubernetes cluster deployments with significant community backing.
 We have found Kubespray to be significantly less painful than tools like `kubeadm` for cluster deployments and recommend new cluster installs using these playbooks.
 
-Further, Kubespray has the added benefit of being able to handle scenarios like adding/replacing nodes to the cluster, upgrading your Kubernetes cluster version, and configuring Kubernetes with different runtimes.
+Further, Kubespray has the added benefit of being able to handle scenarios like adding/replacing nodes to the cluster, upgrading your Kubernetes cluster version, and configuring Kubernetes with different container runtimes.
 For more information, please see the [Kubespray wiki](https://kubespray.io/).
 
 SLATE builts on top of Kubespray by providing a playbook that works with the created Kubespray inventory file to automate cluster registration.
@@ -20,10 +20,27 @@ These instructions assume you are installing a Kubernetes cluster with MetalLB a
 To configure the cluster without these or with other parameters, please read [Additional Configurations](#additional-configurations) first.
 
 ## Prerequisites
+Ansible can be executed anywhere (your laptop, OOB machine, etc), including on a machine that is to be in your Kubernetes cluster.
+The host that is executing Ansible is referred to as the "Ansible executor" in these prerequisites.
 
-- On each machine to be configured, you have a user with key-based SSH access *and* passwordless sudo access.
-- Must have Ansible version 2.9+ installed on the host that is running Ansible.
-- Must have Python's netaddr library installed on the host that is running Ansible.
+### Ansible
+
+- On each machine in the cluster, you have a user (`<SSH_USER>`) with key-based SSH access *and* passwordless sudo access.
+  - The Ansible executor must be able to SSH into each machine in the cluster as this `<SSH_USER>` using an SSH key.
+- Must have Ansible version 2.9+ installed on the Ansible executor.
+
+### Kubernetes
+
+- Kubernetes packages are not installed on any machine in the cluster.
+  - You can remove these with `sudo yum remove 'kube*' -y`.
+  - We recommend also removing the Kubernetes repo if it exists.
+- The current `systemd` version on every machine in the cluster supports `TaskAccounting`.
+  - For CentOS 7, this is systemd version `>=219-37`.
+  - For other distributions, this is systemd version `>=227`.
+
+### MetalLB
+
+- Must have at least one public IP address not currently assigned to any specific machine (including any machine in the cluster).
 
 ## Kubernetes Cluster Creation
 
@@ -31,21 +48,13 @@ Replace everything in `<>` brackets with your own strings.
 
 ### Setup
 
-1. Install Ansible and Python3 on your local machine:
-`sudo yum install ansible python3 python3-pip`
-2. Clone kubespray:
+1. Clone kubespray:
 `git clone https://github.com/kubernetes-sigs/kubespray.git && cd kubespray && git checkout v2.14.2`
-3. Install kubespray Python dependencies:
-`sudo pip3 install -r requirements.txt`
-
-### Deploy
-
-1. Create a kubespray inventory directory:
-    ```bash
-   cp -rfp inventory/sample inventory/<CLUSTER_NAME>
-    ```
-    {:data-add-copy-button='true'}
-2. Create `inventory/<CLUSTER_NAME>/hosts.yaml` with the contents:
+2. Install kubespray Python dependencies:
+`sudo pip3 install -r requirements.txt` or `sudo pip install -r requirements.txt`
+3. Create a kubespray inventory directory:
+`cp -rfp inventory/sample inventory/<CLUSTER_NAME>`
+4. Create `inventory/<CLUSTER_NAME>/hosts.yaml` with the contents:
 
     ```yaml
    all:
@@ -66,15 +75,20 @@ Replace everything in `<>` brackets with your own strings.
            kube-master:
            kube-node:
          vars:
-           # dns_min_replicas: 1 # UNCOMMENT THIS ONLY IF YOU HAVE A SINGLE NODE CLUSTER
+           # Uncomment this only if you have a single-node cluster.
+           # dns_min_replicas: 1
+           #
+           # Uncomment this only if your cluster is behind a _port-forward_ NAT and ping the #installation channel before proceeding.
+           # supplementary_addresses_in_ssl_keys: ['<PUBLIC_IP>']
            slate_cluster_name: <SLATE_CLUSTER_NAME>
            slate_group_name: <SLATE_CLUSTER_GROUP>
            slate_org_name: <SLATE_CLUSTER_ORG>
      hosts:
        node1:
-         # Necessary when the public IP is routed through a NAT, e.g. AWS EC2 instances.
-         # This can be set to the same as ansible_host if the public IP is set directly on the host's NIC.
-         access_ip: <ACCESS_IP> (can be same as HOST_IP)
+         # Uncomment if the public IP is routed through an _one-to-one_ NAT, e.g. AWS EC2 instances.
+         # Port forward NATs should not use this.
+         # access_ip: <ACCESS_IP>
+         #
          # The IP to use for SSH connections to this host.
          ansible_host: <HOST_IP>
          # The IP to use for binding services.
@@ -84,7 +98,12 @@ Replace everything in `<>` brackets with your own strings.
 
     You can add additional nodes under `hosts:` and add them to `kube-master` and/or `kube-node` similar to how it is done with `node1`.
 
-3. Configure MetalLB by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` from
+### Configure {#kcc-configure}
+
+These are the default configuration steps we provide.
+Please read [Additional Configurations](#additional-configurations) to see if any of those apply to you before continuing.
+
+1. Configure MetalLB by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` from
 
     ```yaml
    ...
@@ -115,7 +134,9 @@ Replace everything in `<>` brackets with your own strings.
     ```
     {:data-add-copy-button='true'}
 
-4. Configure Kubernetes by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` from
+    The IP addresses listed here must be the unassigned public IPs mentioned in the prerequisites.
+
+2. Configure strict ARP by changing these lines in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` from
 
     ```yaml
    kube_proxy_strict_arp: false
@@ -128,33 +149,30 @@ Replace everything in `<>` brackets with your own strings.
     ```
     {:data-add-copy-button='true'}
 
-5. Run kubespray:
-    ```bash
-   ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
-    ```
-    {:data-add-copy-button='true'}
+### Run
 
-## SLATE Cluster Creation
+Run the kubespray playbook:
+
+`ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml`
+
+## SLATE Cluster Registration
 
 ### Setup
 
-1. Clone SLATE registration playbook (outside of the kubespray folder):
-    ```bash
-   git clone https://github.com/slateci/slate-ansible.git && cd slate-ansible
-    ```
-    {:data-add-copy-button='true'}
+Clone SLATE registration playbook (outside of the kubespray folder):
+`git clone https://github.com/slateci/slate-ansible.git && cd slate-ansible`
 
-### Deploy
+### Run
 
-1. Run the SLATE registration playbook:
+Run the SLATE registration playbook:
 
-    ```bash
-   ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <SSH_USER> --become --become-user=root \
-     -e 'slate_cli_token=<SLATE_CLI_TOKEN>' \
-     -e 'slate_cli_endpoint=https://api.slateci.io:443' \
-     site.yml
-    ```
-    {:data-add-copy-button='true'}
+```bash
+ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <SSH_USER> --become --become-user=root \
+ -e 'slate_cli_token=<SLATE_CLI_TOKEN>' \
+ -e 'slate_cli_endpoint=https://api.slateci.io:443' \
+ site.yml
+```
+{:data-add-copy-button='true'}
 
 ## Additional Configurations
 
@@ -183,8 +201,8 @@ k8s-cluster:
 
 ### Disable MetalLB
 
-- Skip steps 3 and 4 in [Kubernetes Cluster Creation](#kubernetes-cluster-creation).
-- Add flag `-e 'slate_enable_ingress=false'` to your `ansible-playbook` command in [SLATE Cluster Creation](#slate-cluster-creation).
+- Skip steps 1 and 2 in [Kubernetes Cluster Creation / Configure](#kcc-configure).
+- Add flag `-e 'slate_enable_ingress=false'` to your `ansible-playbook` command in [SLATE Cluster Registration](#slate-cluster-registration).
 
 ### Enable Cert Manager
 In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` set
@@ -210,3 +228,38 @@ In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-net-calico.yml` set
 calico_ip_auto_method: "cidr={% raw %}{{ ip }}{% endraw %}/32" # Defaults to the address specified in `ip:` in hosts.yaml
 ```
 {:data-add-copy-button='true'}
+
+### Use IPTables instead of IPVS
+
+Kubespray defaults to configuring `kube-proxy` with IPVS instead of IPTables as it is more performant.
+If you would like to use IPTables instead, in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` set:
+```yaml
+kube_proxy_mode: ipvs
+```
+
+to
+
+```yaml
+kube_proxy_mode: iptables
+```
+{:data-add-copy-button='true'}
+
+### Setup cluster behind a port-forward NAT
+WIP
+
+## Reset
+If you want to wipe your cluster and start from scratch (e.g. if your cluster was put into a bad state), you can run the following command:
+
+`ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> reset.yml`
+
+**NOTE**: There's a bug in this playbook associated with `kubelet` dirs in `v2.14.2`.
+If this command errors out on `TASK [reset : reset | gather mounted kubelet dirs]`, you will need to checkout master (`git checkout master`) first then run the reset playbook.
+Don't forget to re-checkout the kubespray version from before when you're done!
+
+## Upgrades / Adding & Removing Nodes
+Please see the Kubespray docs for this:
+- [Upgrading](https://kubespray.io/#/docs/upgrades)
+- [Adding/replacing a node](https://kubespray.io/#/docs/nodes)
+
+## Debugging
+WIP
