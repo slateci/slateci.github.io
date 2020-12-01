@@ -180,7 +180,7 @@ For version number changes, you must verify that the current version of kubespra
 If you get an error along the lines of "'dict object' has no attribute 'v1.18.10'", it means your checked out version of kubespray does not support the version you specified.
 Try pulling the newest release of kubespray and try again.
 
-For a full list of variables you can configure, please read [Configurable Parameters in Kubespray](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/vars.md).
+For a full list of variables you can configure, please read [Configurable Parameters in Kubespray](https://kubespray.io/#/docs/vars).
 
 ### Set specific Kubernetes versions
 
