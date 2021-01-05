@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-overview: SLATE Privacy Policy
+overview: Privacy Policy
 
 order: 15
 
