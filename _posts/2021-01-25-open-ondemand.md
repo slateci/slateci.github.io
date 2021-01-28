@@ -11,8 +11,16 @@ tag: draft
 
 
 [Open OnDemand](https://openondemand.org/) is an web application enabling simple access to high-performance computing resources.
+OnDemand, through an extensible plugin system, provides many different ways to interact with these resources.
+Most simply, OnDemand can launch a shell to remote resources in one's web browser.
+Currently, SLATE only supports this functionality, but more applications are
+in development.
+Additionally, OnDemand can provide several ways of submitting batch jobs and launching interactive computing sessions.
+It is also able to serve as a portal to computationally expensive software running on remote HPC nodes.
+For example, users can launch remote Jupyter Notebooks or Matlab instances.
+
 The SLATE platform provides a simple way to rapidly deploy this application in
-containers, complete with a user-management and authentication system.
+a containerized environment, complete with integration into an existing LDAP user directory.
 
 
 <!--end_excerpt-->
@@ -28,6 +36,7 @@ line interface.  If not, instructions can be found at
 Additionally, this application requires persistent storage in the form of a
 SLATE/Kubernetes volume. The SLATE cluster that Open OnDemand is being 
 installed on must have some sort of volume provisioner installed.
+More information about this can be found [here](https://slateci.io/docs/tools/client-manual.html#volume-commands) and [here](https://slateci.io/blog/slate-open-ondemand.html).
 
 
 ## Configuration
@@ -48,9 +57,13 @@ instructions below.
 
 ### Modifying Default Values
 
-Modify configuration file to ensure appropriate setup.
-	* Set the `SLATE.Cluster.DNSName` value to the DNS name of the cluster the application is being installed on
-	* Set the `claimName` value to the name of the previously created SLATE volume.
+At the top of the configuration file is a value called `Instance`.
+Set this to a unique string you wish to identify your application with.
+Take note of this value, as it will eventually form part of the URL you will access your OnDemand instance with.
+Next, set the `claimName` value to the name of the SLATE volume that you will eventually create.
+Set the `SLATE.Cluster.DNSName` value to the DNS name of the cluster the application is being installed on.
+Then, configure the LDAP and Kerberos sections according to your institution's setup.
+
 
 
 ### Volume Setup
@@ -61,11 +74,12 @@ following command:
 ```bash
 slate volume create --group <group_name> --cluster <cluster> --size 50M --storageClass <storage_class> <slate_volume_name>
 ```
+Make sure that the name of this volume matches the `claimName` value you set earlier.
 
 To determine the storage classes supported by each cluster, consult individual
-cluster documentation. (`slate cluster info <cluster_name>`)
+cluster documentation. (`slate cluster info <cluster_name>`) If this does not
+yield helpful output, contact your cluster administrator.
 
-*TODO: figure out how to get information about storage classes*
 
 
 ## Installation
@@ -81,9 +95,8 @@ slate app install open-ondemand --group <group_name> --cluster <cluster> --conf 
 
 After a short while, your SLATE OnDemand application should be live at
 `<slate_instance_id>.ondemand.<slate_cluster_name>.slateci.net`.
-Navigate to this URL with any web browser, and you should be directed to a
-Keycloak login page. Logging in should direct you to the Open OnDemand portal
-home page.
+Navigate to this URL with any web browser, and you will be directed to a
+Keycloak login page. A successful login will then direct you to the Open OnDemand portal home page.
 
 
 ## Configurable Parameters:
