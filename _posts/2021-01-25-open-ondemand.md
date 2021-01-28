@@ -77,7 +77,7 @@ slate volume create --group <group_name> --cluster <cluster> --size 50M --storag
 Make sure that the name of this volume matches the `claimName` value you set earlier.
 
 To determine the storage classes supported by each cluster, consult individual
-cluster documentation. (`slate cluster info <cluster_name>`) If this does not
+cluster documentation (`slate cluster info <cluster_name>`). If this does not
 yield helpful output, contact your cluster administrator.
 
 
