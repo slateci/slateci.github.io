@@ -36,7 +36,7 @@ line interface.  If not, instructions can be found at
 Additionally, this application requires persistent storage in the form of a
 SLATE/Kubernetes volume. The SLATE cluster that Open OnDemand is being 
 installed on must have some sort of volume provisioner installed.
-More information about this can be found [here](https://slateci.io/docs/tools/client-manual.html#volume-commands) and [here](https://slateci.io/blog/slate-open-ondemand.html).
+More information about this can be found [here](https://slateci.io/docs/tools/client-manual.html#volume-commands) and [here](https://slateci.io/blog/persistent-volumes.html).
 
 
 ## Configuration

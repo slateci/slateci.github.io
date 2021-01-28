@@ -2,7 +2,7 @@
 title: "Persistent Volumes"
 overview: Introducing Persistent Volumes.
 published: true
-permalink: blog/slate-open-ondemand.html
+permalink: blog/persistent-volumes.html
 attribution: Jason Stidd 
 layout: post
 type: markdown
