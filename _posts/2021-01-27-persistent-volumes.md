@@ -71,12 +71,68 @@ accessMode is the read write mode of the volume and accepts the following values
 
 Here is the CLI command to implement a persistent volume on `uchicago-prod` cluster with storage class `slateci-nfs`.
 
+In this example replace `<group-name>` with the name of your group. 
+
 ```
-$ slate volume create --group <group-name> --cluster uchicago-prod --size 100Mi --accessMode ReadWriteMany --volumeMode Filesystem --storageClass slateci-nfs my-volume
+$ slate volume create --group <group-name> --cluster uchicago-prod --size 100Mi --accessMode ReadWriteMany --storageClass slateci-nfs my-volume
 
 Creating volume...
 Successfully created volume my-volume with ID volume_xxxxxxxxx
 ```
 
-To be continued with an exmaple of configuring an application to use the persistent volume that I just created...
+We will use this persistent volume with JupyterLab. The following command will download the configuration file for SLATE's version of JupyterLab and save it to a file name jupyter.conf. 
 
+```
+$ slate app get-conf jupyter-notebook --dev > jupyter.conf
+```
+
+Open the config file and change the PersistentVolume field with the name of your persistent volume created above - in this case, I named it my-volume. 
+
+```
+# Persistent Volume mounted as 'data' in the user's home directory
+PersistentVolume: my-volume
+```
+
+We can now launch JupyterLab with this configuration file. It will set up a directory named data in the user's home directory where the user can save their notebooks. 
+
+```
+$ slate app install jupyter-notebook --dev --group <group-name> --cluster uchicago-prod --conf jupyter.conf
+
+Installing application...
+Successfully installed application jupyter-notebook as instance jupyter-notebook with ID instance_********
+```
+
+### Conclusion
+
+With just a few commands we were able create a persistent volume and run an application that consumes that volume. Applications running on SLATE are run through containers and are ephemeral. If an application crashes or is otherwise not responding, SLATE will relaunch the application. Without a persistent volume, anything saved in the applicationw would be lost as it is just written locally in the container. However, with a persistent volume the application will relaunch and mount that volume so that saved data is available to the new container.
+
+## Logging into JupyterLab
+
+If you followed along with this tutorial you will now have JupyterLab running on a SLATE cluster. While the tutorial demonstrating how to use persistent volumes is complete, it would be nice to know how to log into your new JupyterLab instance and save a notebook to the persistent volume.
+
+There were more options available in the JupyterLab configuration file.Since I did not change any configuration beyond adding the persistent volume I will domenstrate logging in with the default settings. 
+
+Run the following command to get the URL to your instance of JupyterLab and the randomly generated token required to login: 
+
+```
+$ slate instance info instance_********
+```
+
+(The instance ID was provided after launching the application above)
+
+result: 
+```
+Services:
+Name             Cluster IP   External IP     Ports          URL
+jupyter-notebook 10.96.184.79 xxx.xxx.xxx.xxx 8888:***** /TCP http://jupyter.uchicago-prod.slateci.net/
+```
+
+Scroll down to see the Configuration section. There is a randomly generated token: 
+
+```
+Token: !<!> 90249339b038==RandomlyGenerated==cf4276925cb6b152
+```
+
+Visit the URL in your web browser and you will see a form requesting a token. Copy the token into the form and submit. 
+
+Once logged in, you can create a new notebook and save it into the `data` directory. You could now delete and relaunch the application on SLATE with the same volume, and your data will be available when you log in. Or, if a node were to crash, you would not lose any data.
