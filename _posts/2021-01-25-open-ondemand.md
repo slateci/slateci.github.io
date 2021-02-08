@@ -29,7 +29,7 @@ a containerized environment, complete with integration into an existing LDAP use
 ## Prerequisites
 
 It is assumed that you already have access to a SLATE-registered Kubernetes
-cluster, and that you already have installed and configured the SLATE command
+cluster, and that you have installed and configured the SLATE command
 line interface.  If not, instructions can be found at 
 [SLATE Quickstart](https://slateci.io/docs/quickstart/).  
 
@@ -83,7 +83,7 @@ yield helpful output, contact your cluster administrator.
 
 ### Cert-Manager Setup
 
-If cert-manager is not already installed on your cluster, contact your cluster administrator. To set up cert-manager the administrator must either set up the SLATE cluster using Ansible or have access to `kubectl` on the command line.
+If cert-manager is not already present, contact your cluster administrator. To install cert-manager, the administrator must either set up the SLATE cluster using Ansible and Kubespray, or have access to `kubectl` on the command line.
 
 When using the Ansible playbook the option for cert-manager must be changed from:
 ```yaml
@@ -94,9 +94,9 @@ to
 cert_manager_enabled: true
 ```
 More information on using Ansible playbooks can be found [here](https://slateci.io/docs/cluster/install-kubernetes-with-kubespray.html).
-If the administrator has access to `kubectl` then cert-manager can be installed using a regular manafest or with helm. Instructions can be found at the official [cert-manager docs](https://cert-manager.io/docs/installation/kubernetes/).
+If the administrator has access to `kubectl` then cert-manager can be installed using a regular manifest or with helm. Instructions can be found at the official [cert-manager docs](https://cert-manager.io/docs/installation/kubernetes/).
 
-When all of the manafest components are installed, create an `Issuer` or `ClusterIssuer` YAML file so that cert-manager can issue certificates on request by the OnDemand Helm chart. Here is a simple example of a `ClusterIssuer` YAML configuration:
+When all of the manifest components are installed, create an `Issuer` or `ClusterIssuer` .yaml file so that cert-manager can issue certificates on request by the OnDemand Helm chart. Here is a simple example of a `ClusterIssuer` .yaml configuration:
 ```yaml
 metadata:
   name: letsencrypt-prod
