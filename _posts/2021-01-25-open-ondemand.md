@@ -33,8 +33,7 @@ cluster, and that you already have installed and configured the SLATE command
 line interface.  If not, instructions can be found at 
 [SLATE Quickstart](https://slateci.io/docs/quickstart/).  
 
-Additionally, this application requires persistent storage in the form of a
-SLATE/Kubernetes volume. The SLATE cluster that Open OnDemand is being 
+Additionally, this application requires cert-manager and persistent storage in the form of a SLATE/Kubernetes volume. The SLATE cluster that Open OnDemand is being 
 installed on must have some sort of volume provisioner installed.
 More information about this can be found [here](https://slateci.io/docs/tools/client-manual.html#volume-commands) and [here](https://slateci.io/blog/persistent-volumes.html).
 
@@ -82,6 +81,37 @@ yield helpful output, contact your cluster administrator.
 
 
 
+### Cert-Manager Setup
+
+If cert-manager is not already installed on your cluster, contact your cluster administrator. To set up cert-manager the administrator must either set up the SLATE cluster using Ansible or have access to `kubectl` on the command line. When using the Ansible playbook the option for cert-manager must be changed from:
+```bash
+cert_manager_enabled: false
+```
+to
+```bash
+cert_manager_enabled: true
+```
+More information on using Ansible playbooks can be found [here](https://slateci.io/docs/cluster/install-kubernetes-with-kubespray.html).
+If the administrator has access to `kubectl` then cert-manager can be installed using a regular manafest or with helm. Instructions can be found at the official [cert-manager docs](https://cert-manager.io/docs/installation/kubernetes/).
+When all of the manafest components are installed, create an `Issuer` or `ClusterIssuer` YAML file so that cert-manager can issue certificates on request by the OnDemand Helm chart. Here is a simple example of a `ClusterIssuer` YAML configuration:
+```bash
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: admin@example.com
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: lets-encrypt-key
+```
+Make sure that the name of the issuer is `letsencrypt-prod`.
+Note: The difference between a `ClusterIssuer` and an `Issuer` is that the latter is namespace specific.
+
+
+
 ## Installation
 
 Now that Open OnDemand has been properly configured, and persistent storage set
@@ -96,7 +126,7 @@ slate app install open-ondemand --group <group_name> --cluster <cluster> --conf 
 After a short while, your SLATE OnDemand application should be live at
 `<slate_instance_id>.ondemand.<slate_cluster_name>.slateci.net`.
 Navigate to this URL with any web browser, and you will be directed to a
-Keycloak login page. If a `user does not exist` error appears wait a few minutes for users to be populated in the container. If a `missing home directory` page appears, simply click `restart webserver`. A successful login will then direct you to the Open OnDemand portal home page.
+Keycloak login page. A successful login will then direct you to the Open OnDemand portal home page.
 
 
 ## Configurable Parameters:
