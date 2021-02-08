@@ -141,6 +141,6 @@ Once logged in, you can create a new notebook and save it into the `data` direct
 
 ## SLATE Portal
 
-In the [SLATE Portal](https://portal.slateci.io/) there is a Volumes tab in the menu that includes a form to setup a new persistent volume. Once that is complete you can include the persistent volume name in either a CLI configuration or the Portal GUI application installation process. The above example of the installation of Juptyer-Notebook through the incubator/development catalog is not possible through the Portal because incubator applications cannot be installed through the Portal.
+In the [SLATE Portal](https://portal.slateci.io/) there is a Volumes tab in the menu that includes a form to setup a new persistent volume. Once that is complete you can include the persistent volume name in either a CLI configuration or the Portal GUI application installation process.
 
 <img src="/img/persistent-volumes.png" alt="Persistent volume form">
