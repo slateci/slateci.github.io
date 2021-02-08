@@ -10,8 +10,8 @@ tag: draft
 ---
 
 
-[Open OnDemand](https://openondemand.org/) is an web application enabling simple access to high-performance computing resources.
-OnDemand, through an extensible plugin system, provides many different ways to interact with these resources.
+[Open OnDemand](https://openondemand.org/) is a web application enabling easy access to high-performance computing resources.
+Open OnDemand, through an extensive plugin system, provides many different ways to interact with these resources.
 Most simply, OnDemand can launch a shell to remote resources in one's web browser.
 Currently, SLATE only supports this functionality, but more applications are
 in development.
@@ -96,7 +96,7 @@ slate app install open-ondemand --group <group_name> --cluster <cluster> --conf 
 After a short while, your SLATE OnDemand application should be live at
 `<slate_instance_id>.ondemand.<slate_cluster_name>.slateci.net`.
 Navigate to this URL with any web browser, and you will be directed to a
-Keycloak login page. A successful login will then direct you to the Open OnDemand portal home page.
+Keycloak login page. If a `user does not exist` error appears wait a few minutes for users to be populated in the container. If a `missing home directory` page appears, simply click `restart webserver`. A successful login will then direct you to the Open OnDemand portal home page.
 
 
 ## Configurable Parameters:
