@@ -15,6 +15,8 @@ A commonly requested feature for SLATE has been to add persistent volumes. We ar
 
 SLATE uses containers to run applications, which are ephemeral. Without an external volume, the container writes data locally, and that data is lost when the container is shut down or fails. In SLATE, if an application container fails, it is relaunched. Without a persistent volume, any data written to disk is not available to the relaunched instances of that application. Persistent volumes live outside the container and are mounted to a directory within the application container. If the application is relaunched, the persistent volume will again be mounted, making the data available to the new instance. An application instance can also be deleted and a new one created with the same persistent volume. We often see this when upgrading software or changing the configuration.
 
+## Command Line Interface
+
 To add a persistent volume to an application through the CLI, we first create the persistent volume. Then we add the name of the volume to the configuration file of the application we are launching. 
 
 ```
@@ -136,3 +138,9 @@ Token: !<!> 90249339b038==RandomlyGenerated==cf4276925cb6b152
 Visit the URL in your web browser and you will see a form requesting a token. Copy the token into the form and submit. 
 
 Once logged in, you can create a new notebook and save it into the `data` directory. You could now delete and relaunch the application on SLATE with the same volume, and your data will be available when you log in. Or, if a node were to crash, you would not lose any data.
+
+## SLATE Portal
+
+In the [SLATE Portal](https://portal.slateci.io/) there is a Volumes tab in the menu that includes a form to setup a new persistent volume. Once that is complete you can include the persistent volume name in either a CLI configuration or the Portal GUI application installation process. The above example of the installation of Juptyer-Notebook through the incubator/development catalog is not possible through the Portal because incubator applications cannot be installed through the Portal.
+
+<img src="/img/persistent-volumes.png" alt="Persistent volume form">
