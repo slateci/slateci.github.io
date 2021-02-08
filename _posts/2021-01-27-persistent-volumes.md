@@ -13,7 +13,7 @@ A commonly requested feature for SLATE has been to add persistent volumes. We ar
 
 <!--end_excerpt-->
 
-Currently, we have this feature available in the CLI. We are still working on adding it to the website portal to provide a graphical interface to add persistent volumes. The Portal should be updated in the next few days. 
+SLATE uses containers to run applications, which are ephemeral. Without an external volume, the container writes data locally, and that data is lost when the container is shut down or fails. In SLATE, if an application container fails, it is relaunched. Without a persistent volume, any data written to disk is not available to the relaunched instances of that application. Persistent volumes live outside the container and are mounted to a directory within the application container. If the application is relaunched, the persistent volume will again be mounted, making the data available to the new instance. An application instance can also be deleted and a new one created with the same persistent volume. We often see this when upgrading software or changing the configuration.
 
 To add a persistent volume to an application through the CLI, we first create the persistent volume. Then we add the name of the volume to the configuration file of the application we are launching. 
 
