@@ -33,8 +33,7 @@ cluster, and that you already have installed and configured the SLATE command
 line interface.  If not, instructions can be found at 
 [SLATE Quickstart](https://slateci.io/docs/quickstart/).  
 
-Additionally, this application requires persistent storage in the form of a
-SLATE/Kubernetes volume. The SLATE cluster that Open OnDemand is being 
+Additionally, this application requires cert-manager and persistent storage in the form of a SLATE/Kubernetes volume. The SLATE cluster that Open OnDemand is being 
 installed on must have some sort of volume provisioner installed.
 More information about this can be found [here](https://slateci.io/docs/tools/client-manual.html#volume-commands) and [here](https://slateci.io/blog/persistent-volumes.html).
 
@@ -79,6 +78,37 @@ Make sure that the name of this volume matches the `claimName` value you set ear
 To determine the storage classes supported by each cluster, consult individual
 cluster documentation (`slate cluster info <cluster_name>`). If this does not
 yield helpful output, contact your cluster administrator.
+
+
+
+### Cert-Manager Setup
+
+If cert-manager is not already installed on your cluster, contact your cluster administrator. To set up cert-manager the administrator must either set up the SLATE cluster using Ansible or have access to `kubectl` on the command line. When using the Ansible playbook the option for cert-manager must be changed from:
+```bash
+cert_manager_enabled: false
+```
+to
+```bash
+cert_manager_enabled: true
+```
+More information on using Ansible playbooks can be found [here](https://slateci.io/docs/cluster/install-kubernetes-with-kubespray.html).
+If the administrator has access to `kubectl` then cert-manager can be installed using a regular manafest or with helm. Instructions can be found at the official [cert-manager docs](https://cert-manager.io/docs/installation/kubernetes/).
+When all of the manafest components are installed, create an `Issuer` or `ClusterIssuer` YAML file so that cert-manager can issue certificates on request by the OnDemand Helm chart. Here is a simple example of a `ClusterIssuer` YAML configuration:
+```bash
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    # The ACME server URL
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    # Email address used for ACME registration
+    email: admin@example.com
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: lets-encrypt-key
+```
+Make sure that the name of the issuer is letsencrypt-prod.
+Note: The difference between an Issuer and a ClusterIssuer is that an Issuer is namespace specific, rather than a cluster-wide issuer.
 
 
 
