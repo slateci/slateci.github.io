@@ -83,18 +83,21 @@ yield helpful output, contact your cluster administrator.
 
 ### Cert-Manager Setup
 
-If cert-manager is not already installed on your cluster, contact your cluster administrator. To set up cert-manager the administrator must either set up the SLATE cluster using Ansible or have access to `kubectl` on the command line. When using the Ansible playbook the option for cert-manager must be changed from:
-```bash
+If cert-manager is not already installed on your cluster, contact your cluster administrator. To set up cert-manager the administrator must either set up the SLATE cluster using Ansible or have access to `kubectl` on the command line.
+
+When using the Ansible playbook the option for cert-manager must be changed from:
+```yaml
 cert_manager_enabled: false
 ```
 to
-```bash
+```yaml
 cert_manager_enabled: true
 ```
 More information on using Ansible playbooks can be found [here](https://slateci.io/docs/cluster/install-kubernetes-with-kubespray.html).
 If the administrator has access to `kubectl` then cert-manager can be installed using a regular manafest or with helm. Instructions can be found at the official [cert-manager docs](https://cert-manager.io/docs/installation/kubernetes/).
+
 When all of the manafest components are installed, create an `Issuer` or `ClusterIssuer` YAML file so that cert-manager can issue certificates on request by the OnDemand Helm chart. Here is a simple example of a `ClusterIssuer` YAML configuration:
-```bash
+```yaml
 metadata:
   name: letsencrypt-prod
 spec:
@@ -108,6 +111,7 @@ spec:
       name: lets-encrypt-key
 ```
 Make sure that the name of the issuer is `letsencrypt-prod`.
+
 Note: The difference between a `ClusterIssuer` and an `Issuer` is that the latter is namespace specific.
 
 
