@@ -9,27 +9,40 @@ toc:
     subfolderitems:
       - page: SLATE Roles
         url: /docs/concepts/index.html
-  - title: Cluster Installation
-    id: cluster-installation
+  - title: Manual Cluster Installation
+    id: manual-cluster-installation
     subfolderitems:
       - page: Installation
         url: /docs/cluster/index.html
       - page: Obtain a SLATE Token
-        url: /docs/cluster/slate-token.html
+        url: /docs/cluster/manual/slate-token.html
       - page: Operating System Requirements
-        url: /docs/cluster/operating-system-requirements.html
+        url: /docs/cluster/manual/operating-system-requirements.html
       - page: Docker and Kubernetes
-        url: /docs/cluster/docker-kubernetes.html
-      #- page: Installing Kubernetes with Ansible and Kubespray
-      #  url: /docs/cluster/install-kubernetes-with-kubespray.html
+        url: /docs/cluster/manual/docker-kubernetes.html
       - page: SLATE Master Node
-        url: /docs/cluster/slate-master-node.html
+        url: /docs/cluster/manual/slate-master-node.html
       - page: SLATE Worker Node
-        url: /docs/cluster/slate-worker-node.html
+        url: /docs/cluster/manual/slate-worker-node.html
       - page: Cluster Federation
-        url: /docs/cluster/cluster-federation.html
+        url: /docs/cluster/manual/cluster-federation.html
       - page: Troubleshooting
-        url: /docs/cluster/troubleshooting.html
+        url: /docs/cluster/manual/troubleshooting.html
+  - title: Automated Cluster Installation 
+    id: automated-cluster-installation
+    subfolderitems:
+      - page: Introduction
+        url: /docs/cluster/automated/introduction.html
+      - page: Prerequisites 
+        url: /docs/cluster/automated/prerequisites.html
+      - page: Kubernetes cluster Creation
+        url: /docs/cluster/automated/kubernetes-cluster-creation.html
+      - page: Reset
+        url: /docs/cluster/automated/reset.html
+      - page: Upgrades / Adding & Removing Nodes 
+        url: /docs/cluster/automated/upgrades-adding-nodes.html
+      - page: Troubleshooting 
+        url: /docs/cluster/automated/troubleshooting.html
   - title: SLATE Tools 
     id: slate-tools
     url: /docs/tools/

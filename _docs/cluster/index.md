@@ -10,4 +10,4 @@ type: markdown
 
 ---
 
-{% include_relative cluster-install.md %}
+{% include_relative manual/cluster-install.md %}
