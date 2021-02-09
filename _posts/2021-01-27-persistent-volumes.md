@@ -1,6 +1,6 @@
 ---
-title: "Persistent Volumes"
-overview: Introducing Persistent Volumes.
+title: Managing Storage with Persistent Volumes
+overview: IManaging Storage with Persistent Volumes
 published: true
 permalink: blog/persistent-volumes.html
 attribution: Jason Stidd 
@@ -13,11 +13,15 @@ A commonly requested feature for SLATE has been to add persistent volumes. We ar
 
 <!--end_excerpt-->
 
-SLATE uses containers to run applications, which are ephemeral. Without an external volume, the container writes data locally, and that data is lost when the container is shut down or fails. In SLATE, if an application container fails, it is relaunched. Without a persistent volume, any data written to disk is not available to the relaunched instances of that application. Persistent volumes live outside the container and are mounted to a directory within the application container. If the application is relaunched, the persistent volume will again be mounted, making the data available to the new instance. An application instance can also be deleted and a new one created with the same persistent volume. We often see this when upgrading software or changing the configuration.
+## Persistent Volumes in K8s
 
-## Command Line Interface
+Persistent Volumes is a Kubernetes [concept](https://kubernetes.io/docs/concepts/storage/persistent-volumes/), it is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes. Persistent Volumes have a lifecycle that are independent of an application. 
 
-To add a persistent volume to an application through the CLI, we first create the persistent volume. Then we add the name of the volume to the configuration file of the application we are launching. 
+## Create a Persistent Volume
+
+In SLATE, we provide this functionality in the CLI and the web Portal. In this blog post we will use the CLI to setup a persistent volume. To add a persistent volume to an application, we first create the persistent volume, then we add the name of the volume to the configuration file of the application we are launching. 
+
+To see what options are available in SLATE, I recommend using the -h flag. 
 
 ```
 $ slate -h 
@@ -65,11 +69,10 @@ Options:
 
 As usual, the group and cluster are required. Also required are the size, access mode, and storage class. 
 
-Storage class is a term used in Kubernetes, the technology we use under the hood for SLATE. In SLATE it is the name of underlying storage offered by a cluster. This storage may be Network File Storage (NFS) or Ceph, or any other number of methods for providing persistent storage. The storage class's name is determined by the cluster administrator and may be different on each cluster. We are currently working out a way to advertise the storage classes' names on each cluster. In the meantime, it may be necessary to communicate with the cluster administrator to find out what is currently available. The point of contact for each cluster is listed in the SLATE Portal on the website. 
 
-Size, also a required field, takes a number plus the size suffix: options include T, G, M, K  and their power of two equivalents: Ti, Gi, Mi, Ki. An example of size is `10Mi` for 10 megabytes.
-
-accessMode is the read write mode of the volume and accepts the following values: ReadWriteOnce, ReadOnlyMany, or ReadWriteMany. 
+- `size` takes a number plus the size suffix: options include T, G, M, K  and their power of two equivalents: Ti, Gi, Mi, Ki. An example of size is `10Mi` for 10 megabytes.
+- `accessMode` is the read write mode of the volume and accepts the following values: ReadWriteOnce, ReadOnlyMany, or ReadWriteMany. 
+- The `storageClass` name is determined by the cluster administrator and may be different on each cluster. We are currently working out a way to advertise the storage classes' names on each cluster. In the meantime, it may be necessary to communicate with the cluster administrator to find out what is currently available. The point of contact for each cluster is listed in the SLATE Portal on the website. 
 
 Here is the CLI command to implement a persistent volume on `uchicago-prod` cluster with storage class `slateci-nfs`.
 
@@ -81,6 +84,8 @@ $ slate volume create --group <group-name> --cluster uchicago-prod --size 100Mi 
 Creating volume...
 Successfully created volume my-volume with ID volume_xxxxxxxxx
 ```
+
+## Demo with an App
 
 We will use this persistent volume with JupyterLab. The following command will download the configuration file for SLATE's version of JupyterLab and save it to a file name jupyter.conf. 
 
@@ -104,11 +109,11 @@ Installing application...
 Successfully installed application jupyter-notebook as instance jupyter-notebook with ID instance_********
 ```
 
-### Conclusion
+## Conclusion
 
 With just a few commands we were able create a persistent volume and run an application that consumes that volume. Applications running on SLATE are run through containers and are ephemeral. If an application crashes or is otherwise not responding, SLATE will relaunch the application. Without a persistent volume, anything saved in the applicationw would be lost as it is just written locally in the container. However, with a persistent volume the application will relaunch and mount that volume so that saved data is available to the new container.
 
-## Logging into JupyterLab
+### Final notes: Logging into JupyterLab
 
 If you followed along with this tutorial you will now have JupyterLab running on a SLATE cluster. While the tutorial demonstrating how to use persistent volumes is complete, it would be nice to know how to log into your new JupyterLab instance and save a notebook to the persistent volume.
 
@@ -139,8 +144,3 @@ Visit the URL in your web browser and you will see a form requesting a token. Co
 
 Once logged in, you can create a new notebook and save it into the `data` directory. You could now delete and relaunch the application on SLATE with the same volume, and your data will be available when you log in. Or, if a node were to crash, you would not lose any data.
 
-## SLATE Portal
-
-In the [SLATE Portal](https://portal.slateci.io/) there is a Volumes tab in the menu that includes a form to setup a new persistent volume. Once that is complete you can include the persistent volume name in either a CLI configuration or the Portal GUI application installation process.
-
-<img src="/img/persistent-volumes.png" alt="Persistent volume form">
