@@ -57,4 +57,4 @@ systemctl enable --now kubelet
 
 At this point the kubelet will be crash-looping as it has no configuration. That is okay for now.
 
-<a href="/docs/cluster/slate-master-node.html">Next Page</a>
+<a href="/docs/cluster/manual/slate-master-node.html">Next Page</a>

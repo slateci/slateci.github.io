@@ -110,4 +110,4 @@ To remove the master taint:
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
-<a href="/docs/cluster/slate-worker-node.html">Next Page</a>
+<a href="/docs/cluster/manual/slate-worker-node.html">Next Page</a>

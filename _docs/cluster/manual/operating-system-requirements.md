@@ -53,4 +53,4 @@ EOF
 sysctl --system
 ```
 
-<a href="/docs/cluster/docker-kubernetes.html">Next Page</a>
+<a href="/docs/cluster/manual/docker-kubernetes.html">Next Page</a>
