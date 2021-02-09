@@ -111,9 +111,9 @@ Successfully installed application jupyter-notebook as instance jupyter-notebook
 
 ## Conclusion
 
-With just a few commands we were able create a persistent volume and run an application that consumes that volume. Applications running on SLATE are run through containers and are ephemeral. If an application crashes or is otherwise not responding, SLATE will relaunch the application. Without a persistent volume, anything saved in the applicationw would be lost as it is just written locally in the container. However, with a persistent volume the application will relaunch and mount that volume so that saved data is available to the new container.
+With just a few commands we were able create a persistent volume and run an application that consumes that volume. Persistent volumes have a lifecycle independent of an application. If an application is relaunched (for an upgrade or restarted after a crash) the data on the volume is still available to the new application instance.  
 
-### Final notes: Logging into JupyterLab
+## Final notes: Logging into JupyterLab
 
 If you followed along with this tutorial you will now have JupyterLab running on a SLATE cluster. While the tutorial demonstrating how to use persistent volumes is complete, it would be nice to know how to log into your new JupyterLab instance and save a notebook to the persistent volume.
 
