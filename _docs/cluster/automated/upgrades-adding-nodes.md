@@ -1,6 +1,6 @@
 ---
-title: Upgrades / Adding & Removing Nodes
-overview: Installing Kubernetes with Ansible & Kubespray
+title: Upgrades / Adding / Removing Nodes
+overview: Upgrades / Adding / Removing Nodes
 
 order: 10
 layout: docs2020

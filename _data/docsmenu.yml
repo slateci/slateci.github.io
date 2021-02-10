@@ -4,7 +4,7 @@ toc:
     subfolderitems:
       - page: Getting Started
         url: /docs/quickstart/index.html
-  - title: Roles 
+  - title: Roles
     id: roles
     subfolderitems:
       - page: SLATE Roles
@@ -28,22 +28,24 @@ toc:
         url: /docs/cluster/manual/cluster-federation.html
       - page: Troubleshooting
         url: /docs/cluster/manual/troubleshooting.html
-  - title: Automated Cluster Installation 
+  - title: Automated Cluster Installation
     id: automated-cluster-installation
     subfolderitems:
       - page: Introduction
         url: /docs/cluster/automated/introduction.html
-      - page: Prerequisites 
+      - page: Prerequisites
         url: /docs/cluster/automated/prerequisites.html
-      - page: Kubernetes cluster Creation
+      - page: Kubernetes Cluster Creation
         url: /docs/cluster/automated/kubernetes-cluster-creation.html
-      - page: Reset
+      - page: Additional Configurations
+        url: /docs/cluster/automated/additional-configs.html
+      - page: Reset Kubernetes Cluster
         url: /docs/cluster/automated/reset.html
-      - page: Upgrades / Adding & Removing Nodes 
+      - page: Upgrades / Adding / Removing Nodes
         url: /docs/cluster/automated/upgrades-adding-nodes.html
-      - page: Troubleshooting 
+      - page: Troubleshooting
         url: /docs/cluster/automated/troubleshooting.html
-  - title: SLATE Tools 
+  - title: SLATE Tools
     id: slate-tools
     url: /docs/tools/
     subfolderitems:
@@ -115,13 +117,13 @@ toc:
     subfolderitems:
       - page: Overview
         url: /docs/security-and-policies/index.html
-      - page: SLATE Acceptable Use Policy 
-        url: /docs/security-and-policies/acceptable-use.html 
+      - page: SLATE Acceptable Use Policy
+        url: /docs/security-and-policies/acceptable-use.html
       - page: Supported Software Versions
         url: /docs/security-and-policies/supported-versions.html
       - page: SLATE Privacy Policy
         url: /docs/security-and-policies/privacy.html
-      - page: Overview of SLATE Platform Internals and Security 
+      - page: Overview of SLATE Platform Internals and Security
         url: /docs/security-and-policies/overview-of-slate-platform-internals-and-security.html
       - page: Incident Response Policy
         url: /docs/security-and-policies/incident-response-policy.html
