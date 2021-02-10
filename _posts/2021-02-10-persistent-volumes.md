@@ -1,12 +1,11 @@
 ---
 title: Managing Storage with Persistent Volumes
-overview: IManaging Storage with Persistent Volumes
+overview: Managing Storage with Persistent Volumes
 published: true
 permalink: blog/persistent-volumes.html
 attribution: Jason Stidd 
 layout: post
 type: markdown
-tag: draft
 ---
 
 A commonly requested feature for SLATE has been to add persistent volumes. We are now introducing persistent volumes for the SLATE platform. Adding a persient volume is easy and can be used with any application that accepts persistent volumes in their configuration. 
@@ -82,8 +81,26 @@ In this example replace `<group-name>` with the name of your group.
 $ slate volume create --group <group-name> --cluster uchicago-prod --size 100Mi --accessMode ReadWriteMany --storageClass slateci-nfs my-volume
 
 Creating volume...
-Successfully created volume my-volume with ID volume_xxxxxxxxx
+Successfully created volume my-volume with ID volume_avhVWbvRhVg 
 ```
+
+We can now verify the volume with `slate volume info <volume_id>`, which uses the volume id provided in the previous command: 
+
+```
+$ slate volume info volume_avhVWbvRhVg
+
+Name      Created                         Group     Cluster       ID
+my-volume 2021-Feb-10 22:45:27.006551 UTC <group-name> uchicago-prod volume_avhVWbvRhVg
+
+Details:
+Storage Request Access Mode   Volume Mode Storage Class
+100Mi           ReadWriteMany Filesystem  slateci-nfs
+
+Status:
+Status
+Bound
+```
+
 
 ## Demo with an App
 
