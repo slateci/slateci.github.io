@@ -64,6 +64,15 @@ Set the `SLATE.Cluster.DNSName` value to the DNS name of the cluster the applica
 Then, configure the LDAP and Kerberos sections according to your institution's setup.
 
 
+**Backend cluster setup**
+
+To set up shell access to backend compute resources, edit the `clusters` section
+of the configuration file. Add a `cluster` element for each cluster you wish to
+connect to, and fill out the `name` and `host` sections. The cluster name should
+be whatever you want the OnDemand web portal to display that cluster as, and the
+`host` value should be the DNS name of that cluster.
+
+
 
 ### Volume Setup
 
