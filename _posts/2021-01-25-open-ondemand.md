@@ -11,7 +11,7 @@ tag: draft
 
 
 [Open OnDemand](https://openondemand.org/) is a web application enabling easy access to high-performance computing resources.
-Open OnDemand, through an extensive plugin system, provides many different ways to interact with these resources.
+Open OnDemand, through a plugin system, provides many different ways to interact with these resources.
 Most simply, OnDemand can launch a shell to remote resources in one's web browser.
 Currently, SLATE only supports this functionality, but more applications are
 in development.
@@ -33,9 +33,10 @@ cluster, and that you have installed and configured the SLATE command
 line interface.  If not, instructions can be found at 
 [SLATE Quickstart](https://slateci.io/docs/quickstart/).  
 
-Additionally, this application requires cert-manager and persistent storage in the form of a SLATE/Kubernetes volume. The SLATE cluster that Open OnDemand is being 
-installed on must have some sort of volume provisioner installed.
-More information about this can be found [here](https://slateci.io/docs/tools/client-manual.html#volume-commands) and [here](https://slateci.io/blog/persistent-volumes.html).
+Additionally, this application requires that `cert-manager` and a volume provisioner be present on the cluster you are installing on.
+Contact your cluster administrator for more information about this.
+More information about `cert-manager` can be found [here](https://cert-manager.io/docs/installation/kubernetes/),
+and more information about persistent volume types can be found [here](https://kubernetes.io/docs/concepts/storage/storage-classes/).
 
 
 ## Configuration
@@ -46,11 +47,11 @@ obtained. The SLATE client will do this with the following command:
 slate app get-conf open-ondemand > ood.yaml
 ```
 
-This will save a local copy of the OnDemand configuration, formatted as a 
-.yaml file. We will modify this configuration accordingly, and eventually 
+This will save a local copy of the OnDemand configuration, formatted as a
+.yaml file. We will modify this configuration accordingly, and eventually
 deploy Open OnDemand with this configuration.
 
-With your preferred text editor, open this configuration file and follow the 
+With your preferred text editor, open this configuration file and follow the
 instructions below.
 
 
@@ -59,8 +60,16 @@ instructions below.
 At the top of the configuration file is a value called `Instance`.
 Set this to a unique string you wish to identify your application with.
 Take note of this value, as it will eventually form part of the URL you will access your OnDemand instance with.
-Next, set the `claimName` value to the name of the SLATE volume that you will eventually create.
-Set the `SLATE.Cluster.DNSName` value to the DNS name of the cluster the application is being installed on.
+
+Next, configure the persistent volume that will store authentication data.
+Under `volume`, set the `storageClass` value to a storage class that is supported by your cluster.
+
+To determine the storage classes supported by each cluster, consult individual
+cluster documentation (`slate cluster info <cluster_name>`). If this does not
+yield helpful output, contact your cluster administrator.
+
+Leave the `size` value at its default `50M`.
+
 Then, configure the LDAP and Kerberos sections according to your institution's setup.
 
 
@@ -71,22 +80,6 @@ of the configuration file. Add a `cluster` element for each cluster you wish to
 connect to, and fill out the `name` and `host` sections. The cluster name should
 be whatever you want the OnDemand web portal to display that cluster as, and the
 `host` value should be the DNS name of that cluster.
-
-
-
-### Volume Setup
-
-To store user data, a SLATE volume must be created.
-This can be done with the SLATE command line tool. To create a volume, run the
-following command:
-```bash
-slate volume create --group <group_name> --cluster <cluster> --size 50M --storageClass <storage_class> <slate_volume_name>
-```
-Make sure that the name of this volume matches the `claimName` value you set earlier.
-
-To determine the storage classes supported by each cluster, consult individual
-cluster documentation (`slate cluster info <cluster_name>`). If this does not
-yield helpful output, contact your cluster administrator.
 
 
 
@@ -130,7 +123,7 @@ Note: The difference between a `ClusterIssuer` and an `Issuer` is that the latte
 Now that Open OnDemand has been properly configured, and persistent storage set
 up, we can install the application. Run the following SLATE command:
 ```bash
-slate app install open-ondemand --group <group_name> --cluster <cluster> --conf /path/to/ood.yaml
+slate app install open-ondemand --group <group_name> --cluster <cluster_name> --conf /path/to/ood.yaml
 ```
 
 
@@ -140,6 +133,7 @@ After a short while, your SLATE OnDemand application should be live at
 `<slate_instance_id>.ondemand.<slate_cluster_name>.slateci.net`.
 Navigate to this URL with any web browser, and you will be directed to a
 Keycloak login page. A successful login will then direct you to the Open OnDemand portal home page.
+Navigating to the shell access menu within the portal should allow you to launch in-browser shells to the previously specified backend compute resources.
 
 
 ## Configurable Parameters:
@@ -151,18 +145,20 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`Instance`| Optional string to differentiate SLATE experiment instances. |`global`|
 |`replicaCount`| The number of replicas to create. |`1`|
 |`setupKeycloak`| Runs Keycloak setup script if enabled. |`true`|
-|`claimName`| The name of the SLATE volume to store configuration in. |`keycloak-db`| 
-|`SLATE.Cluster.DNSName`| DNS name of the cluster the application is deployed on. |`slate-cluster`|
-|`setupLDAP`| Set up LDAP automatically based on following values. |`true`| 
-|`ldap.connectionURL`| URL to access LDAP at. |`ldap://your-ldap-here`| 
-|`ldap.importUsers`| Import LDAP users to Keycloak. |`true`| 
-|`ldap.rdnLDAPAttribute`| LDAP configuration |`uid`| 
-|`ldap.uuidLDAPAttribute`| LDAP configuration |`uidNumber`| 
-|`ldap.userObjectClasses`| LDAP configuration |`inetOrgPerson, organizationalPerson`| 
-|`ldap.usersDN`| LDAP configuration |`usersDN`| 
-|`kerberos.realm`| Kerberos realm to connect to. |`kerberos_realm`| 
-|`kerberos.serverPrincipal`| Kerberos server principal |`kerberos_server_principal`| 
-|`kerberos.keyTab`| Kerberos configuration |`/etc/krb5.keytab`| 
-|`kerberos.kerberosPasswordAuth`| Use Kerberos for password authentication. |`true`| 
-|`kerberos.debug`| Writes additional debug logs if enabled. |`true`| 
+|`volume.storageClass`| The volume provisioner from which to request the Keycloak backing volume |`local-path`|
+|`volume.size`| The amount of storage to request for the volume |`50M`|
+|`setupLDAP`| Set up LDAP automatically based on following values. |`true`|
+|`ldap.connectionURL`| URL to access LDAP at. |`ldap://your-ldap-here`|
+|`ldap.importUsers`| Import LDAP users to Keycloak. |`true`|
+|`ldap.rdnLDAPAttribute`| LDAP configuration |`uid`|
+|`ldap.uuidLDAPAttribute`| LDAP configuration |`uidNumber`|
+|`ldap.userObjectClasses`| LDAP configuration |`inetOrgPerson, organizationalPerson`|
+|`ldap.usersDN`| LDAP configuration |`ou=People,dc=chpc,dc=utah,dc=edu`|
+|`kerberos.realm`| Kerberos realm to connect to. |`AD.UTAH.EDU`|
+|`kerberos.serverPrincipal`| Kerberos server principal |`HTTP/utah-dev.chpc.utah.edu@AD.UTAH.EDU`|
+|`kerberos.keyTab`| Kerberos configuration |`/etc/krb5.keytab`|
+|`kerberos.kerberosPasswordAuth`| Use Kerberos for password authentication. |`true`|
+|`kerberos.debug`| Writes additional debug logs if enabled. |`true`|
+|`clusters.cluster.name`| Name of cluster to connect to. |`Kingspeak`|
+|`clusters.cluster.host`| Hostname of cluster to connect to. |`kingspeak.chpc.utah.edu`|
 
