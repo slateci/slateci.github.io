@@ -73,7 +73,7 @@ Leave the `size` value at its default `50M`.
 Then, configure the LDAP and Kerberos sections according to your institution's setup.
 
 
-**Backend cluster setup**
+**Backend Cluster Setup**
 
 To set up shell access to backend compute resources, edit the `clusters` section
 of the configuration file. Add a `cluster` element for each cluster you wish to
@@ -81,6 +81,19 @@ connect to, and fill out the `name` and `host` sections. The cluster name should
 be whatever you want the OnDemand web portal to display that cluster as, and the
 `host` value should be the DNS name of that cluster.
 
+
+**Test User Setup**
+
+This Open OnDemand chart supports the creation of temporary test users, for
+validating application functionality without the complexity of connecting to
+external LDAP and Kerberos servers. To add a test user(s), navigate to the
+`testUsers` section of the configuration file. Add the following yaml to this
+section for each user you would like to add:
+```yaml
+- user:
+    name: <username_here>
+    tempPassword: <temporary_password_here>
+```
 
 
 ### Cert-Manager Setup
