@@ -30,7 +30,7 @@ jobs:
       - name: Install Chrome web driver
         run: |
           google-chrome --version
-          wget https://chromedriver.storage.googleapis.com/85.0.4183.87/chromedriver_linux64.zip
+          wget https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           rm chromedriver_linux64.zip
           export PATH=$PATH:/home/runner/work/slateci.github.io/slateci.github.io/ >> ~/.profile
@@ -38,7 +38,7 @@ jobs:
           # pwd
       - name: Download test
         run: |
-          git clone https://github.com/lzhang666/slateci-unit-tests.git
+          git clone https://github.com/slateci/slateci-unit-tests.git
       - name: Run Selenium Tests
         run:
           python slateci-unit-tests/main.py

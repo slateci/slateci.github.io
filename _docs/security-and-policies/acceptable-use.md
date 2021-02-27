@@ -1,6 +1,6 @@
 ---
 title: Acceptable Use Policy
-overview: SLATE Acceptable Use Policy
+overview: Acceptable Use Policy
 
 order: 10  
 

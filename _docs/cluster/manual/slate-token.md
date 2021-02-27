@@ -34,4 +34,4 @@ To check that the SLATE client is ready to use, you can run
 
 This should list the various clusters which are already participating in the federation.
 
-<a href="/docs/cluster/operating-system-requirements.html">Next Page</a>
+<a href="/docs/cluster/manual/operating-system-requirements.html">Next Page</a>

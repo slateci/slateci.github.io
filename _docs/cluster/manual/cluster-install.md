@@ -8,4 +8,4 @@ This guide also assumes that your Kubernetes head node (or control plane) is on 
 
 Finally, it is strongly recommended to have at least one additional publicly accessible IP address, not currently assigned to any specific machine. This is needed in order to install a Kubernetes load balancer, which will in turn allocate an address to an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) which will provide convenient access to users' services.
 
-<a href="/docs/cluster/slate-token.html">Next Page</a>
+<a href="/docs/cluster/manual/slate-token.html">Next Page</a>

@@ -52,6 +52,13 @@ To report any type of security issue involving SLATE, contact the Security Opera
     </td>
   </tr>
 
+  <tr>
+    <td class="logo"><img src="{{home}}/img/youtube.png" alt="You Tube Channel"></td>
+    <td>
+    <a href="https://www.youtube.com/channel/UCbJ654YHcv-4nni-8tzrINg">Visit our YouTube Channel</a>
+    </td>
+  </tr>
+
   </tbody>
 </table>
 

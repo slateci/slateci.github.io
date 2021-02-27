@@ -40,4 +40,4 @@ Cluster administrators can grant cluster access to specific groups.
 slate cluster allow-group [YOUR-CLUSTER-NAME] '[GROUP-NAME]'
 ```
 
-<a href="/docs/cluster/troubleshooting.html">Next Page</a>
+<a href="/docs/cluster/manual/troubleshooting.html">Next Page</a>

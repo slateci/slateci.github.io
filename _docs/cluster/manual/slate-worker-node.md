@@ -22,4 +22,4 @@ kubeadm token create --print-join-command
 
 Run this generated join command on the worker node to join it to the cluster.
 
-<a href="/docs/cluster/cluster-federation.html">Next Page</a>
+<a href="/docs/cluster/manual/cluster-federation.html">Next Page</a>
