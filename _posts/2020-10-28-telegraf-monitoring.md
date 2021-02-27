@@ -56,7 +56,7 @@ The SLATE client provides a simple way to do this with the command below:
 slate app get-conf telegraf > telegraf.yaml
 ```
 
-This will save a local copy of the telegraf configuration, formatted as a .yaml file.
+This will save a local copy of the Telegraf configuration, formatted as a .yaml file.
 We will modify this configuration accordingly, and eventually deploy the application with this configuration.
 Open the configuration file with your preferred text editor, and follow the instructions below to configure each piece of the application.
 
@@ -140,20 +140,26 @@ If only one host group is required, delete the second `hostGroup` section.
 
 ### Additional Parameters
 
-There are three other parameters that can be configured. The first of these is `writeToStdout`.
+There are several other parameters that can be configured. The first of these is `writeToStdout`.
 When set to true, Telegraf will additionally write its metrics to stdout inside its container.
 This can be useful for debugging, but is not necessary. Set this as needed.
 
-The second parameter is `interval`. This controls the frequency at which Telegraf collects metrics.
+Another configurable parameter is `collectionInterval`. 
+This controls the frequency at which Telegraf collects SNMP metrics.
 Specify your desired value here by combining an integer with a time unit. 
 Valid time units include "ns", "us", "ms", "s", "m" and "h".
 For example, to collect metrics every five seconds, enter the following:
 ```yaml
-interval: 5s
+collectionInterval: 5s
 ```
+The `collectionInterval` parameter is paired with a `collectionJitter` parameter.
+This `collectionJitter` parameter will offset data collection times by a random amount not exceeding its value.
 
-The third parameter is 'flushInterval`. This control the frequency at which Telegraf flushes its output plugins, or writes to the specified databases.
-Set this in the same fashion as the `interval` parameter.
+Another configurable parameter is `flushInterval`.
+This controls the frequency at which Telegraf writes to its output databases.
+Set this in the same fashion as the `collectionInterval` parameter.
+Additionally, this parameter is also paired with a jitter parameter.
+It functions in the same manner as previously discussed, but for database writes instead of data collection.
 
 
 ### InfluxDB Configuration
@@ -248,8 +254,10 @@ The following table lists the configurable parameters of the Telegraf monitoring
 |-------------------------------|---------------------------------|-----------------------------|
 |`Instance`| Optional string to differentiate SLATE experiment instances |""|
 |`writeToStdout`| Optionally write to stdout in container |`true`|
-|`interval`| Data collection interval |`5s`|
-|`flushInterval`| Output flush interval |`300s`|
+|`collectionInterval`| Data collection interval |`5s`|
+|`collectionJitter`| Data jitter interval |`10s`|
+|`flushInterval`| Output flush interval |`15s`|
+|`flushJitter`| Output jitter interval |`10s`|
 |`grnocOutput.enabled`| Whether to write to GlobalNOC database |`true`|
 |`grnocOutput.hostname`| Database endpoint |`tsds.hostname.net`|
 |`grnocOutput.username`| Database username |`tsds username`|
@@ -264,3 +272,4 @@ The following table lists the configurable parameters of the Telegraf monitoring
 |`influxOutput.httpBasicAuth.enabled`| Whether http basic authentication is enabled |`false`|
 |`influxOutput.httpBasicAuth.username`| Database username |`telegraf`|
 |`influxOutput.httpBasicAuth.password`| Database password |`metrics`|
+
