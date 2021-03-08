@@ -34,6 +34,8 @@ SLATE:
   Cluster:
     Name: mini-SLATE
   LocalStorage: false
+  Instance:
+    ID: "untagged"
 ### SLATE-END ###
 
 Service:
