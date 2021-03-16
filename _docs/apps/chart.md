@@ -93,7 +93,9 @@ SLATE Standardization:
 {% endraw %}
 * It is not required to include the SLATE set variables shown above in every chart, but they should be included if they will be used in your deployment.
 * Additionally a `instanceID` label is needed inside the app's deployment or StatefulSet under `metadata`.
+{% raw %}
 ```
 ...
 instanceID: {{ .Values.SLATE.Instance.ID | quote  }}
 ```
+{% endraw %}
