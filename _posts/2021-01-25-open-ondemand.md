@@ -143,7 +143,10 @@ slate app install open-ondemand --group <group_name> --cluster <cluster_name> --
 ## Testing
 
 After a short while, your SLATE OnDemand application should be live at
-`<slate_instance_id>.ondemand.<slate_cluster_name>.slateci.net`.
+`<slate_instance_tag>.ondemand.<slate_cluster_name>.slateci.net`.
+Note that `<slate_instance_tag>` is the `instance` parameter specified in the `values.yaml` file,
+not the randomly-assigned SLATE instance ID.
+
 Navigate to this URL with any web browser, and you will be directed to a
 Keycloak login page. A successful login will then direct you to the Open OnDemand portal home page.
 Navigating to the shell access menu within the portal should allow you to launch in-browser shells to the previously specified backend compute resources.
@@ -155,7 +158,7 @@ The following table lists the configurable parameters of the Open OnDemand appli
 
 |           Parameter           |           Description           |           Default           |
 |-------------------------------|---------------------------------|-----------------------------|
-|`Instance`| Optional string to differentiate SLATE experiment instances. |`global`|
+|`Instance`| String to differentiate SLATE experiment instances. |`global`|
 |`replicaCount`| The number of replicas to create. |`1`|
 |`setupKeycloak`| Runs Keycloak setup script if enabled. |`true`|
 |`volume.storageClass`| The volume provisioner from which to request the Keycloak backing volume |`local-path`|
