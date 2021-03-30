@@ -6,7 +6,6 @@ permalink: blog/slate-open-ondemand.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 
