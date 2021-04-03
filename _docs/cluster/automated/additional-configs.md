@@ -93,7 +93,7 @@ In your `inventory/<CLUSTER_NAME>/hosts.yaml` add the `access_ip` variable so yo
 ```yaml
 hosts:
   node1:
-    access_ip: <ACCESS_IP> # the public IP bound one-to-one to _this_ host
+    access_ip: <HOST_IP> # the internal IP bound to _this_ host
     ansible_host: <ACCESS_IP> # the IP on which the host is accessible via SSH
     ip: <HOST_IP> # the internal IP of the host to bind Kubernetes cluster services to
 ```
