@@ -10,7 +10,7 @@ tag: draft
 
 ---
 
-We are introducing in this blog post a new SLATE app that users could use on a specific cluster node within SLATE to get an insight on the network bandwidth and latency at a specific time between that node and the central SLATE infrastructure. This app could be an important tool that cluster administrators can use to run basic networking tests after joining the SLATE platform.
+We are introducing in this blog post a new SLATE app that users could use on a specific cluster node within SLATE to get an insight on the network bandwidth and latency between that node and the central SLATE infrastructure at a specific time. This app could be an important tool that cluster administrators can use to run basic networking tests after joining the SLATE platform.
 <!--end_excerpt-->
 
 In this blog post, we assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster. 
