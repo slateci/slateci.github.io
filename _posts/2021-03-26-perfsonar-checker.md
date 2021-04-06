@@ -22,7 +22,7 @@ PerfSONAR is the performance Service-Oriented Network monitoring ARchitecture. I
 In this new app, we're just using a few test commands from the perfSONAR test toolkit. Those tests run to three different sites that are part of the SLATE infrastructure with the following details:
 
 - A 30 second throughput test
-- A 3 minute latency test at high frequency (100 htz)
+- A 3-minute latency test at high frequency (100 htz)
 - A traceroute test   
 
 ## Deploy Perfsonar-Checker
