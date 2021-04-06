@@ -171,4 +171,4 @@ We showed in this post how you can easily deploy `perfsonar-checker` app on a SL
 
 ## Questions?
 
-As always, we encourage you to try this out and let us if you have feedback or suggestions that would help us improve this chart and make more beneficial to users. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
+As always, we encourage you to try this out and let us if you have feedback or suggestions that would help us improve this chart and make it more beneficial to users. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
