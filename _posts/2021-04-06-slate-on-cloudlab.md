@@ -20,11 +20,13 @@ More information about CloudLab can be found [here](https://www.cloudlab.us/).
 ## Prerequisites
 
 To begin, CloudLab access is necessary.
-An account can be requested [here](https://cloudlab.us/signup.php).
+Instructions for obtaining an account can be found [here](http://docs.cloudlab.us/users.html).
 Request to join the [SLATE](https://www.cloudlab.us/show-project.php?project=SLATE) CloudLab project.
 
 Additionally, a SLATE account and CLI credentials are necessary.
 Instructions for doing this can be found [here](https://slateci.io/docs/quickstart/).
+
+Comprehensive documentation for CloudLab can be found [here](http://docs.cloudlab.us/).
 
 
 ## Launching CloudLab Experiment
@@ -41,26 +43,28 @@ Useful profiles:
 
 For simplicity, we will be using the `slate-single-node-cluster` profile.
 
+Instantiate this profile, and wait for it to fully spin up.
+
 *Note:*
 Additional custom profiles can also be used;
-however, for full functionality, there are a few recommend guidelines. 
+however, for full functionality, there are a few recommended guidelines. 
 First, although many different Linux distributions can be used, the SLATE team recommends CentOS 7.
 Second, an additional pool of floating public IP addresses must be allocated for ingress and OSG applications to work.
+The CloudLab documentation has instructions for this [here](http://docs.cloudlab.us/advanced-topics.html#%28part._dynamic-public-ip%29).
 
 
-## Kubernetes Cluster Creation
+## Kubernetes Cluster Creation / SLATE Registration
 
 Once our CloudLab experiment/instances have fully spun up, we can begin installing Kubernetes on the node(s).
 
-The SLATE team recommends that the [`kubespray`](https://kubespray.io/#/) tool be used for this.
+The SLATE team recommends that [Kubespray](https://kubespray.io/#/) be used for this.
 
-Instructions can be found [here](https://slateci.io/docs/cluster/automated/introduction.html).
-
-
-## SLATE Registration
+Follow the instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
+The standard installation instructions can be followed exactly, with the exception of making changes to accommodate a single-node cluster.
 
 Once our Kubernetes cluster is operational, we can finally register it with SLATE!
 There is another Ansible playbook that has been developed to make this process easy as well.
+The guide listed above will also cover the SLATE registration process.
 
 
 ## Testing
