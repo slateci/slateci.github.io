@@ -10,24 +10,25 @@ tag: draft
 
 ---
 
-We are introducing in this blog post a new SLATE app that users could use on a specific cluster node within SLATE to get an insight on the network bandwidth and latency between that node and the central SLATE infrastructure at a specific time. This app could be an important tool that cluster administrators can use to run basic networking tests after joining the SLATE platform.
+We are introducing in this blog post a new SLATE application that can be deployed on a specific cluster node within SLATE to get an insight on the network bandwidth and latency between that node and the central SLATE infrastructure at a specific time. It would be an important tool that cluster administrators can use to run basic networking tests after joining the SLATE platform.
 <!--end_excerpt-->
 
-In this blog post, we assume you have a SLATE account and client installed on your laptop (c.f. the [SLATE quickstart](https://slateci.io/docs/quickstart/)) and access to a SLATE registered Kubernetes cluster. 
+In this blog post, we assume that you have a [SLATE account](https://portal.slateci.io/slate_portal) and access to a Kubernetes cluster [registered with the SLATE federation](https://portal.slateci.io/clusters).  You will also need a local copy of the [SLATE client installed](https://slateci.io/docs/tools/index.html).  See [SLATE quickstart](https://slateci.io/docs/quickstart/) or contact us if you need help getting started.
+
 
 ## PerfSONAR Overview
 
 PerfSONAR is the performance Service-Oriented Network monitoring ARchitecture. It's a tool that many science networks and facilities deploy to test and monitor end-to-end network performance. 
 
-In this new app, we're just using a few test commands from the perfSONAR test toolkit. Those tests run to three different sites that are part of the SLATE infrastructure with the following details:
+In this new app, `perfsonar-checker`, we're just using a few test commands from the perfSONAR test toolkit. Those tests run to three different sites in the SLATE platform and do the following:
 
-- A 30 second throughput test
+- A 30-second throughput test
 - A 3-minute latency test at high frequency (100 htz)
 - A traceroute test   
 
-## Deploy Perfsonar-Checker
+## Deployment
 
-We're going to show you here how you can deploy the app using the SLATE CLI, but the app deployment can also be done through the SLATE web portal.
+We're going to show you here how you can deploy the `perfsonr-checker` app using the SLATE CLI. However, the app deployment can also be done through the SLATE Portal.
 
 The SLATE CLI has many subcommands which you can list by running the command `slate -h`: 
 
@@ -70,7 +71,7 @@ Edit the conf file as needed. For example, the above shows three variables that 
 - The second is a hostname to deploy your app instance to. If you leave this `null`, the cluster scheduler will automatically assign a host to your deployment.
 - The third is an optional parameter for the HTTPLogger which you can enable so that you can access the full log of the tests and see their detailed output. 
 
-In this demo, we're updating all three configuration variables as you can see below:
+In this post, we're updating all three configuration variables as you can see below:
 
 ```
 Instance: 'demo'
@@ -84,25 +85,27 @@ Save the changes to the config file.
 
 ### App Installation
 
-To install your app instance, run the below command after substituting `slate-dev` with your SLATE group and `utah-dev` with the target cluster you have a deploy permission on:
+To install your app instance, run the below command after substituting `<your-group>` with your SLATE group and `<cluster>` with a target cluster for your app instance:
 
 ```
-slate app install --dev --group slate-dev --cluster utah-dev perfsonar-checker --conf app.conf
+slate app install --dev --group <your-group> --cluster <cluster> perfsonar-checker --conf app.conf
 ``` 
 
-The above command installs an instance of the `perfsonar-checker` app under the `slate-dev` group on the `utah-dev` cluster using the configuration from `app.conf`. A successful run of the install command should print a message along with an <instance-ID> for your deployment as shown in the below example:
+The above command would install an instance of the `perfsonar-checker` app under your group on the given target cluster using the configuration from `app.conf`. A successful run of the install command should print a message along with an `<instance-ID>` for your deployment as shown in the below example:
 
 ```
 Successfully installed application perfsonar-checker as instance perfsonar-checker-demo with ID instance_r3g1AJcMqcQ
 ```
 
+In the above example, the `<instance-ID>` is `instance_r3g1AJcMqcQ`.
+
 It could take a couple of minutes for your instance to be fully up and ready to run the tests.
 
 ### Test Results
-To view the summary output of the tests that have finished, run the below command with your `<instance-ID>` as an argument.
+To view the summary output of the tests that have finished, run the below command with your `<instance-ID>` as an argument. 
 
 ```
-slate instance logs --max-lines 0 instance_r3g1AJcMqcQ
+slate instance logs --max-lines 0 <instance-ID>
 ```
 
 The tests start by checking the status of the pscheduler services in your instance, so for a normal operation you will see the below instance log message:
@@ -124,12 +127,12 @@ localhost:
 pScheduler appears to be functioning normally.
 
 ``` 
-After that, the result of all other tests will follow. In our case, the tests took around X minutes to finish.
+After that, the result of all other tests will follow. In our case, the tests took around 20 minutes to finish.
 
 #### HTTPLogger (Optional)
 If you enabled HTTPLogger like we did above, you would be able to view the full log of the tests via a web browser.
 
-To do that, run the `slate instance info <instance-ID>` command, and look for the URL for the HTTPLogger service. Here is an example from our demo:
+To do that, run the `slate instance info <instance-ID>` command, and look for the URL for the HTTPLogger service. Here is an example from our instance deployment:
 
 ```
 $ slate instance info  instance_r3g1AJcMqcQ
@@ -161,14 +164,20 @@ logger:a62e1b92ff24eb2d
 ...
 ...
 ```
-Now, visit your URL `http://<ip-address>:<port>` from a web browser and use your credentials to log in and view the `perfsonar-checker.log` which contains the full output of the tests.
+Now, visit your URL `http://<ip-address>:<port>` from a web browser and use your credentials to log in and view the `checker.log` which contains the full output of the tests.
+
+#### Instance Uninstall
+To delete your deployed instance, run the below command along with your `<instance-ID>`.
+
+```
+slate instance delete <instance-ID>
+```
 
 
-
-## Conclusion
+## Summary
 
 We showed in this post how you can easily deploy `perfsonar-checker` app on a SLATE cluster and get basic network measurements on throughput, latency and hops to central SLATE infrastructure. We also showed how you can simply view the full details of the tests all with just few SLATE commands.
 
 ## Questions?
 
-As always, we encourage you to try this out and let us if you have feedback or suggestions that would help us improve this chart and make it more beneficial to users. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
+As always, we encourage you to try this out and let us if you have any feedback or suggestions that would help us improve this chart and make it more beneficial to users. For discussion, news and troubleshooting, the [SLATE Slack workspace](https://slack.slateci.io/) is the best place to reach us! 
