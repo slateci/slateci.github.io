@@ -85,25 +85,27 @@ Save the changes to the config file.
 
 ### App Installation
 
-To install your app instance, run the below command after substituting `slate-dev` with your SLATE group and `utah-dev` with the target cluster:
+To install your app instance, run the below command after substituting `<your-group>` with your SLATE group and `<cluster>` with a target cluster for your app instance:
 
 ```
-slate app install --dev --group slate-dev --cluster utah-dev perfsonar-checker --conf app.conf
+slate app install --dev --group <your-group> --cluster <cluster> perfsonar-checker --conf app.conf
 ``` 
 
-The above command installs an instance of the `perfsonar-checker` app under the `slate-dev` group on the `utah-dev` cluster using the configuration from `app.conf`. A successful run of the install command should print a message along with an `<instance-ID>` for your deployment as shown in the below example:
+The above command would install an instance of the `perfsonar-checker` app under your group on the given target cluster using the configuration from `app.conf`. A successful run of the install command should print a message along with an `<instance-ID>` for your deployment as shown in the below example:
 
 ```
 Successfully installed application perfsonar-checker as instance perfsonar-checker-demo with ID instance_r3g1AJcMqcQ
 ```
 
+In the above example, the `<instance-ID>` is `instance_r3g1AJcMqcQ`.
+
 It could take a couple of minutes for your instance to be fully up and ready to run the tests.
 
 ### Test Results
-To view the summary output of the tests that have finished, run the below command with your `<instance-ID>` as an argument.
+To view the summary output of the tests that have finished, run the below command with your `<instance-ID>` as an argument. 
 
 ```
-slate instance logs --max-lines 0 instance_r3g1AJcMqcQ
+slate instance logs --max-lines 0 <instance-ID>
 ```
 
 The tests start by checking the status of the pscheduler services in your instance, so for a normal operation you will see the below instance log message:
@@ -162,8 +164,14 @@ logger:a62e1b92ff24eb2d
 ...
 ...
 ```
-Now, visit your URL `http://<ip-address>:<port>` from a web browser and use your credentials to log in and view the `perfsonar-checker.log` which contains the full output of the tests.
+Now, visit your URL `http://<ip-address>:<port>` from a web browser and use your credentials to log in and view the `checker.log` which contains the full output of the tests.
 
+#### Instance Uninstall
+To delete your deployed instance, run the below command along with your `<instance-ID>`.
+
+```
+slate instance delete <instance-ID>
+```
 
 
 ## Summary
