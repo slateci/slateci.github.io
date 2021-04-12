@@ -10,7 +10,7 @@ tag: draft
 ---
 
 CloudLab is a research platform for provisioning compute and networking resources.
-It can be easily leveraged to provide the resources upon which a SLATE cluster can run.
+It can be leveraged to provide the resources upon which a SLATE cluster can run.
 This post will outline the process of setting up this SLATE cluster.
 More information about CloudLab can be found [here](https://www.cloudlab.us/).
 
@@ -36,21 +36,23 @@ This experiment will contain the compute and networking resources needed to laun
 Several CloudLab profiles have already been created to make this process easier.
 
 Useful profiles:
+* [cloudlab-slate](https://www.cloudlab.us/show-profile.php?uuid=6ab61da6-97c2-11eb-b1eb-e4434b2381fc)
 * [30-cluster-bring-up](https://www.cloudlab.us/show-profile.php?uuid=bfb6a8ec-0361-11eb-b7c5-e4434b2381fc)
 * [slate-single-node-cluster](https://www.cloudlab.us/show-profile.php?uuid=a0e779b6-1435-11eb-b7c5-e4434b2381fc)
 * [slate-three-node-cluster](https://www.cloudlab.us/show-profile.php?uuid=93f70990-034c-11eb-b7c5-e4434b2381fc)
 * [slate-vm-cluster](https://www.cloudlab.us/show-profile.php?uuid=77e8915c-01d7-11eb-b7c5-e4434b2381fc)
 
-For simplicity, we will be using the `slate-single-node-cluster` profile.
+For simplicity, we will be using the `cloudlab-slate` profile.
+This profile will bring up a single CENTOS 7 bare-metal node, as well as allocate two additional floating IPs.
 
 Instantiate this profile, and wait for it to fully spin up.
 
-*Note:*
+*Note:
 Additional custom profiles can also be used;
 however, for full functionality, there are a few recommended guidelines. 
 First, although many different Linux distributions can be used, the SLATE team recommends CentOS 7.
 Second, an additional pool of floating public IP addresses must be allocated for ingress and OSG applications to work.
-The CloudLab documentation has instructions for this [here](http://docs.cloudlab.us/advanced-topics.html#%28part._dynamic-public-ip%29).
+The CloudLab documentation has instructions for this [here](http://docs.cloudlab.us/advanced-topics.html#%28part._dynamic-public-ip%29).*
 
 
 ## Kubernetes Cluster Creation / SLATE Registration
@@ -59,12 +61,13 @@ Once our CloudLab experiment/instances have fully spun up, we can begin installi
 
 The SLATE team recommends that [Kubespray](https://kubespray.io/#/) be used for this.
 
-Follow the instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
-The standard installation instructions can be followed exactly, with the exception of making changes to accommodate a single-node cluster.
+Follow the official SLATE instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
+The standard installation instructions can be followed exactly, with the exception of making changes to accommodate a single-node cluster if necessary.
 
-Once our Kubernetes cluster is operational, we can finally register it with SLATE!
+Once the Kubernetes cluster is operational, we can finally register it with SLATE!
 There is another Ansible playbook that has been developed to make this process easy as well.
-The guide listed above will also cover the SLATE registration process.
+
+The guide listed above will also cover the SLATE registration process [here](https://slateci.io/docs/cluster/automated/kubernetes-cluster-creation.html#slate-cluster-registration).
 
 
 ## Testing
@@ -76,7 +79,8 @@ If everything has been done properly, your SLATE cluster on CloudLab should now 
 
 ## Limitations
 
-If you registered your SLATE cluster with the `slate-dev` API server, SLATE will not automatically configure DNS records for your cluster.
+If you registered your SLATE cluster with the `slate-dev` API server,
+SLATE will not automatically configure DNS records for ingress into your cluster.
 This must then be done outside of SLATE.
 
 
