@@ -10,7 +10,7 @@ tag: draft
 ---
 
 CloudLab is a research platform for provisioning compute and networking resources.
-It can be easily leveraged to provide the resources upon which a SLATE cluster can run.
+It can be leveraged to provide the resources upon which a SLATE cluster can run.
 This post will outline the process of setting up this SLATE cluster.
 More information about CloudLab can be found [here](https://www.cloudlab.us/).
 
@@ -47,12 +47,12 @@ This profile will bring up a single CENTOS 7 bare-metal node, as well as allocat
 
 Instantiate this profile, and wait for it to fully spin up.
 
-*Note:*
+*Note:
 Additional custom profiles can also be used;
 however, for full functionality, there are a few recommended guidelines. 
 First, although many different Linux distributions can be used, the SLATE team recommends CentOS 7.
 Second, an additional pool of floating public IP addresses must be allocated for ingress and OSG applications to work.
-The CloudLab documentation has instructions for this [here](http://docs.cloudlab.us/advanced-topics.html#%28part._dynamic-public-ip%29).
+The CloudLab documentation has instructions for this [here](http://docs.cloudlab.us/advanced-topics.html#%28part._dynamic-public-ip%29).*
 
 
 ## Kubernetes Cluster Creation / SLATE Registration
@@ -61,12 +61,13 @@ Once our CloudLab experiment/instances have fully spun up, we can begin installi
 
 The SLATE team recommends that [Kubespray](https://kubespray.io/#/) be used for this.
 
-Follow the instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
+Follow the official SLATE instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
 The standard installation instructions can be followed exactly, with the exception of making changes to accommodate a single-node cluster if necessary.
 
 Once the Kubernetes cluster is operational, we can finally register it with SLATE!
 There is another Ansible playbook that has been developed to make this process easy as well.
-The guide listed above will also cover the SLATE registration process.
+
+The guide listed above will also cover the SLATE registration process [here](https://slateci.io/docs/cluster/automated/kubernetes-cluster-creation.html#slate-cluster-registration).
 
 
 ## Testing
