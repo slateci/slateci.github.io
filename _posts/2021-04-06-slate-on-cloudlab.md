@@ -50,11 +50,18 @@ Current SLATE-on-CloudLab profiles are listed here:
 * [slate-vm-cluster](https://www.cloudlab.us/show-profile.php?uuid=77e8915c-01d7-11eb-b7c5-e4434b2381fc)
 
 For simplicity, we will be using the [`cloudlab-slate`](https://www.cloudlab.us/show-profile.php?uuid=6ab61da6-97c2-11eb-b1eb-e4434b2381fc) profile.
-This profile will bring up a single CENTOS 7 bare-metal node, as well as allocate two additional floating IPs.
+This profile will bring up a single CENTOS 7 bare-metal node, as well as allocate a variable number of additional floating IPs.
 
-<!-- Need instructions for instantiation -->
+To instantiate this profile, navigate to [this](https://www.cloudlab.us/instantiate.php) page.
+Click the "Change Profile" button, and select the `cloudlab-slate` profile from the list of options.
+Next, you will be asked how many additional public IPs to allocate.
+Leave this at the default value, which is 2.
+Click next, and then select a cluster to install this profile on. Any CloudLab cluster should be fine.
+After clicking next again, set an experiment duration (the default of 16 hours is OK).
+Finally, click "Finish" and wait for your experiment to fully spin up.
 
-Instantiate this profile, and wait for it to fully spin up.
+If you require more guidance instantiating your experiment, CloudLab has additional documentation [here](https://docs.cloudlab.us/getting-started.html).
+
 
 *Note:
 Additional custom profiles can also be used;
