@@ -24,9 +24,16 @@ Instructions for obtaining an account can be found [here](http://docs.cloudlab.u
 Request to join the [SLATE](https://www.cloudlab.us/show-project.php?project=SLATE) CloudLab project.
 
 Additionally, a SLATE account and CLI credentials are necessary.
-Instructions for doing this can be found [here](https://slateci.io/docs/quickstart/).
 
-Comprehensive documentation for CloudLab can be found [here](http://docs.cloudlab.us/).
+A SLATE account can be created [here](https://portal.slateci.io/slate_portal).
+Click button that says "Sign Up" in the top right corner, and follow the prompts.
+
+Once signed in to SLATE, you can access your SLATE CLI token [here](https://portal.slateci.io/cli).
+This token is for the SLATE production API, and corresponds with an API endpoint of `https://api.slateci.io:443`.
+
+For more information about getting started with SLATE, consult our quick-start guide [here](https://slateci.io/docs/quickstart/).
+
+Additionally, comprehensive documentation for CloudLab can be found [here](http://docs.cloudlab.us/).
 
 
 ## Launching CloudLab Experiment
@@ -35,17 +42,26 @@ Next, a CloudLab experiment must be created.
 This experiment will contain the compute and networking resources needed to launch a SLATE cluster.
 Several CloudLab profiles have already been created to make this process easier.
 
-Useful profiles:
+Current SLATE-on-CloudLab profiles are listed here:
 * [cloudlab-slate](https://www.cloudlab.us/show-profile.php?uuid=6ab61da6-97c2-11eb-b1eb-e4434b2381fc)
 * [30-cluster-bring-up](https://www.cloudlab.us/show-profile.php?uuid=bfb6a8ec-0361-11eb-b7c5-e4434b2381fc)
 * [slate-single-node-cluster](https://www.cloudlab.us/show-profile.php?uuid=a0e779b6-1435-11eb-b7c5-e4434b2381fc)
 * [slate-three-node-cluster](https://www.cloudlab.us/show-profile.php?uuid=93f70990-034c-11eb-b7c5-e4434b2381fc)
 * [slate-vm-cluster](https://www.cloudlab.us/show-profile.php?uuid=77e8915c-01d7-11eb-b7c5-e4434b2381fc)
 
-For simplicity, we will be using the `cloudlab-slate` profile.
-This profile will bring up a single CENTOS 7 bare-metal node, as well as allocate two additional floating IPs.
+For simplicity, we will be using the [`cloudlab-slate`](https://www.cloudlab.us/show-profile.php?uuid=6ab61da6-97c2-11eb-b1eb-e4434b2381fc) profile.
+This profile will bring up a single CENTOS 7 bare-metal node, as well as allocate a variable number of additional floating IPs.
 
-Instantiate this profile, and wait for it to fully spin up.
+To instantiate this profile, navigate to [this](https://www.cloudlab.us/instantiate.php) page.
+Click the "Change Profile" button, and select the `cloudlab-slate` profile from the list of options.
+Next, you will be asked how many additional public IPs to allocate.
+Leave this at the default value, which is 2.
+Click next, and then select a cluster to install this profile on. Any CloudLab cluster should be fine.
+After clicking next again, set an experiment duration (the default of 16 hours is OK).
+Finally, click "Finish" and wait for your experiment to fully spin up.
+
+If you require more guidance instantiating your experiment, CloudLab has additional documentation [here](https://docs.cloudlab.us/getting-started.html).
+
 
 *Note:
 Additional custom profiles can also be used;
