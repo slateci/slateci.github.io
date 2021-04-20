@@ -10,7 +10,7 @@ tag: draft
 
 ---
 
-We are introducing in this blog post a new SLATE application that can be deployed on a specific cluster node within SLATE to get an insight on the network bandwidth and latency between that node and the central SLATE infrastructure at a specific time. It would be an important tool that cluster administrators can use to run basic networking tests after joining the SLATE platform.
+[PerfSONAR](https://docs.perfsonar.net/index.html) is a popular tool to measure network bandwidth and latency between between hosts in a network.  We've built an application that can be easily deployed on a SLATE cluster and check against production endpoints on the SLATE platform.  This should be a handy tool cluster administrators can quickly run network tests after registering with the SLATE platform.
 <!--end_excerpt-->
 
 In this blog post, we assume that you have a [SLATE account](https://portal.slateci.io/slate_portal) and access to a Kubernetes cluster [registered with the SLATE federation](https://portal.slateci.io/clusters).  You will also need a local copy of the [SLATE client installed](https://slateci.io/docs/tools/index.html).  See [SLATE quickstart](https://slateci.io/docs/quickstart/) or contact us if you need help getting started.
