@@ -23,6 +23,9 @@ Once you have access to the Chameleon testbed, create a reservation for one inst
 
 Now, we are ready to set up a Kubernetes cluster on this machine.
 
+To login to Chameleon, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
+This user should have password-less `sudo` access.
+
 
 ## Cluster Setup
 
@@ -72,7 +75,7 @@ This means all ingress requests must have the ingress controller NodePort append
 
 To install the ingress controller, login to a cluster node with `kubectl` access, and download the following Kubernetes manifest:
 ```bash
-curl -o deploy.yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml`
+curl -o deploy.yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml
 ```
 
 Next, open this file with your preferred editor, and navigate to the line that contains this argument: `--ingress-class=nginx`
