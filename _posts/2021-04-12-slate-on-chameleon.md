@@ -19,30 +19,59 @@ Chameleon is an OpenStack-based research platform for provisioning compute and n
 To run a SLATE cluster on [Chameleon](https://www.chameleoncloud.org/), you must first have access to a Chameleon account, as well as be on an existing Chameleon project. 
 The [Chameleon Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html) contains lots of useful information about this.
 
-Once you have access to the Chameleon testbed, create a reservation for one instance and one floating public IP address. Then, instantiate one CentOS 7 instance, and associate the previously allocated floating public IP to this instance. More detailed instructions regarding this process can also be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html). If you would like to setup a multiple-node cluster, provision additional machines at this time.
+Once you have access to the Chameleon testbed, you will need to select a specific site to run your Chameleon experiment on. 
+The homepage for [Chameleon](https://www.chameleoncloud.org/) has a drop-down menu at the top titled "Experiment".
+Click this menu, and observe the options under "Sites". There are currently three sites that your experiment can be instantiated at.
+For installing a cluster on bare metal, which we will be doing in this post, select either "CHI@TACC" or "CHI@UC".
+Selecting either of these will bring you to the Chameleon portal specific to that site.
+Both sites' portals will be identical other than the resources they access.
 
-Now, we are ready to set up a Kubernetes cluster on this machine.
+Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address. 
+Then, instantiate one CentOS 7 instance.
+There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`.
+Next, associate the previously allocated floating public IP to this instance. 
 
-To login to Chameleon, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
+Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
+If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
+
+### Additional Considerations
+* You must create a reservation (which won't physically provision anything) before you can instantiate actual instances under that reservation.
+* If there are no resources available at your selected site, try the other one. If there are still no resources available, you may have to wait until a later time.
+* If you would like to setup a multiple-node cluster, provision additional machines at this time.
+
+
+The instance(s) will take about 10 minutes to spin up.
+Once they are done, we are ready to set up a Kubernetes cluster.
+
+### Logging In
+
+To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
 This user should have password-less `sudo` access.
+Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
+On Chameleon, `ufw` is often running, even on CentOS. 
+Disable it with `sudo ufw disable`.
 
 
 ## Cluster Setup
 
 To create a Kubernetes cluster and register it with SLATE, follow documentation [here](https://slateci.io/docs/cluster/automated/introduction.html), with a few changes.
+Specifically, follow the instructions for setting up a cluster behind a NAT.
 
-First, make sure MetalLB is disabled. 
+This will mean the following changes to cluster configuration:
+* MetalLB will be disabled. 
+* The `supplementary_addresses_in_ssl_keys` variable will need to be added.
 
-Second, follow the additional configuration steps for setting up a cluster behind a NAT (for one-to-one NATs). 
+<!-- TODO: update this link -->
+<!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
 
-Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. Make sure to not forget the `supplementary_addresses_in_ssl_keys` variable.
-
-Third, make sure any firewalls are disabled. On Chameleon, `ufw` is often running, even on CentOS. Disable it with `sudo ufw disable`.
-
-Finally, to run the Ansible playbook (run in `kubespray` directory):
+To run the Ansible playbook (run in `kubespray` directory):
 ```bash
 ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
 ```
+
+This playbook will take a while to run (around 10 minutes, depending).
+Once it has finished, login to the node and run `sudo kubectl get nodes`.
+If all nodes say that they are `Ready`, then Kubernetes cluster creation was successful!
 
 
 ### SLATE Registration
@@ -58,6 +87,7 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
 ```
 
 After this command runs, you should have a SLATE cluster!
+Run `slate cluster list`, and if everything was successful, you should see your cluster listed in the output.
 
 
 ## Limitations
@@ -83,10 +113,10 @@ Change this `ingress-class` parameter from `nginx` to `slate`.
 
 Finally, deploy the ingress controller with `kubectl`:
 ```bash
-kubectl apply -f /path/to/deploy.yaml
+sudo kubectl apply -f /path/to/deploy.yaml
 ```
 
-At this point, you will have an operational ingress controller. All that remains is to see which ports the ingress controller is running on. This can be done with `kubectl get services -n ingress-nginx`. 
+At this point, you will have an operational ingress controller. All that remains is to see which ports the ingress controller is running on. This can be done with `sudo kubectl get services -n ingress-nginx`. 
 You will see an `ingress-nginx-controller` NodePort service, with ports 80 and 443 mapped to two different high ports. One of these ports (80 is http, 443 is https) must be appended to any and all requests using the ingress controller.
 
 
