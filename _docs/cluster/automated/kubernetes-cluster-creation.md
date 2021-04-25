@@ -124,6 +124,7 @@ Otherwise, deploy MetalLB by following these instructions.
 
 Otherwise, continue reading to learn about alternate configurations. For a full list of variables you can configure, please read [Configurable Parameters in Kubespray](https://kubespray.io/#/docs/vars).
 
+
 #### Creating a Single-Node Cluster
 By default, Kubespray will setup Kubernetes to create two replicas of CoreDNS, which is impossible on single-node clusters.
 While it doesn't break anything or cause any critical errors, it can create noise in your logs and we recommend adding the following:
