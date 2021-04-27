@@ -81,7 +81,7 @@ NodeSelection:
 HTTPLogger: 
   Enabled: true
 ``` 
-###### Note: If you want to deploy the instance to a specific node, you'll need to substitute `sl-es1.slateci.io` shown in the above example with the hostname of that node. That node will be the origin from which tests will run.
+###### Note: If you want to deploy the instance to a specific node, you'll need to substitute `sl-es1.slateci.io` shown in the above example with the hostname of that node. That node will be the origin from which tests will run. *Additionally, the node must have no other perfSONAR instances running on it because perfSONAR uses host network mode*. Running multiple perfSONAR applications on the same node will lead to unexpected app behavior.
 
 The configuration parameters for the destinations to which the tests will run are included in the app config file but they can be left at their default values.
 
