@@ -247,6 +247,18 @@ Run the Kubespray playbook:
 
 `cd` into the slate-ansible repository or folder.
 
+
+#### Federation
+
+Currently, SLATE operates two separate federations, a development federation and a production federation.
+When you register your cluster, you will need to decide which federation to register with.
+By default, you will be given a token for the SLATE production federation.
+If you would like to register your cluster here, then simply use the default SLATE token given to you,
+and `https://api-dev.slateci.io:18080` as the `slate_cli_endpoint` parameter in the following command.
+
+However, if you would like to register your cluster with the development federation, reach out to the SLATE team about obtaining a development token.
+Once you have done this, the development API endpoint is `https://api.slateci.io:443`.
+
 ### Run
 
 Run the SLATE registration playbook.
@@ -259,6 +271,8 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
  site.yml
 ```
 {:data-add-copy-button='true'}
+
+
 
 #### Cluster registration behind NAT:
 Add the following two flags to your SLATE registration playbook command if your cluster is behind a NAT: 
