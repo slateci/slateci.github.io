@@ -28,7 +28,7 @@ In this new app, `perfsonar-checker`, we're just using a few test commands from 
 
 ## Deployment
 
-We're going to show you here how you can deploy the `perfsonr-checker` app using the SLATE CLI. However, the app deployment can also be done through the SLATE Portal.
+We're going to show you here how you can deploy the `perfsonar-checker` app using the SLATE CLI. However, the app deployment can also be done through the SLATE Portal.
 
 The SLATE CLI has many subcommands which you can list by running the command `slate -h`: 
 
@@ -75,13 +75,17 @@ In this post, we're updating all three configuration variables as you can see be
 
 ```
 Instance: 'demo'
-NodeSelection:  
+NodeSelection:
+  # We're using the below hostname just an example
   Hostname: sl-es1.slateci.io
 HTTPLogger: 
   Enabled: true
 ``` 
+###### Note: If the user wants to deploy the instance to a specific node, they need to substitute `sl-es1.slateci.io` shown in the above example with the hostname of that node. That node will be the origin from which tests will run.
 
-Save the changes to the config file.
+The destinations to which the tests run are included in the app config file but they can be left at their default values.
+
+Save the changes to the config file, and proceed to the next step.
 
 ### App Installation
 
@@ -127,7 +131,7 @@ localhost:
 pScheduler appears to be functioning normally.
 
 ``` 
-After that, the result of all other tests will follow. In our case, the tests took around 20 minutes to finish.
+After that, the result of all other tests will follow. In our case, the tests took around 20 minutes to finish. After all tests are finished, you should see the message `All tests have finished!` in the instance log messages.
 
 #### HTTPLogger (Optional)
 If you enabled HTTPLogger like we did above, you would be able to view the full log of the tests via a web browser.
@@ -164,6 +168,8 @@ logger:a62e1b92ff24eb2d
 ...
 ...
 ```
+###### Note: The username will always be logger, followed by a colon, and then the randomly generated password, as shown in the above example.
+
 Now, visit your URL `http://<ip-address>:<port>` from a web browser and use your credentials to log in and view the `checker.log` which contains the full output of the tests.
 
 #### Instance Uninstall
