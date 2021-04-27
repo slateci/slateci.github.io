@@ -76,12 +76,12 @@ In this post, we're updating all three configuration variables as you can see be
 ```
 Instance: 'demo'
 NodeSelection:
-  # We're using the below hostname just an example
+  # We're using the below hostname just as an example
   Hostname: sl-es1.slateci.io
 HTTPLogger: 
   Enabled: true
 ``` 
-###### Note: If the user wants to deploy the instance to a specific node, they need to substitute `sl-es1.slateci.io` shown in the above example with the hostname of that node. That node will be the origin from which tests will run.
+###### Note: If you want to deploy the instance to a specific node, you'll need to substitute `sl-es1.slateci.io` shown in the above example with the hostname of that node. That node will be the origin from which tests will run.
 
 The destinations to which the tests run are included in the app config file but they can be left at their default values.
 
