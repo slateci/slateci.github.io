@@ -76,6 +76,15 @@ If all nodes say that they are `Ready`, then Kubernetes cluster creation was suc
 
 ### SLATE Registration
 
+Currently, SLATE operates two separate federations, a development federation and a production federation.
+When you register your cluster, you will need to decide which federation to register with.
+By default, you will be given a token for the SLATE production endpoint.
+If you would like to register your cluster with the production federation, then you simply use the default SLATE token given to you, 
+and `https://api-dev.slateci.io:18080` as the `slate_cli_endpoint` parameter in the following command.
+
+However, if you would like to register your cluster with the development federation, reach out to the SLATE team about obtaining a development token.
+Once you have done this, the development API endpoint is `https://api.slateci.io:443`.
+
 To register the previously created Kubernetes cluster with SLATE, navigate to the `slate-ansible` directory, and run the following command:
 ```bash
 ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <SSH_USER> --become --become-user=root \
