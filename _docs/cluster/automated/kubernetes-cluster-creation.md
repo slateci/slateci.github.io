@@ -118,6 +118,22 @@ Otherwise, deploy MetalLB by following these instructions.
     {:data-add-copy-button='true'}
 
 
+#### Cert Manager
+Cert Manager is a component that we recommend installing on all SLATE clusters.
+To do so, in `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` set
+```yaml
+cert_manager_enabled: false
+```
+
+to
+
+```yaml
+cert_manager_enabled: true
+```
+{:data-add-copy-button='true'}
+
+
+
 ### Other Configurations
 
 *You can safely skip this entire section ([to here](/docs/cluster/automated/kubernetes-cluster-creation.html#run)) if you are installing a standard multi-node Kubernetes cluster with MetalLB and Calico that is not behind a NAT.*
@@ -157,19 +173,6 @@ k8s-cluster:
 
 Skip steps 1 and 2 in [Kubernetes Cluster Creation / Configure](/docs/cluster/automated/kubernetes-cluster-creation.html#kcc-configure).
 - Add flag `-e 'slate_enable_ingress=false'` to your `ansible-playbook` command in [SLATE Cluster Registration](/docs/cluster/automated/kubernetes-cluster-creation.html#slate-cluster-registration).
-
-#### Enable Cert Manager
-In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/addons.yml` set
-```yaml
-cert_manager_enabled: false
-```
-
-to
-
-```yaml
-cert_manager_enabled: true
-```
-{:data-add-copy-button='true'}
 
 
 #### Setup Calico on a multi-homed box
