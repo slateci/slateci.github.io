@@ -52,13 +52,16 @@ Current SLATE-on-CloudLab profiles are listed here:
 For simplicity, we will be using the [`cloudlab-slate`](https://www.cloudlab.us/show-profile.php?uuid=6ab61da6-97c2-11eb-b1eb-e4434b2381fc) profile.
 This profile will bring up a single CENTOS 7 bare-metal node, as well as allocate a variable number of additional floating IPs.
 
-To instantiate this profile, navigate to [this](https://www.cloudlab.us/instantiate.php) page.
-Click the "Change Profile" button, and select the `cloudlab-slate` profile from the list of options.
-Next, you will be asked how many additional public IPs to allocate.
-Leave this at the default value, which is 2.
-Click next, and then select a cluster to install this profile on. Any CloudLab cluster should be fine.
-After clicking next again, set an experiment duration (the default of 16 hours is OK).
-Finally, click "Finish" and wait for your experiment to fully spin up.
+To instantiate this profile, navigate to
+<a href="https://www.cloudlab.us/instantiate.php" target="_blank">this</a>
+page.
+
+1. Click the "Change Profile" button, and select the `cloudlab-slate` profile from the list of options.
+1. Next, you will be asked how many additional public IPs to allocate.
+1. Leave this at the default value, which is 2.
+1. Click next, and then select a cluster to install this profile on. Any CloudLab cluster should be fine. At this stage, you will also be asked for an optional experiment name. Unless you have many CloudLab experiments, leave this blank.
+1. After clicking next again, set an experiment duration (the default of 16 hours is OK).
+1. Finally, click "Finish" and wait for your experiment to fully spin up.
 
 If you require more guidance instantiating your experiment, CloudLab has additional documentation [here](https://docs.cloudlab.us/getting-started.html).
 
@@ -91,6 +94,8 @@ The guide listed above will also cover the SLATE registration process [here](htt
 To verify cluster install, the Nginx SLATE application can be deployed.
 Do this by running `slate app install nginx --cluster <your_cloudlab_cluster> --group <your_slate_group>`.
 If everything has been done properly, your SLATE cluster on CloudLab should now be serving an Nginx page!
+
+Additionally, you can log into one of your cluster nodes via `ssh`, and observe cluster status with `kubectl`.
 
 
 ## Limitations
