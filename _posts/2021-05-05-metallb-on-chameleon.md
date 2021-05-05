@@ -1,15 +1,17 @@
 ---
-title: "Deploying a SLATE Cluster on Chameleon"
-overview: A guide to running a SLATE cluster on Chameleon.
+title: "Deploying a SLATE Cluster on Chameleon with MetalLB"
+overview: A guide to running a SLATE cluster on Chameleon with MetalLB.
 published: true
-permalink: blog/slate-on-chameleon.html
+permalink: blog/metallb-on-chameleon.html
 attribution: The SLATE Team
 layout: post
 type: markdown
 tag: draft
 ---
 
-Chameleon is an OpenStack-based research platform for provisioning compute and networking resources.
+This blog post is intended as an optional follow-up to the ["SLATE On Chameleon"](https://slateci.io/blog/slate-on-chameleon.html) blog post.
+If you have not read this initial post, it is helpful to read it first before beginning this one.
+
 
 <!--end_excerpt-->
 
@@ -25,6 +27,46 @@ Click this menu, and observe the options under "Sites". There are currently thre
 For installing a cluster on bare metal, which we will be doing in this post, select either "CHI@TACC" or "CHI@UC".
 Selecting either of these will bring you to the Chameleon portal specific to that site.
 Both sites' portals will be identical other than the resources they access.
+
+
+### Network Setup
+
+First, to create a SLATE cluster with MetalLB enabled internally in Chameleon,
+we must set up a different private network that we control.
+This is necessary because Chameleon's default "shared-net" will block MetalLB functionality. 
+By default, to Chameleon, MetalLB looks like it is executing an ARP-spoofing attack.
+
+To set up an additional network, we must first create a router. 
+1. First, create a router in the Chameleon interface, and connect it to the public network.
+1. Create an additional network (we like to name ours `slate-net` or something similar). The exact network is not important, but we used this one: 192.168.0.0/24. 
+More documentation on setting up networks in Chameleon can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
+1. Create an interface on the router that connects to this new network.
+1. Spin up instances, and in the "Network" section, make sure that the only network that is selected is our new network.
+
+1. Disable all firewalls
+
+### Disable OpenStack ARP-Spoofing Protection
+
+This next step requires access to your Chameleon resources through the OpenStack CLI.
+
+<!-- todo: add information about setting this up  -->
+
+Once you have CLI access, use the following command to view the ID of your OpenStack/Chameleon port.
+```bash
+openstack port list
+```
+
+Then, disable ARP-spoofing protection for each one of your MetalLB IP addresses with this command:
+```bash
+openstack port set <port-id> --allowed-address ip-address=<additional-ip-address>
+```
+*Note that this command is not allowed on the main "shared-net".*
+
+`openstack port set <port-id> --disable-port-security`
+results in the following error: "ConflictException: 409: Client Error for url: https://chi.uc.chameleoncloud.org:9696/v2.0/ports/183c2e42-8d82-4263-9236-8b9a2cbcf376, Port Security must be enabled in order to have allowed address pairs on a port."
+
+
+### Old Stuff
 
 Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address. 
 Then, instantiate one CentOS 7 instance.
@@ -91,7 +133,6 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
  -e 'slate_cli_token=<SLATE_CLI_TOKEN>' \
  -e 'slate_cli_endpoint=<SLATE_API_ENDPOINT>' \
  -e 'cluster_access_ip=<EXTERNAL_NAT_IP>:6443' \
- -e 'slate_enable_ingress=false' \
  site.yml
 ```
 
@@ -137,7 +178,7 @@ More functionality can be achieved, with some caveats, by running MetalLB behind
 In this case, instead of using MetalLB to provision additional public IPs,
 we can use MetalLB to provision additional private IP addresses.
 Thus, the Nginx ingress controller and any other services/applications that use additional IPs will operate as normal, but only inside the Chameleon experimental plane. 
-This approach requires provisioning Chameleon resources differently, and so will be discussed in a separate blog post linked [here](https://slateci.io/blog/metallb-on-chameleon.html).
+This approach requires provisioning Chameleon resources in a moderately different way, and so will be discussed in a separate blog post linked [here](todo).
 
 
 ## Contact Us
