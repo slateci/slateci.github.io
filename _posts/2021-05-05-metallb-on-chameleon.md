@@ -10,7 +10,7 @@ tag: draft
 ---
 
 This blog post is intended as an optional follow-up to the ["SLATE On Chameleon"](https://slateci.io/blog/slate-on-chameleon.html) blog post.
-If you have not read this initial post, it is helpful to read it first before beginning this one.
+If you have not read this initial post, do so, as it is a prerequisite to this one.
 
 
 <!--end_excerpt-->
@@ -18,15 +18,17 @@ If you have not read this initial post, it is helpful to read it first before be
 
 ## Chameleon Setup
 
-To run a SLATE cluster on [Chameleon](https://www.chameleoncloud.org/), you must first have access to a Chameleon account, as well as be on an existing Chameleon project. 
-The [Chameleon Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html) contains lots of useful information about this.
+To run a SLATE cluster with MetalLB on [Chameleon](https://www.chameleoncloud.org/), you must first have access to a Chameleon account, as well as be on an existing Chameleon project. 
+The [first blog post](https://slateci.io/blog/slate-on-chameleon.html) in this series outlines gaining Chameleon access.
 
 Once you have access to the Chameleon testbed, you will need to select a specific site to run your Chameleon experiment on. 
-The homepage for [Chameleon](https://www.chameleoncloud.org/) has a drop-down menu at the top titled "Experiment".
-Click this menu, and observe the options under "Sites". There are currently three sites that your experiment can be instantiated at.
-For installing a cluster on bare metal, which we will be doing in this post, select either "CHI@TACC" or "CHI@UC".
-Selecting either of these will bring you to the Chameleon portal specific to that site.
-Both sites' portals will be identical other than the resources they access.
+For this post, we are going to use the "KVM" site, which is slightly different than the sites used in the previous post; however, it can be accessed in the same fashion. 
+
+On the [Chameleon](https://www.chameleoncloud.org/) homepage, navigate to the drop-down menu at the top titled "Experiment".
+
+Click this menu, and observe the options under "Sites". 
+
+Select the "KVM" site, and you will be brought to the KVM portal page.
 
 
 ### Network Setup
@@ -44,6 +46,40 @@ More documentation on setting up networks in Chameleon can be found [here](https
 1. Spin up instances, and in the "Network" section, make sure that the only network that is selected is our new network.
 
 1. Disable all firewalls
+
+
+TODO: 
+talk about finding where DHCP is set up
+restrict range of allocatable IP addresses, because MetalLB will need some reserved.
+note where these addresses are
+
+
+### Launch VM Instances
+
+TODO: Update this stuff to match KVM stuff
+
+Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address. 
+Then, instantiate one CentOS 7 instance.
+There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`.
+Next, associate the previously allocated floating public IP to this instance. 
+
+Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
+If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
+
+TODO: make sure instances are attached to new network, and not "shared-net"
+
+Talk about security group configuration - need to test this stuff
+
+
+### Logging In
+
+To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
+This user should have password-less `sudo` access.
+Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
+On Chameleon, `ufw` is often running, even on CentOS. 
+Disable it with `sudo ufw disable`.
+
+
 
 ### Disable OpenStack ARP-Spoofing Protection
 
@@ -66,34 +102,6 @@ openstack port set <port-id> --allowed-address ip-address=<additional-ip-address
 results in the following error: "ConflictException: 409: Client Error for url: https://chi.uc.chameleoncloud.org:9696/v2.0/ports/183c2e42-8d82-4263-9236-8b9a2cbcf376, Port Security must be enabled in order to have allowed address pairs on a port."
 
 
-### Old Stuff
-
-Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address. 
-Then, instantiate one CentOS 7 instance.
-There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`.
-Next, associate the previously allocated floating public IP to this instance. 
-
-Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
-If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
-
-### Additional Considerations
-* You must create a reservation (which won't physically provision anything) before you can instantiate actual instances under that reservation.
-* If there are no resources available at your selected site, try the other one. If there are still no resources available, you may have to wait until a later time.
-* If you would like to setup a multiple-node cluster, provision additional machines at this time.
-
-
-The instance(s) will take about 10 minutes to spin up.
-Once they are done, we are ready to set up a Kubernetes cluster.
-
-### Logging In
-
-To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
-This user should have password-less `sudo` access.
-Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
-On Chameleon, `ufw` is often running, even on CentOS. 
-Disable it with `sudo ufw disable`.
-
-
 ## Cluster Setup
 
 To create a Kubernetes cluster and register it with SLATE, follow documentation [here](https://slateci.io/docs/cluster/automated/introduction.html), with a few changes.
@@ -110,6 +118,8 @@ To run the Ansible playbook (run in `kubespray` directory):
 ```bash
 ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
 ```
+
+TODO: need to talk about MetalLB internal provisioning
 
 This playbook will take a while to run (around 10 minutes, depending).
 Once it has finished, login to the node and run `sudo kubectl get nodes`.
@@ -142,43 +152,8 @@ Run `slate cluster list`, and if everything was successful, you should see your 
 
 ## Limitations
 
-Currently, SLATE on Chameleon does not support a floating-IP address provisioner (MetalLB on most SLATE clusters). Thus, most OSG applications cannot be run. Additionally, the functionality of the ingress controller present on most SLATE clusters will be limited.
-
-
-## Additional Components
-
-### Ingress Controller - NodePort
-	
-Due to some current limitations of Chameleon, a fully-operational ingress controller cannot be installed. 
-However, there is a workaround, but it requires all ingress traffic to be routed though a NodePort service on the main node IP.
-This means all ingress requests must have the ingress controller NodePort appended to their URL.
-
-To install the ingress controller, login to a cluster node with `kubectl` access, and download the following Kubernetes manifest:
-```bash
-curl -o deploy.yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml
-```
-
-Next, open this file with your preferred editor, and navigate to the line that contains this argument: `--ingress-class=nginx`
-Change this `ingress-class` parameter from `nginx` to `slate`. 
-
-Finally, deploy the ingress controller with `kubectl`:
-```bash
-sudo kubectl apply -f /path/to/deploy.yaml
-```
-
-At this point, you will have an operational ingress controller. All that remains is to see which ports the ingress controller is running on. This can be done with `sudo kubectl get services -n ingress-nginx`. 
-You will see an `ingress-nginx-controller` NodePort service, with ports 80 and 443 mapped to two different high ports. One of these ports (80 is http, 443 is https) must be appended to any and all requests using the ingress controller.
-
-
-### MetalLB on Internal Network
-
-Depending on your use case, running an ingress controller through a NodePort service may not be ideal.
-More functionality can be achieved, with some caveats, by running MetalLB behind Chameleon's NAT.
-
-In this case, instead of using MetalLB to provision additional public IPs,
-we can use MetalLB to provision additional private IP addresses.
-Thus, the Nginx ingress controller and any other services/applications that use additional IPs will operate as normal, but only inside the Chameleon experimental plane. 
-This approach requires provisioning Chameleon resources in a moderately different way, and so will be discussed in a separate blog post linked [here](todo).
+MetalLB is only provisioning internal IP addresses, so access will be limited to inside the experimental plane.
+This means DNS services or other similar dependencies must be done without or setup inside the experimental plane.
 
 
 ## Contact Us
