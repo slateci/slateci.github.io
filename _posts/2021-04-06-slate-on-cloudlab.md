@@ -77,10 +77,32 @@ The CloudLab documentation has instructions for this [here](http://docs.cloudlab
 ## Kubernetes Cluster Creation / SLATE Registration
 
 Once our CloudLab experiment/instances have fully spun up, we can begin installing Kubernetes on the node(s).
-
 The SLATE team recommends that [Kubespray](https://kubespray.io/#/) be used for this.
 
-Follow the official SLATE instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
+However, we need a few additional pieces of information before we begin configuring Kubespray.
+
+<!-- A nice touch to your blog post would be walking through were to find the data to add to the kubespray config. Like where to find the IP address, floating IPs, what to put exactly for metallb. For instance, do I just use one address and put “/32”. Do I list both addresses setup by default. Do I use the subnet that comes with the public IP. Etc. I had a hard time finding the public IP addresses and found them in the XML of the manifest tab. -->
+
+Using Kubespray will require you to know the IP address of your CloudLab node, as well as the additional IP addresses CloudLab has allocated for MetalLB.
+To find these, navigate to the "Manifest" tab of the CloudLab experiment page, which will be accessible as soon as your experiment has partially spun up.
+
+First, scroll down to the line (or lines if you have multiple nodes) that look similar to this:
+```xml
+<host name="node1.user-QV98448.slate-PG0.utah.cloudlab.us" ipv4="xxx.xxx.xxx.xxx"/>
+```
+This IP address is your node's public IP.
+
+Next, to find the additional public IPs that MetalLB will use, look for the section that looks similar to this:
+```xml
+<emulab:routable_pool client_id="addressPool" count="2" type="any" component_manager_id="urn:publicid:IDN+site.cloudlab.us+authority+cm">
+  <emulab:ipv4 address="xxx.xxx.xxx.xxx" netmask="xxx.xxx.xxx.xxx"/>
+  <emulab:ipv4 address="xxx.xxx.xxx.xxx" netmask="xxx.xxx.xxx.xxx"/>
+</emulab:routable_pool>
+```
+These IP address will be used as needed for `LoadBalancer` services.
+You will have to specify them when you are editing the configuration files for Kubespray, as it will use them to set up MetalLB.
+
+After you have located this information, follow the official SLATE instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
 The standard installation instructions can be followed exactly, with the exception of making changes to accommodate a single-node cluster if necessary.
 
 Once the Kubernetes cluster is operational, we can finally register it with SLATE!
