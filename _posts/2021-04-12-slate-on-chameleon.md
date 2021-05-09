@@ -129,16 +129,15 @@ At this point, you will have an operational ingress controller. All that remains
 You will see an `ingress-nginx-controller` NodePort service, with ports 80 and 443 mapped to two different high ports. One of these ports (80 is http, 443 is https) must be appended to any and all requests using the ingress controller.
 
 
-### Ingress Controller - Separate IP
+### MetalLB on Internal Network
 
-*in progress*
+Depending on your use case, running an ingress controller through a NodePort service may not be ideal.
+More functionality can be achieved, with some caveats, by running MetalLB behind Chameleon's NAT.
 
-It is possible to create a slightly more functional SLATE cluster on Chameleon by provisioning another IP manually.
-
-* Create an extra network
-* Set up reservation with a node that has two NICs
-* Associate both networks with instance upon launch
-* Associate two public IPs with instance
+In this case, instead of using MetalLB to provision additional public IPs,
+we can use MetalLB to provision additional private IP addresses.
+Thus, the Nginx ingress controller and any other services/applications that use additional IPs will operate as normal, but only inside the Chameleon experimental plane. 
+This approach requires provisioning Chameleon resources differently, and so will be discussed in a separate blog post linked [here](https://slateci.io/blog/metallb-on-chameleon.html).
 
 
 ## Contact Us

@@ -1,0 +1,162 @@
+---
+title: "Deploying a SLATE Cluster on Chameleon with MetalLB"
+overview: A guide to running a SLATE cluster on Chameleon with MetalLB.
+published: true
+permalink: blog/metallb-on-chameleon.html
+attribution: The SLATE Team
+layout: post
+type: markdown
+tag: draft
+---
+
+This blog post is intended as an optional follow-up to the ["SLATE On Chameleon"](https://slateci.io/blog/slate-on-chameleon.html) blog post.
+If you have not read this initial post, do so, as it is a prerequisite to this one.
+
+
+<!--end_excerpt-->
+
+
+## Chameleon Setup
+
+To run a SLATE cluster with MetalLB on [Chameleon](https://www.chameleoncloud.org/), you must first have access to a Chameleon account, as well as be on an existing Chameleon project. 
+The [first blog post](https://slateci.io/blog/slate-on-chameleon.html) in this series outlines gaining Chameleon access.
+
+Once you have access to the Chameleon testbed, you will need to select a specific site to run your Chameleon experiment on. 
+For this post, we are going to use the "KVM" site, which is slightly different than the sites used in the previous post; however, it can be accessed in the same fashion. 
+
+On the [Chameleon](https://www.chameleoncloud.org/) homepage, navigate to the drop-down menu at the top titled "Experiment".
+
+Click this menu, and observe the options under "Sites". 
+
+Select the "KVM" site, and you will be brought to the KVM portal page.
+
+
+### Network Setup
+
+First, to create a SLATE cluster with MetalLB enabled internally in Chameleon,
+we must set up a different private network that we control.
+This is necessary because Chameleon's default "shared-net" will block MetalLB functionality. 
+By default, to Chameleon, MetalLB looks like it is executing an ARP-spoofing attack.
+
+To set up an additional network, we must first create a router. 
+1. First, create a router in the Chameleon interface, and connect it to the public network.
+1. Create an additional network (we like to name ours `slate-net` or something similar). The exact network is not important, but we used this one: 192.168.0.0/24. 
+More documentation on setting up networks in Chameleon can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
+1. Create an interface on the router that connects to this new network.
+1. Spin up instances, and in the "Network" section, make sure that the only network that is selected is our new network.
+
+1. Disable all firewalls
+
+
+TODO: 
+talk about finding where DHCP is set up
+restrict range of allocatable IP addresses, because MetalLB will need some reserved.
+note where these addresses are
+
+
+### Launch VM Instances
+
+TODO: Update this stuff to match KVM stuff
+
+Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address. 
+Then, instantiate one CentOS 7 instance.
+There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`.
+Next, associate the previously allocated floating public IP to this instance. 
+
+Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
+If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
+
+TODO: make sure instances are attached to new network, and not "shared-net"
+
+Talk about security group configuration - need to test this stuff
+
+
+### Logging In
+
+To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
+This user should have password-less `sudo` access.
+Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
+On Chameleon, `ufw` is often running, even on CentOS. 
+Disable it with `sudo ufw disable`.
+
+
+
+### Disable OpenStack ARP-Spoofing Protection
+
+This next step requires access to your Chameleon resources through the OpenStack CLI.
+
+<!-- todo: add information about setting this up  -->
+
+Once you have CLI access, use the following command to view the ID of your OpenStack/Chameleon port.
+```bash
+openstack port list
+```
+
+Then, disable ARP-spoofing protection for each one of your MetalLB IP addresses with this command:
+```bash
+openstack port set <port-id> --allowed-address ip-address=<additional-ip-address>
+```
+*Note that this command is not allowed on the main "shared-net".*
+
+`openstack port set <port-id> --disable-port-security`
+results in the following error: "ConflictException: 409: Client Error for url: https://chi.uc.chameleoncloud.org:9696/v2.0/ports/183c2e42-8d82-4263-9236-8b9a2cbcf376, Port Security must be enabled in order to have allowed address pairs on a port."
+
+
+## Cluster Setup
+
+To create a Kubernetes cluster and register it with SLATE, follow documentation [here](https://slateci.io/docs/cluster/automated/introduction.html), with a few changes.
+Specifically, follow the instructions for setting up a cluster behind a NAT.
+
+This will mean the following changes to cluster configuration:
+* MetalLB will be disabled. 
+* The `supplementary_addresses_in_ssl_keys` variable will need to be added.
+
+<!-- TODO: update this link -->
+<!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
+
+To run the Ansible playbook (run in `kubespray` directory):
+```bash
+ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
+```
+
+TODO: need to talk about MetalLB internal provisioning
+
+This playbook will take a while to run (around 10 minutes, depending).
+Once it has finished, login to the node and run `sudo kubectl get nodes`.
+If all nodes say that they are `Ready`, then Kubernetes cluster creation was successful!
+
+
+### SLATE Registration
+
+Currently, SLATE operates two separate federations, a development federation and a production federation.
+When you register your cluster, you will need to decide which federation to register with.
+By default, you will be given a token for the SLATE production endpoint.
+If you would like to register your cluster with the production federation, then you simply use the default SLATE token given to you, 
+and `https://api-dev.slateci.io:18080` as the `slate_cli_endpoint` parameter in the following command.
+
+However, if you would like to register your cluster with the development federation, reach out to the SLATE team about obtaining a development token.
+Once you have done this, the development API endpoint is `https://api.slateci.io:443`.
+
+To register the previously created Kubernetes cluster with SLATE, navigate to the `slate-ansible` directory, and run the following command:
+```bash
+ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <SSH_USER> --become --become-user=root \
+ -e 'slate_cli_token=<SLATE_CLI_TOKEN>' \
+ -e 'slate_cli_endpoint=<SLATE_API_ENDPOINT>' \
+ -e 'cluster_access_ip=<EXTERNAL_NAT_IP>:6443' \
+ site.yml
+```
+
+After this command runs, you should have a SLATE cluster!
+Run `slate cluster list`, and if everything was successful, you should see your cluster listed in the output.
+
+
+## Limitations
+
+MetalLB is only provisioning internal IP addresses, so access will be limited to inside the experimental plane.
+This means DNS services or other similar dependencies must be done without or setup inside the experimental plane.
+
+
+## Contact Us
+
+If you have any additional comments or questions, please contact [our team](https://slateci.io/community/)!
+
