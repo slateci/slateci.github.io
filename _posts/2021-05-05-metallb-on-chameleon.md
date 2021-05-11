@@ -35,40 +35,83 @@ Select the "KVM" site, and you will be brought to the KVM portal page.
 
 First, to create a SLATE cluster with MetalLB enabled internally in Chameleon,
 we must set up a different private network that we control.
+
 This is necessary because Chameleon's default "shared-net" will block MetalLB functionality. 
-By default, to Chameleon, MetalLB looks like it is executing an ARP-spoofing attack.
+By default, to Chameleon, MetalLB will look like it is executing an ARP-spoofing attack.
 
-To set up an additional network, we must first create a router. 
-1. First, create a router in the Chameleon interface, and connect it to the public network.
-1. Create an additional network (we like to name ours `slate-net` or something similar). The exact network is not important, but we used this one: 192.168.0.0/24. 
-More documentation on setting up networks in Chameleon can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
-1. Create an interface on the router that connects to this new network.
-1. Spin up instances, and in the "Network" section, make sure that the only network that is selected is our new network.
 
+#### Create a router
+
+1. Navigate to the "Routers" section under the "Network" tab on the left sidebar.
+1. Then, on the right-hand side, click the "Create Router" button.
+1. Next, name this router. We like to use `slate-router`.
+1. Click the external network drop-down menu, and select "public".
+1. Leave everything else as-is, and click "Create Router".
+
+#### Create an additional network
+
+1. Navigate to the left sidebar and select "Network", then select "Networks" underneath this.
+1. Then, click the "Create Network" button.
+1. Leave all options as they are, but give this new network a name. We like to name ours `slate-net`.
+1. Click "Next", and you will be brought to the "Subnet" section.
+1. The only value that needs to be changed here is the "Network Address" parameter (no subnet name is needed).
+1. The exact network you choose is not important as long as it has space for all the hosts you will need, and at least one extra IP for the Nginx Ingress Controller.
+1. That being said, we used this subnet: 192.168.1.0/24.
+1. Following this, click "Next" again.
+1. You will be brought to the "Subnet Details" section.
+1. Here, we will be changing the "Allocation Pools" values.
+1. This will restrict the number of IPs Chameleon is allowed to allocate, thus leaving some free for MetalLB.
+
+If you would like to learn more about networks in Chameleon, more documentation can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
+
+#### Connect your router to your new network
+
+1. Navigate back to the "Routers" section under the "Network" tab on the left sidebar.
+1. Click on the name of the router you created earlier (most likely called `slate-router`).
+1. Select the "Interfaces" tab, and then click "Add Interface"
+1. Under the "Subnet" drop-down menu, select the network you created earlier (most likely called `slate-net`).
+1. Leave everything else as-is, and click "Submit".
+
+#### Create Security Groups
+
+1. SSH group
+1. SLATE server / `kubectl` group
+
+test what works with only a ssh group and a slate group
+test allow all group - does ssh work with this?
+
+### Spin Up Instances
+
+Unlike at the UC or TACC sites, on KVM, you do not need a reservation/lease to provision instances.
+We can simply bring them up as needed.
+
+1. First, navigate to the "Instances" page under the "Compute" menu on the left-hand side.
+1. Then, on the right side of the page, click the "Launch Instance" button.
+1. Under the "Details" tab, give this instance a name (we like `slate-vm`).
+1. Under the "Source" tab, select "Image" under the "Select Boot Source" drop-down menu. Then, select the `CC-CentOS7` image.
+1. Under the "Flavor" tab, select the `m1.medium` VM flavor.
+1. Under the "Network" tab, make sure that the only network that is selected is our new network (`slate-net`).
+1. Under the "Security Groups" tab, select the `slate` and `ssh` security groups that we created earlier.
+1. Under the "Key Pair" tab, make sure you have configured the correct SSH keys. This is explained in more detail in [this documentation](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#getting-started).
 1. Disable all firewalls
 
 
-TODO: 
-talk about finding where DHCP is set up
-restrict range of allocatable IP addresses, because MetalLB will need some reserved.
-note where these addresses are
-
+<!-- TODO:  -->
+<!-- talk about finding where DHCP is set up -->
+<!-- restrict range of allocatable IP addresses, because MetalLB will need some reserved. -->
+<!-- note where these addresses are -->
 
 ### Launch VM Instances
 
-TODO: Update this stuff to match KVM stuff
+<!-- TODO: Update this stuff to match KVM stuff -->
+<!-- Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address.  -->
+<!-- Then, instantiate one CentOS 7 instance. -->
+<!-- There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`. -->
+<!-- Next, associate the previously allocated floating public IP to this instance.  -->
 
-Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address. 
-Then, instantiate one CentOS 7 instance.
-There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`.
-Next, associate the previously allocated floating public IP to this instance. 
+<!-- Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html). -->
+<!-- If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there. -->
 
-Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
-If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
-
-TODO: make sure instances are attached to new network, and not "shared-net"
-
-Talk about security group configuration - need to test this stuff
 
 
 ### Logging In
