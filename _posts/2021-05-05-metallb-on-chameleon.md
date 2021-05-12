@@ -59,10 +59,23 @@ By default, to Chameleon, MetalLB will look like it is executing an ARP-spoofing
 1. That being said, we used this subnet: 192.168.1.0/24.
 1. Following this, click "Next" again.
 1. You will be brought to the "Subnet Details" section.
-1. Here, we will be changing the "Allocation Pools" values.
-1. This will restrict the number of IPs Chameleon is allowed to allocate, thus leaving some free for MetalLB.
+1. Here, we will be changing the "Allocation Pools" values. This will restrict the number of IPs Chameleon is allowed to allocate, thus leaving some free for MetalLB.
+1. In the "Allocation Pools" box, enter `192.168.1.3,192.168.1.246`. This will leave eight IPs reserved for MetalLB.
 
 If you would like to learn more about networks in Chameleon, more documentation can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
+
+<!-- 192.168.1.0 - network -->
+<!-- 192.168.1.1 - default gateway -->
+<!-- 192.168.1.2 - DHCP -->
+<!-- 192.168.1.247 - MetalLB -->
+<!-- 192.168.1.248 - MetalLB -->
+<!-- 192.168.1.249 - MetalLB -->
+<!-- 192.168.1.250 - MetalLB -->
+<!-- 192.168.1.251 - MetalLB -->
+<!-- 192.168.1.252 - MetalLB -->
+<!-- 192.168.1.253 - MetalLB -->
+<!-- 192.168.1.254 - MetalLB -->
+<!-- 192.168.1.255 - Broadcast -->
 
 #### Connect your router to your new network
 
@@ -80,7 +93,8 @@ If you would like to learn more about networks in Chameleon, more documentation 
 test what works with only a ssh group and a slate group
 test allow all group - does ssh work with this?
 
-### Spin Up Instances
+
+### Launch VM Instances
 
 Unlike at the UC or TACC sites, on KVM, you do not need a reservation/lease to provision instances.
 We can simply bring them up as needed.
@@ -93,25 +107,12 @@ We can simply bring them up as needed.
 1. Under the "Network" tab, make sure that the only network that is selected is our new network (`slate-net`).
 1. Under the "Security Groups" tab, select the `slate` and `ssh` security groups that we created earlier.
 1. Under the "Key Pair" tab, make sure you have configured the correct SSH keys. This is explained in more detail in [this documentation](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#getting-started).
-1. Disable all firewalls
+1. Click the "Launch Instance" button, and wait for the instance to spin up. This should not take long.
+1. Set up SSH access according to the directions in the previous blog post.
+<!-- 1. Disable all firewalls - maybe - TODO -->
 
-
-<!-- TODO:  -->
-<!-- talk about finding where DHCP is set up -->
-<!-- restrict range of allocatable IP addresses, because MetalLB will need some reserved. -->
-<!-- note where these addresses are -->
-
-### Launch VM Instances
-
-<!-- TODO: Update this stuff to match KVM stuff -->
-<!-- Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address.  -->
-<!-- Then, instantiate one CentOS 7 instance. -->
-<!-- There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`. -->
-<!-- Next, associate the previously allocated floating public IP to this instance.  -->
-
-<!-- Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html). -->
-<!-- If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there. -->
-
+Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
+If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
 
 
 ### Logging In
@@ -121,7 +122,6 @@ This user should have password-less `sudo` access.
 Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
 On Chameleon, `ufw` is often running, even on CentOS. 
 Disable it with `sudo ufw disable`.
-
 
 
 ### Disable OpenStack ARP-Spoofing Protection
@@ -148,11 +148,17 @@ results in the following error: "ConflictException: 409: Client Error for url: h
 ## Cluster Setup
 
 To create a Kubernetes cluster and register it with SLATE, follow documentation [here](https://slateci.io/docs/cluster/automated/introduction.html), with a few changes.
-Specifically, follow the instructions for setting up a cluster behind a NAT.
+Specifically, follow the instructions for setting up a cluster behind a NAT, but leave MetalLB enabled.
 
 This will mean the following changes to cluster configuration:
-* MetalLB will be disabled. 
-* The `supplementary_addresses_in_ssl_keys` variable will need to be added.
+1. Add the `supplementary_addresses_in_ssl_keys` variable.
+1. Give MetalLB this configuration:
+	```yaml
+	metallb_enabled: true
+	metallb_ip_range:
+	  - "192.168.1.247-192.168.1.254"
+	metallb_version: v0.9.3
+	```
 
 <!-- TODO: update this link -->
 <!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
@@ -162,11 +168,10 @@ To run the Ansible playbook (run in `kubespray` directory):
 ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
 ```
 
-TODO: need to talk about MetalLB internal provisioning
-
 This playbook will take a while to run (around 10 minutes, depending).
 Once it has finished, login to the node and run `sudo kubectl get nodes`.
 If all nodes say that they are `Ready`, then Kubernetes cluster creation was successful!
+
 
 
 ### SLATE Registration
@@ -196,7 +201,7 @@ Run `slate cluster list`, and if everything was successful, you should see your 
 ## Limitations
 
 MetalLB is only provisioning internal IP addresses, so access will be limited to inside the experimental plane.
-This means DNS services or other similar dependencies must be done without or setup inside the experimental plane.
+This means DNS services or other similar dependencies must be done without or set-up inside the experimental plane.
 
 
 ## Contact Us
