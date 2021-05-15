@@ -9,7 +9,9 @@ type: markdown
 tag: draft
 ---
 
-This blog post is intended as an optional follow-up to the ["SLATE On Chameleon"](https://slateci.io/blog/slate-on-chameleon.html) blog post.
+This blog post will demonstrate how to run a SLATE cluster on the Chameleon testbed, with MetalLB functionality enabled.
+
+This post is intended as an optional follow-up to the ["SLATE On Chameleon"](https://slateci.io/blog/slate-on-chameleon.html) blog post.
 If you have not read this initial post, do so, as it is a prerequisite to this one.
 
 
@@ -35,81 +37,167 @@ Select the "KVM" site, and you will be brought to the KVM portal page.
 
 First, to create a SLATE cluster with MetalLB enabled internally in Chameleon,
 we must set up a different private network that we control.
+
 This is necessary because Chameleon's default "shared-net" will block MetalLB functionality. 
-By default, to Chameleon, MetalLB looks like it is executing an ARP-spoofing attack.
-
-To set up an additional network, we must first create a router. 
-1. First, create a router in the Chameleon interface, and connect it to the public network.
-1. Create an additional network (we like to name ours `slate-net` or something similar). The exact network is not important, but we used this one: 192.168.0.0/24. 
-More documentation on setting up networks in Chameleon can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
-1. Create an interface on the router that connects to this new network.
-1. Spin up instances, and in the "Network" section, make sure that the only network that is selected is our new network.
-
-1. Disable all firewalls
+By default, to Chameleon, MetalLB will look like it is executing an ARP-spoofing attack.
 
 
-TODO: 
-talk about finding where DHCP is set up
-restrict range of allocatable IP addresses, because MetalLB will need some reserved.
-note where these addresses are
+#### Create a router
+
+1. Navigate to the "Routers" section under the "Network" tab on the left sidebar.
+1. Then, on the right-hand side, click the "Create Router" button.
+1. Next, name this router. We like to use `slate-router`.
+1. Click the external network drop-down menu, and select "public".
+1. Leave everything else as-is, and click "Create Router".
+
+#### Create an additional network
+
+1. Navigate to the left sidebar and select "Network", then select "Networks" underneath this.
+1. Then, click the "Create Network" button.
+1. Leave all options as they are, but give this new network a name. We like to name ours `slate-net`.
+1. Click "Next", and you will be brought to the "Subnet" section.
+1. The only value that needs to be changed here is the "Network Address" parameter (no subnet name is needed).
+The exact network you choose is not important as long as it has space for all the hosts you will need, and at least one extra IP for the Nginx Ingress Controller.
+However, for ease in following this guide, we recommend using this subnet: `192.168.1.0/24`.
+1. Following this, click "Next" again. You will be brought to the "Subnet Details" section.
+1. Here, we will be changing the "Allocation Pools" values. This will restrict the number of IPs Chameleon is allowed to allocate, thus leaving some free for MetalLB.
+In the "Allocation Pools" box, enter `192.168.1.3,192.168.1.250`. This will leave four IPs reserved for MetalLB. 
+*Note that different values can be used here, but we recommend using these for this guide.*
+1. Click "Create".
+
+If you would like to learn more about networks in Chameleon, more documentation can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
+
+<!-- 192.168.1.0 - network -->
+<!-- 192.168.1.1 - default gateway -->
+<!-- 192.168.1.2 - DHCP -->
+<!-- 192.168.1.251 - MetalLB -->
+<!-- 192.168.1.252 - MetalLB -->
+<!-- 192.168.1.253 - MetalLB -->
+<!-- 192.168.1.254 - MetalLB -->
+<!-- 192.168.1.255 - Broadcast -->
+
+#### Connect your router to your new network
+
+1. Navigate back to the "Routers" section under the "Network" tab on the left sidebar.
+1. Click on the name of the router you created earlier (most likely called `slate-router`).
+1. Select the "Interfaces" tab, and then click "Add Interface"
+1. Under the "Subnet" drop-down menu, select the network you created earlier (most likely called `slate-net`).
+1. Leave everything else as-is, and click "Submit".
+
+#### Create Security Groups
+
+By default, KVM blocks most external traffic to instances.
+To communicate with our instance over SSH, and for SLATE to communicate with our instance, we need to create a few additional security rules.
+
+First, we'll create an SSH rule.
+1. Navigate to the "Security Groups" section under the "Network" tab on the left sidebar.
+1. Click "Create Security Group".
+1. Name this group `ssh`, and click "Create Security Group".
+1. You should be brought to a page for managing rules for the `ssh` group. Click the "Add Rule" on the right.
+1. Under the "Rule" drop down menu, select "SSH". Leave everything else the same, and click "Add".
+
+Next, we'll create a SLATE API server rule.
+1. Follow the same steps as before for creating a security group, but name this one `slate`. 
+1. After clicking the "Add Rule" button, change the "Port" field to `6443`. Leave everything else default.
+1. Click "Add". This should result in a rule allowing ingress TCP traffic on port `6443`.
 
 
 ### Launch VM Instances
 
-TODO: Update this stuff to match KVM stuff
+Unlike at the UC or TACC sites, on KVM, you do not need a reservation/lease to provision instances.
+We can simply bring them up as needed.
 
-Once you are in the Chameleon portal, create a reservation for one instance and one floating public IP address. 
-Then, instantiate one CentOS 7 instance.
-There are multiple CentOS 7 instances available through Chameleon; choose the one titled `CC-CentOS7`.
-Next, associate the previously allocated floating public IP to this instance. 
+1. First, navigate to the "Instances" page under the "Compute" menu on the left-hand side.
+1. Then, on the right side of the page, click the "Launch Instance" button.
+1. Under the "Details" tab, give this instance a name (we like `slate-vm`).
+1. Under the "Source" tab, select "Image" under the "Select Boot Source" drop-down menu. Then, select the `CC-CentOS7` image.
+1. Under the "Flavor" tab, select the `m1.medium` VM flavor.
+1. Under the "Network" tab, make sure that the only network that is selected is our new network (`slate-net`).
+1. Under the "Security Groups" tab, select the `slate` and `ssh` security groups that were created earlier. Make sure the `default` security group is also enabled.
+1. Under the "Key Pair" tab, make sure you have configured the correct SSH keys. This is explained in more detail in [this documentation](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#getting-started).
+1. Click the "Launch Instance" button, and wait for the instance to spin up. This should not take long.
+1. Set up SSH access according to the directions in the previous blog post. You will need to associate a public floating IP.
 
 Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
 If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
 
-TODO: make sure instances are attached to new network, and not "shared-net"
 
-Talk about security group configuration - need to test this stuff
-
-
-### Logging In
+#### Logging In
 
 To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
 This user should have password-less `sudo` access.
+
+
+### Disable Firewall
+
 Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
 On Chameleon, `ufw` is often running, even on CentOS. 
 Disable it with `sudo ufw disable`.
-
 
 
 ### Disable OpenStack ARP-Spoofing Protection
 
 This next step requires access to your Chameleon resources through the OpenStack CLI.
 
-<!-- todo: add information about setting this up  -->
+The Chameleon docs provide information on setting this up [here](https://chameleoncloud.readthedocs.io/en/latest/technical/cli.html).
+We at SLATE recommend using application credentials for authenticating command line clients.
 
-Once you have CLI access, use the following command to view the ID of your OpenStack/Chameleon port.
+Once you have OpenStack CLI access, use the following command to view a list of the IDs of your OpenStack/Chameleon ports.
 ```bash
 openstack port list
 ```
+
+You will see some output that looks similar to this:
+```bash
++--------------------------------------+------+-------------------+--------------------------------------------------------------------------------+--------+
+| ID                                   | Name | MAC Address       | Fixed IP Addresses                                                             | Status |
++--------------------------------------+------+-------------------+--------------------------------------------------------------------------------+--------+
+| 17752ced-1919-48c8-b133-91c8dbb9cf8e |      | fa:16:3e:aa:aa:aa | ip_address='xxx.xxx.xxx.xxx', subnet_id='a9a7cb27-14e0-4b11-85cc-c4fd30846124' | N/A    |
+| 1c48f086-2d38-447c-9a98-814c80ac6db0 |      | fa:16:3e:aa:aa:aa | ip_address='192.168.1.5', subnet_id='f488d515-176a-4922-b52d-48486ca9fd1d'     | ACTIVE |
++--------------------------------------+------+-------------------+--------------------------------------------------------------------------------+--------+
+```
+Copy the ID field from the port that has the internal IP address of your SLATE instance.
+In this case, we would want the second ID in the list, because its IP address is the internal address of the instance in question.
 
 Then, disable ARP-spoofing protection for each one of your MetalLB IP addresses with this command:
 ```bash
 openstack port set <port-id> --allowed-address ip-address=<additional-ip-address>
 ```
-*Note that this command is not allowed on the main "shared-net".*
 
-`openstack port set <port-id> --disable-port-security`
-results in the following error: "ConflictException: 409: Client Error for url: https://chi.uc.chameleoncloud.org:9696/v2.0/ports/183c2e42-8d82-4263-9236-8b9a2cbcf376, Port Security must be enabled in order to have allowed address pairs on a port."
-
+In our case, we need to run this command four times, once for each IP address we have set aside for MetalLB:
+```bash
+openstack port set <port-id> --allowed-address ip-address=192.168.1.251
+openstack port set <port-id> --allowed-address ip-address=192.168.1.252
+openstack port set <port-id> --allowed-address ip-address=192.168.1.253
+openstack port set <port-id> --allowed-address ip-address=192.168.1.254
+```
+*If you have set aside different addresses for MetalLB, change these previous commands accordingly.*
 
 ## Cluster Setup
 
 To create a Kubernetes cluster and register it with SLATE, follow documentation [here](https://slateci.io/docs/cluster/automated/introduction.html), with a few changes.
-Specifically, follow the instructions for setting up a cluster behind a NAT.
+Specifically, follow the instructions for setting up a cluster behind a NAT, but leave MetalLB enabled.
 
 This will mean the following changes to cluster configuration:
-* MetalLB will be disabled. 
-* The `supplementary_addresses_in_ssl_keys` variable will need to be added.
+1. Add the `supplementary_addresses_in_ssl_keys` variable.
+<!-- 1. talk about hosts.yaml? -->
+1. Give MetalLB this configuration:
+```yaml
+metallb_enabled: true
+metallb_ip_range:
+  - "192.168.1.251-192.168.1.254"
+metallb_version: v0.9.3
+```
+*Note that if you have used a different private subnet, or reserved different IP addresses for MetalLB, you will need to change this configuration accordingly.*
+1. Configure strict ARP by changing these lines in inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml from
+```
+kube_proxy_strict_arp: false
+```
+to
+```
+kube_proxy_strict_arp: true # Required for MetalLB
+```
+
 
 <!-- TODO: update this link -->
 <!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
@@ -119,9 +207,7 @@ To run the Ansible playbook (run in `kubespray` directory):
 ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
 ```
 
-TODO: need to talk about MetalLB internal provisioning
-
-This playbook will take a while to run (around 10 minutes, depending).
+This playbook will take a while to run (around 15 minutes, depending).
 Once it has finished, login to the node and run `sudo kubectl get nodes`.
 If all nodes say that they are `Ready`, then Kubernetes cluster creation was successful!
 
@@ -150,10 +236,42 @@ After this command runs, you should have a SLATE cluster!
 Run `slate cluster list`, and if everything was successful, you should see your cluster listed in the output.
 
 
+## Testing
+
+*Note: this guide to testing assumes familiarity with the SLATE platform.*
+
+1. On any machine with access to the SLATE CLI, install an instance of `nginx` on the cluster you just created.
+Make sure ingress is enabled in the `values.yaml`, and make a note of your chosen subdomain.
+
+1. Run this command on the SLATE cluster you just created:
+```bash
+sudo kubectl get services -n slate-system
+```
+An `ingress-nginx` LoadBalancer will show up.
+Make a note of the `EXTERNAL-IP` value.
+It should be one of the IP addresses you allocated to MetalLB.
+
+1. Bring up another `CC-CentOS7` instance on `slate-net` with the `ssh` security group added.
+Login to this instance, and disable `ufw`.
+Then, run this command:
+```bash
+curl -H "Host: <subdomain_name>.<your_cluster_name>.slateci.net" <load_balancer_external_ip>
+```
+1. If everything was successful, you should see the following output:
+
+```
+<html>
+<body>
+<h1>Hello world!</h1>
+</body>
+</html>
+```
+
+
 ## Limitations
 
 MetalLB is only provisioning internal IP addresses, so access will be limited to inside the experimental plane.
-This means DNS services or other similar dependencies must be done without or setup inside the experimental plane.
+This means DNS services or other similar dependencies must be done without or set-up inside the experimental plane.
 
 
 ## Contact Us
