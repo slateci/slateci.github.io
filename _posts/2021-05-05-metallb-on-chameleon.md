@@ -58,11 +58,11 @@ By default, to Chameleon, MetalLB will look like it is executing an ARP-spoofing
 1. Click "Next", and you will be brought to the "Subnet" section.
 1. The only value that needs to be changed here is the "Network Address" parameter (no subnet name is needed).
 1. The exact network you choose is not important as long as it has space for all the hosts you will need, and at least one extra IP for the Nginx Ingress Controller.
-1. That being said, we used this subnet: 192.168.1.0/24.
+1. However, for ease in following this guide, we recommend using this subnet: `192.168.1.0/24`.
 1. Following this, click "Next" again.
 1. You will be brought to the "Subnet Details" section.
 1. Here, we will be changing the "Allocation Pools" values. This will restrict the number of IPs Chameleon is allowed to allocate, thus leaving some free for MetalLB.
-1. In the "Allocation Pools" box, enter `192.168.1.3,192.168.1.250`. This will leave four IPs reserved for MetalLB.
+1. In the "Allocation Pools" box, enter `192.168.1.3,192.168.1.250`. This will leave four IPs reserved for MetalLB. *Note that different values can be used here, but we recommend using these for this guide.*
 
 If you would like to learn more about networks in Chameleon, more documentation can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
 
@@ -85,7 +85,7 @@ If you would like to learn more about networks in Chameleon, more documentation 
 
 #### Create Security Groups
 
-By default, KVM restricts traffic on the control plane to instances.
+By default, KVM blocks most external traffic to instances.
 To communicate with our instance over SSH, and for SLATE to communicate with our instance, we need to create a few additional security rules.
 
 First, we'll create an SSH rule.
@@ -93,12 +93,14 @@ First, we'll create an SSH rule.
 1. Click "Create Security Group".
 1. Name this group `ssh`, and click "Create Security Group".
 1. Next, locate this new group in the list of security groups, and click the "Manage Rules" button to the right.
-1. Add an SSH rule.
-
+1. Then, click the "Add Rule" on the right.
+1. Under the "Rule" drop down menu, select "SSH". Leave everything else the same, and click "Add".
 
 Next, we'll create a SLATE API server rule.
 1. Follow the same steps as before for creating a security group, but name this one `slate`. 
-1. Instead of adding an `ssh` rule, add a rule that allows all traffic on port 6443.
+1. After clicking the "Add Rule" button, change the "Port" field to `6443`. Leave everything else default.
+1. Click "Add". This should result in a rule allowing ingress TCP traffic on port `6443`.
+
 
 ### Launch VM Instances
 
@@ -120,10 +122,14 @@ Detailed instructions regarding creating instances and associating IP addresses 
 If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
 
 
-### Logging In
+#### Logging In
 
 To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
 This user should have password-less `sudo` access.
+
+
+### Disable Firewall
+
 Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
 On Chameleon, `ufw` is often running, even on CentOS. 
 Disable it with `sudo ufw disable`.
@@ -165,6 +171,7 @@ openstack port set <port-id> --allowed-address ip-address=192.168.1.252
 openstack port set <port-id> --allowed-address ip-address=192.168.1.253
 openstack port set <port-id> --allowed-address ip-address=192.168.1.254
 ```
+*If you have set aside different addresses for MetalLB, change these previous commands accordingly.*
 
 ## Cluster Setup
 
@@ -180,6 +187,7 @@ metallb_ip_range:
   - "192.168.1.251-192.168.1.254"
 metallb_version: v0.9.3
 ```
+*Note that if you have used a different private subnet, or reserved different IP addresses for MetalLB, you will need to change this configuration accordingly.*
 
 <!-- TODO: update this link -->
 <!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
