@@ -257,8 +257,9 @@ Then, run this command:
 ```bash
 curl -H "Host: <subdomain_name>.<your_cluster_name>.slateci.net" <load_balancer_external_ip>
 ```
-If everything was successful, you should see the following output:
-```bash
+1. If everything was successful, you should see the following output:
+
+```
 <html>
 <body>
 <h1>Hello world!</h1>
