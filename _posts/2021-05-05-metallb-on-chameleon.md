@@ -57,12 +57,13 @@ By default, to Chameleon, MetalLB will look like it is executing an ARP-spoofing
 1. Leave all options as they are, but give this new network a name. We like to name ours `slate-net`.
 1. Click "Next", and you will be brought to the "Subnet" section.
 1. The only value that needs to be changed here is the "Network Address" parameter (no subnet name is needed).
-1. The exact network you choose is not important as long as it has space for all the hosts you will need, and at least one extra IP for the Nginx Ingress Controller.
-1. However, for ease in following this guide, we recommend using this subnet: `192.168.1.0/24`.
-1. Following this, click "Next" again.
-1. You will be brought to the "Subnet Details" section.
+The exact network you choose is not important as long as it has space for all the hosts you will need, and at least one extra IP for the Nginx Ingress Controller.
+However, for ease in following this guide, we recommend using this subnet: `192.168.1.0/24`.
+1. Following this, click "Next" again. You will be brought to the "Subnet Details" section.
 1. Here, we will be changing the "Allocation Pools" values. This will restrict the number of IPs Chameleon is allowed to allocate, thus leaving some free for MetalLB.
-1. In the "Allocation Pools" box, enter `192.168.1.3,192.168.1.250`. This will leave four IPs reserved for MetalLB. *Note that different values can be used here, but we recommend using these for this guide.*
+In the "Allocation Pools" box, enter `192.168.1.3,192.168.1.250`. This will leave four IPs reserved for MetalLB. 
+*Note that different values can be used here, but we recommend using these for this guide.*
+1. Click "Create".
 
 If you would like to learn more about networks in Chameleon, more documentation can be found [here](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
 
@@ -92,8 +93,7 @@ First, we'll create an SSH rule.
 1. Navigate to the "Security Groups" section under the "Network" tab on the left sidebar.
 1. Click "Create Security Group".
 1. Name this group `ssh`, and click "Create Security Group".
-1. Next, locate this new group in the list of security groups, and click the "Manage Rules" button to the right.
-1. Then, click the "Add Rule" on the right.
+1. You should be brought to a page for managing rules for the `ssh` group. Click the "Add Rule" on the right.
 1. Under the "Rule" drop down menu, select "SSH". Leave everything else the same, and click "Add".
 
 Next, we'll create a SLATE API server rule.
@@ -113,10 +113,10 @@ We can simply bring them up as needed.
 1. Under the "Source" tab, select "Image" under the "Select Boot Source" drop-down menu. Then, select the `CC-CentOS7` image.
 1. Under the "Flavor" tab, select the `m1.medium` VM flavor.
 1. Under the "Network" tab, make sure that the only network that is selected is our new network (`slate-net`).
-1. Under the "Security Groups" tab, select the `slate` and `ssh` security groups that were created earlier.
+1. Under the "Security Groups" tab, select the `slate` and `ssh` security groups that were created earlier. Make sure the `default` security group is also enabled.
 1. Under the "Key Pair" tab, make sure you have configured the correct SSH keys. This is explained in more detail in [this documentation](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#getting-started).
 1. Click the "Launch Instance" button, and wait for the instance to spin up. This should not take long.
-1. Set up SSH access according to the directions in the previous blog post.
+1. Set up SSH access according to the directions in the previous blog post. You will need to associate a public floating IP.
 
 Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
 If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
@@ -180,6 +180,7 @@ Specifically, follow the instructions for setting up a cluster behind a NAT, but
 
 This will mean the following changes to cluster configuration:
 1. Add the `supplementary_addresses_in_ssl_keys` variable.
+<!-- 1. talk about hosts.yaml? -->
 1. Give MetalLB this configuration:
 ```yaml
 metallb_enabled: true
@@ -188,6 +189,15 @@ metallb_ip_range:
 metallb_version: v0.9.3
 ```
 *Note that if you have used a different private subnet, or reserved different IP addresses for MetalLB, you will need to change this configuration accordingly.*
+1. Configure strict ARP by changing these lines in inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml from
+```
+kube_proxy_strict_arp: false
+```
+to
+```
+kube_proxy_strict_arp: true # Required for MetalLB
+```
+
 
 <!-- TODO: update this link -->
 <!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
@@ -197,7 +207,7 @@ To run the Ansible playbook (run in `kubespray` directory):
 ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
 ```
 
-This playbook will take a while to run (around 10 minutes, depending).
+This playbook will take a while to run (around 15 minutes, depending).
 Once it has finished, login to the node and run `sudo kubectl get nodes`.
 If all nodes say that they are `Ready`, then Kubernetes cluster creation was successful!
 
@@ -224,6 +234,34 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
 
 After this command runs, you should have a SLATE cluster!
 Run `slate cluster list`, and if everything was successful, you should see your cluster listed in the output.
+
+
+## Testing
+
+*Note: this guide to testing assumes familiarity with the SLATE platform.*
+
+1. On any machine with access to the SLATE CLI, install an instance of `nginx` on the cluster you just created.
+Make sure ingress is enabled in the `values.yaml`, and make a note of your chosen subdomain.
+
+1. Run `sudo kubectl get services -n slate-system` on the SLATE cluster you just created. 
+An `ingress-nginx` LoadBalancer will show up.
+Make a note of the `EXTERNAL-IP` value.
+It should be one of the IP addresses you allocated to MetalLB.
+
+1. Bring up another `CC-CentOS7` instance on `slate-net` with the `ssh` security group added.
+Login to this instance, and disable `ufw`.
+Then, run this command:
+```bash
+curl -H "Host: <subdomain_name>.<your_cluster_name>.slateci.net" <load_balancer_external_ip>
+```
+If everything was successful, you should see the following output:
+```html
+<html>
+<body>
+<h1>Hello world!</h1>
+</body>
+</html>
+```
 
 
 ## Limitations
