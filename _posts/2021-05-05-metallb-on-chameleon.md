@@ -243,7 +243,10 @@ Run `slate cluster list`, and if everything was successful, you should see your 
 1. On any machine with access to the SLATE CLI, install an instance of `nginx` on the cluster you just created.
 Make sure ingress is enabled in the `values.yaml`, and make a note of your chosen subdomain.
 
-1. Run `sudo kubectl get services -n slate-system` on the SLATE cluster you just created. 
+1. Run this command on the SLATE cluster you just created:
+```bash
+sudo kubectl get services -n slate-system
+```
 An `ingress-nginx` LoadBalancer will show up.
 Make a note of the `EXTERNAL-IP` value.
 It should be one of the IP addresses you allocated to MetalLB.
@@ -255,7 +258,7 @@ Then, run this command:
 curl -H "Host: <subdomain_name>.<your_cluster_name>.slateci.net" <load_balancer_external_ip>
 ```
 If everything was successful, you should see the following output:
-```html
+```bash
 <html>
 <body>
 <h1>Hello world!</h1>
