@@ -13,6 +13,18 @@ Chameleon is an OpenStack-based research platform for provisioning compute and n
 
 <!--end_excerpt-->
 
+## SLATE on Chameleon Motivation
+
+Running SLATE clusters on Chameleon enables researchers to quickly test and tweak many different parameters.
+For example, testing a network of SLATE clusters, with simulated experimental latency or real latency (provided by profiles that launch machines across multiple sites), is made possible by Chameleon.
+These experiments can be carried out at many scales, from across a campus, to across a region, to across the nation.
+In addition, differing topologies, at both layer 2 and 3, can be tested.
+SLATE's monitoring applications, including perfSONAR, can also be leveraged to understand different testbed profiles and their performance capabilities.
+
+Additionally, being able to rapidly deploy SLATE clusters on Chameleon gives SLATE developers and users many useful capabilities.
+For example, new applications or new application configurations can be launched on temporary Chameleon clusters, but registered with the SLATE production API, providing a highly realistic yet safe environment for testing changes.
+Kubespray, the SLATE team's preferred cluster bring-up tool, can also be quickly tested, or easily tested at scale with many machines on Chameleon.
+
 
 ## Chameleon Setup
 
