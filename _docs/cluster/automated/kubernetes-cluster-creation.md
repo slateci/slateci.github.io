@@ -127,3 +127,6 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
  site.yml
 ```
 {:data-add-copy-button='true'}
+
+
+[Previous](/docs/cluster/automated/prerequisites.html) / [Next](/docs/cluster/automated/additional-configs.html)

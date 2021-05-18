@@ -18,3 +18,5 @@ SLATE builts on top of Kubespray by providing a playbook that works with the cre
 
 These instructions assume you are installing a multi-node, Kubernetes cluster with MetalLB and Calico that is _not_ behind a NAT.
 To configure the cluster without these or with other parameters, please read [Additional Configurations](/docs/cluster/automated/additional-configs.html) first.
+
+[Next](/docs/cluster/automated/prerequisites.html)

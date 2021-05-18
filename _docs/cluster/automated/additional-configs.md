@@ -112,3 +112,5 @@ k8s-cluster:
 {:data-add-copy-button='true'}
 
 And add the following flag to your SLATE registration playbook command: `-e 'cluster_access_ip=<NAT_IP>:6443'`.
+
+[Previous](/docs/cluster/automated/kubernetes-cluster-creation.html) / [Next](/docs/cluster/automated/reset.html)
