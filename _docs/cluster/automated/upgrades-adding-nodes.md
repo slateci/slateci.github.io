@@ -11,3 +11,5 @@ type: markdown
 Please see the Kubespray docs for this:
 - [Upgrading](https://kubespray.io/#/docs/upgrades)
 - [Adding/replacing a node](https://kubespray.io/#/docs/nodes)
+
+[Previous](/docs/cluster/automated/reset.html) / [Next](/docs/cluster/automated/troubleshooting.html)

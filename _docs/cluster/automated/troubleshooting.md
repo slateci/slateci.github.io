@@ -19,3 +19,5 @@ Log in to one of the controller nodes in the cluster, use `sudo /usr/local/bin/k
 If the logs say something related to "Invalid CIDR", it likely means the CIDR range you passed into the [MetalLB Configuration](/docs/cluster/automated/kubernetes-cluster-creation.html#kcc-configure) was invalid (e.g. forgot to append `/32` to the end of a single IP).
 Try adjusting the CIDR range and rerunning the *Kubespray* playbook to see if this fixes the issue.
 Else, we suggest pinging the SLATE Slack for more help.
+
+[Previous](/docs/cluster/automated/upgrades-adding-nodes.html)

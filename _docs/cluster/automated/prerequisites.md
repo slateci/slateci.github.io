@@ -33,3 +33,5 @@ The host that is executing Ansible is referred to as the "Ansible executor" in t
 
 - Clone of SLATE registration playbook on the Ansible executor: `git clone https://github.com/slateci/slate-ansible.git`
 - SLATE token obtained from the [CLI access page](https://portal.slateci.io/cli).
+
+[Previous](/docs/cluster/automated/introduction.html) / [Next](/docs/cluster/automated/kubernetes-cluster-creation.html)

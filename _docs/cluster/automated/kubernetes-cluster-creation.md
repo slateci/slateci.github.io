@@ -276,7 +276,6 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
 {:data-add-copy-button='true'}
 
 
-
 #### Cluster registration behind NAT:
 Add the following two flags to your SLATE registration playbook command if your cluster is behind a NAT: 
 
@@ -288,4 +287,4 @@ Add the following two flags to your SLATE registration playbook command if your 
 *Note that `EXTERNAL_NAT_IP` is the IP at which your node is publicly accessible.*
 
 
-
+[Previous](/docs/cluster/automated/prerequisites.html) / [Next](/docs/cluster/automated/additional-configs.html)

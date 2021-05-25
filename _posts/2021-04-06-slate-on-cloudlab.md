@@ -17,6 +17,19 @@ More information about CloudLab can be found [here](https://www.cloudlab.us/).
 <!--end_excerpt-->
 
 
+## SLATE on CloudLab Motivation
+
+Running SLATE clusters on CloudLab enables researchers to quickly test and tweak many different parameters.
+For example, testing a network of SLATE clusters, with simulated experimental latency or real latency (provided by profiles that launch machines across multiple sites), is made possible by CloudLab.
+These experiments can be carried out at many scales, from across a campus, to across a region, to across the nation.
+In addition, differing topologies, at both layer 2 and 3, can be tested.
+SLATE's monitoring applications, including perfSONAR, can also be leveraged to understand different testbed profiles and their performance capabilities.
+
+Additionally, being able to rapidly deploy SLATE clusters on CloudLab gives SLATE developers and users many useful capabilities.
+For example, new applications or new application configurations can be launched on temporary CloudLab clusters, but registered with the SLATE production API, providing a highly realistic yet safe environment for testing changes.
+Kubespray, the SLATE team's preferred cluster bring-up tool, can also be quickly tested, or easily tested at scale with many machines on CloudLab.
+
+
 ## Prerequisites
 
 To begin, CloudLab access is necessary.
@@ -52,13 +65,16 @@ Current SLATE-on-CloudLab profiles are listed here:
 For simplicity, we will be using the [`cloudlab-slate`](https://www.cloudlab.us/show-profile.php?uuid=6ab61da6-97c2-11eb-b1eb-e4434b2381fc) profile.
 This profile will bring up a single CENTOS 7 bare-metal node, as well as allocate a variable number of additional floating IPs.
 
-To instantiate this profile, navigate to [this](https://www.cloudlab.us/instantiate.php) page.
-Click the "Change Profile" button, and select the `cloudlab-slate` profile from the list of options.
-Next, you will be asked how many additional public IPs to allocate.
-Leave this at the default value, which is 2.
-Click next, and then select a cluster to install this profile on. Any CloudLab cluster should be fine.
-After clicking next again, set an experiment duration (the default of 16 hours is OK).
-Finally, click "Finish" and wait for your experiment to fully spin up.
+To instantiate this profile, navigate to
+<a href="https://www.cloudlab.us/instantiate.php" target="_blank">this</a>
+page.
+
+1. Click the "Change Profile" button, and select the `cloudlab-slate` profile from the list of options.
+1. Next, you will be asked how many additional public IPs to allocate.
+1. Leave this at the default value, which is 2.
+1. Click next, and then select a cluster to install this profile on. Any CloudLab cluster should be fine. At this stage, you will also be asked for an optional experiment name. Unless you have many CloudLab experiments, leave this blank.
+1. After clicking next again, set an experiment duration (the default of 16 hours is OK).
+1. Finally, click "Finish" and wait for your experiment to fully spin up.
 
 If you require more guidance instantiating your experiment, CloudLab has additional documentation [here](https://docs.cloudlab.us/getting-started.html).
 
@@ -74,10 +90,32 @@ The CloudLab documentation has instructions for this [here](http://docs.cloudlab
 ## Kubernetes Cluster Creation / SLATE Registration
 
 Once our CloudLab experiment/instances have fully spun up, we can begin installing Kubernetes on the node(s).
-
 The SLATE team recommends that [Kubespray](https://kubespray.io/#/) be used for this.
 
-Follow the official SLATE instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
+However, we need a few additional pieces of information before we begin configuring Kubespray.
+
+<!-- A nice touch to your blog post would be walking through were to find the data to add to the kubespray config. Like where to find the IP address, floating IPs, what to put exactly for metallb. For instance, do I just use one address and put “/32”. Do I list both addresses setup by default. Do I use the subnet that comes with the public IP. Etc. I had a hard time finding the public IP addresses and found them in the XML of the manifest tab. -->
+
+Using Kubespray will require you to know the IP address of your CloudLab node, as well as the additional IP addresses CloudLab has allocated for MetalLB.
+To find these, navigate to the "Manifest" tab of the CloudLab experiment page, which will be accessible as soon as your experiment has partially spun up.
+
+First, scroll down to the line (or lines if you have multiple nodes) that look similar to this:
+```xml
+<host name="node1.user-QV98448.slate-PG0.utah.cloudlab.us" ipv4="xxx.xxx.xxx.xxx"/>
+```
+This IP address is your node's public IP.
+
+Next, to find the additional public IPs that MetalLB will use, look for the section that looks similar to this:
+```xml
+<emulab:routable_pool client_id="addressPool" count="2" type="any" component_manager_id="urn:publicid:IDN+site.cloudlab.us+authority+cm">
+  <emulab:ipv4 address="xxx.xxx.xxx.xxx" netmask="xxx.xxx.xxx.xxx"/>
+  <emulab:ipv4 address="xxx.xxx.xxx.xxx" netmask="xxx.xxx.xxx.xxx"/>
+</emulab:routable_pool>
+```
+These IP address will be used as needed for `LoadBalancer` services.
+You will have to specify them when you are editing the configuration files for Kubespray, as it will use them to set up MetalLB.
+
+After you have located this information, follow the official SLATE instructions [here](https://slateci.io/docs/cluster/automated/introduction.html) to install Kubernetes with Kubespray.
 The standard installation instructions can be followed exactly, with the exception of making changes to accommodate a single-node cluster if necessary.
 
 Once the Kubernetes cluster is operational, we can finally register it with SLATE!
@@ -91,6 +129,8 @@ The guide listed above will also cover the SLATE registration process [here](htt
 To verify cluster install, the Nginx SLATE application can be deployed.
 Do this by running `slate app install nginx --cluster <your_cloudlab_cluster> --group <your_slate_group>`.
 If everything has been done properly, your SLATE cluster on CloudLab should now be serving an Nginx page!
+
+Additionally, you can log into one of your cluster nodes via `ssh`, and observe cluster status with `kubectl`.
 
 
 ## Limitations
