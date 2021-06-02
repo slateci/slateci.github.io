@@ -67,16 +67,23 @@ Navigate to the `grnocOutput` section.
 First, make sure that the `enabled` flag is set to true.
 Next, to push to GlobalNOC's databases, credentials must be obtained.
 
-*Process for getting credentials here*
+Contact GlobalNOC to obtain these credentials.
+<!-- todo: add more information about getting credentials -->
 
-Next, configure the database endpoint by filling out the `grnocOutput` section with the hostname, username, and password obtained earlier. 
+Once you have credentials, store the password in a SLATE secret by running the following command:
+```bash
+slate secret create --group <slate_group> --cluster <slate_cluster> --from-literal password=<your_password> <secret_name>
+```
+Make a note of the name you gave this secret, as we will use it later.
+
+Next, configure the database endpoint by filling out the `grnocOutput` section with the hostname, username, and secret name that you setup earlier.
 This section will look like this:
 ```yaml
 grnocOutput:
   enabled: true
   hostname: "tsds.hostname.net"
-  username: "tsds username"
-  password: "tsds password"
+  username: "tsds_username"
+  passwordSecretName: "secret_name"
 ```
 
 Note that if GRNOC output is enabled, you will not be able to specify a custom set of OIDs. 
@@ -92,6 +99,8 @@ It will look something like this:
 targets:
   - hostGroup:
       community: "public"
+      timeout: "15s"
+      retries: 2
       hosts:
         - "127.0.0.1:161"
       counter64Bit: false
@@ -112,6 +121,18 @@ Add as many additional hosts underneath as wanted. As per yaml syntax, preface t
 **Community String**
 
 Next, change the `community` parameter to the appropriate SNMP community string.
+
+
+**Timeout**
+
+This value controls the amount of time before an SNMP request is considered failed.
+For most situations, the default value is acceptable.
+
+
+**Retries**
+
+This value controls the number of times an SNMP request will be retried before it is considered failed.
+Again, the default value here is fine for most situations.
 
 
 **Counter Type**
