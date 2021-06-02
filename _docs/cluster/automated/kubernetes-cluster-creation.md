@@ -37,9 +37,9 @@ Replace everything in `<>` brackets with your own strings. These all run on the 
            kube-master:
            kube-node:
          vars:
-           slate_cluster_name: <SLATE_CLUSTER_NAME>
-           slate_group_name: <SLATE_CLUSTER_GROUP>
-           slate_org_name: <SLATE_CLUSTER_ORG>
+           slate_cluster_name: <SLATE_CLUSTER_NAME>  # Choose any cluster name conforming to Kubernetes naming standards that doesn't already exist
+           slate_group_name: <SLATE_CLUSTER_GROUP>  # Provide an already-existing SLATE group you belong to here
+           slate_org_name: <SLATE_CLUSTER_ORG>  # Provide your organization name here
      hosts:
        node1:
          # The IP to use for SSH connections to this host.
@@ -52,6 +52,8 @@ Replace everything in `<>` brackets with your own strings. These all run on the 
     You can add additional nodes under `hosts:` and add them to `kube-master` and/or `kube-node` similar to how it is done with `node1`.
     Node names can be anything (i.e. instead of `node1`, it can be the FQDN of the host).
     However, due to Kubernetes restrictions, all characters in the node name must be *lowercase*.
+    
+
 
 ### Standard Configuration {#kcc-configure}
 
@@ -60,7 +62,12 @@ Where appropriate, non-standard configuration steps are provided.
 
 #### MetalLB
 
-MetalLB is usually a required component for any SLATE cluster; however, there are some situations where it should not be deployed.
+MetalLB is a service that dynamically provides additional IPs for various services on a SLATE cluster that require their own dedicated IP.
+To do this, MetalLB requires at least one publicly routable, floating (not assigned and separate from your machine address) IP address to give out.
+This first extra public IP will be assigned to an Nginx Ingress Controller, a standard SLATE component.
+If you would like to run additional services that also require dedicated IPs (e.g. most OSG applications), you will want to allocate MetalLB more than one IP.
+
+Usually, MetalLB is a required component for any SLATE cluster; however, there are some situations where it should not be deployed.
 If you are setting up a SLATE cluster behind any sort of NAT, you must disable MetalLB.
 Setting up a cluster behind a NAT is quite complex and we recommend pinging `#installation` on the SLATE Slack before proceeding.
 More information about alternate configurations can be found later in this document [here](/docs/cluster/automated/kubernetes-cluster-creation.html#other-configurations).
