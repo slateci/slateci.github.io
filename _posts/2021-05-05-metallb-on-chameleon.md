@@ -9,18 +9,15 @@ type: markdown
 tag: draft
 ---
 
+The Chameleon testbed is an OpenStack-based testbed for running a wide variety of experiments.
+
 This blog post will demonstrate how to run a SLATE cluster on the Chameleon testbed, with MetalLB functionality enabled.
 Normally, MetalLB is not able to run on Chameleon, due to the complexities of operating behind a NAT.
-However, by following this guide, it can be deployed, just restricted to the experimental plane.
+However, by following this guide, it can be deployed, albeit restricted to the experimental plane.
 
 This post is intended as an optional follow-up to the ["SLATE On Chameleon"](https://slateci.io/blog/slate-on-chameleon.html) blog post.
 If you have not read this initial post, do so, as it is a prerequisite to this one.
-
-<!-- what is chameleon  -->
-<!-- what is metallb  -->
-<!-- what's the point/goal/learning opportunity? -->
-
-<!-- Why is the previous post a prereq? -->
+It will go through a simpler cluster install on Chameleon, and help familiarize you with the testbed.
 
 
 <!--end_excerpt-->
@@ -29,7 +26,7 @@ If you have not read this initial post, do so, as it is a prerequisite to this o
 
 MetalLB is a load balancer for Kubernetes that is designed to run on bare metal resources.
 By default, SLATE installs MetalLB and uses it to provision extra public IP addresses for a cluster.
-On SLATE clusters, these additional public IP addresses are usually used for running an NGINX ingress controller, as well as giving certain [Open Science Grid](https://opensciencegrid.org/) applications their own dedicated IP, which they require. 
+On SLATE clusters, these additional public IP addresses are usually used for running an NGINX ingress controller, as well as giving certain [Open Science Grid](https://opensciencegrid.org/) applications their own dedicated IP.
 
 On SLATE, MetalLB operates in what is called "layer 2 mode".
 Essentially, it advertises additional IP addresses on a given node interface by responding to ARP/NDP requests for the additional IP addresses it has been configured to use.
@@ -54,28 +51,16 @@ Select the "KVM" site, and you will be brought to the KVM portal page.
 ### Network Setup
 
 By default, Chameleon connects all instances to a default "shared-net".
-MetalLB will be sending ARP packets advertising additional IP addresses that Chameleon has not given us permission 
-<!-- TODO -->
-<!-- why is MetalLB perceived as a security risk? -->
-
-First, to create a SLATE cluster with MetalLB enabled internally in Chameleon,
+As mentioned before, MetalLB will be sending ARP packets advertising additional IP addresses that Chameleon has not given us permission to use, and as such, the default Chameleon "shared-net" sees MetalLB as a security risk.
+To Chameleon, MetalLB looks like it's performing an ARP-spoofing attack.
+ 
+To get around this, we need to create a SLATE cluster with MetalLB enabled internally in Chameleon,
 we must set up a different private network that we control.
 
-This is necessary because Chameleon's default "shared-net" will block MetalLB functionality. 
-By default, to Chameleon, MetalLB will look like it is executing an ARP-spoofing attack.
-
-<!-- Explain the purpose of all these intricate steps -->
-<!-- I'm setting up routers, setting additional networks, and connecting to that network. However, I really have no idea why I'm doing this, or even what it is I'm doing. I can tell if go back and read the headlines a bit,but walking through the instructions, it is not clear what I'm doing or why. -->
-
-#### Create a router
-
-1. Navigate to the "Routers" section under the "Network" tab on the left sidebar.
-1. Then, on the right-hand side, click the "Create Router" button.
-1. Next, name this router. We like to use `slate-router`.
-1. Click the external network drop-down menu, and select "public".
-1. Leave everything else as-is, and click "Create Router".
 
 #### Create an additional network
+
+First, we will create the private network our instances will connect to.
 
 1. Navigate to the left sidebar and select "Network", then select "Networks" underneath this.
 1. Then, click the "Create Network" button.
@@ -95,19 +80,35 @@ If you would like to learn more about networks in Chameleon, more information ca
 <!-- 192.168.1.0 - network -->
 <!-- 192.168.1.1 - default gateway -->
 <!-- 192.168.1.2 - DHCP -->
+<!-- 192.168.1.3 - 192.168.1.250 - hosts -->
 <!-- 192.168.1.251 - MetalLB -->
 <!-- 192.168.1.252 - MetalLB -->
 <!-- 192.168.1.253 - MetalLB -->
 <!-- 192.168.1.254 - MetalLB -->
-<!-- 192.168.1.255 - Broadcast -->
+<!-- 192.168.1.255 - broadcast -->
+
+
+#### Create a router
+
+Next, a router must be created to serve as a default gateway for our instances to access the rest of the internet.
+
+1. Navigate to the "Routers" section under the "Network" tab on the left sidebar.
+1. Then, on the right-hand side, click the "Create Router" button.
+1. Next, name this router. We like to use `slate-router`.
+1. Click the external network drop-down menu, and select "public".
+1. Leave everything else as-is, and click "Create Router".
+
 
 #### Connect your router to your new network
+
+Here, we will connect the router object we made to our custom network.
 
 1. Navigate back to the "Routers" section under the "Network" tab on the left sidebar.
 1. Click on the name of the router you created earlier (most likely called `slate-router`).
 1. Select the "Interfaces" tab, and then click "Add Interface"
 1. Under the "Subnet" drop-down menu, select the network you created earlier (most likely called `slate-net`).
 1. Leave everything else as-is, and click "Submit".
+
 
 #### Create Security Groups
 
@@ -121,17 +122,13 @@ First, we'll create an SSH rule.
 1. You should be brought to a page for managing rules for the `ssh` group. Click the "Add Rule" on the right.
 1. Under the "Rule" drop down menu, select "SSH". Leave everything else the same, and click "Add".
 
-<!-- mention that this will create an ingress rule for ssh -->
-<!-- Blogpostfeedback-Chameleon/metallb2understandthesteps,thestepsareclearandIcanfollowalong.Theothersectionsmightneedshortexplanationslikethisaswell.Thisgivesaniceintrolineexplainingit,thenhasshortsentencesbeforeeachgroupofstepstosaywhatishappening."First,we'llcreateanSSHrule."Thisisexcellent.Step5(select"SSH").IwasaslightlyconfusedatwhatIwaslookingat.ItmightbegoodmentionthatthiswillcreateanewIngressruleforssh.Smalldifference,butonthescreenitsaysIngress.Yourblogpostdidn'tmentionegressoringress,butthatiswhati'mlookingat.Anyway,itsasmallthingandeasilyresolvedbyaddingtheoneword.Basedontheotherscreensthatwesawearlier,iwasexpectingtosee"SSH"asoneofthethingsIcanselect.Ididn'tnoticethatthetopsaysSSH,sinceI'minthemanagementforthatgroupwejustcreated.I'mnotinspectingthewholescreen(thestuffatthetitleisjustnoisebecausethereisalotofcharactersthere),justlookingforthingstoclickonbasedontheinstructions.Sowhatyou'vewritteniscorrect,justthrewmeforamomentandIsecondguessedwhatIwasdoing -->
+This will create an ingress rule that allows SSH traffic on port 22.
 
-
-
-Next, we'll create a SLATE API server rule.
+Next, we'll create a SLATE API server rule. 
+This rule will allow the SLATE API server to communicate with our cluster using `kubectl` on port 6443.
 1. Follow the same steps as before for creating a security group, but name this one `slate`. Click the "Add Rule" button.
 1. After clicking the "Add Rule" button, change the "Port" field to `6443`. Leave everything else default.
 1. Click "Add". This should result in a rule allowing ingress TCP traffic on port `6443`.
-
-<!-- Elaborate on the purpose of this rule -->
 
 
 ### Launch VM Instances
@@ -148,15 +145,19 @@ We can simply bring them up as needed.
 1. Under the "Security Groups" tab, select the `slate` and `ssh` security groups that were created earlier. Make sure the `default` security group is also enabled.
 1. Under the "Key Pair" tab, make sure you have configured the correct SSH keys. This is explained in more detail in [this documentation](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#getting-started).
 1. Click the "Launch Instance" button, and wait for the instance to spin up. This should not take long.
-1. Set up SSH access according to the directions in the previous blog post. You will need to associate a public floating IP.
-
-<!-- Jason doesn't like that he has to reference the previous blog post to figure out the floating ip piece... not sure how I want to handle this. It's a lot of additional crap that I'm not sure belongs here  -->
-
-Detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
-If you are not familiar with Chameleon, it is recommended that you read this document and follow the instructions there.
 
 
-#### Logging In
+#### Associate Public IP and Log In
+
+To access our instance, we need to NAT a floating public IP to our instance.
+1. First, go to the "Network" tab on the left and select "Floating IPs".
+1. Click the "Allocate IP to Project" button located on the right side.
+1. Leave the default settings and click "Allocate IP".
+1. Once an IP address has been allocated, click the "Associate" button to the right of the IP address.
+1. From the "Port to be Associated" menu, select the instance you created earlier (likely `slate-vm`).
+1. Click "Associate"
+
+For more information regarding associating floating IP addresses, visit the [Chameleon Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
 
 To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
 This user should have password-less `sudo` access.
@@ -174,9 +175,13 @@ Disable it with `sudo ufw disable`.
 This next step requires access to your Chameleon resources through the OpenStack CLI.
 
 The [Chameleon docs](https://chameleoncloud.readthedocs.io/en/latest/technical/cli.html) provide information on setting this up.
-We at SLATE recommend using application credentials for authenticating command line clients.
+We at SLATE recommend using application credentials (download the openrc file) for authenticating command line clients.
+An unrestricted application credential is not necessary.
 
-Once you have OpenStack CLI access, use the following command to view a list of the IDs of your OpenStack/Chameleon ports.
+Once you have an application credential, run `source /path/to/<openstack_rc_fille>`.
+After this, your command line client will be authenticated.
+
+Use the following command to view a list of the IDs of your OpenStack/Chameleon ports.
 ```bash
 openstack port list
 ```
@@ -207,6 +212,7 @@ openstack port set <port-id> --allowed-address ip-address=192.168.1.254
 ```
 *If you have set aside different addresses for MetalLB, change these previous commands accordingly.*
 
+
 ## Cluster Setup
 
 To create a Kubernetes cluster and register it with SLATE, follow documentation on the [SLATE website](https://slateci.io/docs/cluster/automated/introduction.html), with a few changes.
@@ -214,7 +220,6 @@ Specifically, follow the instructions for setting up a cluster behind a NAT, but
 
 This will mean the following changes to cluster configuration:
 1. Add the `supplementary_addresses_in_ssl_keys` variable.
-<!-- 1. talk about hosts.yaml? -->
 1. Give MetalLB this configuration:
 ```yaml
 metallb_enabled: true
@@ -231,7 +236,6 @@ to
 ```
 kube_proxy_strict_arp: true # Required for MetalLB
 ```
-
 
 <!-- TODO: update this link -->
 <!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
@@ -252,10 +256,10 @@ Currently, SLATE operates two separate federations, a development federation and
 When you register your cluster, you will need to decide which federation to register with.
 By default, you will be given a token for the SLATE production endpoint.
 If you would like to register your cluster with the production federation, then you simply use the default SLATE token given to you, 
-and `https://api-dev.slateci.io:18080` as the `slate_cli_endpoint` parameter in the following command.
+and `https://api.slateci.io:443` as the `slate_cli_endpoint` parameter in the following command.
 
 However, if you would like to register your cluster with the development federation, reach out to the SLATE team about obtaining a development token.
-Once you have done this, the development API endpoint is `https://api.slateci.io:443`.
+Once you have done this, the development API endpoint is `https://api-dev.slateci.io:18080`.
 
 To register the previously created Kubernetes cluster with SLATE, navigate to the `slate-ansible` directory, and run the following command:
 ```bash
@@ -285,7 +289,7 @@ An `ingress-nginx` LoadBalancer will show up.
 Make a note of the `EXTERNAL-IP` value.
 It should be one of the IP addresses you allocated to MetalLB.
 
-1. Bring up another `CC-CentOS7` instance on `slate-net` with the `ssh` security group added.
+1. Bring up another `CC-CentOS7` instance connected to our custom `slate-net` with the `ssh` security group added.
 Login to this instance, and disable `ufw`.
 Then, run this command:
 ```bash
@@ -301,11 +305,10 @@ curl -H "Host: <subdomain_name>.<your_cluster_name>.slateci.net" <load_balancer_
 </html>
 ```
 
-
 ## Limitations
 
 MetalLB is only provisioning internal IP addresses, so access will be limited to inside the experimental plane.
-This means DNS services or other similar dependencies must be done without or set-up inside the experimental plane.
+This means DNS services or other similar dependencies cannot be used unless they are set-up inside the experimental plane.
 
 
 ## Contact Us
