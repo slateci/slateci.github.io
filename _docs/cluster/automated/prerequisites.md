@@ -1,6 +1,6 @@
 ---
 title: Prerequisites
-overview: Prequisites for Installing Kubernetes with Ansible & Kubespray
+overview: Prerequisites for Installing Kubernetes with Ansible & Kubespray
 
 order: 10
 layout: docs2020

@@ -8,6 +8,8 @@ type: markdown
 
 ---
 
+<!-- deprecated -->
+
 Kubespray is an Ansible playbook developed to automate Kubernetes cluster deployments (including system tuning, Docker installation, etc) with significant community backing.
 We have found Kubespray to be significantly less painful than tools like `kubeadm` for cluster deployments and recommend new cluster installs using these playbooks.
 

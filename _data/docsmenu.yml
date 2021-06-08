@@ -37,8 +37,6 @@ toc:
         url: /docs/cluster/automated/prerequisites.html
       - page: Kubernetes Cluster Creation
         url: /docs/cluster/automated/kubernetes-cluster-creation.html
-      - page: Additional Configurations
-        url: /docs/cluster/automated/additional-configs.html
       - page: Reset Kubernetes Cluster
         url: /docs/cluster/automated/reset.html
       - page: Upgrades / Adding / Removing Nodes
