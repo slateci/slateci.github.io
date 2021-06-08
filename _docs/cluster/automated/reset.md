@@ -13,4 +13,4 @@ If you want to wipe your Kubernetes cluster and start from scratch (e.g. if your
 
 If your cluster is registered with SLATE, ensure you delete the cluster from SLATE _first_ by using `slate cluster delete <CLUSTER_NAME>`.
 
-[Previous](/docs/cluster/automated/additional-configs.html) / [Next](/docs/cluster/automated/upgrades-adding-nodes.html)
+[Previous](/docs/cluster/automated/kubernetes-cluster-creation.html) / [Next](/docs/cluster/automated/upgrades-adding-nodes.html)

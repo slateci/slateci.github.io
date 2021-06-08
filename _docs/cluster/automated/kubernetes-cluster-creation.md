@@ -70,7 +70,7 @@ If you would like to run additional services that also require dedicated IPs (e.
 Usually, MetalLB is a required component for any SLATE cluster; however, there are some situations where it should not be deployed.
 If you are setting up a SLATE cluster behind any sort of NAT, you must disable MetalLB.
 Setting up a cluster behind a NAT is quite complex and we recommend pinging `#installation` on the SLATE Slack before proceeding.
-More information about alternate configurations can be found later in this document [here](/docs/cluster/automated/kubernetes-cluster-creation.html#other-configurations).
+More information about alternate configurations can be found later in this document [here](/docs/cluster/automated/kubernetes-cluster-creation.html#additional-configurations).
 
 To disable MetalLB, simply skip the following section (steps 1 and 2). 
 Additionally, a flag must be added to your `ansible-playbook` command in [SLATE Cluster Registration](/docs/cluster/automated/kubernetes-cluster-creation.html#slate-cluster-registration). 
@@ -141,7 +141,7 @@ cert_manager_enabled: true
 
 
 
-### Other Configurations
+### Additional Configurations
 
 *You can safely skip this entire section ([to here](/docs/cluster/automated/kubernetes-cluster-creation.html#run)) if you are installing a standard multi-node Kubernetes cluster with MetalLB and Calico that is not behind a NAT.*
 
@@ -294,4 +294,4 @@ Add the following two flags to your SLATE registration playbook command if your 
 *Note that `EXTERNAL_NAT_IP` is the IP at which your node is publicly accessible.*
 
 
-[Previous](/docs/cluster/automated/prerequisites.html) / [Next](/docs/cluster/automated/additional-configs.html)
+[Previous](/docs/cluster/automated/prerequisites.html) / [Next](/docs/cluster/automated/reset.html)
