@@ -6,7 +6,6 @@ permalink: blog/slate-on-cloudlab.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 CloudLab is a research platform for provisioning compute and networking resources.
@@ -22,7 +21,7 @@ More information about CloudLab can be found [here](https://www.cloudlab.us/).
 Running SLATE clusters on CloudLab enables researchers to quickly test and tweak many different parameters.
 For example, testing a network of SLATE clusters, with simulated experimental latency or real latency (provided by profiles that launch machines across multiple sites), is made possible by CloudLab.
 These experiments can be carried out at many scales, from across a campus, to across a region, to across the nation.
-In addition, differing topologies, at both layer 2 and 3, can be tested.
+In addition, differing topologies at both layer 2 and 3 can be tested.
 SLATE's monitoring applications, including perfSONAR, can also be leveraged to understand different testbed profiles and their performance capabilities.
 
 Additionally, being able to rapidly deploy SLATE clusters on CloudLab gives SLATE developers and users many useful capabilities.
@@ -93,8 +92,6 @@ Once our CloudLab experiment/instances have fully spun up, we can begin installi
 The SLATE team recommends that [Kubespray](https://kubespray.io/#/) be used for this.
 
 However, we need a few additional pieces of information before we begin configuring Kubespray.
-
-<!-- A nice touch to your blog post would be walking through were to find the data to add to the kubespray config. Like where to find the IP address, floating IPs, what to put exactly for metallb. For instance, do I just use one address and put “/32”. Do I list both addresses setup by default. Do I use the subnet that comes with the public IP. Etc. I had a hard time finding the public IP addresses and found them in the XML of the manifest tab. -->
 
 Using Kubespray will require you to know the IP address of your CloudLab node, as well as the additional IP addresses CloudLab has allocated for MetalLB.
 To find these, navigate to the "Manifest" tab of the CloudLab experiment page, which will be accessible as soon as your experiment has partially spun up.
