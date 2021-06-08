@@ -36,7 +36,7 @@ The Parallel Traceroute Visualization Project and others like it are able to use
 
 It is assumed that you already have access to a SLATE-registered Kubernetes cluster, and that you already have installed and set up the SLATE command line interface.
 If not, instructions can be found at [SLATE Quickstart](https://slateci.io/docs/quickstart/).
-Additionally, it is assumed that there is an SNMP daemon (responds to SNMP requests) running on one or more target hosts.
+Additionally, it is assumed that there is an SNMP daemon (responds to SNMP requests) running on all target hosts.
 
 On CentOS 7, a simple SNMP setup can be installed by running the following commands:
 ```bash
@@ -52,7 +52,7 @@ More details can be found [here](https://support.managed.com/kb/a2390/how-to-ins
 To begin, a configuration file for the application must be fetched.
 The SLATE client provides a simple way to do this with the command below:
 ```bash
-slate app get-conf telegraf > telegraf.yaml
+slate app get-conf grnoc-telegraf > grnoc-telegraf.yaml
 ```
 
 This will save a local copy of the Telegraf configuration, formatted as a .yaml file.
@@ -63,8 +63,7 @@ Open the configuration file with your preferred text editor, and follow the inst
 ### GlobalNOC Database Configuration
 
 Navigate to the `grnocOutput` section.
-First, make sure that the `enabled` flag is set to true.
-Next, to push to GlobalNOC's databases, credentials must be obtained.
+To push to GlobalNOC's databases, credentials must be obtained.
 
 Contact GlobalNOC to obtain these credentials.
 <!-- todo: add more information about getting credentials -->
@@ -79,15 +78,10 @@ Next, configure the database endpoint by filling out the `grnocOutput` section w
 This section will look like this:
 ```yaml
 grnocOutput:
-  enabled: true
   hostname: "tsds.hostname.net"
   username: "tsds_username"
   passwordSecretName: "secret_name"
 ```
-
-Note that if GRNOC output is enabled, you will not be able to specify a custom set of OIDs. 
-An OID is an identifier specifying a metric to monitor. More information can be found [here](https://www.ittsystems.com/snmp-oid-versions-functionality/).
-
 
 ### Target Configuration
 
@@ -103,18 +97,16 @@ targets:
       hosts:
         - "127.0.0.1:161"
       counter64Bit: false
-      oids: |-
-        [[inputs.snmp.field]]
-          oid = "DISMAN-EVENT-MIB::sysUpTimeInstance"
-          name = "uptime"
 ```
 
 
 **Hosts**
 
-Under `hosts`, replace the placeholder IP address with the IP address or full DNS name of the host you want to monitor.
-Additionally, specify the default SNMP port (161) by appending a colon followed by this number.
-Add as many additional hosts underneath as wanted. As per yaml syntax, preface them with a hyphen and surround with quotes to reduce ambiguity.
+Under `hosts`, replace the placeholder IP address with the IP address or full DNS name of the host(s) you want to monitor.
+You can specify as many hosts as necessary here in a list.
+Just note that they must all share the same settings (community string, counter type, etc).
+As per yaml syntax, preface each host with a hyphen and surround with quotes to reduce ambiguity.
+Additionally, specify the default SNMP port (161) on each host by appending a colon followed by 161.
 
 
 **Community String**
@@ -136,17 +128,9 @@ Again, the default value here is fine for most situations.
 
 **Counter Type**
 
-The `counter64Bit` parameter is only relevant if GRNOC output has been enabled.
 The `counter64Bit` flag switches between two different sets of OIDs, one for hosts with 64-bit SNMP counters, and one for hosts with 32-bit SNMP counters.
 You will need to find out which type of counter the machines you are attempting to monitor are using, and set this flag accordingly. 
 (Set to "true" if you have 64-bit counters, and "false" if you have 32-bit counters.)
-
-
-**OIDs**
-
-Following this, configure the appropriate OIDs to monitor.
-The `oids` parameter is formatted a little differently than the rest of the file.
-To provide fine-grained control over these parameters, this section inherits from the Telegraf service's syntax. Specify the OIDs you want to monitor by following documentation [here](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/snmp).
 
 
 **Host Groups**
@@ -184,7 +168,7 @@ It functions in the same manner as previously discussed, but for database writes
 
 ### InfluxDB Configuration
 
-To enable InfluxDB output, navigate to the `influxOutput` section of the configuration file. It will look like this:
+If you would like to optionally enable InfluxDB output, navigate to the `influxOutput` section of the configuration file. It will look like this:
 ```yaml
 influxOutput:
   enabled: false
@@ -206,47 +190,16 @@ If not, this section can be left disabled.
 
 ## Installation
 
-Once the application has been properly configured, we must deploy it.
+Once the application has been configured, we can deploy it.
 To install the application onto a SLATE cluster, simply run the command below:
 ```bash
-slate app install telegraf --group <group_name> --cluster <cluster_name> --conf telegraf.yaml
+slate app install grnoc-telegraf --group <group_name> --cluster <cluster_name> --conf telegraf.yaml
 ```
-This installs the Telegraf application onto the cluster specified, with the configuration previously specified.
+This installs the `grnoc-telegraf` application onto the cluster specified, with the configuration previously specified.
 
-
-## Testing
-
-### Testing with Netcat
-
-If you want to quickly test the application without setting up a database, `netcat` can be used as an improvised database endpoint.
-On the machine you want to receive metrics on, enter the command:
-```bash
-nc -lk 9999
-```
-This will listen for any incoming data on port 9999.
-Then, configure the InfluxDB endpoint to point to port 9999 on this machine. Enter something like this:
-```yaml
-influxOutput:
-  enabled: true
-  endpoint: "http://<machine_ip_here>:9999"
-  database: "telegraf"
-```
-
-
-### Testing with InfluxDB
-
-Alternately, an InfluxDB endpoint can be simply set up using Docker.
-Configure Docker on the machine you want to receive metrics on, and pull the InfluxDB image with:
-```bash
-docker pull influxdb
-```
-Next, run the image in a container with the appropriate ports and volumes:
-```bash
-docker run -p 9999:9999 -v $PWD:/var/lib/influxdb influxdb
-```
-
-Configure Telegraf's InfluxDB output to push over http to this endpoint on port 9999.
-
+After installation, metrics will be pushed to the [GlobalNOC database](https://tsds.wash2.net.internet2.edu/community/?method=browse&measurement_type=interface).
+The page linked above contains data from various Internet2 infrastructure.
+Use the search/filter boxes to find your hosts, and verify that metrics are being pushed.
 
 
 ## Troubleshooting
@@ -265,7 +218,6 @@ slate instance list
 For additional help, or to report a bug, please contact the [SLATE team](https://slateci.io/community/).
 
 
-
 ## Configuration Notes
 
 The following table lists the configurable parameters of the Telegraf monitoring application and their default values.
@@ -278,14 +230,14 @@ The following table lists the configurable parameters of the Telegraf monitoring
 |`collectionJitter`| Data jitter interval |`10s`|
 |`flushInterval`| Output flush interval |`15s`|
 |`flushJitter`| Output jitter interval |`10s`|
-|`grnocOutput.enabled`| Whether to write to GlobalNOC database |`true`|
 |`grnocOutput.hostname`| Database endpoint |`tsds.hostname.net`|
 |`grnocOutput.username`| Database username |`tsds username`|
-|`grnocOutput.password`| Database password |`tsds password`|
+|`grnocOutput.passwordSecretName`| GlobalNOC database password secret name |`tsds-password-secret`|
 |`targets.hostGroup.community`| Community string of `hostGroup` |`public`|
+|`targets.hostGroup.timeout`| SNMP timeout length of `hostGroup` |`15s`|
+|`targets.hostGroup.retries`| Number of retries to attempt for `hostGroup` |`2`|
 |`targets.hostGroup.hosts`| Hosts to monitor |`127.0.0.1:161`|
 |`targets.hostGroup.counter64bit`| Type of SNMP counter on host machine |`false`|
-|`targets.hostGroup.oids`| SNMP OIDs to poll |*telegraf configuration monitoring system uptime*|
 |`influxOutput.enabled`| Whether to write to InfluxDB |`true`|
 |`influxOutput.endpoint`| Database endpoint |`http://127.0.0.1:9999`|
 |`influxOutput.database`| Database name |`telegraf`|
