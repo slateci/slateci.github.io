@@ -12,8 +12,9 @@ tag: draft
 The Chameleon testbed is an OpenStack-based testbed for running a wide variety of experiments.
 
 This blog post will demonstrate how to run a SLATE cluster on the Chameleon testbed, with MetalLB functionality enabled.
-Normally, MetalLB is not able to run on Chameleon, due to the complexities of operating behind a NAT.
-However, by following this guide, it can be deployed, albeit restricted to the experimental plane.
+Normally, MetalLB is not able to run on Chameleon, due to Chameleon's inability to directly assign a public IP address to an instance.
+However, by following this guide, MetalLB can still can be deployed, but restricted to the experimental plane.
+This gives researchers testing on Chameleon the ability to have a much more functional test environment.
 
 This post is intended as an optional follow-up to the ["SLATE On Chameleon"](https://slateci.io/blog/slate-on-chameleon.html) blog post.
 If you have not read this initial post, do so, as it is a prerequisite to this one.
@@ -237,8 +238,7 @@ to
 kube_proxy_strict_arp: true # Required for MetalLB
 ```
 
-<!-- TODO: update this link -->
-<!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
+Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/kubernetes-cluster-creation.html#additional-configurations) section of the docs.
 
 To run the Ansible playbook (run in `kubespray` directory):
 ```bash
