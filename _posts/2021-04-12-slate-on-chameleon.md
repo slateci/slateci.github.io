@@ -73,8 +73,7 @@ This will mean the following changes to cluster configuration:
 * MetalLB will be disabled. 
 * The `supplementary_addresses_in_ssl_keys` variable will need to be added.
 
-<!-- TODO: update this link -->
-<!-- Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/additional-configs.html) section of the docs. -->
+Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/kubernetes-cluster-creation.html#additional-configurations) section of the docs.
 
 To run the Ansible playbook (run in `kubespray` directory):
 ```bash
