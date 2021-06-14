@@ -11,25 +11,32 @@ tag: draft
 
 The SLATE platform provides a powerful, simple way to deploy a large variety of applications.
 In this blog post, we will demonstrate how SLATE can be leveraged to quickly deploy a monitoring solution for Internet2 network infrastructure.
-Collected metrics will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).
+Collected metrics regarding network traffic through monitored nodes will be sent to a database at Indiana University's Global Research Network Operations Center ([GlobalNOC](https://globalnoc.iu.edu/)).
 Our monitoring solution will use [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) to monitor a group of hosts with the Simple Network Management Protocol, usually referred to as SNMP.
 More information about SNMP can be found [here](http://www.net-snmp.org/).
 In addition, metrics can also be sent to a separate [InfluxDB](https://www.influxdata.com/) database.
+
+<!-- Add information about what data specifically is collected --> 
+<!-- Clarify that this parallel traceroute project is different -->
+<!-- talk more about why this application is cool/useful -->
 
 <!--end_excerpt-->
 
 
 ## GlobalNOC Time-Series Data Services
 
-Metrics marked for export using the `tsds` Telegraf output plugin are sent to the GlobalNOC Time-Series Data Services (TSDS) endpoint, given that correct credentials are provided. 
-Metrics exported to the database join metrics for devices at many research institutions on the Internet2 network. 
+Metrics marked for export using the `tsds` Telegraf output plugin are sent to the GlobalNOC Time-Series Data Services (TSDS) endpoint.
+Metrics exported to this database join metrics for devices at many research institutions on the Internet2 network. 
 This wealth of data exposes possibilities for many interesting applications. 
-One such application is the Parallel Traceroute Visualization Project being developed at the [University of Utah Center for High Performance Computing](https://www.chpc.utah.edu/).
+One such application is the [Parallel Traceroute Visualization Project](http://network-viz.chpc.utah.edu:8080/about.html) being developed at the [University of Utah Center for High Performance Computing](https://www.chpc.utah.edu/).
 The project aims to be a tool for researchers to better understand data transfer nodes and the links between them by running and displaying a visualization of traceroutes between pairs of specified hosts. 
-Once a traceroute is visualized, a user is able to hover over a host to display more information about network conditions at that host. 
-Additionally, the GlobalNOC TSDS enables researchers to view graphs of historical network data for specific hosts.
-This can be useful for reasoning about data transfer node performance and other troubleshooting. 
-The Parallel Traceroute Visualization Project and others like it are able to use the data stored in the TSDS to create more informative tools for researchers and research institutions.
+
+The metrics we are going to collect enter the picture after the traceroute has been run.
+Once a traceroute is visualized, users are able to hover over hosts in this traceroute that are being monitored by this Telegraf application (or similar applications that send metrics to GlobalNOC), and view a relevant historical network performance/traffic chart.
+
+Additionally, this viewing of historical network data for specific hosts is also useful in many other contexts.
+For example, it can be useful for reasoning about data transfer node performance and other troubleshooting in general.
+Overall, the Parallel Traceroute Visualization Project and others like it are able to use the data stored in the TSDS to create more informative tools for researchers and research institutions.
 
 
 ## Prerequisites
