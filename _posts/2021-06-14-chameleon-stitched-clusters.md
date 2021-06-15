@@ -12,6 +12,8 @@ tag: draft
 
 <!-- Intro: TO-DO -->
 
+<!--end_excerpt-->
+
 
 ## Requirements
 
