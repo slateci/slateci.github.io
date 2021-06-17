@@ -32,7 +32,10 @@ Additionally, you must have a SLATE account with an access token.
 
 Due to Chameleon limitations, a stitched network can only be created with the OpenStack CLI.
 Install the OpenStack/Chameleon Blazar client for creating leases.
-It can be downloaded with the following command: `pip install git+https://github.com/ChameleonCloud/python-blazarclient.git`.
+It can be downloaded with the following command:
+```bash
+pip install git+https://github.com/ChameleonCloud/python-blazarclient.git
+```
 It is important to be aware of different client versions, as Chameleon expects version `2.2.2` to be used.
 
 
@@ -78,8 +81,9 @@ Once the leases have instantiated correctly, a network will automatically be cre
 This can be verified on the online portal, using the "Networks" tab.
 
 Once both networks are up, a ticket will need to be submitted to the Chameleon help desk.
-The Chameleon documentation states:
-"After having stitchable isolated networks on UC and TACC sites, a request should be sent to the Help Desk for creation of AL2S circuits. In the request, following information should be specified: - Information for the network at UC (Project ID, name of the network, ID of the network) - Information for the network at TACC (Project ID, name of the network, ID of the network) - Duration of the circuit in active state."
+This ticket should request the creation of an AL2S circuit between the sites, and should specify the Project ID, network name, and network ID of each network.
+This information can be found by clicking on each network name.
+Additionally, the lifetime of the stitched network should also be specified.
 
 Submit a ticket containing this information, and wait for it to be approved.
 
@@ -132,7 +136,7 @@ Here, we will connect the router object we made to our custom network.
 Now, we need to launch two compute nodes, on the subnets that we already created.
 More detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
 
-### Launch Instances
+#### Launch Instances
 
 1. First, login to one of the Chameleon portals.
 1. Click the "Reservations" tab on the left side, and select the "Leases" menu underneath it.
@@ -218,11 +222,6 @@ iperf -c <node_1_internal_ip>
 After a little while, the test will complete, and you should see bandwidth results.
 
 
-### Testing with Nginx
-
-Host a SLATE Nginx application (without ingress controller) on both nodes, and access from opposing node over NodePort using curl.
-
-
 ### Testing with perfSONAR
 
 The `perfsonar-testpoint` application can be installed with its default values.
@@ -256,6 +255,8 @@ slate instance logs --max-lines 0 <perfsonar_checker_instance_id>
 
 Similar setups can be created on other testbeds as well.
 The testing methods outlined in the post will also work on other testbeds.
+Additionally, the SLATE Nginx application (without ingress controller) can be used to test.
+Host an Nginx instance on both nodes, and access each instance from the opposing node over NodePort using `curl`.
 
 CloudLab-to-CloudLab setups have been verified to work, as well as GENI-to-Chameleon@UC.
 
