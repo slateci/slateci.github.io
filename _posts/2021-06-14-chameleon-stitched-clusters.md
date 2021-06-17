@@ -90,6 +90,7 @@ Submit a ticket containing this information, and wait for it to be approved.
 
 Next, a router must be created to serve as a default gateway for our instances to access the rest of the internet.
 
+1. Login to one of the Chameleon portals.
 1. Navigate to the "Routers" section under the "Network" tab on the left sidebar.
 1. Then, on the right-hand side, click the "Create Router" button.
 1. Next, name this router. We like to use `slate-router`.
@@ -102,16 +103,13 @@ Next, a router must be created to serve as a default gateway for our instances t
 
 Next, we will create a subnet under our existing network.
 
+1. Login to one of the Chameleon portals.
 1. Navigate to the left sidebar and select "Network", then select "Networks" underneath this.
-1. Select the network that was already created for you.
-1. The only value that needs to be changed here is the "Network Address" parameter (no subnet name is needed).
-The exact network you choose is not important as long as it has space for all the hosts you will need, and at least one extra IP for the Nginx Ingress Controller.
-However, for ease in following this guide, we recommend using this subnet: `192.168.1.0/24`.
-1. Following this, click "Next" again. You will be brought to the "Subnet Details" section.
-1. Here, we will be changing the "Allocation Pools" values. This will restrict the number of IPs Chameleon is allowed to allocate, thus leaving some free for MetalLB.
-In the "Allocation Pools" box, enter `192.168.1.3,192.168.1.250`. This will leave four IPs reserved for MetalLB. 
-*Note that different values can be used here, but we recommend using these for this guide.*
-1. Click "Create".
+1. Locate the network that was already created for you, and click the drop down menu next to your network on the right side.
+1. From the drop down menu, select "Create Subnet".
+1. The only value that needs to be changed here is the "Network Address" parameter (no subnet name is needed). Use `192.168.1.0/24` for the network address.
+1. Following this, click "Next" again. You will be brought to the "Subnet Details" section. Leave this as-is, and click "Create".
+1. Repeat these steps on the other Chameleon site/portal.
 
 If you would like to learn more about networks in Chameleon, more information can be found in the [Chameleon documentation](https://chameleoncloud.readthedocs.io/en/latest/technical/networks.html).
 
@@ -120,29 +118,71 @@ If you would like to learn more about networks in Chameleon, more information ca
 
 Here, we will connect the router object we made to our custom network.
 
+1. Login to one of the Chameleon portals.
 1. Navigate back to the "Routers" section under the "Network" tab on the left sidebar.
 1. Click on the name of the router you created earlier (most likely called `slate-router`).
 1. Select the "Interfaces" tab, and then click "Add Interface"
 1. Under the "Subnet" drop-down menu, select the network that was created earlier.
 1. Leave everything else as-is, and click "Submit".
+1. Repeat these steps on the other Chameleon site/portal.
+
+
+### Instance Setup
+
+Now, we need to launch two compute nodes, on the subnets that we already created.
+More detailed instructions regarding creating instances and associating IP addresses can be found in the [Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
+
+### Launch Instances
+
+1. First, login to one of the Chameleon portals.
+1. Click the "Reservations" tab on the left side, and select the "Leases" menu underneath it.
+1. Click "Create Lease", and create a lease for as much time as you need. Any node type that can run CentOS 7 is acceptable.
+1. Next, navigate to the "Instances" page under the "Compute" menu on the left-hand side.
+1. Then, on the right side of the page, click the "Launch Instance" button.
+1. Under the "Details" tab, give this instance a name (we like `slate-instance`). Additionally, select the reservation that was previously created.
+1. Under the "Source" tab, select "Image" under the "Select Boot Source" drop-down menu. Then, select the `CC-CentOS7` image.
+1. Under the "Network" tab, make sure that the only network that is selected is our new network.
+1. Under the "Key Pair" tab, make sure you have configured the correct SSH keys. This is explained in more detail in [this documentation](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#getting-started).
+1. Click the "Launch Instance" button, and wait for the instance to spin up. This may take 5 to 10 minutes.
+1. Repeat these steps for the other site.
+
+
+#### Associate Public IP and Log In
+
+To access our instance, we need to NAT a floating public IP to our instance.
+1. First, login to one Chameleon portal.
+1. Next, go to the "Network" tab on the left and select "Floating IPs".
+1. Click the "Allocate IP to Project" button located on the right side.
+1. Leave the default settings and click "Allocate IP".
+1. Once an IP address has been allocated, click the "Associate" button to the right of the IP address.
+1. From the "Port to be Associated" menu, select the instance you created earlier.
+1. Click "Associate"
+1. Repeat for the other instance on the other Chameleon site.
+
+For more information regarding associating floating IP addresses, visit the [Chameleon Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
+
+To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
+This user should have password-less `sudo` access.
+
+
+#### Disable Firewall
+
+Before you go any further, make sure any firewalls are disabled, as they will impact cluster creation.
+On Chameleon, `ufw` is often running, even on CentOS.
+Disable it with `sudo ufw disable`.
 
 
 #### Assign Cluster Hostnames
 
 Our testing software, perfSONAR, requires a DNS name, not an IP address.
 To get around this, we are simply going to edit the `/etc/hosts` file on both of our clusters.
-Open this file on both machines, and append the following lines:
+Open this file on both nodes, and append the following lines:
 ```bash
 <node_1_internal_ip> cluster1.slateci.net
 <node_2_internal_ip> cluster2.slateci.net
 ```
-
-### Instance Setup
-
-Launch a Chameleon instance here.
-
-
-
+Note that the internal IP of each node can be found from each node's respective web portal.
+These IPs will be assigned from the `192.168.1.0/24` subnet that we created earlier.
 
 
 ## Testing
@@ -151,9 +191,11 @@ Launch a Chameleon instance here.
 
 First, use the ping command on each node to reach the other node.  
 
-From the first cluster:`ping cluster2.slateci.net`.
+From the first cluster, run: `ping cluster2.slateci.net`.
 
-From the second cluster: `ping cluster1.slateci.net`.
+From the second cluster, run: `ping cluster1.slateci.net`.
+
+If these ping commands succeed, we have successfully stitched the two Chameleon sites together!
 
 
 ### Testing with iPerf
@@ -174,6 +216,7 @@ Then, run the iPerf client on the second node and connect to the server on the f
 iperf -c <node_1_internal_ip>
 ```
 After a little while, the test will complete, and you should see bandwidth results.
+
 
 ### Testing with Nginx
 
