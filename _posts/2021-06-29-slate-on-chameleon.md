@@ -6,7 +6,6 @@ permalink: blog/slate-on-chameleon.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 Chameleon is an OpenStack-based research platform for provisioning compute and networking resources.
