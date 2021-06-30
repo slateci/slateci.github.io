@@ -5,8 +5,13 @@ layout: docs2020
 type: markdown
 ---
 
-<div id="minislate-content">
+Minislate is a self-contained SLATE cluster that runs locally on your computer. We use it as an application development tool because it allows running local helm charts and access to the underlying Kubernetes cluster via kubectl, which is unavailable in production. 
 
+To get started, clone or download the [Minislate repository](https://github.com/slateci/minislate) in Github: https://github.com/slateci/minislate
+
+
+<div id="minislate-content">
+    
 </div>
 
 <script src='{{home}}/js/showdown.min.js'></script>
