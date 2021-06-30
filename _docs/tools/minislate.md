@@ -9,6 +9,7 @@ Minislate is a self-contained SLATE cluster that runs locally on your computer. 
 
 To get started, clone or download the [Minislate repository](https://github.com/slateci/minislate) in Github: https://github.com/slateci/minislate
 
+<hr>
 
 <div id="minislate-content">
     
