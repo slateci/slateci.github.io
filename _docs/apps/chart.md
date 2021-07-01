@@ -77,7 +77,7 @@ Some notes about creating the Helm Chart and deciding on values:
 * Choose default values that are immediately functional for a general purpose.
 * Avoid using technical terminology of kubernetes or docker.
 
-SLATE Standardization:
+### SLATE Standardization
 * An `Instance` variable is required for SLATE to deploy unique instances of the application. This should be included in the metadata names using the helper function below in the _helpers.tpl file. If there is a resource associated with the deployment, it should be named as {% raw %} `{{ template "[chart].fullname" . }}-[resourceName]` {% endraw %}  
 {% raw %}
 ```
@@ -99,3 +99,29 @@ SLATE Standardization:
 instanceID: {{ .Values.SLATE.Instance.ID | quote  }}
 ```
 {% endraw %}
+
+### SLATE Metadata
+
+SLATE has the capability to automatically inject metadata into any chart it installs, if such information is needed.
+Any or all of the following values can be used in any SLATE chart:
+```yaml
+### SLATE-START ###
+SLATE:
+  Logging:
+    Enabled: "trueOrFalse"
+    Server: "server"
+      Name: "name"
+      Port: "port"
+  Cluster:
+    Name: "some-cluster"
+    DNSName: "some-cluster.slateci.net"
+  Instance:
+    ID: "instance-id"
+  Metadata:
+    Group: "group-name"
+    GroupEmail: "group-email"
+### SLATE-END ###
+```
+To use any of these, simply add them to your `values.yaml` file between the `### SLATE-START ###` and `### SLATE-END ###` tags.
+The values they are assigned can here can be arbitrary, as they will be overridden at application install time by the correct values.
+
