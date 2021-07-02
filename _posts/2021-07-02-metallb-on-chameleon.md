@@ -6,7 +6,6 @@ permalink: blog/metallb-on-chameleon.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 The Chameleon testbed is an OpenStack-based testbed for running a wide variety of experiments.
