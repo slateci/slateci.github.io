@@ -120,6 +120,7 @@ SLATE:
   Metadata:
     Group: "group-name"
     GroupEmail: "group-email"
+    ClusterName: "cluster-name"
 ### SLATE-END ###
 ```
 To use any of these, simply add them to your `values.yaml` file between the `### SLATE-START ###` and `### SLATE-END ###` tags.
