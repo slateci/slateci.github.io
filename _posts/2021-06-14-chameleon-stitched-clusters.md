@@ -140,7 +140,9 @@ More detailed instructions regarding creating instances and associating IP addre
 
 1. First, login to one of the Chameleon portals.
 1. Click the "Reservations" tab on the left side, and select the "Leases" menu underneath it.
-1. Click "Create Lease", and create a lease for as much time as you need. Any node type that can run CentOS 7 is acceptable.
+1. Click "Create Lease", and configure a lease for as much time as you need.
+1. In the lease-creation box, switch to the "Hosts" tab, and check the "Reserve Hosts" box. Additionally, set the minimum and maximum number of hosts to 1. As far as node type goes, anything that can run CentOS 7 is acceptable.
+1. Click through the remainder of the lease creation wizard, until a reservation is created.
 1. Next, navigate to the "Instances" page under the "Compute" menu on the left-hand side.
 1. Then, on the right side of the page, click the "Launch Instance" button.
 1. Under the "Details" tab, give this instance a name (we like `slate-instance`). Additionally, select the reservation that was previously created.
