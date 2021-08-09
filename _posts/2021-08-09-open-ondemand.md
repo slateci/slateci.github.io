@@ -9,8 +9,6 @@ type: markdown
 ---
 
 
-# Using SLATE to deploy Open OnDemand
-
 [Open OnDemand](https://openondemand.org/) is a web application enabling easy access to high-performance computing resources.
 Open OnDemand, through a plugin system, provides many different ways to interact with these resources.
 Most simply, OnDemand can launch a shell to remote resources in one's web browser.
@@ -357,5 +355,3 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`mountPoint` | Preferred path for mounting nfs shares. |`/ondemand/home`|
 |`nfs_shares` | A mapfile with shares to be mounted by autofs. |`* -nolock,hard,...`|
 |`testUsers` | Unprivileged users for testing login to OnDemand. |`test`|
-
-
