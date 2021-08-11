@@ -73,6 +73,8 @@ The time and date should be specified with the following format:
 "YYYY-MM-DD HH:MM"
 ```
 The time zone is UTC, and a 24-hour clock should be used.
+Additionally, the network lease command needs to have a start time later than the current time, and an end time no later than 7 days after the start time.
+Note that the networks we will create are only going to be active during the time the lease is active, so ensure you have allocated sufficient time.
 
 Repeat these steps for the other Chameleon site.
 Note that these networks or leases cannot be named the same thing.
@@ -80,10 +82,12 @@ Note that these networks or leases cannot be named the same thing.
 Once the leases have instantiated correctly, a network will automatically be created at each site.
 This can be verified on the online portal, using the "Networks" tab.
 
-Once both networks are up, a ticket will need to be submitted to the Chameleon help desk.
+Once both networks are up, a ticket will need to be submitted to the [Chameleon help desk](https://www.chameleoncloud.org/user/help/).
 This ticket should request the creation of an AL2S circuit between the sites, and should specify the Project ID, network name, and network ID of each network.
 This information can be found by clicking on each network name.
 Additionally, the lifetime of the stitched network should also be specified.
+Set this lifetime to be the same as the lifetime of your network leases.
+This circuit will enable our hosts at different physical sites to talk to each other as if they were on the same LAN.
 
 Submit a ticket containing this information, and wait for it to be approved.
 
@@ -141,13 +145,15 @@ More detailed instructions regarding creating instances and associating IP addre
 1. First, login to one of the Chameleon portals.
 1. Click the "Reservations" tab on the left side, and select the "Leases" menu underneath it.
 1. Click "Create Lease", and configure a lease for as much time as you need.
-1. In the lease-creation box, switch to the "Hosts" tab, and check the "Reserve Hosts" box. Additionally, set the minimum and maximum number of hosts to 1. As far as node type goes, anything that can run CentOS 7 is acceptable.
+1. In the lease-creation box, switch to the "Hosts" tab, and check the "Reserve Hosts" box.
+1. Set the minimum and maximum number of hosts to 1.
+1. Set the node type property to `compute_haswell` or `compute_skylake`.
 1. Click through the remainder of the lease creation wizard, until a reservation is created.
 1. Next, navigate to the "Instances" page under the "Compute" menu on the left-hand side.
 1. Then, on the right side of the page, click the "Launch Instance" button.
 1. Under the "Details" tab, give this instance a name (we like `slate-instance`). Additionally, select the reservation that was previously created.
 1. Under the "Source" tab, select "Image" under the "Select Boot Source" drop-down menu. Then, select the `CC-CentOS7` image.
-1. Under the "Network" tab, make sure that the only network that is selected is our new network.
+1. Under the "Networks" tab, make sure that the only network that is selected is our new network.
 1. Under the "Key Pair" tab, make sure you have configured the correct SSH keys. This is explained in more detail in [this documentation](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html#getting-started).
 1. Click the "Launch Instance" button, and wait for the instance to spin up. This may take 5 to 10 minutes.
 1. Repeat these steps for the other site.
@@ -168,6 +174,7 @@ To access our instance, we need to NAT a floating public IP to our instance.
 For more information regarding associating floating IP addresses, visit the [Chameleon Getting Started Guide](https://chameleoncloud.readthedocs.io/en/latest/getting-started/index.html).
 
 To login to any Chameleon node, log in as user `cc`, with `ssh cc@<PUBLIC_INSTANCE_IP>`.
+The public instance IP is the floating public IP that we assigned earlier.
 This user should have password-less `sudo` access.
 
 
@@ -187,7 +194,7 @@ Open this file on both nodes, and append the following lines:
 <node_1_internal_ip> cluster1.slateci.net
 <node_2_internal_ip> cluster2.slateci.net
 ```
-Note that the internal IP of each node can be found from each node's respective web portal.
+The internal IP of each node can be found from each node's respective web portal.
 These IPs will be assigned from the `192.168.1.0/24` subnet that we created earlier.
 
 
@@ -222,12 +229,14 @@ Then, run the iPerf client on the second node and connect to the server on the f
 iperf -c <node_1_internal_ip>
 ```
 After a little while, the test will complete, and you should see bandwidth results.
+If desired, you can run this test in reverse by swapping the locations of the client and server.
+Alternately, iPerf's `-r` or `-d` options can be used for running bi-directional tests.
 
 
 ### Testing with perfSONAR
 
 The `perfsonar-testpoint` application can be installed with its default values.
-Do this with the following command:
+Do this with the following command wherever you have the slate client available:
 ```bash
 slate app install perfsonar-testpoint --cluster <cluster_2> --group <your_group>
 ```
@@ -251,6 +260,7 @@ Then, give the application some time to run, and check the results with this com
 ```bash
 slate instance logs --max-lines 0 <perfsonar_checker_instance_id>
 ```
+More information about perfSONAR and the expected results can be found in the [PerfSONAR Checker Blog Post](https://slateci.io/blog/perfsonar-checker.html).
 
 
 ## Other Testbeds
