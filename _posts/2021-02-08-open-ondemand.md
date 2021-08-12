@@ -37,8 +37,6 @@ Contact your cluster administrator for more information about this.
 More information about `cert-manager` can be found [here](https://cert-manager.io/docs/installation/kubernetes/),
 and more information about persistent volume types can be found [here](https://kubernetes.io/docs/concepts/storage/storage-classes/).
 
-To enable more advanced features, NFS sharing and host-level trust must be permitted between front and backend resources.
-
 
 ## Configuration
 
@@ -111,175 +109,20 @@ Then, configure the LDAP and Kerberos sections according to your institution's s
 
 **Shell Access**
 
-To set up shell access to backend compute resources, edit the `clusters` section
-of the configuration file. Add a `cluster` element for each cluster you wish to
-connect to, and fill out the `name` and `host` sections. The cluster name should
-be whatever you want the OnDemand web portal to display that cluster as, and the
-`host` value should be the DNS name of that cluster.
-
-```yaml
-  - cluster:
-      name: "Notchpeak"
-      host: "notchpeak.chpc.utah.edu"
-      enableHostAdapter: false
-```
-
-**Resource Management**
-
 To configure shell access to backend resources, simply fill in the
 name and host sections for each cluster. If no other features are desired
-then set `enableHostAdapter` to false and skip the 'Advanced' section
-of this document.
-
-To set up remote desktop access, set the `enableHostAdapter` value to true,
-then configure the LinuxHost Adapter. This is a simplified resource manager
-built from various components such as TurboVNC, Singularity and tmux. By
-enabling resource management, you can set up more interactive apps and 
-easily manage remote sessions from the OnDemand portal.
-
-Be sure to install these components on the backend nodes if you wish to
-enable resource management. These components include TurboVNC 2.1+, Singularity,
-a centos7 singularity image, nmap-ncat, Websockify 0.8.0+, and a desktop of your
-choice [mate 1+ (default), xfce 4+, gnome 2]
+then set all `enableHostAdapter` fields to false; then skip the 'Advanced' 
+section of the values.yaml file.
 
 ```yaml
   - cluster:
-      name: "node1"
+      name: "Node1"
       host: "node1.example.net"
-      enableHostAdapter: true
-      job:
-        ssh_hosts: "node1.example.net"
-        site_timeout: 14400
-        singularity_bin: /bin/singularity
-        singularity_bindpath: /etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/home
-        singularity_image: /opt/centos7.sif  # Something like centos_7.6.sif
-        tmux_bin: /usr/bin/tmux
-      basic_script: 
-        - '#!/bin/bash'
-        - 'set -x'
-        - 'export XDG_RUNTIME_DIR=$(mktemp -d)'
-        - '%s'
-      vnc_script: 
-        - '#!/bin/bash'
-        - 'set -x'
-        - 'export PATH="/opt/TurboVNC/bin:$PATH"'
-        - 'export WEBSOCKIFY_CMD="/usr/bin/websockify"'
-        - 'export XDG_RUNTIME_DIR=$(mktemp -d)'
-        - '%s'
-      set_host: "$(hostname)"
-```
-
-To establish a remote desktop connection, ports 5800(+n) 5900(+n) and 6000(+n)
-need to be open on the backend for each display number n. In addition, port 22
-must be open for SSH and ports 20000+ must be open to receive websocket traffic.
-The easiest way to do this is to accept all traffic coming from the OnDemand
-host. To do this, simply add a new rule to iptables
-or a trusted firewalld zone.
-
-```bash
-sudo iptables -A INPUT -s xxx.xxx.xxx.xxx/32 -j ACCEPT
-sudo firewall-cmd --zone=trusted --add-source=xxx.xxx.xxx.xxx/32
-```
-
-## Interactive Apps and Remote Desktop (Advanced)
-
-### Authentication
-
-The LinuxHost Adapter requires passwordless SSH for all users which is 
-most easily configured by establishing host-level trust. To enable hostBased 
-Authentication, first go to each backend resources and add public host keys 
-from the OnDemand server to a file called `/etc/ssh/ssh_known_hosts` using 
-the`ssh-keyscan` command.
-
-```bash
-ssh-keyscan [IP_ADDR] >> /etc/ssh/ssh_known_hosts
-```
-
-Add an entry to `/etc/ssh/shosts.equiv` with the IP address of the
-OnDemand server. Then in the `/etc/ssh/sshd_config` file, change the
-following lines from:
-
-```bash
-#HostbasedAuthentication no
-#IgnoreRhosts yes
-```
-to
-```bash
-HostbasedAuthentication yes
-IgnoreRhosts no
-```
-
-Next, ensure that you have the correct permissions for host keys at `/etc/ssh`
-
-```bash
--rw-r-----.   1 root ssh_keys      227 Jan 1 2000      ssh_host_ecdsa_key
--rw-r--r--.   1 root root          162 Jan 1 2000      ssh_host_ecdsa_key.pub
--rw-r-----.   1 root ssh_keys      387 Jan 1 2000      ssh_host_ed25519_key
--rw-r--r--.   1 root root           82 Jan 1 2000      ssh_host_ed25519_key.pub
--rw-r-----.   1 root ssh_keys     1675 Jan 1 2000      ssh_host_rsa_key
--rw-r--r--.   1 root root          382 Jan 1 2000      ssh_host_rsa_key.pub
-```
-
-And for ssh-keysign at `/usr/libexec/openssh` &nbsp;&nbsp;&nbsp; 
-Note: location varies with distro
-
-```bash
----x--s--x.  1 root ssh_keys      5760 Jan 1 2000      ssh-keysign
-```
-
-Since pods are ephemeral, keys from the host system should be passed 
-into the container using a secret. This will ensure that trust is not broken
-when pods are replaced. This script will generate a secret containing host 
-keys on the OnDemand server.
-
-Note: must be consistent with the values.yaml file
-
-```bash
-#!/bin/bash
-echo -n "Please enter a name for your secret: "
-read secretName
-if [ "$secretName" != "" ]; then
-  :
-else
-  echo "Please enter a non-empty secret name"
-  exit
-fi
-command="kubectl create secret generic $secretName"
-for i in /etc/ssh/ssh_host_*; do
-  command=`echo "$command --from-file=$i"`
-done
-printf "$command\n"
-$command ; echo ""
-```
-
-### Filesystem Distribution
-
-Resource management for Open OnDemand also requires a distributed filesystem.
-
-To configure NFS set the `NFS` value to true and specify a mount point.
-Then make sure `nfs-utils` is installed and the `/etc/exports` file has an
-entry for localhost, and any backend clusters.
-
-```bash
-/uufs/chpc.utah.edu/common/home  127.0.0.1(rw,sync,no_subtree_check,root_squash)
-/uufs/chpc.utah.edu/common/home  192.168.1.1(rw,sync,no_subtree_check,root_squash)
-...
-```
-
-To configure autofs simply set the `autofs` value to true and then add any
-shares you would like in the `nfs_shares` field. Make sure that the backend
-clusters use the same shares and they are mounted using the same absolute path.
-
-### NodeSelector
-
-Finally, in order for these environmental changes to have effect, the chart must
-be installed on a properly configured node. On a multi-node system it is necessary
-to set a `nodeSelectorLabel` called disktype on a desired node. Then match
-that label in the `values.yaml` file. If all nodes are properly configured
-then you may skip this step.
-
-```bash
-kubectl label nodes <node-name> disktype=ssd
+      enableHostAdapter: false
+  - cluster:
+      name: "Node2"
+      host: "node2.example.net"
+      enableHostAdapter: false
 ```
 
 ## Installation
@@ -337,26 +180,7 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`kerberos.keyTab`| Kerberos configuration. |`/etc/krb5.keytab`|
 |`kerberos.kerberosPasswordAuth`| Use Kerberos for password authentication. |`true`|
 |`kerberos.debug`| Writes additional debug logs if enabled. |`true`|
-|`clusters.cluster.name`| Name of cluster to connect to. |`Kingspeak`|
-|`clusters.cluster.host`| Hostname of cluster to connect to. |`kingspeak.chpc.utah.edu`|
-|`desktopEnable` | Configure remote desktop functionality. |`true`|
-|`ssh_hosts` | Full hostname of the login node. |`kingspeak.chpc.utah.edu`|
-|`singularity_bin` | Location of singularity binary. |`/bin/singularity`|
-|`singularity_bindpath` | Directories accessible during VNC sessions. |`/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/home`|
-|`singularity_image` | Location of singularity image. |`/opt/centos7.sif`|
-|`tmux_bin` | Location of tmux binary. |`/usr/bin/tmux`|
-|`basic_script` | Basic desktop startup script. |`#!/bin/bash \ ... \ %s`|
-|`vnc_script` | VNC session startup script. |`#!/bin/bash \ ... \ %s`|
-|`set_host` | Hostname passed from the remote node back to OnDemand. |`$(hostname -A)`|
-|`host_regex` | Regular expression to capture hostnames. |`[\w.-]+\.(peaks\|arches\|int).chpc.utah.edu`|
+|`clusters.cluster.name`| Name of cluster to appear in the portal. |`Node1`|
+|`clusters.cluster.host`| Hostname of cluster to connect to. |`node1.example.net`|
 |`enableHostAdapter` | Enable resource management and interactive apps. |`true`|
-|`desktop` | Desktop environment (mate,xfce,gnome) |`mate`|
-|`node_selector_label` | Matching node label for a preferred node. |`ssd`|
-|`ssh_keys_GID` | Group ID value of ssh_keys group. |`993`|
-|`secret_name` | Name of secret holding host_keys. |`ssh-key-secret`|
-|`host_keys` | Names of stored keys. |`ssh_host_ecdsa_key`|
-|`autofs` | Mount home directories using autofs. |`true`|
-|`NFS` | Mount home directories with just NFS. |`false`|
-|`mountPoint` | Preferred path for mounting nfs shares. |`/ondemand/home`|
-|`nfs_shares` | A mapfile with shares to be mounted by autofs. |`* -nolock,hard,...`|
 |`testUsers` | Unprivileged users for testing login to OnDemand. |`test`|
