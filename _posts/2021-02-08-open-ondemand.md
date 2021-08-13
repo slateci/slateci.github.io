@@ -12,8 +12,6 @@ type: markdown
 [Open OnDemand](https://openondemand.org/) is a web application enabling easy access to high-performance computing resources.
 Open OnDemand, through a plugin system, provides many different ways to interact with these resources.
 Most simply, OnDemand can launch a shell to remote resources in one's web browser.
-Currently, SLATE only supports this functionality, but more applications are
-in development.
 Additionally, OnDemand can provide several ways of submitting batch jobs and launching interactive computing sessions.
 It is also able to serve as a portal to computationally expensive software running on remote HPC nodes.
 For example, users can launch remote Jupyter Notebooks or Matlab instances.
