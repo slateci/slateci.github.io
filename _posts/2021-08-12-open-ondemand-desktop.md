@@ -99,7 +99,7 @@ To enable resource management, you must install components of the
 [nmap-ncat](https://nmap.org/ncat), 
 [Websockify 0.8.0+](https://pypi.org/project/websockify/#description),
 a singularity centos7 image, and a desktop of your choice 
-[mate 1+ (default), xfce 4+, gnome 2].
+[mate 1+, xfce 4+, gnome 2].
 
 ```bash
 singularity pull docker://centos:7
