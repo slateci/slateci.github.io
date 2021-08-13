@@ -172,6 +172,7 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`ldap.rdnLDAPAttribute`| LDAP configuration. |`uid`|
 |`ldap.uuidLDAPAttribute`| LDAP configuration. |`uidNumber`|
 |`ldap.userObjectClasses`| LDAP configuration. |`inetOrgPerson, organizationalPerson`|
+|`ldap.ldapSearchBase`| LDAP configuration. |`dc=chpc,dc=utah,dc=edu`|
 |`ldap.usersDN`| LDAP configuration. |`ou=People,dc=chpc,dc=utah,dc=edu`|
 |`kerberos.realm`| Kerberos realm to connect to. |`AD.UTAH.EDU`|
 |`kerberos.serverPrincipal`| Kerberos server principal. |`HTTP/utah-dev.chpc.utah.edu@AD.UTAH.EDU`|
@@ -180,5 +181,5 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`kerberos.debug`| Writes additional debug logs if enabled. |`true`|
 |`clusters.cluster.name`| Name of cluster to appear in the portal. |`Node1`|
 |`clusters.cluster.host`| Hostname of cluster to connect to. |`node1.example.net`|
-|`enableHostAdapter` | Enable resource management and interactive apps. |`true`|
+|`enableHostAdapter` | Enable resource management and interactive apps. |`false`|
 |`testUsers` | Unprivileged users for testing login to OnDemand. |`test`|

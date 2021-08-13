@@ -93,7 +93,7 @@ additional definition for each cluster you'd like to connect to.
 
 ### Backend Configuration
 
-To enable resource management, you must install these components of the 
+To enable resource management, you must install components of the 
 `LinuxHost Adapter` on each backend cluster. These include 
 [TurboVNC 2.1+](https://www.turbovnc.org/), [Singularity](https://sylabs.io/),
 [nmap-ncat](https://nmap.org/ncat), 
@@ -101,12 +101,14 @@ To enable resource management, you must install these components of the
 a singularity centos7 image, and a desktop of your choice 
 [mate 1+ (default), xfce 4+, gnome 2].
 
+```bash
+
+```
+
 To establish a remote desktop connection, ports 5800(+n) 5900(+n) and 6000(+n)
-need to be open for each display number n. In addition, port 22
-must be open for SSH and ports 20000+ must be open to receive websocket traffic.
-The easiest way to do this is to accept all traffic coming from the OnDemand
-host. To do this, simply add a new rule to iptables
-or a trusted firewalld zone.
+need to be open for each display number n. As well as, port 22 for ssh
+and ports 20000+ for websocket connections. To do this simply, add a 
+global rule to iptables or a trusted firewalld zone.
 
 ```bash
 sudo iptables -A INPUT -s xxx.xxx.xxx.xxx/32 -j ACCEPT
@@ -157,12 +159,12 @@ Note: location varies with distro
 ---x--s--x.  1 root ssh_keys      5760 Jan 1 2000      ssh-keysign
 ```
 
+### Secret Generation
+
 Since pods are ephemeral, keys from the host system should be passed 
 into the container using a secret. This will ensure that trust is not broken
-when pods are replaced. This script will generate a secret containing host 
+when pods are replaced. This script generates a secret containing host 
 keys on the OnDemand server.
-
-Note: must be consistent with the values.yaml file
 
 ```bash
 #!/bin/bash
@@ -207,10 +209,9 @@ clusters use the same shares and they are mounted using the same absolute path.
 
 ### NodeSelector
 
-Finally, in order for these environmental changes to have effect, the chart must
-be installed on a properly configured node. On a multi-node system it is necessary
-to set a `nodeSelectorLabel` called disktype on a desired node. Then match
-that label in the `values.yaml` file. If all nodes are properly configured for
+Finally, the chart must be installed on a properly configured node. On a multi-node
+cluster it is necessary to set a `nodeSelectorLabel` called disktype on a desired node. 
+Then match that label in the `values.yaml` file. If all nodes are properly configured
 this application then you may leave this field blank.
 
 ```bash
@@ -266,6 +267,7 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`ldap.rdnLDAPAttribute`| LDAP configuration. |`uid`|
 |`ldap.uuidLDAPAttribute`| LDAP configuration. |`uidNumber`|
 |`ldap.userObjectClasses`| LDAP configuration. |`inetOrgPerson, organizationalPerson`|
+|`ldap.ldapSearchBase`| LDAP configuration. |`dc=chpc,dc=utah,dc=edu`|
 |`ldap.usersDN`| LDAP configuration. |`ou=People,dc=chpc,dc=utah,dc=edu`|
 |`kerberos.realm`| Kerberos realm to connect to. |`AD.UTAH.EDU`|
 |`kerberos.serverPrincipal`| Kerberos server principal. |`HTTP/utah-dev.chpc.utah.edu@AD.UTAH.EDU`|
@@ -274,7 +276,7 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`kerberos.debug`| Writes additional debug logs if enabled. |`true`|
 |`clusters.cluster.name`| Name of cluster to appear in the portal. |`Node1`|
 |`clusters.cluster.host`| Hostname of cluster to connect to. |`node1.example.net`|
-|`desktopEnable` | Configure remote desktop functionality. |`true`|
+|`enableHostAdapter` | Configure remote desktop functionality. |`true`|
 |`ssh_hosts` | Full hostname of the login node. |`kingspeak.chpc.utah.edu`|
 |`singularity_bin` | Location of singularity binary. |`/bin/singularity`|
 |`singularity_bindpath` | Directories accessible during VNC sessions. |`/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/home`|
