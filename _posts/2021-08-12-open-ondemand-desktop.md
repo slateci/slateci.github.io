@@ -166,7 +166,7 @@ into the container using a secret. This will ensure trust is not broken
 when pods are replaced. This script will generate a secret containing host 
 keys on the OnDemand server.
 
-```bash
+```zsh
 #!/bin/bash
 echo -n "Please enter a name for your secret: "
 read secretName
