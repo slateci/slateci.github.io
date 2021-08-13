@@ -210,12 +210,12 @@ clusters use the same shares and they are mounted using the same absolute path.
 ### NodeSelector
 
 Finally, the chart must be installed on a properly configured node. On a multi-node
-cluster it is necessary to set a `nodeSelectorLabel` called disktype on a desired node. 
-Then match that label in the `values.yaml` file. If all nodes are properly configured
-this application then you may leave this field blank.
+cluster it is necessary to set a `nodeSelectorLabel` called 'application' on a desired 
+node. Then match that label in the `values.yaml` file. If all nodes are properly configured
+then you may leave this field blank.
 
 ```bash
-kubectl label nodes <node-name> disktype=ssd
+kubectl label nodes <node-name> application=ood
 ```
 
 ## Installation
