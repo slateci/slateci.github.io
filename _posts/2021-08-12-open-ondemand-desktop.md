@@ -1,5 +1,5 @@
 ---
-title: "Using SLATE to Implement Remote Desktop in Open OnDemand"
+title: "Using SLATE to Enable Remote Desktop in Open OnDemand"
 overview: A guide to using SLATE to run an Open OnDemand instance.
 published: true
 permalink: blog/slate-open-ondemand-desktop.html
@@ -25,15 +25,14 @@ any desired backend compute resources.
 
 ## Prerequisites
 
-This tutorial requires that you have completed the basic deployment tutorial [here](https://slateci.io/blog/slate-open-ondemand.html),
-and that you are able to create an instance of Open OnDemand using SLATE and log in using the web portal.
+This tutorial requires that you can install a basic OnDemand instance using SLATE as described [here](https://slateci.io/blog/slate-open-ondemand.html).
 
 It is assumed that you already have access to a SLATE-registered Kubernetes
 cluster, and that you have installed and configured the SLATE command
 line interface.  If not, instructions can be found at 
 [SLATE Quickstart](https://slateci.io/docs/quickstart/).  
 
-The remote desktop application requires that NFS, hostbased authentication, and autofs (optional) can be implemented
+The remote desktop application requires that hostBased authentication and NFS/autofs can be implemented
 on the cluster you are installing on.
 More information about hostbased authentication can be found [here](https://arc.liv.ac.uk/SGE/howto/hostbased-ssh.html).
 Information on NFS and autofs can be found [here](https://linux.die.net/man/5/nfs) and [here](https://linux.die.net/man/5/autofs).
@@ -59,10 +58,8 @@ instructions below.
 
 To set up remote desktop access, set the `enableHostAdapter` value to true,
 then configure the `LinuxHost Adapter`. This is a simplified resource manager
-built from various components such as TurboVNC, Singularity and tmux. By
-enabling resource management, you can set up more interactive apps and 
-easily manage remote sessions from the OnDemand portal. Be sure to create an 
-additional definition for each cluster you'd like to connect to.
+built from various component softwares. By enabling resource management, you 
+can set up interactive apps and manage sessions remotely.
 
 ```yaml
   - cluster:
@@ -89,6 +86,9 @@ additional definition for each cluster you'd like to connect to.
         - 'export XDG_RUNTIME_DIR=$(mktemp -d)'
         - '%s'
       set_host: "$(hostname)"
+  - cluster:
+      name: "Node2"
+      ...
 ```
 
 ### Backend Configuration
@@ -98,7 +98,7 @@ To enable resource management, you must install components of the
 [TurboVNC 2.1+](https://www.turbovnc.org/), [Singularity](https://sylabs.io/),
 [nmap-ncat](https://nmap.org/ncat), 
 [Websockify 0.8.0+](https://pypi.org/project/websockify/#description),
-a singularity centos7 image, and a desktop of your choice 
+a singularity CentOS 7 image, and a desktop of your choice 
 [mate 1+, xfce 4+, gnome 2].
 
 ```bash
@@ -117,18 +117,18 @@ sudo firewall-cmd --zone=trusted --add-source=xxx.xxx.xxx.xxx/32
 
 ### Authentication
 
-The LinuxHost Adapter requires passwordless SSH for all users which is 
-most easily configured by establishing host-level trust. To enable hostbased 
-authentication, first go to each backend resources and add public host keys 
-from the OnDemand server to a file called `/etc/ssh/ssh_known_hosts` using 
-the`ssh-keyscan` command.
+The LinuxHost Adapter requires passwordless SSH for all users. This is 
+most easily configured by establishing host-level trust (hostbased authentication). 
+First go to each backend cluster and add public host keys from the OnDemand 
+server to a file called `/etc/ssh/ssh_known_hosts` using the`ssh-keyscan`.
+For more detailed information, see the links in [Prerequisites](##Prerequisites).
 
 ```bash
 ssh-keyscan [IP_ADDR] >> /etc/ssh/ssh_known_hosts
 ```
 
 Add an entry to `/etc/ssh/shosts.equiv` with the IP address of the
-OnDemand server. Then in the `/etc/ssh/sshd_config` file, change the
+OnDemand server. Then, in the `/etc/ssh/sshd_config` file, change the
 following lines from:
 
 ```bash
@@ -141,7 +141,7 @@ HostbasedAuthentication yes
 IgnoreRhosts no
 ```
 
-Next, ensure that you have the correct permissions for host keys at `/etc/ssh`
+Now ensure that you have the correct permissions for host keys at `/etc/ssh`
 
 ```bash
 -rw-r-----.   1 root ssh_keys      227 Jan 1 2000      ssh_host_ecdsa_key
@@ -161,9 +161,9 @@ Note: location varies with distro
 
 ### Secret Generation
 
-Since pods are ephemeral, keys from the host system should be passed 
-into the container using a secret. This will ensure that trust is not broken
-when pods are replaced. This script generates a secret containing host 
+Pods are ephermeral, so keys from the host system should be passed 
+into the container using a secret. This will ensure trust is not broken
+when pods are replaced. This script will generate a secret containing host 
 keys on the OnDemand server.
 
 ```bash
@@ -184,18 +184,19 @@ printf "$command\n"
 $command ; echo ""
 ```
 
-To secure your secrets when not in use or in the event of a system intrusion, 
-you can also install a secret management provider such as 
+To secure your secrets when not in use or in the event of intrusion, 
+you can install a secret management provider such as 
 [Vault](https://www.vaultproject.io/docs/platform/k8s/helm) or 
 [CyberArk](https://docs.cyberark.com/Product-Doc/OnlineHelp/AAM-DAP/11.2/en/Content/Integrations/Kubernetes_deployApplicationsConjur-k8s-Secrets.htm).
 
 ### Filesystem Distribution
 
-Resource management for Open OnDemand also requires a distributed filesystem.
+Resource management for OnDemand also requires a distributed filesystem. This chart
+supports NFS and autofs.
 
-To configure NFS set the `NFS` value to true and specify a mount point.
+To configure NFS alone, set the `NFS` value to true and specify a mount point.
 Then make sure `nfs-utils` is installed and the `/etc/exports` file has an
-entry for localhost, and any backend clusters.
+entry for localhost, and backend clusters.
 
 ```bash
 /uufs/chpc.utah.edu/common/home  127.0.0.1(rw,sync,no_subtree_check,root_squash)
@@ -203,9 +204,9 @@ entry for localhost, and any backend clusters.
 ...
 ```
 
-To configure autofs simply set the `autofs` value to true and then add any
-shares you would like in the `nfs_shares` field. Make sure that the backend
-clusters use the same shares and they are mounted using the same absolute path.
+To configure autofs set the `autofs` value to true and fill out the `nfs_shares` 
+field. Make sure that backend clusters use the same shares and are mounted using
+the same path.
 
 ### NodeSelector
 
