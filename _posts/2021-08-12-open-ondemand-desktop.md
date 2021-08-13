@@ -102,7 +102,7 @@ a singularity centos7 image, and a desktop of your choice
 [mate 1+ (default), xfce 4+, gnome 2].
 
 ```bash
-
+singularity pull docker://centos:7
 ```
 
 To establish a remote desktop connection, ports 5800(+n) 5900(+n) and 6000(+n)
