@@ -277,24 +277,24 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`kerberos.debug`| Writes additional debug logs if enabled. |`true`|
 |`clusters.cluster.name`| Name of cluster to appear in the portal. |`Node1`|
 |`clusters.cluster.host`| Hostname of cluster to connect to. |`node1.example.net`|
-|`enableHostAdapter` | Configure remote desktop functionality. |`true`|
-|`ssh_hosts` | Full hostname of the login node. |`kingspeak.chpc.utah.edu`|
-|`singularity_bin` | Location of singularity binary. |`/bin/singularity`|
-|`singularity_bindpath` | Directories accessible during VNC sessions. |`/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/home`|
-|`singularity_image` | Location of singularity image. |`/opt/centos7.sif`|
-|`tmux_bin` | Location of tmux binary. |`/usr/bin/tmux`|
-|`basic_script` | Basic desktop startup script. |`#!/bin/bash \ ... \ %s`|
-|`vnc_script` | VNC session startup script. |`#!/bin/bash \ ... \ %s`|
-|`set_host` | Hostname passed from the remote node back to OnDemand. |`$(hostname -A)`|
+|`clusters.cluster.enableHostAdapter` | Configure remote desktop functionality. |`true`|
+|`clusters.cluster.job.ssh_hosts` | Full hostname of the login node. |`kingspeak.chpc.utah.edu`|
+|`clusters.cluster.job.singularity_bin` | Location of singularity binary. |`/bin/singularity`|
+|`clusters.cluster.job.singularity_bindpath` | Directories accessible during VNC sessions. |`/etc,/media,/mnt,/opt,/run,/srv,/usr,/var,/home`|
+|`clusters.cluster.job.singularity_image` | Location of singularity image. |`/opt/centos7.sif`|
+|`clusters.cluster.job.tmux_bin` | Location of tmux binary. |`/usr/bin/tmux`|
+|`clusters.cluster.basic_script` | Basic desktop startup script. |`#!/bin/bash \ ... \ %s`|
+|`clusters.cluster.vnc_script` | VNC session startup script. |`#!/bin/bash \ ... \ %s`|
+|`clusters.cluster.set_host` | Hostname passed from the remote node back to OnDemand. |`$(hostname -A)`|
 |`host_regex` | Regular expression to capture hostnames. |`[\w.-]+\.(peaks\|arches\|int).chpc.utah.edu`|
 |`enableHostAdapter` | Enable resource management and interactive apps. |`true`|
-|`desktop` | Desktop environment (mate,xfce,gnome) |`mate`|
-|`node_selector_label` | Matching node label for a preferred node. |`ssd`|
-|`ssh_keys_GID` | Group ID value of ssh_keys group. |`993`|
-|`secret_name` | Name of secret holding host_keys. |`ssh-key-secret`|
-|`host_keys` | Names of stored keys. |`ssh_host_ecdsa_key`|
-|`autofs` | Mount home directories using autofs. |`true`|
-|`NFS` | Mount home directories with just NFS. |`false`|
-|`mountPoint` | Preferred path for mounting nfs shares. |`/ondemand/home`|
-|`nfs_shares` | A mapfile with shares to be mounted by autofs. |`* -nolock,hard,...`|
+|`advanced.desktop` | Desktop environment (mate,xfce,gnome) |`mate`|
+|`advanced.node_selector_label` | Matching node label for a preferred node. |`ssd`|
+|`advanced.ssh_keys_GID` | Group ID value of ssh_keys group. |`993`|
+|`advanced.secret_name` | Name of secret holding host_keys. |`ssh-key-secret`|
+|`advanced.host_keys` | Names of stored keys. |`ssh_host_ecdsa_key`|
+|`advanced.autofs` | Mount home directories using autofs. |`true`|
+|`advanced.NFS` | Mount home directories with just NFS. |`false`|
+|`advanced.fliesharing.mountPoint` | Preferred path for mounting nfs shares. |`/ondemand/home`|
+|`advanced.filesharing.nfs_shares` | A mapfile with shares to be mounted by autofs. |`* -nolock,hard,...`|
 |`testUsers` | Unprivileged users for testing login to OnDemand. |`test`|
