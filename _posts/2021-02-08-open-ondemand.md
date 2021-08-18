@@ -163,7 +163,6 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |-------------------------------|---------------------------------|-----------------------------|
 |`Instance`| String to differentiate SLATE experiment instances. |`global`|
 |`replicaCount`| The number of replicas to create. |`1`|
-|`setupKeycloak`| Runs Keycloak setup script if enabled. |`true`|
 |`volume.storageClass`| The volume provisioner from which to request the Keycloak backing volume. |`local-path`|
 |`volume.size`| The amount of storage to request for the volume. |`50M`|
 |`setupLDAP`| Set up LDAP automatically based on following values. |`true`|
