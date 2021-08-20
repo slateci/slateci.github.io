@@ -32,11 +32,13 @@ cluster, and that you have installed and configured the SLATE command
 line interface.  If not, instructions can be found at 
 [SLATE Quickstart](https://slateci.io/docs/quickstart/).  
 
-The remote desktop application requires that hostBased authentication and NFS/autofs can be implemented
+The remote desktop application requires that NFS/autofs can be implemented
 on the cluster you are installing on.
-More information about hostbased authentication can be found [here](https://arc.liv.ac.uk/SGE/howto/hostbased-ssh.html).
 Information on NFS and autofs can be found [here](https://linux.die.net/man/5/nfs) and [here](https://linux.die.net/man/5/autofs).
 
+On backend resources, it is required you can install NFS/autofs, enable hostbased authentication, and can connect
+to an organizational LDAP. 
+More information about hostbased authentication can be found [here](https://arc.liv.ac.uk/SGE/howto/hostbased-ssh.html).
 
 ## Configuration
 
@@ -91,72 +93,35 @@ can set up interactive apps and manage sessions remotely.
       ...
 ```
 
-### Backend Configuration
+Ensure that the `host_regex` field captures all of the provided hostnames
 
-To enable resource management, you must install components of the 
-`LinuxHost Adapter` on each backend cluster. These include 
-[TurboVNC 2.1+](https://www.turbovnc.org/), [Singularity](https://sylabs.io/),
-[nmap-ncat](https://nmap.org/ncat), 
-[Websockify 0.8.0+](https://pypi.org/project/websockify/#description),
-a singularity CentOS 7 image, and a desktop of your choice 
-[mate 1+, xfce 4+, gnome 2].
-
-```bash
-singularity pull docker://centos:7
+```yaml
+host_regex: '[\w.-]+\.(node1|node2|example.net|example.edu)'
 ```
 
-To establish a remote desktop connection, ports 5800(+n) 5900(+n) and 6000(+n)
-need to be open for each display number n. As well as, port 22 for ssh
-and ports 20000+ for websocket connections. To do this simply, add a 
-global rule to iptables or a trusted firewalld zone.
+### Advanced
 
-```bash
-sudo iptables -A INPUT -s xxx.xxx.xxx.xxx/32 -j ACCEPT
-sudo firewall-cmd --zone=trusted --add-source=xxx.xxx.xxx.xxx/32
+Here you must also set `enableHostAdapter` equal to `true` and fill in the following entries
+
+```yaml
+enableHostAdapter: true           # Enable linuxHost Adapter
+advanced:
+  desktop: "mate"                 # Desktop of your choice (mate, xfce, or gnome)
+  node_selector_label: "ood"      # Matching node_selector_label (See next step)
+  ssh_keys_GID: 993               # ssh_keys groupID
 ```
 
-### Authentication
+to find the groupID of your ssh_keys group, simply run `cat /etc/group | grep ssh_keys`.
 
-The LinuxHost Adapter requires passwordless SSH for all users. This is 
-most easily configured by establishing host-level trust (hostbased authentication). 
-First go to each backend cluster and add public host keys from the OnDemand 
-server to a file called `/etc/ssh/ssh_known_hosts` using the`ssh-keyscan`.
-For more detailed information, see the links in [Prerequisites](##Prerequisites).
+### NodeSelector
 
-```bash
-ssh-keyscan [IP_ADDR] >> /etc/ssh/ssh_known_hosts
-```
-
-Add an entry to `/etc/ssh/shosts.equiv` with the IP address of the
-OnDemand server. Then, in the `/etc/ssh/sshd_config` file, change the
-following lines from:
+The chart must be installed on a properly configured node. On a multi-node
+cluster it is necessary to set a `nodeSelectorLabel` called 'application' on a desired 
+node. Then match that label in the `values.yaml` file. If all nodes are properly configured
+then you may leave this field blank.
 
 ```bash
-#HostbasedAuthentication no
-#IgnoreRhosts yes
-```
-to
-```bash
-HostbasedAuthentication yes
-IgnoreRhosts no
-```
-
-Now ensure that you have the correct permissions for host keys at `/etc/ssh`
-
-```bash
--rw-r-----.   1 root ssh_keys      227 Jan 1 2000      ssh_host_ecdsa_key
--rw-r--r--.   1 root root          162 Jan 1 2000      ssh_host_ecdsa_key.pub
--rw-r-----.   1 root ssh_keys      387 Jan 1 2000      ssh_host_ed25519_key
--rw-r--r--.   1 root root           82 Jan 1 2000      ssh_host_ed25519_key.pub
--rw-r-----.   1 root ssh_keys     1675 Jan 1 2000      ssh_host_rsa_key
--rw-r--r--.   1 root root          382 Jan 1 2000      ssh_host_rsa_key.pub
-```
-
-And for ssh-keysign at `/usr/libexec/openssh` &nbsp;&nbsp;&nbsp; 
-Note: location varies with distro
-
-```bash
----x--s--x.  1 root ssh_keys      5760 Jan 1 2000      ssh-keysign
+kubectl label nodes <node-name> application=ood
 ```
 
 ### Secret Generation
@@ -184,39 +149,152 @@ printf "$command\n"
 $command ; echo ""
 ```
 
+In the slate configuration file, ensure that the `secret_name` field and `host_key` 
+names match the secret you generate. If you're not sure what your host_key names are, 
+run `ls /etc/ssh`.
+
+```yaml
+  secret_name: "ssh-key-secret"
+  host_keys:
+    - host_key:
+        name: "ssh_host_ecdsa_key"
+    - host_key:
+        name: "ssh_host_ecdsa_key.pub"
+    - ...
+```
+
 To secure your secrets when not in use or in the event of intrusion, 
 you can install a secret management provider such as 
 [Vault](https://www.vaultproject.io/docs/platform/k8s/helm) or 
 [CyberArk](https://docs.cyberark.com/Product-Doc/OnlineHelp/AAM-DAP/11.2/en/Content/Integrations/Kubernetes_deployApplicationsConjur-k8s-Secrets.htm).
 
-### Filesystem Distribution
+### Filesystem_Distribution
 
 Resource management for OnDemand also requires a distributed filesystem. This chart
-supports NFS and autofs.
+supports NFS and autofs. In the configuration file, set either `NFS` or `autofs` to
+true and the other to false. Then list your NFS shares to be mounted.
 
-To configure NFS alone, set the `NFS` value to true and specify a mount point.
-Then make sure `nfs-utils` is installed and the `/etc/exports` file has an
-entry for localhost, and backend clusters.
+```yaml
+  autofs: true
+  nfs: false
+  fileSharing:
+    mountPoint: "/example/home"
+    nfs_shares:
+      - 'slate1   -rw   slate.example.net:/export/mdist/slate1'
+      - 'slate2   -rw   slate.example.net:/export/mdist/slate2'
+      - '...'
+```
+
+## Backend Configuration
+
+Now that Open OnDemand is ready to be deployed using `slate app install`, we should access each
+of our backend clusters and ensure that they are ready to establish a connection.
+
+### Resource Management
+
+To enable resource management, you must install components of the 
+`LinuxHost Adapter` on each backend cluster. These include 
+[TurboVNC 2.1+](https://www.turbovnc.org/), [Singularity](https://sylabs.io/),
+[nmap-ncat](https://nmap.org/ncat), 
+[Websockify 0.8.0+](https://pypi.org/project/websockify/#description),
+a [singularity image](https://sylabs.io/guides/3.5/user-guide/quick_start.html#download-pre-built-images),
+and a desktop of your choice 
+([mate 1+](https://mate-desktop.org/), [xfce 4+](https://www.xfce.org/), 
+[gnome 2](https://www.gnome.org/)).
 
 ```bash
-/uufs/chpc.utah.edu/common/home  127.0.0.1(rw,sync,no_subtree_check,root_squash)
-/uufs/chpc.utah.edu/common/home  192.168.1.1(rw,sync,no_subtree_check,root_squash)
+singularity pull docker://centos:7
+```
+
+To establish a remote desktop connection, ports 5800(+n) 5900(+n) and 6000(+n)
+need to be open for each display number n. As well as, port 22 for ssh
+and ports 20000+ for websocket connections. To do this simply, add a 
+global rule to iptables or a trusted firewalld zone.
+
+```bash
+sudo iptables -A INPUT -s xxx.xxx.xxx.xxx/32 -j ACCEPT
+sudo firewall-cmd --zone=trusted --add-source=xxx.xxx.xxx.xxx/32
+```
+
+### Filesystem Distribution
+
+Filesystem Distribution must also be configured on the backend clusters, so that user data
+is persistent between the OnDemand server and backend resources.
+
+**NFS**
+
+To configure NFS alone, first ensure that `nfs-utils` is installed, and then run the `mount`
+command using the OnDemand host public IP address.
+
+```bash
+mount -t nfs [ONDEMAND_HOST_PUBLIC_IP]:/example/home
+```
+
+**autofs**
+
+To configure autofs install `nfs-utils` and `autofs`. Then configure the `auto.master` file to
+mount NFS shares from an `auto.map` file. This map file should have consistent shares and mount points
+with entries in the slate app configuration described [above](###Filesystem_Distribution). When everything
+is set up, run `systemctl start nfs autofs`
+
+```bash
+slate1   -rw   slate.example.net:/export/mdist/slate1
+slate2   -rw   slate.example.net:/export/mdist/slate2
 ...
 ```
 
-To configure autofs set the `autofs` value to true and fill out the `nfs_shares` 
-field. Make sure that backend clusters use the same shares and are mounted using
-the same path.
+### Authentication
 
-### NodeSelector
+The LinuxHost Adapter requires passwordless SSH for all users, which is most easily
+configured by establishing host-level trust (hostBasedAuthentication). 
 
-Finally, the chart must be installed on a properly configured node. On a multi-node
-cluster it is necessary to set a `nodeSelectorLabel` called 'application' on a desired 
-node. Then match that label in the `values.yaml` file. If all nodes are properly configured
-then you may leave this field blank.
+To do this, run the `ssh-keyscan` command below using the public IP address of the 
+OnDemand host. This will automatically populate an `ssh_known_hosts` file with public
+host keys.
+
+For more detailed information, see the links in [Prerequisites](##Prerequisites).
 
 ```bash
-kubectl label nodes <node-name> application=ood
+ssh-keyscan [ONDEMAND_HOST_PUBLIC_IP] >> /etc/ssh/ssh_known_hosts
+```
+
+Next, add an entry to `/etc/ssh/shosts.equiv` with the IP address of the
+OnDemand server like so
+
+```bash
+node1.example.net
+node2.example.net
+...
+```
+
+And in the `/etc/ssh/sshd_config` file, change the following entries from
+
+```bash
+#HostbasedAuthentication no
+#IgnoreRhosts yes
+```
+to
+```bash
+HostbasedAuthentication yes
+IgnoreRhosts no
+```
+
+Finally, ensure that you have the correct permissions for host keys at `/etc/ssh`
+
+```bash
+-rw-r-----.   1 root ssh_keys      227 Jan 1 2000      ssh_host_ecdsa_key
+-rw-r--r--.   1 root root          162 Jan 1 2000      ssh_host_ecdsa_key.pub
+-rw-r-----.   1 root ssh_keys      387 Jan 1 2000      ssh_host_ed25519_key
+-rw-r--r--.   1 root root           82 Jan 1 2000      ssh_host_ed25519_key.pub
+-rw-r-----.   1 root ssh_keys     1675 Jan 1 2000      ssh_host_rsa_key
+-rw-r--r--.   1 root root          382 Jan 1 2000      ssh_host_rsa_key.pub
+```
+
+And for ssh-keysign at `/usr/libexec/openssh` &nbsp;&nbsp;&nbsp; 
+Note: location varies with distro
+
+```bash
+---x--s--x.  1 root ssh_keys      5760 Jan 1 2000      ssh-keysign
 ```
 
 ## Installation
@@ -248,6 +326,8 @@ section for each user you would like to add:
 ```yaml
 - user:
     name: <username_here>
+    group: <test_group>
+    groupID: <1000+n>
     tempPassword: <temporary_password_here>
 ```
 
