@@ -34,7 +34,8 @@ line interface.  If not, instructions can be found at
 
 The remote desktop application requires that NFS/autofs can be implemented
 on the cluster you are installing on.
-Information on NFS and autofs can be found [here](https://linux.die.net/man/5/nfs) and [here](https://linux.die.net/man/5/autofs).
+The official linux man pages can provide more information on both
+[NFS](https://linux.die.net/man/5/nfs) and [autofs](https://linux.die.net/man/5/autofs).
 
 On backend resources, it is required you can install NFS/autofs, enable hostbased authentication, and can connect
 to an organizational LDAP. 
