@@ -59,10 +59,18 @@ instructions below.
 
 ### Cluster_Definitions
 
-To set up remote desktop access, set the `enableHostAdapter` value to true,
-then configure the `LinuxHost Adapter`. This is a simplified resource manager
-built from various component softwares. By enabling resource management, you 
-can *set up interactive apps and manage sessions remotely.
+To set up remote desktop access, we must configure the `LinuxHost Adapter`. 
+This is a simplified resource manager built from various component softwares. 
+By enabling resource management, you can configure interactive apps and 
+manage sessions remotely.
+
+To do this set `enableHostAdapter` to true and fill in each cluster definition
+file. If you're not sure what a field should be, leave it as default for now. Most
+failures in connecting to backend resources are due to errors with these definition
+files.
+
+After creating an entry for each backend resource you'd like to connect to,
+ensure that the `host_regex` field below captures all of the provided hostnames.
 
 ```yaml
   - cluster:
@@ -93,8 +101,6 @@ can *set up interactive apps and manage sessions remotely.
       name: "Node2"
       ...
 ```
-
-* Ensure that the `host_regex` field captures all of the provided hostnames
 
 ```yaml
 host_regex: '[\w.-]+\.(node1|node2|example.net|example.edu)'
