@@ -34,7 +34,8 @@ line interface.  If not, instructions can be found at
 
 The remote desktop application requires that NFS/autofs can be implemented
 on the cluster you are installing on.
-Information on NFS and autofs can be found [here](https://linux.die.net/man/5/nfs) and [here](https://linux.die.net/man/5/autofs).
+The official linux man pages can provide more information on both
+[NFS](https://linux.die.net/man/5/nfs) and [autofs](https://linux.die.net/man/5/autofs).
 
 On backend resources, it is required you can install NFS/autofs, enable hostbased authentication, and can connect
 to an organizational LDAP. 
@@ -56,12 +57,12 @@ With your preferred text editor, open this configuration file and follow the
 instructions below.
 
 
-### Cluster Definitions
+### Cluster_Definitions
 
 To set up remote desktop access, set the `enableHostAdapter` value to true,
 then configure the `LinuxHost Adapter`. This is a simplified resource manager
 built from various component softwares. By enabling resource management, you 
-can set up interactive apps and manage sessions remotely.
+can *set up interactive apps and manage sessions remotely.
 
 ```yaml
   - cluster:
@@ -93,7 +94,7 @@ can set up interactive apps and manage sessions remotely.
       ...
 ```
 
-Ensure that the `host_regex` field captures all of the provided hostnames
+* Ensure that the `host_regex` field captures all of the provided hostnames
 
 ```yaml
 host_regex: '[\w.-]+\.(node1|node2|example.net|example.edu)'
@@ -101,7 +102,8 @@ host_regex: '[\w.-]+\.(node1|node2|example.net|example.edu)'
 
 ### Advanced
 
-Here you must also set `enableHostAdapter` equal to `true` and fill in the following entries
+Here you must once again set `enableHostAdapter` equal to `true` and fill in the following entries.
+To find the groupID of your ssh_keys group, simply run `cat /etc/group | grep ssh_keys`.
 
 ```yaml
 enableHostAdapter: true           # Enable linuxHost Adapter
@@ -110,8 +112,6 @@ advanced:
   node_selector_label: "ood"      # Matching node_selector_label (See next step)
   ssh_keys_GID: 993               # ssh_keys groupID
 ```
-
-to find the groupID of your ssh_keys group, simply run `cat /etc/group | grep ssh_keys`.
 
 ### NodeSelector
 
@@ -124,7 +124,7 @@ then you may leave this field blank.
 kubectl label nodes <node-name> application=ood
 ```
 
-### Secret Generation
+### Secret_Generation
 
 Pods are ephermeral, so keys from the host system should be passed 
 into the container using a secret. This will ensure trust is not broken
@@ -150,10 +150,12 @@ $command ; echo ""
 ```
 
 In the slate configuration file, ensure that the `secret_name` field and `host_key` 
-names match the secret you generate. If you're not sure what your host_key names are, 
-run `ls /etc/ssh`.
+names match the secret you generate. 
+
+If you're not sure what your host_key names are, list the contents of `/etc/ssh`.
 
 ```yaml
+# Provide names for each host key stored in your secret
   secret_name: "ssh-key-secret"
   host_keys:
     - host_key:
@@ -163,6 +165,8 @@ run `ls /etc/ssh`.
     - ...
 ```
 
+**Security Precautions**
+
 To secure your secrets when not in use or in the event of intrusion, 
 you can install a secret management provider such as 
 [Vault](https://www.vaultproject.io/docs/platform/k8s/helm) or 
@@ -171,10 +175,13 @@ you can install a secret management provider such as
 ### Filesystem_Distribution
 
 Resource management for OnDemand also requires a distributed filesystem. This chart
-supports NFS and autofs. In the configuration file, set either `NFS` or `autofs` to
+supports NFS and autofs. 
+
+In the configuration file, set either `NFS` or `autofs` to
 true and the other to false. Then list your NFS shares to be mounted.
 
 ```yaml
+# Configure file sharing (Choose either to use autofs or a single NFS mount)
   autofs: true
   nfs: false
   fileSharing:
@@ -190,17 +197,22 @@ true and the other to false. Then list your NFS shares to be mounted.
 Now that Open OnDemand is ready to be deployed using `slate app install`, we should access each
 of our backend clusters and ensure that they are ready to establish a connection.
 
-### Resource Management
+### Resource_Management
 
 To enable resource management, you must install components of the 
-`LinuxHost Adapter` on each backend cluster. These include 
+`LinuxHost Adapter` on each backend cluster. 
+
+These include 
 [TurboVNC 2.1+](https://www.turbovnc.org/), [Singularity](https://sylabs.io/),
 [nmap-ncat](https://nmap.org/ncat), 
 [Websockify 0.8.0+](https://pypi.org/project/websockify/#description),
 a [singularity image](https://sylabs.io/guides/3.5/user-guide/quick_start.html#download-pre-built-images),
-and a desktop of your choice 
+and a desktop 
 ([mate 1+](https://mate-desktop.org/), [xfce 4+](https://www.xfce.org/), 
 [gnome 2](https://www.gnome.org/)).
+
+To get a basic centOS 7 image run the following command, and ensure it has the same
+path as the `singularity_image` field in Cluster Definitions [above](###Cluster_Definitions).
 
 ```bash
 singularity pull docker://centos:7
@@ -208,15 +220,16 @@ singularity pull docker://centos:7
 
 To establish a remote desktop connection, ports 5800(+n) 5900(+n) and 6000(+n)
 need to be open for each display number n. As well as, port 22 for ssh
-and ports 20000+ for websocket connections. To do this simply, add a 
-global rule to iptables or a trusted firewalld zone.
+and ports 20000+ for websocket connections. 
+
+To do this easily, add a global rule to iptables or a firewalld exception.
 
 ```bash
 sudo iptables -A INPUT -s xxx.xxx.xxx.xxx/32 -j ACCEPT
 sudo firewall-cmd --zone=trusted --add-source=xxx.xxx.xxx.xxx/32
 ```
 
-### Filesystem Distribution
+### Filesystem_Distribution
 
 Filesystem Distribution must also be configured on the backend clusters, so that user data
 is persistent between the OnDemand server and backend resources.
@@ -234,8 +247,7 @@ mount -t nfs [ONDEMAND_HOST_PUBLIC_IP]:/example/home
 
 To configure autofs install `nfs-utils` and `autofs`. Then configure the `auto.master` file to
 mount NFS shares from an `auto.map` file. This map file should have consistent shares and mount points
-with entries in the slate app configuration described [above](###Filesystem_Distribution). When everything
-is set up, run `systemctl start nfs autofs`
+with entries in the slate app configuration described [above](###Filesystem_Distribution). When everything is set up, run `systemctl enable nfs autofs` to ensure they always run at system startup.
 
 ```bash
 slate1   -rw   slate.example.net:/export/mdist/slate1
@@ -331,7 +343,7 @@ section for each user you would like to add:
     tempPassword: <temporary_password_here>
 ```
 
-## Configurable Parameters:
+## Configurable_Parameters:
 
 The following table lists the configurable parameters of the Open OnDemand application and their default values.
 
