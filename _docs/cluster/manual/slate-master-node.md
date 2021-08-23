@@ -40,19 +40,19 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 
 In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well. 
 
-To install Calico, you will simply need to apply the appropriate Kubernetes manifest:
+To install Calico, you will simply need to apply the appropriate Kubernetes manifests:
 
 ```
-kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 ```
 
 After approximately five minutes, your master node should be ready. You can check with `kubectl get nodes`:
 
 ```
 [root@your-node ~]# kubectl get nodes
-
-NAME                        STATUS  ROLES   AGE     VERSION
-your-node.your-domain.edu   Ready   master  24m     v1.16.1
+NAME                           STATUS   ROLES                  AGE     VERSION
+your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.21.2
 ```
 
 ### Load Balancer
@@ -64,7 +64,8 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
 Apply MetalLB to our cluster. This command will create the relevant kubernetes componenents that will run our load balancer.
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
+kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.10.2/manifests/namespace.yaml
+kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.10.2/manifests/metallb.yaml
 ```
 
 Create the MetalLB configuration and adjust the IP range to reflect your environment. These must be unallocated public IP addresses available to the machine.
