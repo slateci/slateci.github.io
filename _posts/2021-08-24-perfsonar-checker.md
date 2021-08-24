@@ -6,7 +6,6 @@ permalink: blog/perfsonar-checker.html
 attribution: The SLATE Team 
 layout: post
 type: markdown
-tag: draft
 
 ---
 
