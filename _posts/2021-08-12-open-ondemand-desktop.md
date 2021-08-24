@@ -32,10 +32,9 @@ cluster, and that you have installed and configured the SLATE command
 line interface.  If not, instructions can be found at 
 [SLATE Quickstart](https://slateci.io/docs/quickstart/).  
 
-The remote desktop application requires that NFS/autofs can be implemented
+The remote desktop application requires that autofs can be implemented
 on the cluster you are installing on.
-The official linux man pages can provide more information on both
-[NFS](https://linux.die.net/man/5/nfs) and [autofs](https://linux.die.net/man/5/autofs).
+The official linux man pages provide more information [here](https://linux.die.net/man/5/autofs).
 
 On backend resources, it is required you can install NFS/autofs, enable hostbased authentication, and can connect
 to an organizational LDAP. 
@@ -181,17 +180,12 @@ you can install a secret management provider such as
 ### Filesystem_Distribution
 
 Resource management for OnDemand also requires a distributed filesystem. This chart
-supports NFS and autofs. 
-
-In the configuration file, set either `NFS` or `autofs` to
-true and the other to false. Then list your NFS shares to be mounted.
+currently supports autofs.
 
 ```yaml
-# Configure file sharing (Choose either to use autofs or a single NFS mount)
+# Filesystem distribution
   autofs: true
-  nfs: false
   fileSharing:
-    mountPoint: "/example/home"
     nfs_shares:
       - 'slate1   -rw   slate.example.net:/export/mdist/slate1'
       - 'slate2   -rw   slate.example.net:/export/mdist/slate2'
@@ -239,15 +233,6 @@ sudo firewall-cmd --zone=trusted --add-source=xxx.xxx.xxx.xxx/32
 
 Filesystem Distribution must also be configured on the backend clusters, so that user data
 is persistent between the OnDemand server and backend resources.
-
-**NFS**
-
-To configure NFS alone, first ensure that `nfs-utils` is installed, and then run the `mount`
-command using the OnDemand host public IP address.
-
-```bash
-mount -t nfs [ONDEMAND_HOST_PUBLIC_IP]:/example/home
-```
 
 **autofs**
 
@@ -391,7 +376,5 @@ The following table lists the configurable parameters of the Open OnDemand appli
 |`advanced.secret_name` | Name of secret holding host_keys. |`ssh-key-secret`|
 |`advanced.host_keys` | Names of stored keys. |`ssh_host_ecdsa_key`|
 |`advanced.autofs` | Mount home directories using autofs. |`true`|
-|`advanced.NFS` | Mount home directories with just NFS. |`false`|
-|`advanced.fliesharing.mountPoint` | Preferred path for mounting nfs shares. |`/ondemand/home`|
 |`advanced.filesharing.nfs_shares` | A mapfile with shares to be mounted by autofs. |`* -nolock,hard,...`|
 |`testUsers` | Unprivileged users for testing login to OnDemand. |`test`|
