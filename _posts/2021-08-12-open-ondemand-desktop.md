@@ -138,15 +138,16 @@ keys on the OnDemand server.
 
 ```sh
 #!/bin/bash
-echo -n "Please enter a name for your secret: "
-read secretName
-if [ "$secretName" != "" ]; then
-  :
+echo -n "Please enter a name for your secret: " && read secretName
+if [ "$secretName" != "" ]; then :
 else
-  echo "Please enter a non-empty secret name"
-  exit
+  echo "Please enter a non-empty secret name" && exit
 fi
-command="kubectl create secret generic $secretName"
+echo -n "Please select a namespace for your secret (default slate-group-slate-dev): " && read nameSpace
+if [ "$nameSpace" == "" ]; then
+  nameSpace=slate-group-slate-dev
+fi
+command="kubectl create secret generic $secretName -n $nameSpace"
 for i in /etc/ssh/ssh_host_*; do
   command=`echo "$command --from-file=$i"`
 done
