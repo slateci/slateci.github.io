@@ -8,9 +8,13 @@ layout: docs2020
 type: markdown
 ---
 
+**NOTE**: *SLATE currently only supports Kubernetes v1.21 or previous. Support for Kubernetes v1.22 is under development.*
+
 The first node you will add to your cluster will function as the SLATE Cluster Master Node. All possible SLATE topologies will utilize a master node.
 
 To configure a SLATE Master Node, you must first go through the "Operating System Requirements" section above. 
+
+
 
 ### Initialize the Kubernetes cluster with Kubeadm
 
