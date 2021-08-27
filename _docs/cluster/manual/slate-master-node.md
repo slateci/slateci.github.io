@@ -36,6 +36,16 @@ To enable kubeconfig for a single session instead simply run:
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 
+### Allowing pods to run on the Master*
+* For single-node installations of Kubernetes, this step is required. For multi-node clusters, it may be preferable to skip this step. 
+If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Master. This will allow general workloads to run along side of the Kubernetes master node processes. In the case of a dedicated Master and dedicated Workers, please skip to the next section.
+
+To remove the master taint:
+ 
+```
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
 ### Pod Network
 
 In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well. 
@@ -101,14 +111,5 @@ If your Kubernetes cluster is installed on one or more virtual machines run by O
 
 See [the MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) for details; in short, OpenStack must be informed that traffic sent to IP addresses controlled by MetalLB has a valid reason to be going to the VMs which make up the Kubernetes cluster. 
 
-
-### (optional) Allowing user pods to run on the Master
-If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Master. This will allow general workloads to run along side of the Kubernetes master node processes. In the case of a dedicated Master and dedicated Workers, please skip to the next section.
-
-To remove the master taint:
- 
-```
-kubectl taint nodes --all node-role.kubernetes.io/master-
-```
 
 <a href="/docs/cluster/manual/slate-worker-node.html">Next Page</a>
