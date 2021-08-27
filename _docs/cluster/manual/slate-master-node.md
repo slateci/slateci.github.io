@@ -22,7 +22,7 @@ kubeadm init --pod-network-cidr=192.168.0.0/16
 
 ### KubeConfig
 
-If you want to permenantly enable kubectl access for the root account you will need to copy the kubernetes admin configuration (KUBECONFIG) to $HOME/.kube/config. 
+If you want to permenantly enable `kubectl` access for the root account, you will need to copy the kubernetes admin configuration (KUBECONFIG) to $HOME/.kube/config. 
 
 ```
 mkdir -p $HOME/.kube
@@ -36,9 +36,10 @@ To enable kubeconfig for a single session instead simply run:
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 
-### Allowing pods to run on the Master*
-* For single-node installations of Kubernetes, this step is required. For multi-node clusters, it may be preferable to skip this step. 
-If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Master. This will allow general workloads to run along side of the Kubernetes master node processes. In the case of a dedicated Master and dedicated Workers, please skip to the next section.
+### Allowing pods to run on the Master
+**NOTE**: *This step is OPTIONAL for multi-node installations of Kubernetes, but REQUIRED for single-node installations.*
+
+If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Kubernetes control plane. This will allow general workloads to run along side of the Kubernetes master node processes. In larger clusters, it may instead be desireable to prevent "user" workloads from running on the control plane, especially on very busy clusters where the K8S API is servicing a large number of requests.
 
 To remove the master taint:
  
