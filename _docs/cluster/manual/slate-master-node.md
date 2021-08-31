@@ -8,9 +8,13 @@ layout: docs2020
 type: markdown
 ---
 
+**NOTE**: *SLATE currently only supports Kubernetes v1.21 or previous. Support for Kubernetes v1.22 is under development.*
+
 The first node you will add to your cluster will function as the SLATE Cluster Master Node. All possible SLATE topologies will utilize a master node.
 
 To configure a SLATE Master Node, you must first go through the "Operating System Requirements" section above. 
+
+
 
 ### Initialize the Kubernetes cluster with Kubeadm
 
@@ -22,7 +26,7 @@ kubeadm init --pod-network-cidr=192.168.0.0/16
 
 ### KubeConfig
 
-If you want to permenantly enable kubectl access for the root account you will need to copy the kubernetes admin configuration (KUBECONFIG) to $HOME/.kube/config. 
+If you want to permenantly enable `kubectl` access for the root account, you will need to copy the kubernetes admin configuration (KUBECONFIG) to $HOME/.kube/config. 
 
 ```
 mkdir -p $HOME/.kube
@@ -36,23 +40,34 @@ To enable kubeconfig for a single session instead simply run:
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 
+### Allowing pods to run on the Master
+**NOTE**: *This step is OPTIONAL for multi-node installations of Kubernetes, but REQUIRED for single-node installations.*
+
+If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Kubernetes control plane. This will allow general workloads to run along side of the Kubernetes master node processes. In larger clusters, it may instead be desireable to prevent "user" workloads from running on the control plane, especially on very busy clusters where the K8S API is servicing a large number of requests. If you are running a large, multi-node cluster then you may want to skip this step.
+
+To remove the master taint:
+ 
+```
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
 ### Pod Network
 
 In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well. 
 
-To install Calico, you will simply need to apply the appropriate Kubernetes manifest:
+To install Calico, you will simply need to apply the appropriate Kubernetes manifests:
 
 ```
-kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 ```
 
 After approximately five minutes, your master node should be ready. You can check with `kubectl get nodes`:
 
 ```
 [root@your-node ~]# kubectl get nodes
-
-NAME                        STATUS  ROLES   AGE     VERSION
-your-node.your-domain.edu   Ready   master  24m     v1.16.1
+NAME                           STATUS   ROLES                  AGE     VERSION
+your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.21.2
 ```
 
 ### Load Balancer
@@ -64,7 +79,8 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
 Apply MetalLB to our cluster. This command will create the relevant kubernetes componenents that will run our load balancer.
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.1/manifests/metallb.yaml
+kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.10.2/manifests/namespace.yaml
+kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.10.2/manifests/metallb.yaml
 ```
 
 Create the MetalLB configuration and adjust the IP range to reflect your environment. These must be unallocated public IP addresses available to the machine.
@@ -100,14 +116,5 @@ If your Kubernetes cluster is installed on one or more virtual machines run by O
 
 See [the MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) for details; in short, OpenStack must be informed that traffic sent to IP addresses controlled by MetalLB has a valid reason to be going to the VMs which make up the Kubernetes cluster. 
 
-
-### (optional) Allowing user pods to run on the Master
-If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Master. This will allow general workloads to run along side of the Kubernetes master node processes. In the case of a dedicated Master and dedicated Workers, please skip to the next section.
-
-To remove the master taint:
- 
-```
-kubectl taint nodes --all node-role.kubernetes.io/master-
-```
 
 <a href="/docs/cluster/manual/slate-worker-node.html">Next Page</a>
