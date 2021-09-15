@@ -139,3 +139,9 @@ toc:
         url: /docs/security-and-policies/slate-application-developer-and-review-procedures.html
       - page: Trusted Image Sources
         url: /docs/security-and-policies/trusted-image-sources.html
+  - title: Resources
+    id: resources
+    url: /docs/resources/resources
+    subfolderitems:
+      - page: Kubernetes certificates
+        url: /docs/resources/k8s-certificates.html
