@@ -47,6 +47,7 @@ EOF
 
 The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, and `kubelet`. `kubeadm` is a tool used to bootstrap Kubernetes clusters, `kubectl` is the command-line tool needed to interact with and control the cluster, and `kubelet` is the system daemon that allows the Kubernetes api to control the cluster nodes. To install and enable these components:
 
+
 ```
 # Install the three necessary Kubernetes components
 yum install -y kubeadm kubectl kubelet --disableexcludes=kubernetes
@@ -54,6 +55,13 @@ yum install -y kubeadm kubectl kubelet --disableexcludes=kubernetes
 # Enable Kubelet through systemctl.
 systemctl enable --now kubelet
 ```
+
+<strong>NOTE:</strong> The previous code will install the latest Kubernetes version. Currently SLATE is compatible up to Kubernetes version 1.21. To install version 1.21 run this command instead:
+
+```
+yum install kubeadm-1.21.* kubectl-1.21.* kubelet-1.21.* --disableexcludes=kubernetes
+```
+
 
 At this point the kubelet will be crash-looping as it has no configuration. That is okay for now.
 
