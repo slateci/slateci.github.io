@@ -272,6 +272,13 @@ While an application instance is running, you can check on what it is doing by v
 By default, the logs for all containers (in all pods) which make up the instance are shown, but the logs from any single container can be displayed using the `--container` option. 
 
 ## Troubleshooting
+### Connection refused errors
+When running the SLATE client, if you receive an error regarding a connection refused or timeout when connecting to the SLATE api server:
+
+1. Check to make sure that slate server is up
+2. If you're running at a site like TACC, check to see that outgoing connections aren't being blocked.  Several sites block outgoing connections if they aren't connecting to whitelisted ports (80, 443, etc.).  
+
+
 ### Missing token
 When running the SLATE client, if you receive an error similar to the following: 
 
