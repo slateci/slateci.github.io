@@ -272,7 +272,7 @@ While an application instance is running, you can check on what it is doing by v
 By default, the logs for all containers (in all pods) which make up the instance are shown, but the logs from any single container can be displayed using the `--container` option. 
 
 ## Troubleshooting
-### Connection refused errors
+### Connection refused or timeout errors
 When running the SLATE client, if you receive an error regarding a connection refused or timeout when connecting to the SLATE api server:
 
 1. Check to make sure that slate server is up
