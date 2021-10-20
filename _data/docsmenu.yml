@@ -125,8 +125,8 @@ toc:
         url: /docs/security-and-policies/overview-of-slate-platform-internals-and-security.html
       - page: Incident Response Policy
         url: /docs/security-and-policies/incident-response-policy.html
-      - page: Edge Administrator Obligations
-        url: /docs/security-and-policies/edge-administrator-obligations.html
+      - page: SLATE Edge Administrator Obligations
+        url: /docs/security-and-policies/slate-edge-administrator-obligations.html
       #- page: Application Administrator Obligations
       #  url: /docs/security-and-policies/application-admin-obligations.html
       - page: SLATE Application Developer Obligations
