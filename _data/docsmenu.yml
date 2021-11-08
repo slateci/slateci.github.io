@@ -126,7 +126,7 @@ toc:
       - page: Incident Response Policy
         url: /docs/security-and-policies/incident-response-policy.html
       - page: SLATE Edge Administrator Obligations
-        url: /docs/security-and-policies/slate-edge-administrator-obligations.html
+        url: /docs/security-and-policies/edge-administrator-obligations.html
       #- page: Application Administrator Obligations
       #  url: /docs/security-and-policies/application-admin-obligations.html
       - page: SLATE Application Developer Obligations
@@ -135,8 +135,10 @@ toc:
         url: /docs/security-and-policies/slate-application-reviewer-obligations.html
       - page: Change Management
         url: /docs/security-and-policies/change-management.html
-      - page: SLATE Application Developer and Review Procedures
+      - page: SLATE Application Development and Review Procedures
         url: /docs/security-and-policies/slate-application-developer-and-review-procedures.html
+      - page: Application Administrator Obligations
+        url: /docs/security-and-policies/application-admin-obligations.html
       - page: Trusted Image Sources
         url: /docs/security-and-policies/trusted-image-sources.html
   - title: Resources

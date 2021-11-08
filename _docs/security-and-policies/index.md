@@ -29,6 +29,7 @@ The following summary document is intended to give a general overview of the sec
 * [SLATE Application Developer Obligations](/docs/security-and-policies/slate-application-developer-obligations.html)<br>
 * [SLATE Application Reviewer Obligations](/docs/security-and-policies/slate-application-reviewer-obligations.html)<br>
 * [Change Management](/docs/security-and-policies/change-management.html)<br>
-* [SLATE Application Developer and Review Procedures](/docs/security-and-policies/slate-application-developer-and-review-procedures.html)<br>
+* [SLATE Application Development and Review Procedures](/docs/security-and-policies/slate-application-developer-and-review-procedures.html)<br>
 * [Trusted Image Sources](/docs/security-and-policies/trusted-image-sources.html)<br>
-<!-- [Application Administrator Obligations](/docs/security-and-policies/application-admin-obligations.html)<br> -->
+* [Application Administrator Obligations](/docs/security-and-policies/application-admin-obligations.html)<br>
+* [Overview of SLATE Platform Internals and Security](/docs/security-and-policies/overview-of-slate-platform-internals-and-security.html)<br>
