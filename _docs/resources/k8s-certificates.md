@@ -19,7 +19,7 @@ To renew all certs for clusters with kubernetes version 1.19 or earlier, run:
 	
 And for clusters running kubernetes version 1.20 or above, run: 
 
-	kubeadm certs renew all
+	$ kubeadm certs renew all
 
 ### Renewal Check
 
