@@ -15,4 +15,4 @@ The supported version range is currently:
 
 | Effective Date | Minimum Kubernetes Version | Maximum Kubernetes Version | 
 | --- | --- | --- |
-| May 27, 2020 | v1.16 | v1.18 |
+| May 27, 2020 | v1.18 | v1.21 |
