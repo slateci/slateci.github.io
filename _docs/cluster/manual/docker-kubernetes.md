@@ -25,6 +25,19 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 # Install the latest version of DockerCE and containerd 
 yum install docker-ce docker-ce-cli containerd.io -y
 
+# Configure the Docker daemon, in particular to use systemd for the management of the container's cgroups.
+mkdir /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
 # Enable Docker on reboot through systemctl
 systemctl enable --now docker
 ```
