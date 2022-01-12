@@ -22,3 +22,6 @@ config_override.yml
 
 # VSCode artifacts
 .vscode/
+
+# IntelliJ artifacts
+.idea/
