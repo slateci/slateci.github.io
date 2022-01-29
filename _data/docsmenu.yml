@@ -12,14 +12,16 @@ toc:
   - title: Manual Cluster Installation
     id: manual-cluster-installation
     subfolderitems:
-      - page: Installation
+      - page: Prerequisites
         url: /docs/cluster/index.html
       - page: Obtain a SLATE Token
         url: /docs/cluster/manual/slate-token.html
       - page: Operating System Requirements
         url: /docs/cluster/manual/operating-system-requirements.html
-      - page: Docker and Kubernetes
-        url: /docs/cluster/manual/docker-kubernetes.html
+      - page: Install Containerd
+        url: /docs/cluster/manual/containerd.html
+      - page: Install Kubernetes
+        url: /docs/cluster/manual/kubernetes.html
       - page: SLATE Master Node
         url: /docs/cluster/manual/slate-master-node.html
       - page: SLATE Worker Node

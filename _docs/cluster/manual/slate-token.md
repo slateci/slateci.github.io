@@ -25,12 +25,10 @@ A group can also administer both clusters and applications, which may run both o
 
 ## Install SLATE CLI Client
 
-Install a copy of the SLATE CLI client on the machine which you are setting up using the steps described in [SLATE Portal: CLI Access](https://portal.slateci.io/cli). To check that the SLATE CLI client is ready to use, you can run
+Install a copy of the SLATE CLI client on the machine which you are setting up using the steps described in [SLATE Portal: CLI Access](https://portal.slateci.io/cli) and verify by listing the available clusters already participating in the federation.
 
 ```shell
 slate cluster list
 ```
-
-This should list the various clusters which are already participating in the federation.
 
 [Next Page »](/docs/cluster/manual/operating-system-requirements.html)
