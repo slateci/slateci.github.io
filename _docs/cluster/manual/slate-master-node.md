@@ -290,7 +290,7 @@ For the sake of simplicity we will work through the [Install Calico with Kuberne
    ```
    {:data-add-copy-button='true'}
 
-## Install Calico CLI
+### Calico CLI
 
 **While optional**, we recommend installing `calicoctl`, the command line tool for Calico, for administrative needs.
 
@@ -317,13 +317,13 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
    ```
    {:data-add-copy-button='true'}
 
-2. Gather extra pools of internet-routable IPv4 and/or IPv6 addresses other than those assigned to the node.
+2. Gather pools of internet-routable IPv4 and/or IPv6 addresses other than those assigned to the node (pools may be provided by cloud providers as floating IP addresses).
 
    Examples:
-   * `123.101.6.42-123.101.16.64`
-   * `2001:DB8:414:10::56:3-2001:DB8:414:10::56:6`
+   * IPv4: `123.101.6.42-123.101.16.64`
+   * IPv6: `2001:DB8:414:10::56:3-2001:DB8:414:10::56:6`
 
-3. Create the MetalLB configuration and adjust the IP range to reflect your environment.
+3. Create the MetalLB configuration and adjust the IP range(s) to reflect your environment. Below is an example of a single pool with a single IPv4 range.
 
    ```
    cat <<EOF > /tmp/metallb-config.yaml
@@ -338,12 +338,14 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
        - name: default
          protocol: layer2
          addresses:
-         - <range>
+         - 123.101.6.42-123.101.16.64
    EOF
    ```
    {:data-add-copy-button='true'}
 
-4. Finally, create the configuration for MetalLB.
+4. Verify that `kubeproxy` is configured for `ipvs` mode with `strictARP: true` (already set in the `kubeadm join` configuration templates above).
+
+5. Apply the configuration for MetalLB.
 
    ```shell
    kubectl apply -f /tmp/metallb-config.yaml
