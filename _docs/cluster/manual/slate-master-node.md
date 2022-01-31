@@ -259,7 +259,7 @@ For the sake of simplicity we will work through the [Install Calico with Kuberne
    * `__CNI_MTU__`: the maximum transmission unit (e.g. `1500`)
    * `"__KUBECONFIG_FILEPATH__"`: the path to the kubeconfig (e.g. `/etc/Kubernetes/admin.conf`)
 
-4. Add/modify the following in `calico-node` where your values will be appropriate for `CLUSTER_CIDR` from earlier on this page.
+4. Add/modify the following in `calico-node` where your values will be appropriate for `CLUSTER_CIDR`, `controllerManager.extraArgs.node-cidr-mask-size-ipv4`, and `controllerManager.extraArgs.node-cidr-mask-size-ipv6` from earlier on this page.
    
    ```shell
    - name: CALICO_IPV4POOL_CIDR
