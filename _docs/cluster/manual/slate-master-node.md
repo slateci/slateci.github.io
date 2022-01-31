@@ -31,7 +31,7 @@ The Kubernetes control-plane is not currently capable of dual-stack. Due to this
 API_BIND_IP=0.0.0.0
 CLUSTER_CIDR=10.10.0.0/16,fc00:db8:1234:5678:8:2::/104
 CLUSTER_DNS=10.20.0.10
-KUBLET_HEALTHZ_BIND_IP=127.0.0.1
+KUBELET_HEALTHZ_BIND_IP=127.0.0.1
 SERVICE_CLUSTER_IP_RANGE=10.20.0.0/16,fc00:db8:1234:5678:8:3::/112
 ```
 {:data-add-copy-button='true'}
@@ -42,7 +42,7 @@ SERVICE_CLUSTER_IP_RANGE=10.20.0.0/16,fc00:db8:1234:5678:8:3::/112
 API_BIND_IP=::
 CLUSTER_CIDR=fc00:db8:1234:5678:8:2::/104,10.10.0.0/16
 CLUSTER_DNS=fc00:db8:1234:5678:8:3:0:a
-KUBLET_HEALTHZ_BIND_IP=::1
+KUBELET_HEALTHZ_BIND_IP=::1
 SERVICE_CLUSTER_IP_RANGE=fc00:db8:1234:5678:8:3::/112,10.20.0.0/16
 ```
 {:data-add-copy-button='true'}
@@ -112,7 +112,7 @@ apiVersion: kubelet.config.k8s.io/v1beta1
 cgroupDriver: systemd
 clusterDNS:
 - ${CLUSTER_DNS}
-healthzBindAddress: ${KUBLET_HEALTHZ_BIND_IP}
+healthzBindAddress: ${KUBELET_HEALTHZ_BIND_IP}
 kind: KubeletConfiguration
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -177,7 +177,7 @@ apiVersion: kubelet.config.k8s.io/v1beta1
 cgroupDriver: systemd
 clusterDNS:
 - ${CLUSTER_DNS}
-healthzBindAddress: ${KUBLET_HEALTHZ_BIND_IP}
+healthzBindAddress: ${KUBELET_HEALTHZ_BIND_IP}
 kind: KubeletConfiguration
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
