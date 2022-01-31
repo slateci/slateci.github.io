@@ -10,16 +10,95 @@ type: markdown
 
 To distribute work assigned to a SLATE cluster, worker nodes can be networked to a SLATE Master node.
 
-All SLATE Worker nodes should be set up using the "Setting Up a SLATE Node" instructions above.
+## Operating System Requirements
 
-### KubeADM Join
+Prepare the Worker node by following the steps described in [Operating System Requirements](/docs/cluster/manual/operating-system-requirements.html).
 
-On your Master node, run the following command to get a full join command for the Master's cluster:
+## Gather Master Information
 
+SSH into your SLATE Master node and gather the following information:
+
+| Name | Command |
+| --- | --- |
+| Kubernetes Token | `$(kubeadm token create)` |
+| Kubernetes Discovery Certificate Hash | `$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')` |
+
+## Define Variables
+
+SSH into your SLATE Worker node and define the following variables:
+
+1. The token and certificate from the steps above. 
+
+   ```shell
+   K8_TOKEN=<value>
+   K8_DISCO_CERT=<value>
+   ```
+   {:data-add-copy-button='true'}
+
+2. IPv4 and IPv6 addresses for both nodes. For example:
+
+   ```shell
+   # master node
+   MASTER_IPV4_ADDR=192.168.0.3
+   MASTER_IPV6_ADDR=2001:db8:1234:5678::1
+   # worker node
+   WORKER_IPV4_ADDR=192.168.0.4
+   WORKER_IPV6_ADDR=2001:db8:1234:5678::2
+   ```
+   {:data-add-copy-button='true'}
+
+## Build Kubeadm Join
+
+Build the `kubeadm join` configuration file on the Worker node. This file has several forms depending on whether the Kubernetes control-plane is IPv4 or IPv6.
+
+### IPv4
+
+```shell
+cat <<EOF > /tmp/join-config.yml
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: "${IPV4_ADDR}:6443"
+    token: "${K8_TOKEN}"
+    caCertHashes:
+    - "sha256:${K8_DISCO_CERT}"
+nodeRegistration:
+  criSocket: /var/run/containerd/containerd.sock
+  name: ${HOSTNAME}
+  kubeletExtraArgs:
+    node-ip: ${IPV4_ADDR},${IPV6_ADDR}
+EOF
 ```
-kubeadm token create --print-join-command
+{:data-add-copy-button='true'}
+
+### IPv6
+
+```shell
+cat <<EOF > /tmp/join-config.yml
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: "[${IPV6_ADDR}]:6443"
+    token: "${K8_TOKEN}"
+    caCertHashes:
+    - "sha256:${K8_DISCO_CERT}"
+nodeRegistration:
+  criSocket: /var/run/containerd/containerd.sock
+  name: ${HOSTNAME}
+  kubeletExtraArgs:
+    node-ip: ${IPV6_ADDR},${IPV4_ADDR}
+EOF
+```
+{:data-add-copy-button='true'}
+
+## Executing Kubeadm Join
+
+Run the following join command on the Worker node to join it to the cluster.
+
+```shell
+kubeadm join --config="/tmp/join-config.yml"
 ```
 
-Run this generated join command on the worker node to join it to the cluster.
-
-<a href="/docs/cluster/manual/cluster-federation.html">Next Page</a>
+[Next Page »](/docs/cluster/manual/cluster-federation.html)

@@ -312,15 +312,21 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
 1. Apply MetalLB to the cluster. This command will create the relevant Kubernetes components that will run our load balancer.
 
    ```shell
-   kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
-   kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
+   kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
+   kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
    ```
    {:data-add-copy-button='true'}
 
-2. Create the MetalLB configuration and adjust the IP range to reflect your environment.
+2. Gather extra pools of internet-routable IPv4 and/or IPv6 addresses other than those assigned to the node.
+
+   Examples:
+   * `123.101.6.42-123.101.16.64`
+   * `2001:DB8:414:10::56:3-2001:DB8:414:10::56:6`
+
+3. Create the MetalLB configuration and adjust the IP range to reflect your environment.
 
    ```
-   cat <<EOF > metallb-config.yaml
+   cat <<EOF > /tmp/metallb-config.yaml
    apiVersion: v1
    kind: ConfigMap
    metadata:
@@ -332,25 +338,24 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
        - name: default
          protocol: layer2
          addresses:
-         - <start-value>-<finish-value>
+         - <range>
    EOF
    ```
    {:data-add-copy-button='true'}
 
-3. Finally, create the `ConfigMap` for MetalLB on your cluster.
+4. Finally, create the configuration for MetalLB.
 
    ```shell
-   kubectl apply -f metallb-config.yaml
+   kubectl apply -f /tmp/metallb-config.yaml
    ```
    {:data-add-copy-button='true'}
 
 To read more about MetalLB installation and configuration, visit their [installation instructions](https://metallb.universe.tf/installation/).
 
-#### MetalLB on OpenStack
+### MetalLB on OpenStack
 
 If your Kubernetes cluster is installed on one or more virtual machines run by OpenStack, there is one small, extra step required to enable MetalLB to route traffic properly. 
 
 See [the MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) for details; in short, OpenStack must be informed that traffic sent to IP addresses controlled by MetalLB has a valid reason to be going to the VMs which make up the Kubernetes cluster. 
 
-
-<a href="/docs/cluster/manual/slate-worker-node.html">Next Page</a>
+[Next Page »](/docs/cluster/manual/slate-worker-node.html)
