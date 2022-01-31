@@ -27,10 +27,11 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 ```
+{:data-add-copy-button='true'}
 
 ## Install Tools
 
-The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, and `kubelet`. 
+The Kubernetes install includes a few different pieces: 
 * `kubeadm` is a tool used to bootstrap Kubernetes clusters.
 * `kubectl` is the command-line tool needed to interact with and control the cluster.
 * `kubelet` is the system daemon that allows the Kubernetes api to control the cluster nodes.
@@ -41,6 +42,7 @@ To install and enable these components:
 KUBE_VERSION=1.21.* && \
 yum install -y kubeadm-${KUBE_VERSION} kubectl-${KUBE_VERSION} kubelet-${KUBE_VERSION} --disableexcludes=kubernetes
 ```
+{:data-add-copy-button='true'}
 
 ## Finish Up
 
@@ -49,6 +51,7 @@ Finally, enable `kubelet`:
 ```shell
 systemctl enable --now kubelet
 ```
+{:data-add-copy-button='true'}
 
 At this point the `kubelet` will be crash-looping as it has no configuration. That is okay for now.
 

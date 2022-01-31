@@ -10,19 +10,44 @@ type: markdown
 
 {% include alert/warning-k8s-version.html %}
 
-The first node you will add to your cluster will function as the SLATE Cluster Master Node as all possible SLATE topologies will utilize a master node. To configure a SLATE Master Node you must first go through the [Operating System Requirements](/docs/cluster/manual/operating-system-requirements.html). 
+The first node you will add to your cluster will function as the SLATE Cluster Master Node as all possible SLATE topologies will utilize a master node. To configure a SLATE Master Node you must first go through the [Operating System Requirements](/docs/cluster/manual/operating-system-requirements.html).
 
-### Initialize the Kubernetes cluster with Kubeadm
+Follow the steps below to configure Kubernetes using `kubeadm`.
 
-We want to initialize our cluster with dual-stack. Start by choosing sensible IPv4 and IPv6 values for the cluster CIDR, DNS and service cluster IP range. For example:
+## Initialize Kubernetes
+
+Initialize your Kubernetes cluster with dual-stack enabled using `kubeadm` and a YAML configuration file.
+
+### Specify Kubernetes Control-Plane Stack
+
+The Kubernetes control-plane is not currently capable of dual-stack. Due to this limitation you will need to decide between IPv4 or IPv6. Start by choosing sensible IPv4 and IPv6 values for `API_BIND_IP`, `CLUSTER_CIDR`, `CLUSTER_DNS`, `KUBLET_HEALTHZ_BIND_IP`, and `SERVICE_CLUSTER_IP_RANGE`.
+
+{% include alert/note.html content="The chosen value for `CLUSTER_CIDR` will affect the `CALICO_IPV4POOL_CIDR` and `CALICO_IPV6POOL_CIDR` environmental variables in the Calico manifest file described later on this page.
+" %}
+
+#### IPv4
 
 ```shell
+API_BIND_IP=0.0.0.0
 CLUSTER_CIDR=10.10.0.0/16,fc00:db8:1234:5678:8:2::/104
 CLUSTER_DNS=10.20.0.10
+KUBLET_HEALTHZ_BIND_IP=127.0.0.1
 SERVICE_CLUSTER_IP_RANGE=10.20.0.0/16,fc00:db8:1234:5678:8:3::/112
 ```
+{:data-add-copy-button='true'}
 
-Make note of `CLUSTER_CIDR` as the values specified there will affect the `CALICO_IPV4POOL_CIDR` and `CALICO_IPV6POOL_CIDR` environmental variables in the Calico manifest file.
+#### IPv6
+
+```shell
+API_BIND_IP=::
+CLUSTER_CIDR=fc00:db8:1234:5678:8:2::/104,10.10.0.0/16
+CLUSTER_DNS=fc00:db8:1234:5678:8:3:0:a
+KUBLET_HEALTHZ_BIND_IP=::1
+SERVICE_CLUSTER_IP_RANGE=fc00:db8:1234:5678:8:3::/112,10.20.0.0/16
+```
+{:data-add-copy-button='true'}
+
+### Provide Node IPs
 
 Specify the IPv4 and IPv6 addresses for the node. For example:
 
@@ -30,8 +55,13 @@ Specify the IPv4 and IPv6 addresses for the node. For example:
 IPV4_ADDR=192.168.0.3
 IPV6_ADDR=2001:db8:1234:5678::1
 ```
+{:data-add-copy-button='true'}
 
-Execute the following to generate the `kubeadm` configuration file:
+### Generate Config File
+
+Generate your `kubeadm` configuration file. Below are examples of an IPv4 and IPv6 control-plane respectively.
+
+#### IPv4
 
 ```shell
 cat << EOF > /tmp/kubeadm-config.yml
@@ -50,14 +80,14 @@ nodeRegistration:
 apiServer:
   extraArgs:
     advertise-address: ${IPV4_ADDR}
-    bind-address: '0.0.0.0'
+    bind-address: ${API_BIND_IP}
     etcd-servers: https://${IPV4_ADDR}:2379
     service-cluster-ip-range: ${SERVICE_CLUSTER_IP_RANGE}
 apiVersion: kubeadm.k8s.io/v1beta2
 controllerManager:
   extraArgs:
     allocate-node-cidrs: 'true'
-    bind-address: '0.0.0.0'
+    bind-address: ${API_BIND_IP}
     cluster-cidr: ${CLUSTER_CIDR}
     node-cidr-mask-size-ipv4: '24'
     node-cidr-mask-size-ipv6: '120'
@@ -76,13 +106,13 @@ networking:
   serviceSubnet: ${SERVICE_CLUSTER_IP_RANGE}
 scheduler:
   extraArgs:
-    bind-address: '0.0.0.0'
+    bind-address: ${API_BIND_IP}
 ---
 apiVersion: kubelet.config.k8s.io/v1beta1
 cgroupDriver: systemd
 clusterDNS:
 - ${CLUSTER_DNS}
-healthzBindAddress: 127.0.0.1
+healthzBindAddress: ${KUBLET_HEALTHZ_BIND_IP}
 kind: KubeletConfiguration
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -94,112 +124,225 @@ mode: ipvs
 ---
 EOF
 ```
+{:data-add-copy-button='true'}
 
-Complete the initialization process:
+#### IPv6
+
+```shell
+cat << EOF > /tmp/kubeadm-config.yml
+---
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: ${IPV6_ADDR}
+nodeRegistration:
+  criSocket: /var/run/containerd/containerd.sock
+  name: ${HOSTNAME}
+  kubeletExtraArgs:
+    cluster-dns: ${CLUSTER_DNS}
+    node-ip: ${IPV6_ADDR},${IPV4_ADDR}
+---
+apiServer:
+  extraArgs:
+    advertise-address: ${IPV6_ADDR}
+    bind-address: ${API_BIND_IP}
+    etcd-servers: https://[${IPV6_ADDR}]:2379
+    service-cluster-ip-range: ${SERVICE_CLUSTER_IP_RANGE}
+apiVersion: kubeadm.k8s.io/v1beta2
+controllerManager:
+  extraArgs:
+    allocate-node-cidrs: 'true'
+    bind-address: ${API_BIND_IP}
+    cluster-cidr: ${CLUSTER_CIDR}
+    node-cidr-mask-size-ipv4: '24'
+    node-cidr-mask-size-ipv6: '120'
+    service-cluster-ip-range: ${SERVICE_CLUSTER_IP_RANGE}
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+    extraArgs:
+      advertise-client-urls: https://[${IPV6_ADDR}]:2379
+      initial-advertise-peer-urls: https://[${IPV6_ADDR}]:2380
+      initial-cluster: ${HOSTNAME}=https://[${IPV6_ADDR}]:2380
+      listen-client-urls: https://[${IPV6_ADDR}]:2379
+      listen-peer-urls: https://[${IPV6_ADDR}]:2380
+kind: ClusterConfiguration
+networking:
+  serviceSubnet: ${SERVICE_CLUSTER_IP_RANGE}
+scheduler:
+  extraArgs:
+    bind-address: ${API_BIND_IP}
+---
+apiVersion: kubelet.config.k8s.io/v1beta1
+cgroupDriver: systemd
+clusterDNS:
+- ${CLUSTER_DNS}
+healthzBindAddress: ${KUBLET_HEALTHZ_BIND_IP}
+kind: KubeletConfiguration
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+clusterCIDR: ${CLUSTER_CIDR}
+kind: KubeProxyConfiguration
+ipvs:
+  strictARP: true
+mode: ipvs
+---
+EOF
+```
+{:data-add-copy-button='true'}
+
+### Apply Configuration
+
+Apply the `kubadm` configuration file to complete the initialization process:
 
 ```shell
 kubeadm init --config=/tmp/kubeadm-config.yml
 ```
+{:data-add-copy-button='true'}
 
 ## KubeConfig
 
-If you want to permanently enable `kubectl` access for the `root` account, you will need to copy the kubernetes admin configuration (KUBECONFIG) to `$HOME/.kube/config`. 
+If you want to permanently enable `kubectl` access for the `root` account, you will need to copy the Kubernetes admin configuration kubeconfig to `$HOME/.kube/config`. 
 
 ```shell
 mkdir -p /root/.kube && \
-cp -i /etc/kubernetes/admin.conf /root/.kube/config && \
+cp -i /etc/Kubernetes/admin.conf /root/.kube/config && \
 chown root:root $HOME/.kube/config
 ```
+{:data-add-copy-button='true'}
 
-To enable kubeconfig for a single session instead simply run:
+Alternatively to enable kubeconfig for a single session instead run:
 
 ```shell
-export KUBECONFIG=/etc/kubernetes/admin.conf
+export KUBECONFIG=/etc/Kubernetes/admin.conf
 ```
+{:data-add-copy-button='true'}
 
 ## Allow Pods on Master
 
 {% include alert/note.html content="This step is optional for multi-node installations of Kubernetes, but required for single-node installations." %}
 
-If you are running a single-node SLATE cluster, you'll want to remove the "NoSchedule" taint from the Kubernetes control plane. This will allow general workloads to run along-side of the Kubernetes master node processes. In larger clusters, it may instead be desirable to prevent "user" workloads from running on the control plane, especially on very busy clusters where the K8S API is servicing a large number of requests. If you are running a large, multi-node cluster then you may want to skip this step.
+If you are running a single-node SLATE cluster, you'll want to remove the `NoSchedule` taint from the Kubernetes control-plane. This will allow general workloads to run along-side of the Kubernetes master node processes.
+
+In larger clusters, it may instead be desirable to prevent "user" workloads from running on the control plane, especially on very busy clusters where the Kubernetes API is servicing a large number of requests. If you are running a large, multi-node cluster then you may want to skip this step.
 
 To remove the master taint:
  
 ```shell
-kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.Kubernetes.io/master-
 ```
+{:data-add-copy-button='true'}
 
 ## Configure Pod Network
 
-In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well. 
+In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use [Calico](https://www.tigera.io/project-calico/), although other options should work as well. 
 
-```shell
-HOSTNAME=master.hostname
-KUBECONFIG_PATH=/etc/kubernetes/admin.conf
-```
+### Choose Manifest
 
+Creating a dual-stack Kubernetes requires customizing the Calico manifests. Read through [Install Calico networking and network policy for on-premises deployments](https://projectcalico.docs.tigera.io/getting-started/Kubernetes/self-managed-onprem/onpremises) to familiarize yourself with the different manifest options.
 
+For the sake of simplicity we will work through the [Install Calico with Kubernetes API datastore, 50 nodes or less](https://projectcalico.docs.tigera.io/getting-started/Kubernetes/self-managed-onprem/onpremises#install-calico-with-Kubernetes-api-datastore-50-nodes-or-less) option below.
 
+### Configure Calico
 
+1. Download the manifest.
+   ```shell
+   cd /tmp && \
+   curl https://projectcalico.docs.tigera.io/manifests/calico.yaml -O 
+   ```
+   {:data-add-copy-button='true'}
 
+2. Follow the steps described in [Calico: Enable dual stack](https://projectcalico.docs.tigera.io/networking/ipv6#enable-dual-stack) to configure `calico-config` and `calico-node`.
 
+3. Replace the following in `calico-config`:
+   * `"__Kubernetes_NODE_NAME__"`: the hostname of your master node (e.g. `node.domain.com`)
+   * `__CNI_MTU__`: the maximum transmission unit (e.g. `1500`)
+   * `"__KUBECONFIG_FILEPATH__"`: the path to the kubeconfig (e.g. `/etc/Kubernetes/admin.conf`)
 
+4. Add/modify the following in `calico-node` where your values will be appropriate for `CLUSTER_CIDR` from earlier on this page.
+   
+   ```shell
+   - name: CALICO_IPV4POOL_CIDR
+     value: "10.10.0.0/16"
+   - name: CALICO_IPV4POOL_BLOCK_SIZE
+     value: "24"
+   - name: CALICO_IPV6POOL_CIDR
+     value: "fc00:db8:1234:5678:8:2::/104"
+   - name: CALICO_IPV6POOL_BLOCK_SIZE
+     value: "120"
+   ```
+   {:data-add-copy-button='true'}
 
+5. If multiple interfaces exist on a node it may become necessary to tell Calico which interface to use for IPv4 and IPv6. For example:
 
+   ```shell
+   - name: IP_AUTODETECTION_METHOD
+     value: "interface=eth1"
+   - name: IP6_AUTODETECTION_METHOD
+     value: "interface=eth1"
+   ```
+   {:data-add-copy-button='true'}
 
+6. Install Calico by applying the modified manifest file:
 
-To install Calico, you will simply need to apply the appropriate Kubernetes manifests:
+   ```shell
+   kubectl apply -f /tmp/calico.yml
+   ```
+   {:data-add-copy-button='true'}
 
-```
-kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
-kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
-```
+## Install Calico CLI
 
-After approximately five minutes, your master node should be ready. You can check with `kubectl get nodes`:
+**While optional**, we recommend installing `calicoctl`, the command line tool for Calico, for administrative needs.
 
-```
-[root@your-node ~]# kubectl get nodes
-NAME                           STATUS   ROLES                  AGE     VERSION
-your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.21.2
-```
+1. Follow the steps described in [Install calicoctl as a Kubernetes pod](https://projectcalico.docs.tigera.io/maintenance/clis/calicoctl/install#install-calicoctl-as-a-Kubernetes-pod) for the Kubernetes API datastore.
 
-### Load Balancer
+2. Add the suggested alias for `calicoctl`:
 
-Kubernetes clusters, in order to evenly distribute work across all worker nodes, require a load balancer. There are a few load balancer solutions. We recommend using MetalLB for load balancing on SLATE clusters.
+   ```shell
+   alias calicoctl="kubectl exec -i -n kube-system calicoctl -- /calicoctl"
+   ```
+   {:data-add-copy-button='true'}
+
+## Load Balancing
+
+Kubernetes clusters, in order to evenly distribute work across all worker nodes, require a load balancer. There are a few load balancer solutions. We recommend using [MetalLB](https://metallb.universe.tf/) for load balancing on SLATE clusters.
 
 ### MetalLB
 
-Apply MetalLB to our cluster. This command will create the relevant kubernetes componenents that will run our load balancer.
+1. Apply MetalLB to the cluster. This command will create the relevant Kubernetes components that will run our load balancer.
 
-```
-kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
-kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
-```
+   ```shell
+   kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
+   kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
+   ```
+   {:data-add-copy-button='true'}
 
-Create the MetalLB configuration and adjust the IP range to reflect your environment. These must be unallocated public IP addresses available to the machine.
+2. Create the MetalLB configuration and adjust the IP range to reflect your environment.
 
-```
-cat <<EOF > metallb-config.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - 155.101.6.XXX-155.101.6.YYY # Replace this range with whatever IP range your worker nodes may exist in
-EOF
-```
+   ```
+   cat <<EOF > metallb-config.yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     namespace: metallb-system
+     name: config
+   data:
+     config: |
+       address-pools:
+       - name: default
+         protocol: layer2
+         addresses:
+         - <start-value>-<finish-value>
+   EOF
+   ```
+   {:data-add-copy-button='true'}
 
-Finally, create the ConfigMap for MetalLB on your cluster.
+3. Finally, create the `ConfigMap` for MetalLB on your cluster.
 
-```
-kubectl apply -f metallb-config.yaml
-```
+   ```shell
+   kubectl apply -f metallb-config.yaml
+   ```
+   {:data-add-copy-button='true'}
 
 To read more about MetalLB installation and configuration, visit their [installation instructions](https://metallb.universe.tf/installation/).
 

@@ -9,11 +9,11 @@ type: markdown
 ---
 
 
-The SLATE platform uses `containerd` as the container run-time. In this section we will install and configure `containerd`.
+The SLATE platform uses `containerd` as the container run-time. Complete the following steps to install and configure `containerd` on your system.
 
 ## Load Kernel Modules
 
-Load the following kernel module dependencies:
+Specify and load the following kernel module dependencies:
 
 ```shell
 cat <<EOF | tee /etc/modules-load.d/containerd.conf
@@ -21,11 +21,13 @@ overlay
 br_netfilter
 EOF
 ```
+{:data-add-copy-button='true'}
 
 ```shell
 modprobe overlay && \
 modprobe br_netfilter
 ```
+{:data-add-copy-button='true'}
 
 ## Add Yum Repo
 
@@ -34,12 +36,14 @@ Install the `yum-config-manager` tool if not already present:
 ```shell
 yum install yum-utils -y
 ```
+{:data-add-copy-button='true'}
 
 Add the stable Docker Community Edition repository to `yum`:
 
 ```shell
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
+{:data-add-copy-button='true'}
 
 ## Install Containerd
 
@@ -48,6 +52,7 @@ Install the latest version of `containerd`:
 ```shell
 yum install containerd.io -y
 ```
+{:data-add-copy-button='true'}
 
 ## Configure cgroups
 
@@ -59,6 +64,9 @@ rm "${CONTAINDERD_CONFIG_PATH}" && \
 containerd config default > "${CONTAINDERD_CONFIG_PATH}" && \
 sed -i "/runc.options/a\            SystemdCgroup = true" "${CONTAINDERD_CONFIG_PATH}"
 ```
+{:data-add-copy-button='true'}
+
+The `cgroup` driver will also need to be set explicitly in the `kublet` config as we build the `kubeadm` configuration file.
 
 ## Finish Up
 
@@ -68,5 +76,6 @@ Finally, enable `containerd` and apply the changes:
 systemctl enable --now containerd && \
 systemctl restart containerd
 ```
+{:data-add-copy-button='true'}
 
 [Next Page »](/docs/cluster/manual/kubernetes.html)

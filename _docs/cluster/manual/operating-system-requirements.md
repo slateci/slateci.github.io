@@ -18,6 +18,7 @@ Disable SELinux as this generally conflicts with Kubernetes:
 setenforce 0 && \
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 ```
+{:data-add-copy-button='true'}
 
 If you wish to retain the SELinux logging, you can alternatively use the `permissive` mode rather than `enforcing`.
 
@@ -29,6 +30,7 @@ Swap must be disabled for Kubernetes to run effectively. Swap is typically enabl
 swapoff -a && \
 sed -e '/swap/s/^/#/g' -i /etc/fstab
 ```
+{:data-add-copy-button='true'}
 
 ## Disable firewalld
 
@@ -37,6 +39,7 @@ In order to properly communicate with other devices within the cluster, `firewal
 ```shell
 systemctl disable --now firewalld
 ```
+{:data-add-copy-button='true'}
 
 ## Disable root login over SSH
 
@@ -45,6 +48,7 @@ While optional, we **strongly** recommend disabling root login over SSH for secu
 ```shell
 sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 ```
+{:data-add-copy-button='true'}
 
 ## Configure Network Traffic
 
@@ -58,6 +62,7 @@ net.ipv6.conf.all.forwarding=1
 net.ipv4.conf.all.forwarding=1
 EOF
 ```
+{:data-add-copy-button='true'}
 
 Apply the changes and restart the Network Manager:
 
@@ -65,5 +70,6 @@ Apply the changes and restart the Network Manager:
 sysctl --system && \
 systemctl restart NetworkManager
 ```
+{:data-add-copy-button='true'}
 
 [Next Page »](/docs/cluster/manual/containerd.html)
