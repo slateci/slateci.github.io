@@ -41,4 +41,4 @@ slate cluster allow-group <YOUR-CLUSTER-NAME> '<[>GROUP-NAME>'
 ```
 {:data-add-copy-button='true'}
 
-[Next Page »](/docs/cluster/manual/troubleshooting.html)
+{% include doc-next-link.html content="/docs/cluster/manual/troubleshooting.html" %}

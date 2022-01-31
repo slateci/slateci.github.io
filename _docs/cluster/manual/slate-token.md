@@ -31,4 +31,4 @@ Install a copy of the SLATE CLI client on the machine which you are setting up u
 slate cluster list
 ```
 
-[Next Page »](/docs/cluster/manual/operating-system-requirements.html)
+{% include doc-next-link.html content="/docs/cluster/manual/operating-system-requirements.html" %}

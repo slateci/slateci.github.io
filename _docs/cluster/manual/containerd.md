@@ -78,4 +78,4 @@ systemctl restart containerd
 ```
 {:data-add-copy-button='true'}
 
-[Next Page »](/docs/cluster/manual/kubernetes.html)
+{% include doc-next-link.html content="/docs/cluster/manual/kubernetes.html" %}

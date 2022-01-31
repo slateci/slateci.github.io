@@ -72,4 +72,4 @@ systemctl restart NetworkManager
 ```
 {:data-add-copy-button='true'}
 
-[Next Page »](/docs/cluster/manual/containerd.html)
+{% include doc-next-link.html content="/docs/cluster/manual/containerd.html" %}

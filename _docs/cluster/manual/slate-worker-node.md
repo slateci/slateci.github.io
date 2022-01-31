@@ -101,4 +101,4 @@ Run the following join command on the Worker node to join it to the cluster.
 kubeadm join --config="/tmp/join-config.yml"
 ```
 
-[Next Page »](/docs/cluster/manual/cluster-federation.html)
+{% include doc-next-link.html content="/docs/cluster/manual/cluster-federation.html" %}

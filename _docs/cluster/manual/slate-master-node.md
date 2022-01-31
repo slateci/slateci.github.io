@@ -358,4 +358,4 @@ If your Kubernetes cluster is installed on one or more virtual machines run by O
 
 See [the MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) for details; in short, OpenStack must be informed that traffic sent to IP addresses controlled by MetalLB has a valid reason to be going to the VMs which make up the Kubernetes cluster. 
 
-[Next Page »](/docs/cluster/manual/slate-worker-node.html)
+{% include doc-next-link.html content="/docs/cluster/manual/slate-worker-node.html" %}
