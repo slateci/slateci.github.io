@@ -76,7 +76,7 @@ EOF
 
 ```shell
 cat <<EOF > /tmp/join-config.yml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
