@@ -43,7 +43,7 @@ systemctl disable --now firewalld
 
 ## Disable root login over SSH
 
-While optional, we **strongly** recommend disabling root login over SSH for security reasons.
+While optional, we **strongly** recommend disabling root login over SSH for security reasons:
 
 ```shell
 sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config

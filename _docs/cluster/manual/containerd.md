@@ -9,7 +9,7 @@ type: markdown
 ---
 
 
-The SLATE platform uses `containerd` as the container run-time. Complete the following steps to install and configure `containerd` on your system.
+The SLATE platform uses `containerd` as the container run-time. Complete the following steps to install and configure `containerd` for your cluster.
 
 ## Load Kernel Modules
 
@@ -66,7 +66,7 @@ sed -i "/runc.options/a\            SystemdCgroup = true" "${CONTAINDERD_CONFIG_
 ```
 {:data-add-copy-button='true'}
 
-The `cgroup` driver will also need to be set explicitly in the `kublet` config as we build the `kubeadm` configuration file.
+{% include alert/note.html content="The `cgroup` driver will also need to be set explicitly in the `kublet` config as we build the `kubeadm` configuration file further on in this guide." %}
 
 ## Finish Up
 

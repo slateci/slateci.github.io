@@ -10,20 +10,19 @@ type: markdown
 
 {% include alert/warning-k8s-version.html %}
 
-The first node you will add to your cluster will function as the SLATE Cluster Master Node as all possible SLATE topologies will utilize a master node. To configure a SLATE Master Node you must first go through the [Operating System Requirements](/docs/cluster/manual/operating-system-requirements.html).
-
-Follow the steps below to configure Kubernetes using `kubeadm`.
+The first node you will add to your cluster will function as the SLATE Cluster Master Node as all possible SLATE topologies will utilize a Master Node. In this section we will install and configure Kubernetes using `kubeadm`.
 
 ## Initialize Kubernetes
 
 Initialize your Kubernetes cluster with dual-stack enabled using `kubeadm` and a YAML configuration file.
 
-### Specify Kubernetes Control-Plane Stack
+### Choose Kubernetes Control-Plane Stack
 
-The Kubernetes control-plane is not currently capable of dual-stack. Due to this limitation you will need to decide between IPv4 or IPv6. Start by choosing sensible IPv4 and IPv6 values for `API_BIND_IP`, `CLUSTER_CIDR`, `CLUSTER_DNS`, `KUBLET_HEALTHZ_BIND_IP`, and `SERVICE_CLUSTER_IP_RANGE`.
+The Kubernetes control-plane is not currently capable of dual-stack. Due to this limitation you will need to decide between IPv4 or IPv6 beforehand.
 
-{% include alert/note.html content="The chosen value for `CLUSTER_CIDR` will affect the `CALICO_IPV4POOL_CIDR` and `CALICO_IPV6POOL_CIDR` environmental variables in the Calico manifest file described later on this page.
-" %}
+Begin by choosing sensible IPv4 and IPv6 values for `API_BIND_IP`, `CLUSTER_CIDR`, `CLUSTER_DNS`, `KUBLET_HEALTHZ_BIND_IP`, and `SERVICE_CLUSTER_IP_RANGE`.
+
+{% include alert/note.html content="The chosen value for `CLUSTER_CIDR` will affect the `CALICO_IPV4POOL_CIDR` and `CALICO_IPV6POOL_CIDR` environmental variables in the Calico manifest file described later on this page." %}
 
 #### IPv4
 
@@ -47,9 +46,9 @@ SERVICE_CLUSTER_IP_RANGE=fc00:db8:1234:5678:8:3::/112,10.20.0.0/16
 ```
 {:data-add-copy-button='true'}
 
-### Provide Node IPs
+### Node IPs
 
-Specify the IPv4 and IPv6 addresses for the node. For example:
+Specify the IPv4 and IPv6 addresses for the Master Node. For example:
 
 ```shell
 IPV4_ADDR=192.168.0.3
@@ -211,7 +210,7 @@ chown root:root $HOME/.kube/config
 ```
 {:data-add-copy-button='true'}
 
-Alternatively to enable kubeconfig for a single session instead run:
+Alternatively to enable the kubeconfig for a single session execute the following:
 
 ```shell
 export KUBECONFIG=/etc/Kubernetes/admin.conf
@@ -224,9 +223,9 @@ export KUBECONFIG=/etc/Kubernetes/admin.conf
 
 If you are running a single-node SLATE cluster, you'll want to remove the `NoSchedule` taint from the Kubernetes control-plane. This will allow general workloads to run along-side of the Kubernetes master node processes.
 
-In larger clusters, it may instead be desirable to prevent "user" workloads from running on the control plane, especially on very busy clusters where the Kubernetes API is servicing a large number of requests. If you are running a large, multi-node cluster then you may want to skip this step.
+In larger clusters, it may instead be desirable to prevent "user" workloads from running on the control-plane, especially on very busy clusters where the Kubernetes API is servicing a large number of requests. If you are running a large, multi-node cluster then you may want to skip this step.
 
-To remove the master taint:
+To remove the `master` taint:
  
 ```shell
 kubectl taint nodes --all node-role.Kubernetes.io/master-
@@ -273,7 +272,7 @@ For the sake of simplicity we will work through the [Install Calico with Kuberne
    ```
    {:data-add-copy-button='true'}
 
-5. If multiple interfaces exist on a node it may become necessary to tell Calico which interface to use for IPv4 and IPv6. For example:
+5. If multiple interfaces exist on a node it may become necessary to tell Calico which interface to use for IPv4 and IPv6. In the following example Calico will use `eth1`:
 
    ```shell
    - name: IP_AUTODETECTION_METHOD
@@ -317,7 +316,7 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
    ```
    {:data-add-copy-button='true'}
 
-2. Gather pools of internet-routable IPv4 and/or IPv6 addresses other than those assigned to the node (pools may be provided by cloud providers as floating IP addresses).
+2. Gather pools of public IPv4 and/or IPv6 addresses other than those assigned to the node (pools may be provided by cloud providers as floating IP addresses).
 
    Examples:
    * IPv4: `123.101.6.42-123.101.16.64`
@@ -343,9 +342,9 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
    ```
    {:data-add-copy-button='true'}
 
-4. Verify that `kubeproxy` is configured for `ipvs` mode with `strictARP: true` (already set in the `kubeadm join` configuration templates above).
+4. Verify that `kubeproxy` is configured for `ipvs` mode with `strictARP: true` (already set in the `kubeadm init` configuration templates above).
 
-5. Apply the configuration for MetalLB.
+5. Apply the configuration for MetalLB:
 
    ```shell
    kubectl apply -f /tmp/metallb-config.yaml

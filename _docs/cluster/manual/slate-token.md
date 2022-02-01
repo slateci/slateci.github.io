@@ -20,8 +20,8 @@ Every cluster must be administered by a SLATE group.
 
 ### Administrating Clusters
 
-A group can administer multiple clusters, so if you are already a member of a suitable group you do not need to create another.
-A group can also administer both clusters and applications, which may run both on clusters which it administers and on clusters which it does not.
+* A group can administer multiple clusters, so if you are already a member of a suitable group you do not need to create another.
+* A group can also administer both clusters and applications, which may run both on clusters which it administers and on clusters which it does not.
 
 ## Install SLATE CLI Client
 

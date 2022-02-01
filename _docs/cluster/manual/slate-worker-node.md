@@ -10,13 +10,16 @@ type: markdown
 
 To distribute work assigned to a SLATE cluster, worker nodes can be networked to a SLATE Master node.
 
-## Operating System Requirements
+## Requirements
 
-Prepare the Worker node by following the steps described in [Operating System Requirements](/docs/cluster/manual/operating-system-requirements.html).
+Prepare the Worker node by following the steps described in:
+1. [Operating System Requirements](/docs/cluster/manual/operating-system-requirements.html)
+2. [Install Containerd](/docs/cluster/manual/containerd.html)
+3. [Install Kubernetes](/docs/cluster/manual/kubernetes.html)
 
-## Gather Master Information
+## Gather Cluster Information
 
-SSH into your SLATE Master node and gather the following information:
+SSH into your SLATE Master node and gather the following information using the commands described below:
 
 | Name | Command |
 | --- | --- |
@@ -27,7 +30,7 @@ SSH into your SLATE Master node and gather the following information:
 
 SSH into your SLATE Worker node and define the following variables:
 
-1. The token and certificate from the steps above. 
+1. The token and certificate from the steps above:
 
    ```shell
    K8_TOKEN=<value>
@@ -55,11 +58,11 @@ Build the `kubeadm join` configuration file on the Worker node. This file has se
 
 ```shell
 cat <<EOF > /tmp/join-config.yml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "${IPV4_ADDR}:6443"
+    apiServerEndpoint: "${MASTER_IPV4_ADDR}:6443"
     token: "${K8_TOKEN}"
     caCertHashes:
     - "sha256:${K8_DISCO_CERT}"
@@ -67,7 +70,7 @@ nodeRegistration:
   criSocket: /var/run/containerd/containerd.sock
   name: ${HOSTNAME}
   kubeletExtraArgs:
-    node-ip: ${IPV4_ADDR},${IPV6_ADDR}
+    node-ip: ${WORKER_IPV4_ADDR},${WORKER_IPV6_ADDR}
 EOF
 ```
 {:data-add-copy-button='true'}
@@ -80,7 +83,7 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
-    apiServerEndpoint: "[${IPV6_ADDR}]:6443"
+    apiServerEndpoint: "[${MASTER_IPV6_ADDR}]:6443"
     token: "${K8_TOKEN}"
     caCertHashes:
     - "sha256:${K8_DISCO_CERT}"
@@ -88,12 +91,12 @@ nodeRegistration:
   criSocket: /var/run/containerd/containerd.sock
   name: ${HOSTNAME}
   kubeletExtraArgs:
-    node-ip: ${IPV6_ADDR},${IPV4_ADDR}
+    node-ip: ${WORKER_IPV6_ADDR},${WORKER_IPV4_ADDR}
 EOF
 ```
 {:data-add-copy-button='true'}
 
-## Executing Kubeadm Join
+## Join the Cluster
 
 Run the following join command on the Worker node to join it to the cluster.
 

@@ -16,7 +16,7 @@ The SLATE Command Line Interface will let you execute SLATE commands (see [Optai
 
 ## Joining the Federation
 
-On the Master node for your cluster, execute:
+On the Master Node for your cluster, execute:
 
 ```shell
 slate cluster create <NEW-CLUSTER-NAME> --group <YOUR-GROUP-NAME> --org <YOUR-ORG-NAME> -y
@@ -25,10 +25,10 @@ slate cluster create <NEW-CLUSTER-NAME> --group <YOUR-GROUP-NAME> --org <YOUR-OR
 
 ## Update Cluster Location
 
-All SLATE clusters should have their geographic locations listed in the cluster's attributes.
+All SLATE clusters should have their geographic locations listed in the cluster's attributes. Add yours using the `--location` option:
 
 ```shell
-slate cluster update [YOUR-CLUSTER-NAME] --location [LATITUDE],[LONGITUDE]
+slate cluster update <YOUR-CLUSTER-NAME> --location <LATITUDE>,<LONGITUDE>
 ```
 {:data-add-copy-button='true'}
 
@@ -37,7 +37,7 @@ slate cluster update [YOUR-CLUSTER-NAME] --location [LATITUDE],[LONGITUDE]
 Cluster administrators can grant cluster access to specific groups.
 
 ```shell
-slate cluster allow-group <YOUR-CLUSTER-NAME> '<[>GROUP-NAME>'
+slate cluster allow-group <YOUR-CLUSTER-NAME> '<GROUP-NAME>'
 ```
 {:data-add-copy-button='true'}
 
