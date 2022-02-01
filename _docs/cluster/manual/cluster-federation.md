@@ -12,7 +12,7 @@ At this point, you should have a SLATE-Ready Kubernetes cluster. You will now be
 
 ## SLATE CLI
 
-The SLATE Command Line Interface will let you execute SLATE commands (see [Optain a SLATE Token](/docs/cluster/manual/slate-token.html) for installation instructions).
+The SLATE Command Line Interface will let you execute SLATE commands (see [Obtain a SLATE Token](/docs/cluster/manual/slate-token.html) for installation instructions).
 
 ## Joining the Federation
 
