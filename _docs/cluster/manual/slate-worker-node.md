@@ -8,27 +8,36 @@ layout: docs2020
 type: markdown
 ---
 
-To distribute work assigned to a SLATE cluster, worker nodes can be networked to a SLATE Master node.
+To distribute work assigned to a SLATE cluster, Worker Nodes can be networked to a SLATE Master Node.
 
 ## Requirements
 
-Prepare the Worker node by following the steps described in:
+Prepare the Worker Node by following the steps described in:
 1. [Operating System Requirements](/docs/cluster/manual/operating-system-requirements.html)
 2. [Install Containerd](/docs/cluster/manual/containerd.html)
 3. [Install Kubernetes](/docs/cluster/manual/kubernetes.html)
 
 ## Gather Cluster Information
 
-SSH into your SLATE Master node and gather the following information using the commands described below:
+SSH into your SLATE Master Node and gather the following information using the output from the commands described below:
 
-| Name | Command |
-| --- | --- |
-| Kubernetes Token | `$(kubeadm token create)` |
-| Kubernetes Discovery Certificate Hash | `$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')` |
+### Kubernetes Token
+
+```shell
+$(kubeadm token create)
+```
+{:data-add-copy-button='true'}
+
+### Kubernetes Discovery Certificate Hash
+
+```shell
+$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
+```
+{:data-add-copy-button='true'}
 
 ## Define Variables
 
-SSH into your SLATE Worker node and define the following variables:
+SSH into your SLATE Worker Node and define the following variables:
 
 1. The token and certificate from the steps above:
 

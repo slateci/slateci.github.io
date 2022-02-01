@@ -55,4 +55,4 @@ systemctl enable --now kubelet
 
 {% include alert/note.html content="At this point the `kubelet` will be crash-looping as it has no configuration. That is okay for now." %}
 
-{% include doc-next-link.html content="/docs/cluster/manual/slate-master-node.html" %}
+{% include doc-next-link.html content="/docs/cluster/manual/slate-master-node/index.html" %}
