@@ -38,7 +38,7 @@ SERVICE_CLUSTER_IP_RANGE=10.20.0.0/16,fc00:db8:1234:5678:8:3::/112
 #### IPv6
 
 ```shell
-API_BIND_IP=::
+API_BIND_IP='::'
 CLUSTER_CIDR=fc00:db8:1234:5678:8:2::/104,10.10.0.0/16
 CLUSTER_DNS=fc00:db8:1234:5678:8:3:0:a
 KUBELET_HEALTHZ_BIND_IP=::1
@@ -301,6 +301,10 @@ For the sake of simplicity we will work through the [Install Calico with Kuberne
    alias calicoctl="kubectl exec -i -n kube-system calicoctl -- /calicoctl"
    ```
    {:data-add-copy-button='true'}
+
+## Validate IPv6/IPv6 dual-stack
+
+Complete the tests described in [Kubernetes: Validate IPv4/Ipv6 dual-stack](https://kubernetes.io/docs/tasks/network/validate-dual-stack/).
 
 ## Load Balancing
 
