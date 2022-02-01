@@ -323,7 +323,7 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
 2. Gather pools of public IPv4 and/or IPv6 addresses other than those assigned to the node (pools may be provided by cloud providers as floating IP addresses).
 
    Examples:
-   * IPv4: `123.101.6.42-123.101.16.64`
+   * IPv4: `203.0.113.42-203.0.113.64`
    * IPv6: `2001:DB8:414:10::56:3-2001:DB8:414:10::56:6`
 
 3. Create the MetalLB configuration and adjust the IP range(s) to reflect your environment. Below is an example of a single pool with a single IPv4 range.
