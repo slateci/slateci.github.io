@@ -38,7 +38,7 @@ SERVICE_CLUSTER_IP_RANGE=10.20.0.0/16,fc00:db8:1234:5678:8:3::/112
 #### IPv6
 
 ```shell
-API_BIND_IP='::'
+API_BIND_IP='"::"'
 CLUSTER_CIDR=fc00:db8:1234:5678:8:2::/104,10.10.0.0/16
 CLUSTER_DNS=fc00:db8:1234:5678:8:3:0:a
 KUBELET_HEALTHZ_BIND_IP=::1
@@ -51,7 +51,7 @@ SERVICE_CLUSTER_IP_RANGE=fc00:db8:1234:5678:8:3::/112,10.20.0.0/16
 Specify the IPv4 and IPv6 addresses for the Master Node. For example:
 
 ```shell
-IPV4_ADDR=192.168.0.3
+IPV4_ADDR=203.0.113.3
 IPV6_ADDR=2001:db8:1234:5678::1
 ```
 {:data-add-copy-button='true'}
