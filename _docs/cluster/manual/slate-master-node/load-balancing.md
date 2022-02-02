@@ -44,7 +44,7 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
    ```
    {:data-add-copy-button='true'}
 
-4. Verify that `kubeproxy` is configured for `ipvs` mode with `strictARP: true` (already set in the `kubeadm init` configuration templates above).
+4. Verify that `kubeproxy` is configured for `ipvs` mode with `strictARP: true` (already set in the `kubeadm init` configuration templates in [Initialize Kubernetes](/docs/cluster/manual/slate-master-node/initialize-kubernetes.html)).
 
 5. Apply the configuration for MetalLB:
 

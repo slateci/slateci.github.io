@@ -61,7 +61,7 @@ SSH into your SLATE Worker Node and define the following variables:
 
 ## Build Kubeadm Join
 
-Build the `kubeadm join` configuration file on the Worker node. This file has several forms depending on whether the Kubernetes control-plane is IPv4 or IPv6.
+Build the `kubeadm join` configuration file on the Worker Node. This file has several forms depending on whether the Kubernetes control-plane is IPv4 or IPv6.
 
 ### IPv4
 
