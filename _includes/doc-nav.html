@@ -14,7 +14,7 @@
                                     {{ entry.page }}
                                 </a>
                                 {% else %}
-                                <a href="{{entry.subfolderitems[0].url}}" class="doc-nav-sub-link {% if entry.subfolderitems[0].url == page.url %}active{% endif %}">
+                                <a href="{{entry.subfolderitems[0].url}}" class="doc-nav-sub-link {% if entry.subfolderitems[0].url == page.url %}active{% endif %} dropdown-toggle">
                                     {{ entry.title }}
                                 </a>
                                 <div class="collapse collapsable-parent" id="{{entry.id}}">
