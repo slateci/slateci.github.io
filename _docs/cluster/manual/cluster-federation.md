@@ -10,34 +10,35 @@ type: markdown
 
 At this point, you should have a SLATE-Ready Kubernetes cluster. You will now be able to join your cluster to the SLATE Federation.
 
-### SLATE CLI
+## SLATE CLI
 
-The SLATE Command Line Interface will let you execute SLATE commands.
+The SLATE Command Line Interface will let you execute SLATE commands (see [Obtain a SLATE Token](/docs/cluster/manual/slate-token.html) for installation instructions).
 
-On the Master node for your cluster, follow the [SLATE CLI](#) installation instructions.
+## Joining the Federation
 
-### Joining the Federation
+On the Master Node for your cluster, execute:
 
-On the Master node for your cluster, execute
-
+```shell
+slate cluster create <NEW-CLUSTER-NAME> --group <YOUR-GROUP-NAME> --org <YOUR-ORG-NAME> -y
 ```
-slate cluster create [NEW-CLUSTER-NAME] --group [YOUR-GROUP-NAME] --org [YOUR-ORG-NAME] -y
+{:data-add-copy-button='true'}
+
+## Update Cluster Location
+
+All SLATE clusters should have their geographic locations listed in the cluster's attributes. Add yours using the `--location` option:
+
+```shell
+slate cluster update <YOUR-CLUSTER-NAME> --location <LATITUDE>,<LONGITUDE>
 ```
+{:data-add-copy-button='true'}
 
-### Update Cluster Location
-
-All SLATE clusters should have their geographic locations listed in the cluster's attributes.
-
-```
-slate cluster update [YOUR-CLUSTER-NAME] --location [LATITUDE],[LONGITUDE]
-```
-
-### Allow Group Access
+## Allow Group Access
 
 Cluster administrators can grant cluster access to specific groups.
 
+```shell
+slate cluster allow-group <YOUR-CLUSTER-NAME> '<GROUP-NAME>'
 ```
-slate cluster allow-group [YOUR-CLUSTER-NAME] '[GROUP-NAME]'
-```
+{:data-add-copy-button='true'}
 
-<a href="/docs/cluster/manual/troubleshooting.html">Next Page</a>
+{% include doc-next-link.html content="/docs/cluster/manual/troubleshooting.html" %}

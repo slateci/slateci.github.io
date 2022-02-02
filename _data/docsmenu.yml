@@ -12,16 +12,33 @@ toc:
   - title: Manual Cluster Installation
     id: manual-cluster-installation
     subfolderitems:
-      - page: Installation
+      - page: Prerequisites
         url: /docs/cluster/index.html
       - page: Obtain a SLATE Token
         url: /docs/cluster/manual/slate-token.html
       - page: Operating System Requirements
         url: /docs/cluster/manual/operating-system-requirements.html
-      - page: Docker and Kubernetes
-        url: /docs/cluster/manual/docker-kubernetes.html
-      - page: SLATE Master Node
-        url: /docs/cluster/manual/slate-master-node.html
+      - page: Install Containerd
+        url: /docs/cluster/manual/containerd.html
+      - page: Install Kubernetes
+        url: /docs/cluster/manual/kubernetes.html
+      - title: SLATE Master Node
+        id: slate-master-node
+        subfolderitems:
+          - page: Overview
+            url: /docs/cluster/manual/slate-master-node/index.html
+          - page: Initialize Kubernetes
+            url: /docs/cluster/manual/slate-master-node/initialize-kubernetes.html
+          - page: Apply KubeConfig
+            url: /docs/cluster/manual/slate-master-node/apply-kubeconfig.html
+          - page: Allow Pods on Master
+            url: /docs/cluster/manual/slate-master-node/allow-pods-master.html
+          - page: Configure Pod Network with Calico
+            url: /docs/cluster/manual/slate-master-node/configure-pod-network.html
+          - page: Validate Dual-stack
+            url: /docs/cluster/manual/slate-master-node/validate-dual-stack.html
+          - page: Load Balancing with MetalLB
+            url: /docs/cluster/manual/slate-master-node/load-balancing.html
       - page: SLATE Worker Node
         url: /docs/cluster/manual/slate-worker-node.html
       - page: Cluster Federation
