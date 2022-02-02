@@ -39,7 +39,7 @@ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outfor
 
 SSH into your SLATE Worker Node and define the following variables:
 
-1. The token and certificate from the steps above:
+1. The token and certificate hash from the steps above:
 
    ```shell
    K8_TOKEN=<value>
@@ -107,7 +107,7 @@ EOF
 
 ## Join the Cluster
 
-Run the following join command on the Worker node to join it to the cluster.
+Run the following join command on the Worker Node to join it to the cluster.
 
 ```shell
 kubeadm join --config="/tmp/join-config.yml"
