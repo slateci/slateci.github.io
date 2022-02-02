@@ -13,7 +13,15 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% for entry in item.subfolderitems %}
-            <a class="dropdown-item" href="{{entry.url}}">{{entry.page}}</a>
+              {% if entry.subfolderitems == nil %}
+              <a class="dropdown-item" href="{{entry.url}}">
+                  {{entry.page}}
+              </a>
+              {% else %}
+              <a class="dropdown-item" href="{{entry.subfolderitems[0].url}}">
+                  {{entry.title}}
+              </a>
+              {% endif %}
             {% endfor %}
           </div>
         </li>
