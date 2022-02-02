@@ -24,14 +24,14 @@ SSH into your SLATE Master Node and gather the following information using the o
 ### Kubernetes Token
 
 ```shell
-$(kubeadm token create)
+kubeadm token create
 ```
 {:data-add-copy-button='true'}
 
 ### Kubernetes Discovery Certificate Hash
 
 ```shell
-$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
 ```
 {:data-add-copy-button='true'}
 
