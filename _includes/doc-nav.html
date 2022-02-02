@@ -1,11 +1,35 @@
     <div id="side-menu">
         {% for item in site.data.docsmenu.toc %}
         <ul>
-            <li class="parent-li"><a href="{{item.subfolderitems[0].url}}" role="button" aria-expanded="false" aria-controls="{{item.id}}" class="doc-nav-top-link">{{ item.title }}</a>
+            <li class="parent-li">
+                <a href="{{item.subfolderitems[0].url}}" role="button" aria-expanded="false" aria-controls="{{item.id}}" class="doc-nav-top-link">
+                    {{ item.title }}
+                </a>
                 <div class="collapse collapsable-parent" id="{{item.id}}">
                     <ul>
                         {% for entry in item.subfolderitems %}
-                            <li class="sub-item-li"><a href="{{ entry.url }}" class="doc-nav-sub-link {% if entry.url == page.url %}active{% endif %}">{{ entry.page }}</a> </li>
+                            <li class="sub-item-li">
+                                {% if entry.subfolderitems == nil %}
+                                <a href="{{ entry.url }}" class="doc-nav-sub-link {% if entry.url == page.url %}active{% endif %}">
+                                    {{ entry.page }}
+                                </a>
+                                {% else %}
+                                <a href="{{entry.subfolderitems[0].url}}" class="doc-nav-sub-link {% if entry.subfolderitems[0].url == page.url %}active{% endif %} dropdown-toggle">
+                                    {{ entry.title }}
+                                </a>
+                                <div class="collapse collapsable-parent" id="{{entry.id}}">
+                                    <ul>
+                                        {% for subentry in entry.subfolderitems %}
+                                        <li class="sub-sub-item-li">
+                                            <a href="{{ subentry.url }}" class="doc-nav-sub-link {% if subentry.url == page.url %}active{% endif %}">
+                                                {{ subentry.page }}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>
