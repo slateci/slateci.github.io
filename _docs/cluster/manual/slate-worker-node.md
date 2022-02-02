@@ -47,14 +47,14 @@ SSH into your SLATE Worker Node and define the following variables:
    ```
    {:data-add-copy-button='true'}
 
-2. IPv4 and IPv6 addresses for both nodes. For example:
+2. IP addresses for both nodes. For example:
 
    ```shell
    # master node
-   MASTER_IPV4_ADDR=192.168.0.3
-   MASTER_IPV6_ADDR=2001:db8:1234:5678::1
+   MASTER_IPV4_ADDR=203.0.113.3               # required if the control-plane is IPv4
+   MASTER_IPV6_ADDR=2001:db8:1234:5678::1     # required if the control-plane is IPv6
    # worker node
-   WORKER_IPV4_ADDR=192.168.0.4
+   WORKER_IPV4_ADDR=203.0.113.4
    WORKER_IPV6_ADDR=2001:db8:1234:5678::2
    ```
    {:data-add-copy-button='true'}
