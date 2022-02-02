@@ -20,7 +20,7 @@
                                 <div class="collapse collapsable-parent" id="{{entry.id}}">
                                     <ul>
                                         {% for subentry in entry.subfolderitems %}
-                                        <li class="sub-item-li">
+                                        <li class="sub-sub-item-li">
                                             <a href="{{ subentry.url }}" class="doc-nav-sub-link {% if subentry.url == page.url %}active{% endif %}">
                                                 {{ subentry.page }}
                                             </a>
