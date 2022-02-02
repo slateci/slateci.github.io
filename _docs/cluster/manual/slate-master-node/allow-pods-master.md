@@ -17,7 +17,7 @@ In larger clusters, it may instead be desirable to prevent "user" workloads from
 To remove the `master` taint:
 
 ```shell
-kubectl taint nodes --all node-role.Kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 {:data-add-copy-button='true'}
 
