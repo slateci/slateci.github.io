@@ -39,7 +39,7 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
        - name: default
          protocol: layer2
          addresses:
-         - 123.101.6.42-123.101.16.64
+         - 203.0.113.42-203.0.113.64
    EOF
    ```
    {:data-add-copy-button='true'}
