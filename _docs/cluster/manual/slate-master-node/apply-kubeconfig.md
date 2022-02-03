@@ -12,7 +12,7 @@ If you want to permanently enable `kubectl` access for the `root` account, you w
 
 ```shell
 mkdir -p /root/.kube && \
-cp -i /etc/Kubernetes/admin.conf /root/.kube/config && \
+cp -i /etc/kubernetes/admin.conf /root/.kube/config && \
 chown root:root $HOME/.kube/config
 ```
 {:data-add-copy-button='true'}
@@ -20,7 +20,7 @@ chown root:root $HOME/.kube/config
 Alternatively to apply the kubeconfig for a single session execute the following:
 
 ```shell
-export KUBECONFIG=/etc/Kubernetes/admin.conf
+export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 {:data-add-copy-button='true'}
 
