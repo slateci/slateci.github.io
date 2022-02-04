@@ -3,7 +3,7 @@
   overflow-y: auto;
   padding-right: 15px;
   padding-bottom: 10px;
-  max-width: 250px;
+  width: 250px;
   @media (min-width: 0) and (max-width: 991px) {
 	  visibility: hidden;
 	background: white;
@@ -67,9 +67,10 @@
 }
 
 .freeze-menu {
-  position: absolute;
-  top: 0;
-  left: 10px;
+	position: -webkit-sticky;
+  	position: sticky;
+  	top: 0;
+	left: 10px;
 }
 
 .active-menu-link {
