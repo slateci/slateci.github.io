@@ -8,68 +8,49 @@ layout: docs2020
 type: markdown
 ---
 
-In order to reliably run Kubernetes and connect to the SLATE federation, a few changes are needed to the base CentOS 7 install. The following steps will need to be applied to all SLATE nodes in your cluster. 
+In order to reliably run Kubernetes and connect to the SLATE federation, a few changes are needed to the base CentOS install. The following prerequisite steps will need to be applied to all SLATE nodes in your cluster. 
 
-## Disable SELinux
+### Disable SELinux
+First, you will need to disable SELinux as this generally conflicts with Kubernetes:
 
-Disable SELinux as this generally conflicts with Kubernetes:
-
-```shell
-setenforce 0 && \
+```
+setenforce 0
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 ```
-{:data-add-copy-button='true'}
 
-If you wish to retain the SELinux logging, you can alternatively use the `permissive` mode rather than `enforcing`.
+If you wish to retain the SELinux logging, you can alternatively use 'permissive' mode rather than enforcing.
 
-## Disable Swap
+### Disable swap
+Swap must be disabled for Kubernetes to run effectively. Swap is typically enabled in a default CentOS installation where automatic partitioning has been selected. To disable swap:
 
-Swap must be disabled for Kubernetes to run effectively. Swap is typically enabled in a default CentOS 7 installation where automatic partitioning has been selected.
-
-```shell
-swapoff -a && \
+```
+swapoff -a
 sed -e '/swap/s/^/#/g' -i /etc/fstab
 ```
-{:data-add-copy-button='true'}
 
-## Disable firewalld
+### Disable firewalld
+In order to properly communicate with other devices within the cluster, `firewalld` must be disabled:
 
-In order to properly communicate with other devices within the cluster, `firewalld` must be disabled.
-
-```shell
+```
 systemctl disable --now firewalld
 ```
-{:data-add-copy-button='true'}
 
-## Disable root login over SSH
+### Disable root login over SSH
+While optional, we *strongly* recommend disabling root login over SSH for security reasons.
 
-While optional, we **strongly** recommend disabling root login over SSH for security reasons:
-
-```shell
+```
 sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 ```
-{:data-add-copy-button='true'}
 
-## Configure Network Traffic
+### Use iptables for Bridged Network Traffic
+Ensure that bridged network traffic goes through iptables.
 
-Ensure that bridged network traffic goes through iptables and that IP forwarding is enabled for IPv4 and IPv6. This may be done by adding a file read by `sysctl`:
-
-```shell
-cat <<EOF >  /etc/sysctl.d/01-k8s.conf
+```
+cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
-net.ipv6.conf.all.forwarding=1
-net.ipv4.conf.all.forwarding=1
 EOF
+sysctl --system
 ```
-{:data-add-copy-button='true'}
 
-Apply the changes and restart the Network Manager:
-
-```shell
-sysctl --system && \
-systemctl restart NetworkManager
-```
-{:data-add-copy-button='true'}
-
-{% include doc-next-link.html content="/docs/cluster/manual/containerd.html" %}
+<a href="/docs/cluster/manual/docker-kubernetes.html">Next Page</a>
