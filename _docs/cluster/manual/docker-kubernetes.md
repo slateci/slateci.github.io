@@ -64,7 +64,7 @@ The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, an
 
 ```
 # Install the three necessary Kubernetes components
-yum install kubeadm-1.21.* kubectl-1.21.* kubelet-1.21.* --disableexcludes=kubernetes
+yum install kubeadm-1.21.\* kubectl-1.21.\* kubelet-1.21.\* --disableexcludes=kubernetes
 
 # Enable Kubelet through systemctl.
 systemctl enable --now kubelet
