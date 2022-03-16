@@ -33,3 +33,5 @@ The following summary document is intended to give a general overview of the sec
 * [Trusted Image Sources](/docs/security-and-policies/trusted-image-sources.html)<br>
 * [Application Administrator Obligations](/docs/security-and-policies/application-admin-obligations.html)<br>
 * [Overview of SLATE Platform Internals and Security](/docs/security-and-policies/overview-of-slate-platform-internals-and-security.html)<br>
+* [SLATE Access Control Policy and Procedures](/policy_docs/SLATE-Access-Control.pdf)<br>
+* [SLATE Traceability](/policy_docs/SLATE-Traceability.pdf)<br>

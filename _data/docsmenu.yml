@@ -115,30 +115,30 @@ toc:
     subfolderitems:
       - page: Overview
         url: /docs/security-and-policies/index.html
-      - page: SLATE Acceptable Use Policy
-        url: /docs/security-and-policies/acceptable-use.html
-      - page: Supported Software Versions
-        url: /docs/security-and-policies/supported-versions.html
-      - page: SLATE Privacy Policy
-        url: /docs/security-and-policies/privacy.html
-      - page: Overview of SLATE Platform Internals and Security
-        url: /docs/security-and-policies/overview-of-slate-platform-internals-and-security.html
-      - page: Incident Response Policy
-        url: /docs/security-and-policies/incident-response-policy.html
-      - page: SLATE Edge Administrator Obligations
-        url: /docs/security-and-policies/edge-administrator-obligations.html
-      - page: Application Administrator Obligations
-        url: /docs/security-and-policies/application-admin-obligations.html
-      - page: SLATE Application Developer Obligations
-        url: /docs/security-and-policies/slate-application-developer-obligations.html
-      - page: SLATE Application Reviewer Obligations
-        url: /docs/security-and-policies/slate-application-reviewer-obligations.html
-      - page: Change Management
-        url: /docs/security-and-policies/change-management.html
-      - page: SLATE Application Development and Review Procedures
-        url: /docs/security-and-policies/slate-application-developer-and-review-procedures.html
-      - page: Trusted Image Sources
-        url: /docs/security-and-policies/trusted-image-sources.html
+#      - page: SLATE Acceptable Use Policy
+#        url: /docs/security-and-policies/acceptable-use.html
+#      - page: Supported Software Versions
+#        url: /docs/security-and-policies/supported-versions.html
+#      - page: SLATE Privacy Policy
+#        url: /docs/security-and-policies/privacy.html
+#      - page: Overview of SLATE Platform Internals and Security
+#        url: /docs/security-and-policies/overview-of-slate-platform-internals-and-security.html
+#      - page: Incident Response Policy
+#        url: /docs/security-and-policies/incident-response-policy.html
+#      - page: SLATE Edge Administrator Obligations
+#        url: /docs/security-and-policies/edge-administrator-obligations.html
+#      - page: Application Administrator Obligations
+#        url: /docs/security-and-policies/application-admin-obligations.html
+#      - page: SLATE Application Developer Obligations
+#        url: /docs/security-and-policies/slate-application-developer-obligations.html
+#      - page: SLATE Application Reviewer Obligations
+#        url: /docs/security-and-policies/slate-application-reviewer-obligations.html
+#      - page: Change Management
+#        url: /docs/security-and-policies/change-management.html
+#      - page: SLATE Application Development and Review Procedures
+#        url: /docs/security-and-policies/slate-application-developer-and-review-procedures.html
+#      - page: Trusted Image Sources
+#        url: /docs/security-and-policies/trusted-image-sources.html
   - title: Resources
     id: resources
     url: /docs/resources/resources
