@@ -39,7 +39,7 @@ The `--help` option can also be used with any of the client's subcommands to lea
 
 The client's simplest use is to list existing objects on the SLATE platform. For example, you can list the edge clusters currently participating in the platform:
 
-	$ ./slate cluster list
+	$ slate cluster list
 	Name               Admin     ID             
 	umich-prod         slate-dev cluster_WRb0f8mH9ak
 	uchicago-prod      slate-dev cluster_yZroQR5mfBk
