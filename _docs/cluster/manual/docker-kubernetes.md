@@ -58,6 +58,8 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 EOF
 ```
 
+*Note* If you get an error you may need to change the above file to `repo-gpgcheck=0`.  Currently (03/30/2022) the Google GPG key is expired or incorrect for yum installs. Google recommends changing `repo_gpgcheck=0`. For more information please visit Google's [Known Issues](https://cloud.google.com/compute/docs/troubleshooting/known-issues#keyexpired) page. 
+
 The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, and `kubelet`. `kubeadm` is a tool used to bootstrap Kubernetes clusters, `kubectl` is the command-line tool needed to interact with and control the cluster, and `kubelet` is the system daemon that allows the Kubernetes api to control the cluster nodes. To install and enable these components:
 
 <strong>NOTE:</strong> Currently SLATE is compatible up to Kubernetes version 1.21. To install version 1.21 run this command:
