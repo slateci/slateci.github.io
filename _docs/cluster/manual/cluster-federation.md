@@ -18,7 +18,7 @@ On the Master node for your cluster, follow the [SLATE CLI](#) installation inst
 
 ### Joining the Federation
 
-On the Master node for your cluster, execute
+On the Master node for your cluster (or a system with kubectl configured with admin access to your cluster), execute
 
 ```
 slate cluster create [NEW-CLUSTER-NAME] --group [YOUR-GROUP-NAME] --org [YOUR-ORG-NAME] -y
