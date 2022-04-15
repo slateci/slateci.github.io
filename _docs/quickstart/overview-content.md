@@ -20,7 +20,7 @@ In order to use SLATE, you need to register an account. Account creation is hand
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
             <div class="col-sm-9 text-center nofloat center-block">
-                <a href="https://portal.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">SLATE Portal</button></a>
+                <a href="https://portal.slateci.io/signup" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">SLATE Portal Sign-up </button></a>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@ In order to use SLATE, you need to register an account. Account creation is hand
 
 ## Use the SLATE Client
 
-In addition to the console, users may use SLATE Client, a commandline tool for MacOS and Linux. The SLATE Client allows users to configure and deploy applications at a number of SLATE production clusters with just a handful of commands. An installation and usage guide can be found below:
+In addition to the portal, users may use SLATE Client, a commandline tool for MacOS and Linux. The SLATE Client allows users to configure and deploy applications at a number of SLATE production clusters with just a handful of commands. An installation and usage guide can be found below:
 
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
