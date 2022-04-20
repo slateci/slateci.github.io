@@ -18,20 +18,22 @@ The following summary document is intended to give a general overview of the sec
 
 ## SLATE Security Policies
 
+* [Overview of SLATE Platform Internals and Security](/docs/security-and-policies/overview-of-slate-platform-internals-and-security.html)<br>
 * [Acceptable Use Policy](/docs/security-and-policies/acceptable-use.html)
+* [Access Control Policy and Procedures](/policy_docs/SLATE-Access-Control.pdf)<br>
+* [Application Administrator Obligations](/docs/security-and-policies/application-admin-obligations.html)<br>
+* [Application Developer Obligations](/docs/security-and-policies/slate-application-developer-obligations.html)<br>
+* [Application Development and Review Procedures](/docs/security-and-policies/slate-application-developer-and-review-procedures.html)<br>
+* [Application Reviewer Obligations](/docs/security-and-policies/slate-application-reviewer-obligations.html)<br>
+* [Edge Administrator Obligations](/docs/security-and-policies/edge-administrator-obligations.html)<br>
 * [Incident Response Policy](/docs/security-and-policies/incident-response-policy.html)
 * [Privacy Policy](/docs/security-and-policies/privacy.html)
+* [Traceability](/policy_docs/SLATE-Traceability.pdf)<br>
 
 ## Other Policies
 
 * [Supported Software Versions](/docs/security-and-policies/supported-versions.html)<br>
-* [Edge Administrator Obligations](/docs/security-and-policies/edge-administrator-obligations.html)<br>
-* [SLATE Application Developer Obligations](/docs/security-and-policies/slate-application-developer-obligations.html)<br>
-* [SLATE Application Reviewer Obligations](/docs/security-and-policies/slate-application-reviewer-obligations.html)<br>
 * [Change Management](/docs/security-and-policies/change-management.html)<br>
-* [SLATE Application Development and Review Procedures](/docs/security-and-policies/slate-application-developer-and-review-procedures.html)<br>
 * [Trusted Image Sources](/docs/security-and-policies/trusted-image-sources.html)<br>
-* [Application Administrator Obligations](/docs/security-and-policies/application-admin-obligations.html)<br>
-* [Overview of SLATE Platform Internals and Security](/docs/security-and-policies/overview-of-slate-platform-internals-and-security.html)<br>
-* [SLATE Access Control Policy and Procedures](/policy_docs/SLATE-Access-Control.pdf)<br>
-* [SLATE Traceability](/policy_docs/SLATE-Traceability.pdf)<br>
+
+
