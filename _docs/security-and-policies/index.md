@@ -25,15 +25,15 @@ The following summary document is intended to give a general overview of the sec
 * [Application Developer Obligations](/policy_docs/SLATE_Application_Developer_Obligations.pdf)<br>
 * [Application Development and Review Procedures](/policy_docs/SLATE_Application_Development_and_Review_Procedures.pdf)<br>
 * [Application Reviewer Obligations](/policy_docs/SLATE_Application_Reviewer_Obligations.pdf)<br>
-* [Edge Administrator Obligations](/docs/security-and-policies/edge-administrator-obligations.html)<br>
-* [Incident Response Policy](/docs/security-and-policies/incident-response-policy.html)
-* [Privacy Policy](/docs/security-and-policies/privacy.html)
-* [Traceability](/policy_docs/SLATE-Traceability.pdf)<br>
+* [Edge Administrator Obligations](/policy_docs/SLATE_Edge_Administrator_Obligations.pdf)<br>
+* [Incident Response Policy](/policy_docs/SLATE_Incident_Response_Policy.pdf)<br>
+* [Privacy Policy](/policy_docs/SLATE_Privacy_Policy.pdf)<br>
+* [Traceability](/policy_docs/SLATE_Traceability.pdf)<br>
 
 ## Other Policies
 
 * [Supported Software Versions](/docs/security-and-policies/supported-versions.html)<br>
-* [Change Management](/docs/security-and-policies/change-management.html)<br>
+* [Change Management](/policy_docs/SLATE_Change_Management_Policy.pdf)<br>
 * [Trusted Image Sources](/docs/security-and-policies/trusted-image-sources.html)<br>
 
 
