@@ -20,7 +20,7 @@ The following summary document is intended to give a general overview of the sec
 
 * [Overview of SLATE Platform Internals and Security](/docs/security-and-policies/overview-of-slate-platform-internals-and-security.html)<br>
 * [Acceptable Use Policy](/policy_docs/SLATE_Acceptable_Use_Policy.pdf)<br>
-* [Access Control Policy and Procedures](/policy_docs/SLATE-Access-Control.pdf)<br>
+* [Access Control Policy and Procedures](/policy_docs/SLATE_Access_Control_Policy_and_Procedures.pdf)<br>
 * [Application Administrator Obligations](/policy_docs/SLATE_Application_Administrator_Obligations.pdf)<br>
 * [Application Developer Obligations](/policy_docs/SLATE_Application_Developer_Obligations.pdf)<br>
 * [Application Development and Review Procedures](/policy_docs/SLATE_Application_Development_and_Review_Procedures.pdf)<br>
@@ -34,6 +34,6 @@ The following summary document is intended to give a general overview of the sec
 
 * [Supported Software Versions](/docs/security-and-policies/supported-versions.html)<br>
 * [Change Management](/policy_docs/SLATE_Change_Management_Policy.pdf)<br>
-* [Trusted Image Sources](/docs/security-and-policies/trusted-image-sources.html)<br>
+* [Trusted Image Sources](/policy_docs/SLATE_Trusted_Image_Sources.pdf)<br>
 
 
