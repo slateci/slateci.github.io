@@ -22,7 +22,7 @@ The following summary document is intended to give a general overview of the sec
 * [Acceptable Use Policy](/policy_docs/SLATE_Acceptable_Use_Policy.pdf)<br>
 * [Access Control Policy and Procedures](/policy_docs/SLATE-Access-Control.pdf)<br>
 * [Application Administrator Obligations](/policy_docs/SLATE_Application_Administrator_Obligations.pdf)<br>
-* [Application Developer Obligations](/docs/security-and-policies/slate-application-developer-obligations.html)<br>
+* [Application Developer Obligations](/policy_docs/SLATE_Application_Developer_Obligations.pdf)<br>
 * [Application Development and Review Procedures](/docs/security-and-policies/slate-application-developer-and-review-procedures.html)<br>
 * [Application Reviewer Obligations](/docs/security-and-policies/slate-application-reviewer-obligations.html)<br>
 * [Edge Administrator Obligations](/docs/security-and-policies/edge-administrator-obligations.html)<br>
