@@ -23,8 +23,8 @@ The following summary document is intended to give a general overview of the sec
 * [Access Control Policy and Procedures](/policy_docs/SLATE-Access-Control.pdf)<br>
 * [Application Administrator Obligations](/policy_docs/SLATE_Application_Administrator_Obligations.pdf)<br>
 * [Application Developer Obligations](/policy_docs/SLATE_Application_Developer_Obligations.pdf)<br>
-* [Application Development and Review Procedures](/docs/security-and-policies/slate-application-developer-and-review-procedures.html)<br>
-* [Application Reviewer Obligations](/docs/security-and-policies/slate-application-reviewer-obligations.html)<br>
+* [Application Development and Review Procedures](/policy_docs/SLATE_Application_Development_and_Review_Procedures.pdf)<br>
+* [Application Reviewer Obligations](/policy_docs/SLATE_Application_Reviewer_Obligations.pdf)<br>
 * [Edge Administrator Obligations](/docs/security-and-policies/edge-administrator-obligations.html)<br>
 * [Incident Response Policy](/docs/security-and-policies/incident-response-policy.html)
 * [Privacy Policy](/docs/security-and-policies/privacy.html)
