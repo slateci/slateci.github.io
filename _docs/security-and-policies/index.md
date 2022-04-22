@@ -14,14 +14,14 @@ In case of any security related incident involving SLATE or its infrastructure, 
 
 The following summary document is intended to give a general overview of the security model used in SLATE, to complement the precise definitions and requirements set out in the formal policies. 
 
-[Security Summary](/docs/security-and-policies/summary.html)
+[Security Summary](/policy_docs/SLATE_Security_Summary.pdf)<br>
 
 ## SLATE Security Policies
 
 * [Overview of SLATE Platform Internals and Security](/docs/security-and-policies/overview-of-slate-platform-internals-and-security.html)<br>
-* [Acceptable Use Policy](/docs/security-and-policies/acceptable-use.html)
+* [Acceptable Use Policy](/policy_docs/SLATE_Acceptable_Use_Policy.pdf)<br>
 * [Access Control Policy and Procedures](/policy_docs/SLATE-Access-Control.pdf)<br>
-* [Application Administrator Obligations](/docs/security-and-policies/application-admin-obligations.html)<br>
+* [Application Administrator Obligations](/policy_docs/SLATE_Application_Administrator_Obligations.pdf)<br>
 * [Application Developer Obligations](/docs/security-and-policies/slate-application-developer-obligations.html)<br>
 * [Application Development and Review Procedures](/docs/security-and-policies/slate-application-developer-and-review-procedures.html)<br>
 * [Application Reviewer Obligations](/docs/security-and-policies/slate-application-reviewer-obligations.html)<br>
