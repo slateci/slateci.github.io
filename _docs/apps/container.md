@@ -33,8 +33,8 @@ Each SLATE application should reside in a separate Git repository in the [GitHub
 ```
 
 * `app`: Contains all the sources for the application. The main script should be called `entrypoint.sh` where appropriate.
-* `local-test`: Contains the deployment for a local minikube.
-* `build`: Contains `build.sh` to build the images and `run.sh` to start the app in minikube.
+* `local-test`: Contains the deployment for a local [minikube](https://minikube.sigs.k8s.io/docs/).
+* `build`: Contains `build.sh` to build the images and `run.sh` to start the app in [minikube](https://minikube.sigs.k8s.io/docs/).
 
 As a base image, we recommend CentOS 7+ or Ubuntu.
 
