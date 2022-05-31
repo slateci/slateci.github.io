@@ -12,6 +12,7 @@ type: markdown
 By default, storage for a deployment exists within the container as ephemeral storage. For some applications, such as caches, persistent local storage may be important for optimizing application use.
 
 ## Local Storage Provisioning on SLATE
+
 Local storage space is currently being provisioned by the Kubernetes `nfs-provisioner` mounted to the filesystem of one node within a cluster. This allows the storage to be dynamically provisioned and cleaned up with deployments in a user-friendly way.
 
 Kubernetes v1.12 will include a `local-provisioner` as an alpha feature. This is likely the direction that SLATE will take in the future. This change will likely only affect the `storageClassName` for developers utilizing the local storage system.

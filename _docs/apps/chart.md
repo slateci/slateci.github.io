@@ -13,9 +13,9 @@ The third and final step to preparing an application for SLATE is creating a Hel
 
 An intro on how to create and use Helm Charts can be found [on Helm's website](https://helm.sh/docs/chart_template_guide/getting_started/)
 
-The Helm Chart for SLATE should offer customization of application parameters, but should be balanced with abstraction of the application.  
-An example of this is the Frontier Squid Helm package. The values.yaml file (required for all Helm packages) is as follows:  
-```
+The Helm Chart for SLATE should offer customization of application parameters, but should be balanced with abstraction of the application. An example of this is the Frontier Squid Helm package. The `values.yaml` file (required for all Helm packages) is as follows:
+
+```yaml
 # Instance to label use case of Frontier Squid deployment
 # Generates app name as "osg-frontier-squid-[Instance]"
 # Enables unique instances of Frontier Squid in one namespace
@@ -69,6 +69,7 @@ SquidConf:
   # within kubernetes clusters. 
   IPRange: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
 ```  
+
 In this example you can see that there are only 6 non-SLATE settings to manipulate in order to deploy an instance of Frontier Squid. These are the settings most pertinent to the functionality of Frontier Squid, and provide enough flexibility for general users. The settings in the SLATE category are provided by the api at the time of deployment to appropriately reflect the environment that the application is being deployed to. These defaults are for localized testing purposes.
 
 Some notes about creating the Helm Chart and deciding on values:
@@ -79,31 +80,34 @@ Some notes about creating the Helm Chart and deciding on values:
 
 ### SLATE Standardization
 * An `Instance` variable is required for SLATE to deploy unique instances of the application. This should be included in the metadata names using the helper function below in the _helpers.tpl file. If there is a resource associated with the deployment, it should be named as {% raw %} `{{ template "[chart].fullname" . }}-[resourceName]` {% endraw %}  
-{% raw %}
-```
-{{- define "[chart].fullname" -}} #replace the chart name with yours
-  {{- $name := default .Chart.Name .Values.Instance -}}
-  {{- if contains $name .Chart.Name -}}
-    {{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
-  {{- else -}}
-    {{- printf "%s-%s" .Chart.Name $name | trunc 63 | trimSuffix "-" -}}
+
+  {% raw %}
+  ```yaml
+  {{- define "[chart].fullname" -}} #replace the chart name with yours
+    {{- $name := default .Chart.Name .Values.Instance -}}
+    {{- if contains $name .Chart.Name -}}
+      {{- .Chart.Name | trunc 63 | trimSuffix "-" -}}
+    {{- else -}}
+      {{- printf "%s-%s" .Chart.Name $name | trunc 63 | trimSuffix "-" -}}
+    {{- end -}}
   {{- end -}}
-{{- end -}}
-```
-{% endraw %}
+  ```
+  {% endraw %}
+
 * It is not required to include the SLATE set variables shown above in every chart, but they should be included if they will be used in your deployment.
-* Additionally a `instanceID` label is needed inside the app's deployment or StatefulSet under `metadata`.
-{% raw %}
-```
-...
-instanceID: {{ .Values.SLATE.Instance.ID | quote  }}
-```
-{% endraw %}
+* Additionally, an `instanceID` label is needed inside the app's deployment or StatefulSet under `metadata`.
+
+  {% raw %}
+  ```yaml
+  ...
+  instanceID: {{ .Values.SLATE.Instance.ID | quote  }}
+  ```
+  {% endraw %}
 
 ### SLATE Metadata
 
-SLATE has the capability to automatically inject metadata into any chart it installs, if such information is needed.
-Any or all of the following values can be used in any SLATE chart:
+SLATE has the capability to automatically inject metadata into any chart it installs, if such information is needed. Any or all of the following values can be used in any SLATE chart:
+
 ```yaml
 ### SLATE-START ###
 SLATE:
@@ -123,6 +127,5 @@ SLATE:
     GroupEmail: "group-email"
 ### SLATE-END ###
 ```
-To use any of these, simply add them to your `values.yaml` file between the `### SLATE-START ###` and `### SLATE-END ###` tags.
-The values they are assigned can here can be arbitrary, as they will be overridden at application install time by the correct values.
 
+To use any of these, simply add them to your `values.yaml` file between the `### SLATE-START ###` and `### SLATE-END ###` tags. The values they are assigned can here can be arbitrary, as they will be overridden at application install time by the correct values.
