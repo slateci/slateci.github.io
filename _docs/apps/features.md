@@ -18,7 +18,7 @@ Developers can write these features directly into an application's container, or
 One common example of a sidecar feature may be to include a FluentBit container in your pod that sends log data to an Elastic Search database. This can be used for customizable metrics monitoring, or system debugging.
 
 Workflow for including FluentBit sidecar container:
-1. Download and customize the [Frontier Squid FluentBit ConfigMap](https://github.com/slateci/slate-catalog/blob/master/incubator/osg-frontier-squid/templates/fluentBitConfig.yaml) for your deployment.
+1. Download and customize the [Frontier Squid FluentBit ConfigMap](https://github.com/slateci/slate-catalog-stable/blob/master/charts/osg-frontier-squid/templates/configmap.yaml) for your deployment.
   * Change template name to your chart in the metadata 
   * Update Input `Path` to your container's log directory  
   * Include the SLATE specific values in your values.yaml, found under "Preparing a Helm chart", and set your defaults.  
