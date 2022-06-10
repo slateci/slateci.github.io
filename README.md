@@ -1,5 +1,9 @@
 # slate.github.io
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Integration Tests](https://github.com/slateci/slateci.github.io/actions/workflows/integration-tests.yml/badge.svg)](https://github.com/slateci/slateci.github.io/actions/workflows/integration-tests.yml)
+[![pages-build-deployment](https://github.com/slateci/slateci.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/slateci/slateci.github.io/actions/workflows/pages/pages-build-deployment)
+
 This repository contains the source code for the [slateci.io](https://slateci.io) web site. It is modeled after the [istio.io](https://istio.io) website.
 
 ## How to contribute
