@@ -6,5 +6,5 @@ gem "nokogiri", ">= 1.10.8"
 # Error:  uninitialized constant Faraday::Error::ClientError
 #   Did you mean?  Faraday::ClientError
 # https://github.com/github/personal-website/issues/166
-gem 'faraday', '~> 0.17.3'
+gem 'faraday', '~> 2.3.0'
 gem "kramdown", ">= 2.3.0"
