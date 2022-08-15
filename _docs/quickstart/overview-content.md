@@ -1,17 +1,3 @@
-## Try the SLATE demo sandbox
-
-To get a feel for how launching and running a service on the SLATE platform works, a guided tutorial is available on a real (small) instance of the platform:
-
-<div id="doc-call" class="container-fluid doc-call-container ">
-    <div class="row doc-call-row">
-        <div class="col-md-10 nofloat center-block">
-            <div class="col-sm-9 text-center nofloat center-block">
-                <a href="https://sandbox.slateci.io/" style="background-color: #fff; color: #286AC7;" role="button"><button class="btn btn-slate">SLATE Sandbox</button></a>
-            </div>
-        </div>
-    </div>
-</div>
-
 ## Create a SLATE account
 
 In order to use SLATE, you need to register an account. Account creation is handled through the SLATE portal, which also supports most SLATE functions such as managing groups, clusters and services. 
