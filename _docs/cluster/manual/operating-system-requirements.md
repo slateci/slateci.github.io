@@ -53,4 +53,10 @@ EOF
 sysctl --system
 ```
 
-<a href="/docs/cluster/manual/docker-kubernetes.html">Next Page</a>
+### Enable routing
+
+```
+echo 1 > /proc/sys/net/ipv4/ip_forward
+```
+
+<a href="/docs/cluster/manual/containerd.html">Next Page</a>
