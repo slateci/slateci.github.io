@@ -48,7 +48,7 @@ If you are running a single-node SLATE cluster, you'll want to remove the "NoSch
 To remove the master taint:
  
 ```
-kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 ```
 
 ### Pod Network

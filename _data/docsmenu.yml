@@ -18,8 +18,10 @@ toc:
         url: /docs/cluster/manual/slate-token.html
       - page: Operating System Requirements
         url: /docs/cluster/manual/operating-system-requirements.html
-      - page: Docker and Kubernetes
-        url: /docs/cluster/manual/docker-kubernetes.html
+      - page: Containerd
+        url: /docs/cluster/manual/containerd.html
+      - page: Kubernetes
+        url: /docs/cluster/manual/kubernetes.html
       - page: SLATE Master Node
         url: /docs/cluster/manual/slate-master-node.html
       - page: SLATE Worker Node
