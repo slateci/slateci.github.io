@@ -18,7 +18,7 @@ To configure a SLATE Master Node, you must first go through the "Operating Syste
 
 ### Initialize the Kubernetes cluster with Kubeadm
 
-We want to initialize our cluster with the pod network CIDR specifically set to 192.168.0.0/16 as this is the default range utilized by the Calico network plugin. If needed, it is possible to set a different RFC1918 range during `kubeadm init` and configure Calico to use that range. 
+We want to initialize our cluster with the pod network CIDR specifically set to 192.168.0.0/16 as this is the default range utilized by the Calico network plugin. If needed, it is possible to set a different RFC1918 range during `kubeadm init` and configure Calico to use that range. Instructions for configuring Calico for a different IP range is noted below in under Pod Network.  
 
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
@@ -55,7 +55,9 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 
 In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well. 
 
-To install Calico, you will simply need to apply the appropriate Kubernetes manifests:
+If you changed the IP range to anything other than 192.168.0.0/16 in the `kubeadm init` command above, you will need to update the custom-resources.yaml file before installing Calico. Download https://docs.projectcalico.org/manifests/custom-resources.yaml and update the IP range under spec/calicoNetwork/ipPools/blockSize and CIDR.  
+
+To install Calico, you will simply need to apply the appropriate Kubernetes manifests (if you changed the IP range, install your localy copy of custom-resources.yaml using `kubectl create -f customer-resources.yaml` rather than the following path):
 
 ```
 kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
@@ -67,7 +69,7 @@ After approximately five minutes, your master node should be ready. You can chec
 ```
 [root@your-node ~]# kubectl get nodes
 NAME                           STATUS   ROLES                  AGE     VERSION
-your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.21.2
+your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.24.0
 ```
 
 ### Load Balancer
