@@ -54,6 +54,7 @@ To deploy the `perfsonar-checker` app, start by downloading the app configuratio
 ```
 slate app get-conf --dev perfsonar-checker > app.conf
 ```
+{:data-add-copy-button='true'}
 The default configuration should look something like:
 
 ```
@@ -93,6 +94,7 @@ To install your app instance, run the below command after substituting `<your-gr
 ```
 slate app install --dev --group <your-group> --cluster <cluster> perfsonar-checker --conf app.conf
 ``` 
+{:data-add-copy-button='true'}
 
 The above command would install an instance of the `perfsonar-checker` app under your group on the given target cluster using the configuration from `app.conf`. A successful run of the install command should print a message along with an `<instance-ID>` for your deployment as shown in the below example:
 
@@ -110,6 +112,7 @@ To view the summary output of the tests that have finished, run the below comman
 ```
 slate instance logs --max-lines 0 <instance-ID>
 ```
+{:data-add-copy-button='true'}
 
 The tests start by checking the status of the pscheduler services in your instance, so for a normal operation you will see the below instance log message:
 
@@ -177,6 +180,7 @@ To delete your deployed instance, run the below command along with your `<instan
 ```
 slate instance delete <instance-ID>
 ```
+{:data-add-copy-button='true'}
 
 
 ## Summary

@@ -185,6 +185,7 @@ Use the following command to view a list of the IDs of your OpenStack/Chameleon 
 ```bash
 openstack port list
 ```
+{:data-add-copy-button='true'}
 
 You will see some output that looks similar to this:
 ```bash
@@ -202,6 +203,7 @@ Then, disable ARP-spoofing protection for each one of your MetalLB IP addresses 
 ```bash
 openstack port set <port-id> --allowed-address ip-address=<additional-ip-address>
 ```
+{:data-add-copy-button='true'}
 
 In our case, we need to run this command four times, once for each IP address we have set aside for MetalLB:
 ```bash
@@ -227,6 +229,7 @@ metallb_ip_range:
   - "192.168.1.251-192.168.1.254"
 metallb_version: v0.9.3
 ```
+{:data-add-copy-button='true'}
 *Note that if you have used a different private subnet, or reserved different IP addresses for MetalLB, you will need to change this configuration accordingly.*
 1. Configure strict ARP by changing these lines in inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml from
 ```
@@ -236,6 +239,7 @@ to
 ```
 kube_proxy_strict_arp: true # Required for MetalLB
 ```
+{:data-add-copy-button='true'}
 
 Instructions for both of these things can be found in the [additional configurations](https://slateci.io/docs/cluster/automated/kubernetes-cluster-creation.html#additional-configurations) section of the docs.
 
@@ -243,6 +247,7 @@ To run the Ansible playbook (run in `kubespray` directory):
 ```bash
 ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
 ```
+{:data-add-copy-button='true'}
 
 This playbook will take a while to run (around 15 minutes, depending).
 Once it has finished, login to the node and run `sudo kubectl get nodes`.
@@ -268,6 +273,7 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
  -e 'cluster_access_ip=<EXTERNAL_NAT_IP>:6443' \
  site.yml
 ```
+{:data-add-copy-button='true'}
 
 After this command runs, you should have a SLATE cluster!
 Run `slate cluster list`, and if everything was successful, you should see your cluster listed in the output.
@@ -284,6 +290,7 @@ Make sure ingress is enabled in the `values.yaml`, and make a note of your chose
 ```bash
 sudo kubectl get services -n slate-system
 ```
+{:data-add-copy-button='true'}
 An `ingress-nginx` LoadBalancer will show up.
 Make a note of the `EXTERNAL-IP` value.
 It should be one of the IP addresses you allocated to MetalLB.
@@ -294,6 +301,7 @@ Then, run this command:
 ```bash
 curl -H "Host: <subdomain_name>.<your_cluster_name>.slateci.net" <load_balancer_external_ip>
 ```
+{:data-add-copy-button='true'}
 1. If everything was successful, you should see the following output:
 
 ```

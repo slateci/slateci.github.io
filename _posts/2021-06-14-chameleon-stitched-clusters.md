@@ -36,6 +36,7 @@ It can be downloaded with the following command:
 ```bash
 pip install git+https://github.com/ChameleonCloud/python-blazarclient.git
 ```
+{:data-add-copy-button='true'}
 It is important to be aware of different client versions, as Chameleon expects version `2.2.2` to be used.
 
 
@@ -60,6 +61,7 @@ First, authenticate with a Chameleon site by running this command:
 ```bash
 source /path/to/openrc.sh
 ```
+{:data-add-copy-button='true'}
 This `openrc.sh` file is the application credential you created earlier.
 You should have one for each site.
 
@@ -67,6 +69,7 @@ Then, use the following command to create a network lease:
 ```bash
 `blazar lease-create --reservation resource_type=network,network_name=<network_name_here>,resource_properties='["==","$physical_network","exogeni"]' --start-date <start_date> --end-date "<end_date>" <lease_name>`
 ```
+{:data-add-copy-button='true'}
 Note that the start and end date parameters must include a time as well.
 The time and date should be specified with the following format:
 ```bash
@@ -194,6 +197,7 @@ Open this file on both nodes, and append the following lines:
 <node_1_internal_ip> cluster1.slateci.net
 <node_2_internal_ip> cluster2.slateci.net
 ```
+{:data-add-copy-button='true'}
 The internal IP of each node can be found from each node's respective web portal.
 These IPs will be assigned from the `192.168.1.0/24` subnet that we created earlier.
 
@@ -218,16 +222,19 @@ If `iperf` is not already installed, it can be installed with:
 ```bash
 sudo yum install iperf
 ```
+{:data-add-copy-button='true'}
 Note that both nodes will need to have `iperf` installed.
 
 Afterwards, run an iPerf server on the first node with this command:
 ```bash
 iperf -s
 ```
+{:data-add-copy-button='true'}
 Then, run the iPerf client on the second node and connect to the server on the first node with this command:
 ```bash
 iperf -c <node_1_internal_ip>
 ```
+{:data-add-copy-button='true'}
 After a little while, the test will complete, and you should see bandwidth results.
 If desired, you can run this test in reverse by swapping the locations of the client and server.
 Alternately, iPerf's `-r` or `-d` options can be used for running bi-directional tests.
@@ -240,12 +247,14 @@ Do this with the following command wherever you have the slate client available:
 ```bash
 slate app install perfsonar-testpoint --cluster <cluster_2> --group <your_group>
 ```
+{:data-add-copy-button='true'}
 
 The `perfsonar-checker` application will require a small amount of configuration.
 First, to fetch its configuration file, run:
 ```bash
 slate app get-conf --dev perfsonar-checker > perfsonar-checker.conf
 ```
+{:data-add-copy-button='true'}
 Navigate to the `Instance` section, and give your application an appropriate instance tag.
 Next, navigate to the `PerfsonarChecker` section, and change the `Dest1` parameter to the appropriate hostname that was set up earlier in `/etc/hosts/`.
 The `Dest2` and `Dest3` values can be commented out, or left as-is, if you would also like to run tests to those endpoints.
@@ -254,12 +263,14 @@ Now, we are ready to install this application with this command:
 ```bash
 slate app install --dev perfsonar-checker --cluster <cluster_1> --group <your_group> --conf perfsonar-checker.conf
 ```
+{:data-add-copy-button='true'}
 After the application finishes installing, an instance ID will be printed out.
 Take note of this ID.
 Then, give the application some time to run, and check the results with this command:
 ```bash
 slate instance logs --max-lines 0 <perfsonar_checker_instance_id>
 ```
+{:data-add-copy-button='true'}
 More information about perfSONAR and the expected results can be found in the [PerfSONAR Checker Blog Post](https://slateci.io/blog/perfsonar-checker.html).
 
 

@@ -44,6 +44,7 @@ yum install net-snmp net-snmp-utils
 systemctl enable snmpd
 systemctl restart snmpd
 ```
+{:data-add-copy-button='true'}
 More details can be found [here](https://support.managed.com/kb/a2390/how-to-install-snmp-and-configure-the-community-string-for-centos.aspx).
 
  
@@ -54,6 +55,7 @@ The SLATE client provides a simple way to do this with the command below:
 ```bash
 slate app get-conf telegraf > telegraf.yaml
 ```
+{:data-add-copy-button='true'}
 
 This will save a local copy of the Telegraf configuration, formatted as a .yaml file.
 We will modify this configuration accordingly, and eventually deploy the application with this configuration.
@@ -73,6 +75,7 @@ Once you have credentials, store the password in a SLATE secret by running the f
 ```bash
 slate secret create --group <slate_group> --cluster <slate_cluster> --from-literal password=<your_password> <secret_name>
 ```
+{:data-add-copy-button='true'}
 Make a note of the name you gave this secret, as we will use it later.
 
 Next, configure the database endpoint by filling out the `grnocOutput` section with the hostname, username, and secret name that you setup earlier.
@@ -84,6 +87,7 @@ grnocOutput:
   username: "tsds_username"
   passwordSecretName: "secret_name"
 ```
+{:data-add-copy-button='true'}
 
 Note that if GRNOC output is enabled, you will not be able to specify a custom set of OIDs. 
 An OID is an identifier specifying a metric to monitor. More information can be found [here](https://www.ittsystems.com/snmp-oid-versions-functionality/).
@@ -172,6 +176,7 @@ For example, to collect metrics every five seconds, enter the following:
 ```yaml
 collectionInterval: 5s
 ```
+{:data-add-copy-button='true'}
 The `collectionInterval` parameter is paired with a `collectionJitter` parameter.
 This `collectionJitter` parameter will offset data collection times by a random amount not exceeding its value.
 
@@ -211,6 +216,7 @@ To install the application onto a SLATE cluster, simply run the command below:
 ```bash
 slate app install telegraf --group <group_name> --cluster <cluster_name> --conf telegraf.yaml
 ```
+{:data-add-copy-button='true'}
 This installs the Telegraf application onto the cluster specified, with the configuration previously specified.
 
 
@@ -223,6 +229,7 @@ On the machine you want to receive metrics on, enter the command:
 ```bash
 nc -lk 9999
 ```
+{:data-add-copy-button='true'}
 This will listen for any incoming data on port 9999.
 Then, configure the InfluxDB endpoint to point to port 9999 on this machine. Enter something like this:
 ```yaml
@@ -231,6 +238,7 @@ influxOutput:
   endpoint: "http://<machine_ip_here>:9999"
   database: "telegraf"
 ```
+{:data-add-copy-button='true'}
 
 
 ### Testing with InfluxDB
@@ -240,10 +248,12 @@ Configure Docker on the machine you want to receive metrics on, and pull the Inf
 ```bash
 docker pull influxdb
 ```
+{:data-add-copy-button='true'}
 Next, run the image in a container with the appropriate ports and volumes:
 ```bash
 docker run -p 9999:9999 -v $PWD:/var/lib/influxdb influxdb
 ```
+{:data-add-copy-button='true'}
 
 Configure Telegraf's InfluxDB output to push over http to this endpoint on port 9999.
 
@@ -255,12 +265,14 @@ In the event that something is not working properly, logs from the container run
 ```bash
 slate instance logs <instance_id>
 ```
+{:data-add-copy-button='true'}
 An `instance_id` is a unique, randomly-generated string prefaced with "instance" that SLATE assigns to each running experiment.
 This ID is printed on app installation. 
 Additionally, a list of running applications and their IDs can be printed with the command:
 ```bash
 slate instance list
 ```
+{:data-add-copy-button='true'}
 
 For additional help, or to report a bug, please contact the [SLATE team](https://slateci.io/community/).
 

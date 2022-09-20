@@ -43,6 +43,7 @@ obtained. The SLATE client will do this with the following command:
 ```bash
 slate app get-conf open-ondemand > ood.yaml
 ```
+{:data-add-copy-button='true'}
 
 This will save a local copy of the OnDemand configuration, formatted as a
 .yaml file. We will modify this configuration accordingly, and eventually
@@ -63,6 +64,7 @@ to
 ```yaml
 cert_manager_enabled: true
 ```
+{:data-add-copy-button='true'}
 More information on using Ansible playbooks can be found [here](https://slateci.io/docs/cluster/install-kubernetes-with-kubespray.html).
 If the administrator has access to `kubectl` then cert-manager can be installed using a regular manifest or with helm. Instructions can be found at the official [cert-manager docs](https://cert-manager.io/docs/installation/kubernetes/).
 
@@ -82,6 +84,7 @@ spec:
     privateKeySecretRef:
       name: lets-encrypt-key
 ```
+{:data-add-copy-button='true'}
 Make sure that the name of the issuer is `letsencrypt-prod`.
 
 Note: The difference between a `ClusterIssuer` and an `Issuer` is that the latter is namespace specific.
@@ -130,6 +133,7 @@ To install the application using slate, run this app install command:
 ```bash
 slate app install open-ondemand --group <group_name> --cluster <cluster_name> --conf /path/to/ood.yaml
 ```
+{:data-add-copy-button='true'}
 
 ## Testing
 
@@ -154,6 +158,7 @@ section for each user you would like to add:
     name: <username_here>
     tempPassword: <temporary_password_here>
 ```
+{:data-add-copy-button='true'}
 
 ## Configurable Parameters:
 
