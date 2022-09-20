@@ -69,6 +69,7 @@ SquidConf:
   # within kubernetes clusters. 
   IPRange: 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16
 ```  
+{:data-add-copy-button='true'}
 
 In this example you can see that there are only 6 non-SLATE settings to manipulate in order to deploy an instance of Frontier Squid. These are the settings most pertinent to the functionality of Frontier Squid, and provide enough flexibility for general users. The settings in the SLATE category are provided by the api at the time of deployment to appropriately reflect the environment that the application is being deployed to. These defaults are for localized testing purposes.
 
@@ -127,5 +128,6 @@ SLATE:
     GroupEmail: "group-email"
 ### SLATE-END ###
 ```
+{:data-add-copy-button='true'}
 
 To use any of these, simply add them to your `values.yaml` file between the `### SLATE-START ###` and `### SLATE-END ###` tags. The values they are assigned can here can be arbitrary, as they will be overridden at application install time by the correct values.
