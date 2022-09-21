@@ -28,6 +28,7 @@ To check that the SLATE client is ready to use, you can run:
 ```shell
 slate cluster list
 ```
+{:data-add-copy-button='true'}
 
 This should list the various clusters which are already participating in the federation.
 

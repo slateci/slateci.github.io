@@ -23,6 +23,7 @@ We want to initialize our cluster with the pod network CIDR specifically set to 
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
 ```
+{:data-add-copy-button='true'}
 
 ### KubeConfig
 
@@ -33,12 +34,14 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+{:data-add-copy-button='true'}
 
 To enable kubeconfig for a single session instead simply run:
 
 ```
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
+{:data-add-copy-button='true'}
 
 ### Allowing pods to run on the Master
 **NOTE**: *This step is OPTIONAL for multi-node installations of Kubernetes, but REQUIRED for single-node installations.*
@@ -50,6 +53,7 @@ To remove the master taint:
 ```
 kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 ```
+{:data-add-copy-button='true'}
 
 ### Pod Network
 
@@ -63,6 +67,7 @@ To install Calico, you will simply need to apply the appropriate Kubernetes mani
 kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 ```
+{:data-add-copy-button='true'}
 
 After approximately five minutes, your master node should be ready. You can check with `kubectl get nodes`:
 
@@ -71,6 +76,7 @@ After approximately five minutes, your master node should be ready. You can chec
 NAME                           STATUS   ROLES                  AGE     VERSION
 your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.24.0
 ```
+{:data-add-copy-button='true'}
 
 ### Load Balancer
 
@@ -84,6 +90,7 @@ Apply MetalLB to our cluster. This command will create the relevant kubernetes c
 kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
 kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
 ```
+{:data-add-copy-button='true'}
 
 Create the MetalLB configuration and adjust the IP range to reflect your environment. These must be unallocated public IP addresses available to the machine.
 
@@ -103,12 +110,14 @@ data:
       - 155.101.6.XXX-155.101.6.YYY # Replace this range with whatever IP range your worker nodes may exist in
 EOF
 ```
+{:data-add-copy-button='true'}
 
 Finally, create the ConfigMap for MetalLB on your cluster.
 
 ```
 kubectl apply -f metallb-config.yaml
 ```
+{:data-add-copy-button='true'}
 
 To read more about MetalLB installation and configuration, visit their [installation instructions](https://metallb.universe.tf/installation/).
 

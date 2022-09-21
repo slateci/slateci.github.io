@@ -37,6 +37,7 @@ spec:
       storage: {% raw %}{{ .Values.LocalStorageSize }}{% endraw %}Gi
   storageClassName: nfs-provisioner
 ```  
+{:data-add-copy-button='true'}
 The important feature of this is the `storageClassName` which must match `nfs-provisioner`.
 
 The `pvc` is then mounted within the application deployment as a volume as follows:
@@ -53,6 +54,7 @@ volumes:
   persistentVolumeClaim:
     claimName: my-application-{% raw %}{{ .Values.Instance }}{% endraw %}-pvc
 ```
+{:data-add-copy-button='true'}
 
 ## Including a Node Affinity
 
@@ -64,3 +66,4 @@ nodeSelector:
   storage: "local"
 ...
 ```
+{:data-add-copy-button='true'}

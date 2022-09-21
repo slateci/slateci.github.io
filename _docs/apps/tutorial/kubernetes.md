@@ -35,6 +35,7 @@ If you followed [the directions for installing MiniSLATE]({home}/docs/apps/tutor
       $ ./minislate start
       $ ./minislate shell slate
 ```
+{:data-add-copy-button='true'}
 
 This will put you within the MiniSLATE command shell and interact with the KubeCTL instance within your dev cluster.
 
@@ -125,6 +126,7 @@ containers:
 +     - name: nginx-mounted-volume
 +       emptyDir: {}
 ```
+{:data-add-copy-button='true'}
 
 [The Kubernetes documentation](https://kubernetes.io/docs/concepts/storage/volumes/) has more information regarding volume integration.
 
@@ -147,6 +149,7 @@ volumes:
 configMap:
 name: demo-nginx-configmap
 ```
+{:data-add-copy-button='true'}
  Now that you've made the change, appy it with `$ kubectl apply -f firstDeployment.yaml`. If all has gone correctly, the container should restart with the index.html file mounted, and will be serving it. Try to recall how we accessed the NodePort service and give it a try! 
 
 ## Cleaning it Up

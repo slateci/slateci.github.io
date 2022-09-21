@@ -26,6 +26,7 @@ repo_gpgcheck=0
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 ```
+{:data-add-copy-button='true'}
 
 **Note** If you get an error about GPG keys, Google's recommendation is changing above file entry to `repo_gpgcheck=0`.  Currently (03/30/2022) the Google GPG key is expired or incorrect for yum installs. For more information please visit Google's [Known Issues](https://cloud.google.com/compute/docs/troubleshooting/known-issues#keyexpired) page. 
 
@@ -43,6 +44,7 @@ Install and enable these components:
 KUBE_VERSION=1.24.* && \
 yum install -y kubeadm-${KUBE_VERSION} kubectl-${KUBE_VERSION} kubelet-${KUBE_VERSION} --disableexcludes=kubernetes
 ```
+{:data-add-copy-button='true'}
 
 ### Finish Up
 
@@ -51,6 +53,7 @@ Finally, enable kubelet:
 ```
 systemctl enable --now kubelet
 ```
+{:data-add-copy-button='true'}
 
 At this point the kubelet will be crash-looping as it has no configuration. That is okay for now.
 

@@ -78,6 +78,7 @@ To run the Ansible playbook (run in `kubespray` directory):
 ```bash
 ansible-playbook -i inventory/<CLUSTER_NAME>/hosts.yaml --become --become-user=root -u <SSH_USER> cluster.yml
 ```
+{:data-add-copy-button='true'}
 
 This playbook will take a while to run (around 10 minutes, depending).
 Once it has finished, login to the node and run `sudo kubectl get nodes`.
@@ -104,6 +105,7 @@ ansible-playbook -i /path/to/kubespray/inventory/<CLUSTER_NAME>/hosts.yaml -u <S
  -e 'slate_enable_ingress=false' \
  site.yml
 ```
+{:data-add-copy-button='true'}
 
 After this command runs, you should have a SLATE cluster!
 Run `slate cluster list`, and if everything was successful, you should see your cluster listed in the output.
@@ -126,6 +128,7 @@ To install the ingress controller, login to a cluster node with `kubectl` access
 ```bash
 curl -o deploy.yaml https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml
 ```
+{:data-add-copy-button='true'}
 
 Next, open this file with your preferred editor, and navigate to the line that contains this argument: `--ingress-class=nginx`
 Change this `ingress-class` parameter from `nginx` to `slate`. 
@@ -134,6 +137,7 @@ Finally, deploy the ingress controller with `kubectl`:
 ```bash
 sudo kubectl apply -f /path/to/deploy.yaml
 ```
+{:data-add-copy-button='true'}
 
 At this point, you will have an operational ingress controller. All that remains is to see which ports the ingress controller is running on. This can be done with `sudo kubectl get services -n ingress-nginx`. 
 You will see an `ingress-nginx-controller` NodePort service, with ports 80 and 443 mapped to two different high ports. One of these ports (80 is http, 443 is https) must be appended to any and all requests using the ingress controller.

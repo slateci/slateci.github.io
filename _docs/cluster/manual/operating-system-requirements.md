@@ -17,6 +17,7 @@ First, you will need to disable SELinux as this generally conflicts with Kuberne
 setenforce 0
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 ```
+{:data-add-copy-button='true'}
 
 If you wish to retain the SELinux logging, you can alternatively use 'permissive' mode rather than enforcing.
 
@@ -27,6 +28,7 @@ Swap must be disabled for Kubernetes to run effectively. Swap is typically enabl
 swapoff -a
 sed -e '/swap/s/^/#/g' -i /etc/fstab
 ```
+{:data-add-copy-button='true'}
 
 ### Disable firewalld
 In order to properly communicate with other devices within the cluster, `firewalld` must be disabled:
@@ -34,6 +36,7 @@ In order to properly communicate with other devices within the cluster, `firewal
 ```
 systemctl disable --now firewalld
 ```
+{:data-add-copy-button='true'}
 
 ### Disable root login over SSH
 While optional, we *strongly* recommend disabling root login over SSH for security reasons.
@@ -41,6 +44,7 @@ While optional, we *strongly* recommend disabling root login over SSH for securi
 ```
 sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
 ```
+{:data-add-copy-button='true'}
 
 ### Use iptables for Bridged Network Traffic
 Ensure that bridged network traffic goes through iptables.
@@ -52,11 +56,13 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 ```
+{:data-add-copy-button='true'}
 
 ### Enable routing
 
 ```
 echo 1 > /proc/sys/net/ipv4/ip_forward
 ```
+{:data-add-copy-button='true'}
 
 <a href="/docs/cluster/manual/containerd.html">Next Page</a>

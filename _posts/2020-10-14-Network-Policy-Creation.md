@@ -23,6 +23,7 @@ NetworkPolicy:
   AllowedCIDRs: 
     - 0.0.0.0/0
 ```
+{:data-add-copy-button='true'}
 
 The first setting, Enabled, defines wether or not a network policy is created. By default this is false and no policy is created. The second setting is the list of CIDRs whitelisted by the network policy. The default CIDR of `0.0.0.0/0` creates a policy that allows all traffic.
     

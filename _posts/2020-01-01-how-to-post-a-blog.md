@@ -36,6 +36,7 @@ layout: post
 type: markdown
 ---
 ```
+{:data-add-copy-button='true'}
 
 If you want to see the blog post as it would be published, but are not ready to publish to the webiste's blog page, you can add an additional entry in the front matter then view the post at [https://slateci.io/drafts/](https://slateci.io/drafts/). 
 
@@ -44,6 +45,7 @@ Add the following to the the front matter to view the blog in the drafts section
 ```
 tag: draft
 ```
+{:data-add-copy-button='true'}
 
 #### Images
 
@@ -52,6 +54,7 @@ To Include an image in the blog post, place the image in img/posts and link to i
 ```
 ![Alt Text](/img/posts/image-name.png)
 ```
+{:data-add-copy-button='true'}
 
 #### Excerpt
 
@@ -60,5 +63,6 @@ How much of the blog post that is displayed on the Blog page (slateci.io/blog) i
 ```
 <!--end_excerpt-->
 ```
+{:data-add-copy-button='true'}
 
 Feel free to look at other blog posts in the [github repository](https://github.com/slateci/slateci.github.io) for examples. 

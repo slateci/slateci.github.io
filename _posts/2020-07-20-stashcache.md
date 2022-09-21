@@ -24,12 +24,14 @@ First, you'll want to get the configuration for the StashCache application:
 ```bash
 slate app get-conf stashcache > stashcache.yaml
 ```
+{:data-add-copy-button='true'}
 
 Open it in your favorite editor, e.g. vim:
 
 ```bash
 vim stashcache.yaml
 ```
+{:data-add-copy-button='true'}
 
 You'll want to make changes in 4 sections. First, change the Instance tag to something memorable. I used "iu-mwt2".
 ```yaml
@@ -37,6 +39,7 @@ You'll want to make changes in 4 sections. First, change the Instance tag to som
 # Results in a name like "stashcache-[Instance]"
 Instance: "iu-mwt2"
 ```
+{:data-add-copy-button='true'}
 
 ### Configuring the host
 If you want to use this cache for real data, you'll want to point StashCache at some directory on your _host_ system, from which StashCache will serve data. 
@@ -49,12 +52,14 @@ StashCache:
   # contents will be lost any time the application is restarted.
   CacheDirectory: /slate-cache
 ```
+{:data-add-copy-button='true'}
 
 While you're here, you may want to change other options as well. Since this will be a production cache, I increased the `RamSize` from the default 1GB to 64GB:
 ```yaml
   # The amount of memory the cache is allowed to use (in GB)
   RamSize: 64g
 ```
+{:data-add-copy-button='true'}
 
 ### Configuring & installing the certificate
 
@@ -64,6 +69,7 @@ To install the certificate to the cluster, you'll need to use the `slate secret`
 ```bash
 slate secret create stashcache-cert --from-file=hostcert.pem --from-file=hostkey.pem
 ```
+{:data-add-copy-button='true'}
 
 Then, you'll want to take the secret name and put that into the StashCache config file:
 ```yaml
@@ -75,6 +81,7 @@ Then, you'll want to take the secret name and put that into the StashCache confi
 # Leaving this as the empty string will disable the authenticated cache.
 hostCertSecret: stashcache-cert
 ```
+{:data-add-copy-button='true'}
 
 It's possible to install StashCache without an IGTF certificate, however you will not be able to federate your cache with the OSG federation. 
 
@@ -85,6 +92,7 @@ Finally, once you have configured the StashCache application to your satisfactio
 ```bash
 slate app install stashcache --conf stashcache.yaml --group <your group> --cluster <your cluster>
 ```
+{:data-add-copy-button='true'}
 
 If all goes well, SLATE will successfully install the cache and give you an instance ID. You can use that ID to check the status
 ```bash
@@ -98,12 +106,14 @@ Name                          Cluster IP     External IP     Ports          URL
 stashcache-mwt2-iu-test-http  10.105.253.127 149.165.225.214 8000:31612/TCP 149.165.225.214:31612
 stashcache-mwt2-iu-test-xroot 10.108.181.32  149.165.225.214 1094:32009/TCP 149.165.225.214:32009
 ```
+{:data-add-copy-button='true'}
 
 From the URL field reported by SLATE, you can run a test to ensure your cache is working over the HTTP protocol:
 ```bash
  $ curl http://149.165.225.214:31612/osgconnect/public/rynge/test.data
 hello world!
 ```
+{:data-add-copy-button='true'}
 
 ## Registering your cache in the OSG Topology system
 

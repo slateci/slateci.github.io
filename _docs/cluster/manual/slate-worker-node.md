@@ -19,6 +19,7 @@ On your Master node, run the following command to get a full join command for th
 ```
 kubeadm token create --print-join-command
 ```
+{:data-add-copy-button='true'}
 
 Run this generated join command on the worker node to join it to the cluster.
 

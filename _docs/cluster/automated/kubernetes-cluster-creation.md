@@ -158,6 +158,7 @@ k8s-cluster:
   vars:
     dns_min_replicas: 1
 ```
+{:data-add-copy-button='true'}
 
 #### Set specific Kubernetes versions
 
@@ -165,6 +166,7 @@ In `inventory/<CLUSTER_NAME>/group_vars/k8s-cluster/k8s-cluster.yml` set
 ```yaml
 kube_version: v1.18.10
 ```
+{:data-add-copy-button='true'}
 
 #### Set specific Docker and Calico versions
 
@@ -175,6 +177,7 @@ k8s-cluster:
     docker_version: latest
     calico_version: "v3.16.4"
 ```
+{:data-add-copy-button='true'}
 
 #### Disable MetalLB
 
@@ -290,6 +293,7 @@ Add the following two flags to your SLATE registration playbook command if your 
 -e 'cluster_access_ip=<EXTERNAL_NAT_IP>:6443' \
 -e 'slate_enable_ingress=false'
 ```
+{:data-add-copy-button='true'}
 
 *Note that `EXTERNAL_NAT_IP` is the IP at which your node is publicly accessible.*
 

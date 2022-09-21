@@ -47,6 +47,7 @@ obtained. The SLATE client will do this with the following command:
 ```bash
 slate app get-conf open-ondemand > ood.yaml
 ```
+{:data-add-copy-button='true'}
 
 This will save a local copy of the OnDemand configuration, formatted as a
 .yaml file. We will modify this configuration accordingly, and eventually
@@ -128,6 +129,7 @@ then you may leave this field blank.
 ```bash
 kubectl label nodes <node-name> application=ood
 ```
+{:data-add-copy-button='true'}
 
 ### Secret_Generation
 
@@ -218,6 +220,7 @@ path as the `singularity_image` field in Cluster Definitions [above](###Cluster_
 ```bash
 singularity pull docker://centos:7
 ```
+{:data-add-copy-button='true'}
 
 To establish a remote desktop connection, ports 5800(+n) 5900(+n) and 6000(+n)
 need to be open for each display number n. As well as, port 22 for ssh
@@ -229,6 +232,7 @@ To do this easily, add a global rule to iptables or a firewalld exception.
 sudo iptables -A INPUT -s xxx.xxx.xxx.xxx/32 -j ACCEPT
 sudo firewall-cmd --zone=trusted --add-source=xxx.xxx.xxx.xxx/32
 ```
+{:data-add-copy-button='true'}
 
 ### Filesystem_Distribution
 
@@ -261,6 +265,7 @@ For more detailed information, see the links in [Prerequisites](##Prerequisites)
 ```bash
 ssh-keyscan [ONDEMAND_HOST_PUBLIC_IP] >> /etc/ssh/ssh_known_hosts
 ```
+{:data-add-copy-button='true'}
 
 Next, add an entry to `/etc/ssh/shosts.equiv` with the IP address of the
 OnDemand server like so
@@ -308,6 +313,7 @@ To install the application using slate, run this app install command:
 ```bash
 slate app install open-ondemand --group <group_name> --cluster <cluster_name> --conf /path/to/ood.yaml
 ```
+{:data-add-copy-button='true'}
 
 ## Testing
 
@@ -334,6 +340,7 @@ section for each user you would like to add:
     groupID: <1000+n>
     tempPassword: <temporary_password_here>
 ```
+{:data-add-copy-button='true'}
 
 ## Configurable_Parameters:
 

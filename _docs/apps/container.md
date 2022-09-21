@@ -31,6 +31,7 @@ Each SLATE application should reside in a separate Git repository in the [GitHub
 ├── README.md 
 └── .gitignore
 ```
+{:data-add-copy-button='true'}
 
 * `app`: Contains all the sources for the application. The main script should be called `entrypoint.sh` where appropriate.
 * `local-test`: Contains the deployment for a local [minikube](https://minikube.sigs.k8s.io/docs/).
@@ -59,9 +60,11 @@ Use the template below for single-image repositories in the chosen container reg
 ```text
 slateci/appname
 ```
+{:data-add-copy-button='true'}
 
 In the case where your repository has more than one image use the following template instead:
 
 ```text
 slateci/appname-componentname
 ```
+{:data-add-copy-button='true'}

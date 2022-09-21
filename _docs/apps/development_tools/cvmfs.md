@@ -30,6 +30,7 @@ parameters:
   proxy: 0.42.42.42:3128
 reclaimPolicy: Delete
 ```
+{:data-add-copy-button='true'}
 
 * If `proxy` is not provided, the CVMFS client will default to using a direct connection to the repository.
 * A `tag` or `hash` parameter may also be provided, but not both. If not provided, `tag` will default to `trunk`.
@@ -53,6 +54,7 @@ spec:
       storage: 5Gi
   storageClassName: my-repo-sc
 ```
+{:data-add-copy-button='true'}
 
 What is important to note is that this claim is `ReadOnlyMany`. The claim must be `ReadOnly` or `ReadOnlyMany` because there are no write permission to the repository through the CVMFS client.
 
@@ -73,3 +75,4 @@ volumes:
     readOnly: true
 ...
 ```
+{:data-add-copy-button='true'}
