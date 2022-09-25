@@ -87,8 +87,8 @@ Kubernetes clusters, in order to evenly distribute work across all worker nodes,
 Apply MetalLB to our cluster. This command will create the relevant kubernetes componenents that will run our load balancer.
 
 ```
-kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
-kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
+kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.13.5/manifests/namespace.yaml
+kubectl create -f https://raw.githubusercontent.com/metallb/metallb/v0.13.5/manifests/metallb.yaml
 ```
 {:data-add-copy-button='true'}
 
