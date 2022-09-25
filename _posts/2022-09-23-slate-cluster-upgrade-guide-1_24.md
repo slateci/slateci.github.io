@@ -8,7 +8,7 @@ layout: post
 type: markdown
 ---
 
-The team has been busy preparing SLATE for Kubernetes `v1.24` and today we are happy to announce that this work is now live. As cluster administrators there are several upgrade tasks you must perform to continue using SLATE with this new version of Kubernetes (K8s).
+The team has been busy preparing SLATE for Kubernetes (K8s) `v1.24` and today we are happy to announce that this work is now live. As cluster administrators there are several upgrade tasks you must perform to continue using SLATE with this new version of K8s.
 
 <!--end_excerpt-->
 
