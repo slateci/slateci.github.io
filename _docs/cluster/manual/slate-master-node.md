@@ -12,7 +12,7 @@ type: markdown
 
 The first node you will add to your cluster will function as the SLATE Cluster master node.
 * All possible SLATE topologies will utilize a master node.
-* To configure a SLATE master node, you must first go through the previous pages in [Manual Cluster Installation](/docs/cluster/manual/index.html).
+* To configure a SLATE master node, you must first go through the previous pages in [Manual Cluster Installation](/docs/cluster/index.html).
 
 ## Initialize the Kubernetes cluster with Kubeadm
 
