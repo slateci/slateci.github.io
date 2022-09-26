@@ -37,12 +37,6 @@ The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, an
 * `kubectl` is the command-line tool needed to interact with and control the cluster
 * `kubelet` is the system daemon that allows the Kubernetes api to control the cluster nodes
 
-The Kubernetes install includes a few different pieces:
-
-* kubeadm is a tool used to bootstrap Kubernetes clusters
-* kubectl is the command-line tool needed to interact with and control the cluster
-* kubelet is the system daemon that allows the Kubernetes api to control the cluster nodes
-
 Install and enable these components:
 
 ```shell
