@@ -10,37 +10,35 @@ type: markdown
 
 At this point, you should have a SLATE-Ready Kubernetes cluster. You will now be able to join your cluster to the SLATE Federation.
 
-### SLATE CLI
+## SLATE CLI
 
-The SLATE Command Line Interface will let you execute SLATE commands.
+The SLATE Command Line Interface will let you execute SLATE commands against the API server. If you haven't already, download the client to your master node using the instructions on the SLATE Portal [CLI Access page](https://portal.slateci.io/cli).
 
-On the Master node for your cluster, follow the [SLATE CLI](#) installation instructions.
+## Joining the Federation
 
-### Joining the Federation
+On the master node for your cluster (or a system with `kubectl` configured with admin access to your cluster), execute:
 
-On the Master node for your cluster (or a system with kubectl configured with admin access to your cluster), execute
-
-```
-slate cluster create [NEW-CLUSTER-NAME] --group [YOUR-GROUP-NAME] --org [YOUR-ORG-NAME] -y
+```shell
+slate cluster create <NEW-CLUSTER-NAME> --group <YOUR-GROUP-NAME> --org <YOUR-ORG-NAME> -y
 ```
 {:data-add-copy-button='true'}
 
-### Update Cluster Location
+## Update Cluster Location
 
-All SLATE clusters should have their geographic locations listed in the cluster's attributes.
+All SLATE clusters should have their geographic locations listed in the cluster's attributes:
 
-```
-slate cluster update [YOUR-CLUSTER-NAME] --location [LATITUDE],[LONGITUDE]
-```
-{:data-add-copy-button='true'}
-
-### Allow Group Access
-
-Cluster administrators can grant cluster access to specific groups.
-
-```
-slate cluster allow-group [YOUR-CLUSTER-NAME] '[GROUP-NAME]'
+```shell
+slate cluster update <YOUR-CLUSTER-NAME> --location <LATITUDE>,<LONGITUDE>
 ```
 {:data-add-copy-button='true'}
 
-<a href="/docs/cluster/manual/troubleshooting.html">Next Page</a>
+## Allow Group Access
+
+Cluster administrators can grant cluster access to specific groups:
+
+```shell
+slate cluster allow-group <YOUR-CLUSTER-NAME> '<GROUP-NAME>'
+```
+{:data-add-copy-button='true'}
+
+{% include doc-next-link.html content="/docs/cluster/manual/troubleshooting.html" %}

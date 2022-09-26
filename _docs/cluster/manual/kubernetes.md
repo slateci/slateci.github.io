@@ -8,14 +8,15 @@ layout: docs2020
 type: markdown
 ---
 
+{% include alert/note.html content="SLATE currently supports Kubernetes v1.24." %}
 
 The SLATE platform uses Kubernetes as its container orchestration system. This section we'll install the base Kubernetes software components.
 
-### Kubernetes
+## Kubernetes
 
 The Kubernetes repository can be added to the node in the usual way:
 
-```
+```shell
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -28,33 +29,31 @@ EOF
 ```
 {:data-add-copy-button='true'}
 
-**Note** If you get an error about GPG keys, Google's recommendation is changing above file entry to `repo_gpgcheck=0`.  Currently (03/30/2022) the Google GPG key is expired or incorrect for yum installs. For more information please visit Google's [Known Issues](https://cloud.google.com/compute/docs/troubleshooting/known-issues#keyexpired) page. 
+{% include alert/note.html content="To understand why `repo_gpgcheck=0`, see Google's [Known Issues](https://cloud.google.com/compute/docs/troubleshooting/known-issues#keyexpired) page." %}
 
-The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, and `kubelet`. `kubeadm` is a tool used to bootstrap Kubernetes clusters, `kubectl` is the command-line tool needed to interact with and control the cluster, and `kubelet` is the system daemon that allows the Kubernetes api to control the cluster nodes. To install and enable these components:
+The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, and `kubelet`.
 
-The Kubernetes install includes a few different pieces:
-
-- kubeadm is a tool used to bootstrap Kubernetes clusters
-- kubectl is the command-line tool needed to interact with and control the cluster
-- kubelet is the system daemon that allows the Kubernetes api to control the cluster nodes
+* `kubeadm` is a tool used to bootstrap Kubernetes clusters
+* `kubectl` is the command-line tool needed to interact with and control the cluster
+* `kubelet` is the system daemon that allows the Kubernetes api to control the cluster nodes
 
 Install and enable these components:
 
-```
+```shell
 KUBE_VERSION=1.24.* && \
 yum install -y kubeadm-${KUBE_VERSION} kubectl-${KUBE_VERSION} kubelet-${KUBE_VERSION} --disableexcludes=kubernetes
 ```
 {:data-add-copy-button='true'}
 
-### Finish Up
+## Finish Up
 
-Finally, enable kubelet:
+Finally, enable `kubelet`:
 
-```
+```shell
 systemctl enable --now kubelet
 ```
 {:data-add-copy-button='true'}
 
-At this point the kubelet will be crash-looping as it has no configuration. That is okay for now.
+At this point the `kubelet` will be crash-looping as it has no configuration. That is okay for now.
 
-<a href="/docs/cluster/manual/slate-master-node.html">Next Page</a>
+{% include doc-next-link.html content="/docs/cluster/manual/slate-master-node.html" %}

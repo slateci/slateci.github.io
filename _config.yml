@@ -54,6 +54,7 @@ exclude:
   - CONTRIBUTING.md
   - .gitignore
   - .gitmodules
+  - .idea/
   - Vagrantfile
   - .vagrant
   - _docs/concepts/concept.md.template
