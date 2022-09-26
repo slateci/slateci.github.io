@@ -110,7 +110,7 @@ clusterrole.rbac.authorization.k8s.io/federation-cluster configured
 clusterrole.rbac.authorization.k8s.io/federation-cluster-global unchanged
 ```
 
-{% include alert/note.html content="If `kubectl` gives an error, contact [the SLATE team](mailto:slateci@googlegroups.com) for further assistance." %}
+{% include alert/note.html content="If `kubectl` gives an error, contact [the SLATE team](/community/) for further assistance." %}
 
 ### Update the SLATE Federation Controller
 
@@ -138,7 +138,7 @@ kubectl logs -n kube-system <federation-controller-pod-name>
 ```
 {:data-add-copy-button='true'}
 
-{% include alert/note.html content="If `kubectl` gives an error, contact [the SLATE team](mailto:slateci@googlegroups.com) for further assistance." %}
+{% include alert/note.html content="If `kubectl` gives an error, contact [the SLATE team](/community/) for further assistance." %}
 
 ### Update the SLATE Ingress Controller
 

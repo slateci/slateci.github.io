@@ -8,19 +8,18 @@ layout: docs2020
 type: markdown
 ---
 
-To distribute work assigned to a SLATE cluster, worker nodes can be networked to a SLATE Master node.
+To distribute work assigned to a SLATE cluster, worker nodes can be networked to a SLATE master node.
+* To configure a SLATE worker node, you must first go through the previous pages in [Manual Cluster Installation](/docs/cluster/manual/cluster-install.html) (excluding the master node page).
 
-All SLATE Worker nodes should be set up using the "Setting Up a SLATE Node" instructions above.
+## Joining the Cluster
 
-### KubeADM Join
+On your master node, run the following command to get a full join command for the master's cluster:
 
-On your Master node, run the following command to get a full join command for the Master's cluster:
-
-```
+```shell
 kubeadm token create --print-join-command
 ```
 {:data-add-copy-button='true'}
 
 Run this generated join command on the worker node to join it to the cluster.
 
-<a href="/docs/cluster/manual/cluster-federation.html">Next Page</a>
+{% include doc-next-link.html content="/docs/cluster/manual/cluster-federation.html" %}
