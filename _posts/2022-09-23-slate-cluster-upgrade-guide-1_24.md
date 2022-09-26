@@ -119,7 +119,7 @@ Updating the federation controller is a two-step process.
 1. The old `nrp-controller` deployment needs to be deleted by running:
 
    ```shell
-   kubectl -n kube-system delete deployment nrp-controller .
+   kubectl -n kube-system delete deployment nrp-controller 
    ```
    {:data-add-copy-button='true'}
 
