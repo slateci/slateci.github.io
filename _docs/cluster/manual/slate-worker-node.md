@@ -9,7 +9,7 @@ type: markdown
 ---
 
 To distribute work assigned to a SLATE cluster, worker nodes can be networked to a SLATE master node.
-* To configure a SLATE worker node, you must first go through the previous pages in [Manual Cluster Installation](/docs/cluster/manual/cluster-install.html) (excluding the master node page).
+* To configure a SLATE worker node, you must first go through the previous pages in [Manual Cluster Installation](/docs/cluster/index.html) (excluding the master node page).
 
 ## Joining the Cluster
 
