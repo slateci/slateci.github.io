@@ -75,7 +75,7 @@ kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 If you have changed the IP range to anything other than `192.168.0.0/16` in the `kubeadm init` command above, you will need to first download the boilerplate [custom-resources.yaml](https://docs.projectcalico.org/manifests/custom-resources.yaml) file from the Calico website then update its IP range under `spec/calicoNetwork/ipPools/blockSize` and `CIDR`. Finally, create the custom resources manifest:
 
 ```shell
-kubectl create -f /path/to/custome-resources.yaml
+kubectl create -f /path/to/custom-resources.yaml
 ```
 {:data-add-copy-button='true'}
 
