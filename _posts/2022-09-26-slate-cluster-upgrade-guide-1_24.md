@@ -46,6 +46,8 @@ See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-c
 
 Support for `v1beta1` Ingress objects have been [deprecated](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/#what-to-do) and completely removed by Kubernetes `v1.22`. You may need to update any existing Ingress objects accordingly.
 
+#### Example
+
 Below is a sample `v1beta1` Ingress object for the fictitious `hello-app-example`:
 
 ```yaml
@@ -122,7 +124,9 @@ For more information on Ingress objects see the [Kubernetes Ingress documentatio
 <span id="update-calico-cni"></span>
 ### Update Calico CNI
 
-Update the Calico CNI to `>= v3.24.1` using the steps described in [How to: Install Calico](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises).
+Update the Calico CNI to `>= v3.24.1`.
+* If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#pod-network) instructions when initially setting up your cluster, use the example below to update your Tigera operators and custom resources files.
+* If you chose a different route for initially installing and configuring Calico, please refer directly to the [Calico documentation](https://projectcalico.docs.tigera.io/maintenance/kubernetes-upgrade) for update procedures.
 
 #### Example
 
@@ -137,10 +141,14 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALI
 ```
 {:data-add-copy-button='true'}
 
+For more information on updating Calico see [Upgrade Calico on Kubernetes](https://projectcalico.docs.tigera.io/maintenance/kubernetes-upgrade).
+
 <span id="update-metallb"></span>
 ### Update MetalLB
 
-Update MetalLB to `>= v0.13.5`  using the steps described in [Installation By Manifest](https://metallb.universe.tf/installation/#installation-by-manifest).
+Update MetalLB to `>= v0.13.5`.
+* If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#load-balancer) instructions when initially setting up your cluster, use the example below to update your MetalLB installation.
+* If you chose a different route for initially installing and configuring MetalLB, please refer directly to the [MetalLB documentation](https://metallb.universe.tf/installation/) for update procedures.
 
 #### Example
 
@@ -159,7 +167,7 @@ kubectl describe configmap config -n metallb-system
 ```
 {:data-add-copy-button='true'}
 
-Create a new custom resource (CR) with the gathered IP pool information. For example:
+Create a new custom resource (CR) with the gathered IP pool information:
 
 ```shell
 cat <<EOF > /tmp/metallb-ipaddrpool.yml
@@ -181,12 +189,35 @@ kubectl create -f /tmp/metallb-ipaddrpool.yml
 ```
 {:data-add-copy-button='true'}
 
+Then create a Layer 2 advertisement for the `first-pool` address pool:
+
+```shell
+cat <<EOF > /tmp/metallb-ipaddrpool-advert.yml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - first-pool
+EOF
+```
+{:data-add-copy-button='true'}
+
+```shell
+kubectl create -f /tmp/metallb-ipaddrpool-advert.yml
+```
+{:data-add-copy-button='true'}
+
 Finally, remove the deprecated `ConfigMap`:
 
 ```shell
 kubectl delete configmap config -n metallb-system
 ```
 {:data-add-copy-button='true'}
+
+For more information on updating MetalLB see [Installation By Manifest](https://metallb.universe.tf/installation/#installation-by-manifest).
 
 ## SLATE Tasks
 
