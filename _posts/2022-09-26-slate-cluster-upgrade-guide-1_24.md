@@ -267,7 +267,6 @@ See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-c
 ### (Optional) Update Ingress Objects
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
-{% include alert/note.html content="If your cluster is already at `v1.22` (or newer) skip this section." %}
 
 Support for `v1beta1` Ingress objects have been deprecated and completely removed by Kubernetes `v1.22`.  You will only
 need to update manifests to use the new Ingress objects.  Any Ingress objects currently active on your cluster will 
