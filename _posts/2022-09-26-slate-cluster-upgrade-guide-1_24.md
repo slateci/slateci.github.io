@@ -71,7 +71,8 @@ Best practice is to upgrade from one Kubernetes minor release to the next and so
 
 #### Install and configure `containerd`
 If you are using Docker on your cluster, you'll need to switch the kubernetes runtime from Docker to `containerd` because Kubernetes removed support for Docker in `v1.24.0`.  [This guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
-has instructions on updating from Docker to `containerd.`
+has instructions on updating from Docker to `containerd.`  Please note that [this step](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/#configure-the-kubelet-to-use-containerd-as-its-container-runtime) 
+in the guide needs to be done for each node in your kubernetes cluster.
 
 #### Upgrade the control plane
 
@@ -198,67 +199,6 @@ Configure `kubectl`/`kubeadm`.
 ```
 {:data-add-copy-button='true'}
 
-Stop any existing `containerd` service, set it the default runtime, and enable the service. 
-
-```shell
-systemctl stop containerd && \
-containerd config default | sudo tee /etc/containerd/config.toml && \
-systemctl enable --now containerd
-```
-{:data-add-copy-button='true'}
-
-Stop the `kubelet` service, configure `containerd` as the new runtime endpoint, and restart the service.  
-
-```shell
-systemctl stop kubelet
-```
-{:data-add-copy-button='true'}
-
-```shell
-echo 'KUBELET_KUBEADM_ARGS="--pod-infra-container-image=k8s.gcr.io/pause:3.4.1 --container-runtime=remote --container-runtime-endpoint=unix:///run/containerd/containerd.sock"' > /var/lib/kubelet/kubeadm-flags.env
-```
-{:data-add-copy-button='true'}
-
-```shell
-systemctl daemon-reload && \
-systemctl restart kubelet
-```
-{:data-add-copy-button='true'}
-
-Next, for each worker node edit its manifest.
-
-```shell
-kubectl edit node <workernode>
-```
-{:data-add-copy-button='true'}
-
-In the file content replace:
-
-```yaml
-...
-metadata:
-   annotations:
-      ...
-      kubeadm.alpha.kubernetes.io/cri-socket: /var/run/dockershim.sock
-      ...
-...
-```
-{:data-add-copy-button='true'}
-
-with:
-
-```yaml
-...
-metadata:
-   annotations:
-      ...
-      kubeadm.alpha.kubernetes.io/cri-socket: unix:///run/containerd/containerd.sock
-      ...
-...
-```
-{:data-add-copy-button='true'}
-
-Save the file and exit the editor.
 
 Finally, complete the final upgrade from `v1.23.10` to `v1.24.x` using the steps described above, adjusting the K8s versions described in the commands accordingly.
 
