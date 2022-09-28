@@ -275,88 +275,10 @@ automatically get updated when Kubernetes is upgraded to `v1.22`.  See the
 [Kubernetes deprecation guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#ingress-v122) for
 more details on the deprecation.
 
-Let's walk through an example below to illustrate the changes you may need to update any existing manifests that 
-create Ingress objects.
+If you need to update a manifest, [this article](https://awstip.com/upgrading-kubernetes-ingresses-from-v1beta1-to-v1-7f9235765332) 
+gives step by step instructions on what is needed.  
 
-#### Example
-
-Below is a sample `v1beta1` Ingress object for the fictitious `hello-app-example`:
-
-```yaml
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: hello-app-example
-  labels:
-     app: hello-app-example
-     chart: hello-app-example-chart
-     release: hello-app-example-release
-     instance: hello-app-example-instance
-  annotations:
-    kubernetes.io/ingress.class: slate
-spec:
-  rules:
-  - host: hello.some-cluster.slateci.net
-    http:
-      paths:
-        - path: /
-          backend:
-            serviceName: hello-app-example
-            servicePort: 80
-```
-
-To update the Ingress object to `v1` you need to:
-
-1. Change the `apiVersion` to `networking.k8s.io/v1`
-2. Move the `ingress.class` annotation to `spec.ingressClassName`
-3. Add a `pathType` to each specified `path`
-4. Expand the `backend` structure from:
-   ```yaml
-   backend:
-     serviceName: hello-app-example
-     servicePort: 80
-   ```
-   to:
-   ```yaml
-   backend:
-     service:
-       name: hello-app-example
-       port:
-         number: 80
-   ```   
-
-Putting everything together gives us the new `v1` Ingress object:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: hello-app-example
-  labels:
-     app: hello-app-example
-     chart: hello-app-example-chart
-     release: hello-app-example-release
-     instance: hello-app-example-instance
-spec:
-  ingressClassName: slate
-  rules:
-  - host: hello.some-cluster.slateci.net
-    http:
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: hello-app-example
-              port:
-                number: 80
-```
-
-For more information on Ingress objects see the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress).
-
-
-
-
+If you need further assistance, please contact the [the SLATE team](/community/).
 
 
 
