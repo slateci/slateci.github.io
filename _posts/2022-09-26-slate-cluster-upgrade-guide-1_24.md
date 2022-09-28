@@ -188,18 +188,12 @@ systemctl status kubelet
 
 #### Upgrade the worker nodes one at a time
 
-SSH to your first worker node, switch to the `root` user, and configure `kubectl`.
+Leaving a terminal connected to the control plane, SSH to your first worker node in a fresh terminal, and switch to the `root` user.
 
 ```shell
 [you@workernode1] $ sudo su -
 ```
 {:data-add-copy-button='true'}
-
-Configure `kubectl`/`kubeadm`.
-
-```shell
-[root@workernode1] # export KUBECONFIG=/etc/kubernetes/admin.conf
-```
 
 Install the related packages for Kubernetes `v1.22.13`, making sure the `kubernetes` YUM repo is enabled.
 
@@ -208,7 +202,7 @@ yum update --enablerepo=kubernetes kubelet-1.22.13 kubeadm-1.22.13 kubectl-1.22.
 ```
 {:data-add-copy-button='true'}
 
-Apply the upgrade and prepare the worker node for maintenance.
+Back in the control plane terminal window apply the upgrade and prepare the worker node for maintenance.
 
 ```shell
 kubeadm upgrade node && \
@@ -216,7 +210,7 @@ kubectl drain <workernode1> --ignore-daemonsets
 ```
 {:data-add-copy-button='true'}
 
-Restart `kubelet` and check its status.
+In the worker node terminal window restart `kubelet` and check its status.
 
 ```shell
 systemctl daemon-reload && \
@@ -225,14 +219,14 @@ systemctl status kubelet
 ```
 {:data-add-copy-button='true'}
 
-If everything looks good, finish up by uncordoning the node.
+If everything looks good, finish up by uncordoning the node in the control plane terminal window.
 
 ```shell
 kubectl uncordon <workernode1>
 ```
 {:data-add-copy-button='true'}
 
-Rinse and repeat for your remaining worker nodes.
+Log out of your worker node terminal window and rinse-repeat for your remaining worker nodes.
 
 #### Verify the status of the cluster
 
