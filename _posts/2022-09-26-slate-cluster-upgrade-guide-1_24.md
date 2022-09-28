@@ -9,20 +9,20 @@ type: markdown
 tag: draft
 ---
 
-The team has been busy preparing SLATE for Kubernetes (K8s) `v1.24` and today we are happy to announce that this work is now live. As cluster administrators there are several upgrade tasks you must perform to continue using SLATE with this new version of K8s.
+The team has been busy preparing SLATE for Kubernetes (K8s) `v1.24.x` and today we are happy to announce that this work is now live. As cluster administrators there are several upgrade tasks you must perform to continue using SLATE with this new version of K8s.
 
 <!--end_excerpt-->
 
 ## Table of Contents
 
-This post will walk you, the cluster administrator, through the following required tasks:
+This post will walk you, the cluster administrator, through the following tasks:
 
 ### Kubernetes Tasks
 
-1. Upgrade your SLATE Kubernetes Cluster from K8s `v1.x` to `v1.24` using `kubeadm` (<a href="#upgrade-k8s">see below</a>)
-2. Upgrade all `v1beta1` Ingress objects to `v1` (<a href="#update-ingress-objects">see below</a>)
-3. Update the Calico CNI to `>= v3.24.1` (<a href="#update-calico-cni">see below</a>)
-4. Update MetalLB to `>= v0.13.5` (<a href="#update-metallb">see below</a>)
+1. Upgrade all `v1beta1` Ingress objects to `v1` (<a href="#update-ingress-objects">see below</a>)
+2. Upgrade your SLATE Kubernetes Cluster from K8s `v1.x` to `v1.24.x` using `kubeadm` (<a href="#upgrade-k8s">see below</a>)
+3. (Recommended) Update the Calico CNI to `>= v3.24.1` (<a href="#update-calico-cni">see below</a>)
+4. (Recommended) Update MetalLB to `>= v0.13.5` (<a href="#update-metallb">see below</a>)
 
 ### SLATE Tasks
 
@@ -32,19 +32,13 @@ This post will walk you, the cluster administrator, through the following requir
 
 ## Kubernetes Tasks
 
-<span id="upgrade-k8s"></span>
-### Upgrade to K8s `v1.24`
-
-{% include alert/tip.html content="Upgrade one [Kubernetes minor release](https://kubernetes.io/releases/patch-releases/) at a time." %}
-
-See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) for complete instructions on updating a Kubernetes cluster from `v1.x` to `v1.24` using `kubeadm`.
-
 <span id="update-ingress-objects"></span>
 ### Update Ingress Objects
 
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 {% include alert/note.html content="If your cluster is already at `v1.22` (or newer) skip this section." %}
 
-Support for `v1beta1` Ingress objects have been [deprecated](https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/#what-to-do) and completely removed by Kubernetes `v1.22`. You may need to update any existing Ingress objects accordingly.
+Support for `v1beta1` Ingress objects have been deprecated and completely removed by Kubernetes `v1.22`. Let's walk through an example below to illustrate the changes you may need to update any existing Ingress objects.
 
 #### Example
 
@@ -121,8 +115,144 @@ spec:
 
 For more information on Ingress objects see the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress).
 
+<span id="upgrade-k8s"></span>
+### Upgrade to K8s `v1.24.x`
+
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
+
+#### Check the status of the cluster
+
+Start by SSH-ing to your control plane and switching to the `root` user.
+
+```shell
+[you@controlplane] $ sudo su -
+```
+{:data-add-copy-button='true'}
+
+Configure `kubectl`/`kubeadm` and check the state of the Kubernetes nodes.
+
+```shell
+[root@controlplane] # export KUBECONFIG=/etc/kubernetes/admin.conf
+```
+{:data-add-copy-button='true'}
+
+```shell
+[root@controlplane ~]# kubectl get nodes
+NAME                    STATUS   ROLES           AGE     VERSION
+<worker>                Ready    <none>          2y68d   v1.22.1
+<controlplane>          Ready    control-plane   2y68d   v1.22.1
+```
+{:data-add-copy-button='true'}
+
+#### Determine the upgrade path
+
+Best practice is to upgrade from one Kubernetes minor release to the next and so forth down the line all the way to `v1.24.x`. For example, if you are starting at `v1.21.x` the upgrade path should resemble:
+* `v1.21.x` --> `v1.22.13`
+* `v1.22.13` --> `v1.23.10`
+* `v1.23.10` --> `v1.24.4`
+
+#### Upgrade the control plane
+
+Let's assume that like the example above, we are beginning with Kubernetes `v1.21.x`. Install the related packages for Kubernetes `v1.22.13`, making sure the `kubernetes` YUM repo is enabled.
+
+```shell
+yum update --enablerepo=kubernetes kubelet-1.22.13 kubeadm-1.22.13 kubectl-1.22.13
+```
+{:data-add-copy-button='true'}
+
+Check that your cluster can be upgraded from `v1.21.x` --> `v1.22.13`.
+
+```shell
+kubeadm upgrade plan
+```
+{:data-add-copy-button='true'}
+
+If there aren't any issues proceed with the upgrade. 
+
+```shell
+[root@controlplane ~]# kubeadm upgrade apply v1.22.13
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.22.13". Enjoy!
+
+[upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
+```
+{:data-add-copy-button='true'}
+
+Restart `kubelet` and check its status.
+
+```shell
+systemctl daemon-reload && \
+systemctl restart kubelet && \
+systemctl status kubelet 
+```
+{:data-add-copy-button='true'}
+
+#### Upgrade the worker nodes one at a time
+
+SSH to your first worker node, switch to the `root` user, and configure `kubectl`.
+
+```shell
+[you@workernode1] $ sudo su -
+```
+{:data-add-copy-button='true'}
+
+Configure `kubectl`/`kubeadm`.
+
+```shell
+[root@workernode1] # export KUBECONFIG=/etc/kubernetes/admin.conf
+```
+
+Install the related packages for Kubernetes `v1.22.13`, making sure the `kubernetes` YUM repo is enabled.
+
+```shell
+yum update --enablerepo=kubernetes kubelet-1.22.13 kubeadm-1.22.13 kubectl-1.22.13
+```
+{:data-add-copy-button='true'}
+
+Apply the upgrade and prepare the worker node for maintenance.
+
+```shell
+kubeadm upgrade node && \
+kubectl drain <workernode1> --ignore-daemonsets
+```
+{:data-add-copy-button='true'}
+
+Restart `kubelet` and check its status.
+
+```shell
+systemctl daemon-reload && \
+systemctl restart kubelet && \
+systemctl status kubelet 
+```
+{:data-add-copy-button='true'}
+
+If everything looks good, finish up by uncordoning the node.
+
+```shell
+kubectl uncordon <workernode1>
+```
+{:data-add-copy-button='true'}
+
+Rinse and repeat for your remaining worker nodes.
+
+#### Verify the status of the cluster
+
+Now that the `kubelet` has been upgraded on the control plane and worker nodes, verify the entire cluster is now running "v1.22.13" by SSH-ing to your control plane, switching to the `root` user, and 
+
+
+
+
+
+
+
+
+
+
+See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) for complete instructions on updating a Kubernetes cluster from `v1.x` to `v1.24.x` using `kubeadm`.
+
 <span id="update-calico-cni"></span>
 ### Update Calico CNI
+
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
 Update the Calico CNI to `>= v3.24.1`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#pod-network) instructions when initially setting up your cluster, use the example below to update your Tigera operators and custom resources files.
@@ -145,6 +275,8 @@ For more information on updating Calico see [Upgrade Calico on Kubernetes](https
 
 <span id="update-metallb"></span>
 ### Update MetalLB
+
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
 Update MetalLB to `>= v0.13.5`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#load-balancer) instructions when initially setting up your cluster, use the example below to update your MetalLB installation.
@@ -221,10 +353,10 @@ For more information on updating MetalLB see [Installation By Manifest](https://
 
 ## SLATE Tasks
 
-{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
-
 <span id="update-fed-ctrl-role"></span>
 ### Update the SLATE Federation Controller Role
+
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
 Update the role using the following command:
 
@@ -243,6 +375,8 @@ clusterrole.rbac.authorization.k8s.io/federation-cluster-global unchanged
 
 <span id="update-fed-ctrl"></span>
 ### Update the SLATE Federation Controller
+
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
 Updating the federation controller is a two-step process.
 
@@ -270,6 +404,8 @@ kubectl logs -n kube-system <federation-controller-pod-name>
 
 <span id="update-ingress-ctrl"></span>
 ### Update the SLATE Ingress Controller
+
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
 Updating the SLATE Ingress Controller involves the following steps:
 
