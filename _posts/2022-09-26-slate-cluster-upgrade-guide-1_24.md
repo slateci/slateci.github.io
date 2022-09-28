@@ -19,8 +19,8 @@ This post will walk you, the cluster administrator, through the following tasks:
 
 ### Kubernetes Tasks
 
-1. Upgrade all `v1beta1` Ingress objects to `v1` (<a href="#update-ingress-objects">see below</a>)
-2. Upgrade your SLATE Kubernetes Cluster from K8s `v1.x` to `v1.24.x` using `kubeadm` (<a href="#upgrade-k8s">see below</a>)
+1. Upgrade your SLATE Kubernetes Cluster from K8s `v1.x` to `v1.24.x` using `kubeadm` (<a href="#upgrade-k8s">see below</a>)
+2. (Optional) Upgrade manifests with  `v1beta1` Ingress objects to `v1` (<a href="#update-ingress-objects">see below</a>)
 3. (Recommended) Update the Calico CNI to `>= v3.24.1` (<a href="#update-calico-cni">see below</a>)
 4. (Recommended) Update MetalLB to `>= v0.13.5` (<a href="#update-metallb">see below</a>)
 
@@ -31,89 +31,6 @@ This post will walk you, the cluster administrator, through the following tasks:
 3. Upgrade the SLATE Ingress Controller (<a href="#update-ingress-ctrl">see below</a>)
 
 ## Kubernetes Tasks
-
-<span id="update-ingress-objects"></span>
-### Update Ingress Objects
-
-{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
-{% include alert/note.html content="If your cluster is already at `v1.22` (or newer) skip this section." %}
-
-Support for `v1beta1` Ingress objects have been deprecated and completely removed by Kubernetes `v1.22`. Let's walk through an example to illustrate the changes you may need to apply to any existing Ingress objects.
-
-#### Example
-
-Below is a sample `v1beta1` Ingress object for the fictitious `hello-app-example`:
-
-```yaml
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: hello-app-example
-  labels:
-     app: hello-app-example
-     chart: hello-app-example-chart
-     release: hello-app-example-release
-     instance: hello-app-example-instance
-  annotations:
-    kubernetes.io/ingress.class: slate
-spec:
-  rules:
-  - host: hello.some-cluster.slateci.net
-    http:
-      paths:
-        - path: /
-          backend:
-            serviceName: hello-app-example
-            servicePort: 80
-```
-
-To update the Ingress object to `v1` you need to:
-1. Change the `apiVersion` to `networking.k8s.io/v1`
-2. Move the `ingress.class` annotation to `spec.ingressClassName`
-3. Add a `pathType` to each specified `path`
-4. Expand the `backend` structure from:
-   ```yaml
-   backend:
-     serviceName: hello-app-example
-     servicePort: 80
-   ```
-   to:
-   ```yaml
-   backend:
-     service:
-       name: hello-app-example
-       port:
-         number: 80
-   ```   
-
-Putting everything together gives us the new `v1` Ingress object:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: hello-app-example
-  labels:
-     app: hello-app-example
-     chart: hello-app-example-chart
-     release: hello-app-example-release
-     instance: hello-app-example-instance
-spec:
-  ingressClassName: slate
-  rules:
-  - host: hello.some-cluster.slateci.net
-    http:
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: hello-app-example
-              port:
-                number: 80
-```
-
-For more information on Ingress objects see the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress).
 
 <span id="upgrade-k8s"></span>
 ### Upgrade to K8s `v1.24.x`
@@ -147,9 +64,10 @@ NAME                    STATUS   ROLES           AGE     VERSION
 #### Determine the upgrade path
 
 Best practice is to upgrade from one Kubernetes minor release to the next and so forth down the line all the way to `v1.24.x`. For example, if you are starting at `v1.21.x` the upgrade path should resemble:
-* `v1.21.x` --> `v1.22.13`
-* `v1.22.13` --> `v1.23.10`
-* `v1.23.10` --> `v1.24.x`
+
+  * `v1.21.x` --> `v1.22.13`
+  * `v1.22.13` --> `v1.23.10`
+  * `v1.23.10` --> `v1.24.x`
 
 #### Upgrade the control plane
 
@@ -345,9 +263,22 @@ Finally, complete the final upgrade from `v1.23.10` to `v1.24.x` using the steps
 See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) for complete instructions on updating a Kubernetes cluster from `v1.x` to `v1.24.x` using `kubeadm`.
 
 
+<span id="update-ingress-objects"></span>
+### (Optional) Update Ingress Objects
 
+{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
+{% include alert/note.html content="If your cluster is already at `v1.22` (or newer) skip this section." %}
 
+Support for `v1beta1` Ingress objects have been deprecated and completely removed by Kubernetes `v1.22`.  You will only
+need to update manifests to use the new Ingress objects.  Any Ingress objects currently active on your cluster will 
+automatically get updated when Kubernetes is upgraded to `v1.22`.  See the 
+[Kubernetes deprecation guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#ingress-v122) for
+more details on the deprecation.
 
+If you need to update a manifest, [this article](https://awstip.com/upgrading-kubernetes-ingresses-from-v1beta1-to-v1-7f9235765332) 
+gives step by step instructions on what is needed.  
+
+If you need further assistance, please contact the [the SLATE team](/community/).
 
 
 
