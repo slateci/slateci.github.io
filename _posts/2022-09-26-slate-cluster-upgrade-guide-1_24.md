@@ -41,25 +41,25 @@ This post will walk you, the cluster administrator, through the following tasks:
 
 Start by SSH-ing to your control plane and switching to the `root` user.
 
-```shell
-[you@controlplane] $ sudo su -
-```
-{:data-add-copy-button='true'}
-
 Configure `kubectl`/`kubeadm` and check the state of the Kubernetes nodes.
 
 ```shell
-[root@controlplane] # export KUBECONFIG=/etc/kubernetes/admin.conf
+export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 {:data-add-copy-button='true'}
 
 ```shell
-[root@controlplane ~]# kubectl get nodes
+kubectl get nodes
+```
+{:data-add-copy-button='true'}
+
+The output should resemble:
+
+```shell
 NAME                    STATUS   ROLES           AGE     VERSION
 <worker>                Ready    <none>          2y68d   v1.22.1
 <controlplane>          Ready    control-plane   2y68d   v1.22.1
 ```
-{:data-add-copy-button='true'}
 
 #### Determine the upgrade path
 
@@ -93,12 +93,17 @@ kubeadm upgrade plan
 If there aren't any issues proceed with the upgrade. 
 
 ```shell
-[root@controlplane ~]# kubeadm upgrade apply v1.22.13
+kubeadm upgrade apply v1.22.13
+```
+{:data-add-copy-button='true'}
+
+The output should resemble:
+
+```shell
 [upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.22.13". Enjoy!
 
 [upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
 ```
-{:data-add-copy-button='true'}
 
 Restart `kubelet` and check its status.
 
@@ -112,11 +117,6 @@ systemctl status kubelet
 #### Upgrade the worker nodes one at a time
 
 Leaving a terminal connected to the control plane, SSH to your first worker node in a fresh terminal, and switch to the `root` user.
-
-```shell
-[you@workernode1] $ sudo su -
-```
-{:data-add-copy-button='true'}
 
 Install the related packages for Kubernetes `v1.22.13`, making sure the `kubernetes` YUM repo is enabled.
 
@@ -155,52 +155,31 @@ Log out of your worker node terminal window and rinse-repeat for your remaining 
 
 Now that the `kubelet` has been upgraded on the control plane and worker nodes, once more SSH to your control plane and switch to the `root` user.
 
-```shell
-[you@controlplane] $ sudo su -
-```
-{:data-add-copy-button='true'}
-
 Configure `kubectl`/`kubeadm` and check the state of the Kubernetes nodes.
 
 ```shell
-[root@controlplane] # export KUBECONFIG=/etc/kubernetes/admin.conf
+export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 {:data-add-copy-button='true'}
 
 ```shell
-[root@controlplane ~]# kubectl get nodes
+kubectl get nodes
+```
+{:data-add-copy-button='true'}
+
+The output should resemble:
+
+```shell
 NAME                    STATUS   ROLES           AGE     VERSION
 <worker>                Ready    <none>          2y68d   v1.22.13 
 <controlplane>          Ready    control-plane   2y68d   v1.22.13 
 ```
-{:data-add-copy-button='true'}
 
 If everything was successful the control plane and workers should all report as `v1.22.13`.
 
-#### Next steps: `v1.22.13` to `v1.23.10`
+#### Next steps
 
-At this point in the example your cluster should be running `v1.22.13`. Repeat the steps described above to upgrade from `v1.22.13` to `v1.23.10`, adjusting the K8s versions described in the commands accordingly.
-
-#### Next steps: `v1.23.10` to `v1.24.x`
-
-Once your cluster is running `v1.23.10` you are nearly are ready to make the final jump to `v1.24.x`. 
-
-SSH to your control plane and switching to the `root` user.
-
-```shell
-[you@controlplane] $ sudo su -
-```
-{:data-add-copy-button='true'}
-
-Configure `kubectl`/`kubeadm`.
-
-```shell
-[root@controlplane] # export KUBECONFIG=/etc/kubernetes/admin.conf
-```
-{:data-add-copy-button='true'}
-
-
-Finally, complete the final upgrade from `v1.23.10` to `v1.24.x` using the steps described above, adjusting the K8s versions described in the commands accordingly.
+At this point in the example your cluster should be running `v1.22.13`. Repeat the steps described above to upgrade from `v1.22.13` to `v1.23.10` and finally from `v1.23.10` to `v1.24.x` , adjusting the K8s versions described in the commands accordingly.
 
 #### Additional information
 
@@ -219,9 +198,9 @@ automatically get updated when Kubernetes is upgraded to `v1.22`.  See the
 more details on the deprecation.
 
 If you need to update a manifest, [this article](https://awstip.com/upgrading-kubernetes-ingresses-from-v1beta1-to-v1-7f9235765332) 
-gives step by step instructions on what is needed.  
+gives step-by-step instructions on what is needed.  
 
-If you need further assistance, please contact the [the SLATE team](/community/).
+If you need further assistance, please contact [the SLATE team](/community/).
 
 
 
@@ -337,8 +316,7 @@ For more information on updating MetalLB see [Installation By Manifest](https://
 Update the role using the following command:
 
 ```shell
-FEDERATION_CONTROLLER_VERSION=main && \
-kubectl apply -f https://raw.githubusercontent.com/slateci/federation-controller/${FEDERATION_CONTROLLER_VERSION}/resources/installation/federation-role.yaml
+kubectl apply -f https://raw.githubusercontent.com/slateci/federation-controller/main/resources/installation/federation-role.yaml
 ```
 {:data-add-copy-button='true'}
 
@@ -366,8 +344,7 @@ Updating the federation controller is a two-step process.
 2. The new controller deployment needs to be installed by running:
 
    ```shell
-   FEDERATION_CONTROLLER_VERSION=main && \
-   kubectl apply -f https://raw.githubusercontent.com/slateci/federation-controller/${FEDERATION_CONTROLLER_VERSION}/resources/installation/upgrade-controller-debug.yaml
+   kubectl apply -f https://raw.githubusercontent.com/slateci/federation-controller/main/resources/installation/upgrade-controller-debug.yaml
    ```
    {:data-add-copy-button='true'}
 
@@ -416,3 +393,4 @@ Updating the SLATE Ingress Controller involves the following steps:
      --set controller.ingressClass=slate \
      --set controller.service.loadBalancerIP="<ip_address_from_step_1>"
    ```
+   {:data-add-copy-button='true'}
