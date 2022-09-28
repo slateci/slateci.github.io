@@ -33,14 +33,16 @@ best approach for different cases.
 
     <tr>
       <td class="logo"><img src="{{home}}/img/group.png" alt="Mailing Lists"/></td>
-     <td>
+      <td>
       Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-news">slateci-news@ </a> to receive news and updates about SLATE. 
-     </td>
-     <td>
+      </td>
+    </tr>
+    <tr>  
+       <td>
      Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slateci-discuss@</a> to discuss things with the SLATE community. 
-     </td>
-   </tr>
-
+       </td>
+    </tr>
+	  
     <tr>
       <td class="logo"><img src="{{home}}/img/shield-icon.png" alt="Security Contact"/></td>
       <td>
