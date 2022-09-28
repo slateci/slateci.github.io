@@ -38,7 +38,7 @@ This post will walk you, the cluster administrator, through the following tasks:
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 {% include alert/note.html content="If your cluster is already at `v1.22` (or newer) skip this section." %}
 
-Support for `v1beta1` Ingress objects have been deprecated and completely removed by Kubernetes `v1.22`. Let's walk through an example below to illustrate the changes you may need to update any existing Ingress objects.
+Support for `v1beta1` Ingress objects have been deprecated and completely removed by Kubernetes `v1.22`. Let's walk through an example to illustrate the changes you may need to apply to any existing Ingress objects.
 
 #### Example
 
