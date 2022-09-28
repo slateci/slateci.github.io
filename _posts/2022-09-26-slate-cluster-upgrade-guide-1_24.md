@@ -256,7 +256,7 @@ If everything was successful the control plane and workers should all report as 
 
 #### Next steps: `v1.22.13` to `v1.23.10`
 
-At this point in the example your cluster should be running `v1.22.13`. Repeat the steps described above to upgrade from `v1.22.13` to `v1.23.10`, adjusting the K8a versions described in the commands accordingly.
+At this point in the example your cluster should be running `v1.22.13`. Repeat the steps described above to upgrade from `v1.22.13` to `v1.23.10`, adjusting the K8s versions described in the commands accordingly.
 
 #### Next steps: `v1.23.10` to `v1.24.x`
 
@@ -338,7 +338,7 @@ metadata:
 
 Save the file and exit the editor.
 
-Finally, complete the final upgrade from `v1.23.10` to `v1.24.x` using the steps described above, adjusting the K8a versions described in the commands accordingly.
+Finally, complete the final upgrade from `v1.23.10` to `v1.24.x` using the steps described above, adjusting the K8s versions described in the commands accordingly.
 
 #### Additional information
 
