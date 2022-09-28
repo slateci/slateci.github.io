@@ -178,7 +178,9 @@ At this point in the example your cluster should be running `v1.22.13`. Repeat t
 
 #### Next steps: `v1.23.10` to `v1.24.x`
 
-Once your cluster is running `v1.23.10` you are nearly are ready to make the final jump to `v1.24.x`. Before repeating the steps above, switch from `dockershim` to `containerd` as the default container runtime for your cluster.
+Once your cluster is running `v1.23.10` you are nearly are ready to make the final jump to `v1.24.x`. Before repeating the steps above, switch from `dockershim` to `containerd` as the default container runtime for your cluster.  If you don't have 
+`containerd` installed, [this guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
+has instructions on updating from Docker to `containerd.`
 
 SSH to your control plane and switching to the `root` user.
 
@@ -194,9 +196,7 @@ Configure `kubectl`/`kubeadm`.
 ```
 {:data-add-copy-button='true'}
 
-Stop any existing `containerd` service, set it the default runtime, and enable the service. If you don't have 
-`containerd` installed, [this guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
-has instructions on updating from Docker to `containerd.`
+Stop any existing `containerd` service, set it the default runtime, and enable the service. 
 
 ```shell
 systemctl stop containerd && \
