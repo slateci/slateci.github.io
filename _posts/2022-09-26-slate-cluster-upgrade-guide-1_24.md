@@ -194,7 +194,9 @@ Configure `kubectl`/`kubeadm`.
 ```
 {:data-add-copy-button='true'}
 
-Stop any existing `containerd` service, set it the default runtime, and enable the service.
+Stop any existing `containerd` service, set it the default runtime, and enable the service. If you don't have 
+`containerd` installed, [this guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
+has instructions on updating from Docker to `containerd.`
 
 ```shell
 systemctl stop containerd && \
@@ -203,7 +205,7 @@ systemctl enable --now containerd
 ```
 {:data-add-copy-button='true'}
 
-Stop the `kubelet` service, configure `containerd` as the new runtime endpoint, and restart the service.
+Stop the `kubelet` service, configure `containerd` as the new runtime endpoint, and restart the service.  
 
 ```shell
 systemctl stop kubelet
