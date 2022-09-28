@@ -149,7 +149,7 @@ NAME                    STATUS   ROLES           AGE     VERSION
 Best practice is to upgrade from one Kubernetes minor release to the next and so forth down the line all the way to `v1.24.x`. For example, if you are starting at `v1.21.x` the upgrade path should resemble:
 * `v1.21.x` --> `v1.22.13`
 * `v1.22.13` --> `v1.23.10`
-* `v1.23.10` --> `v1.24.4`
+* `v1.23.10` --> `v1.24.x`
 
 #### Upgrade the control plane
 
@@ -236,21 +236,129 @@ Rinse and repeat for your remaining worker nodes.
 
 #### Verify the status of the cluster
 
-Now that the `kubelet` has been upgraded on the control plane and worker nodes, verify the entire cluster is now running "v1.22.13" by SSH-ing to your control plane, switching to the `root` user, and 
+Now that the `kubelet` has been upgraded on the control plane and worker nodes, once more SSH to your control plane and switch to the `root` user.
 
+```shell
+[you@controlplane] $ sudo su -
+```
+{:data-add-copy-button='true'}
 
+Configure `kubectl`/`kubeadm` and check the state of the Kubernetes nodes.
 
+```shell
+[root@controlplane] # export KUBECONFIG=/etc/kubernetes/admin.conf
+```
+{:data-add-copy-button='true'}
 
+```shell
+[root@controlplane ~]# kubectl get nodes
+NAME                    STATUS   ROLES           AGE     VERSION
+<worker>                Ready    <none>          2y68d   v1.22.13 
+<controlplane>          Ready    control-plane   2y68d   v1.22.13 
+```
+{:data-add-copy-button='true'}
 
+If everything was successful the control plane and workers should all report as `v1.22.13`.
 
+#### Next steps: `v1.22.13` to `v1.23.10`
 
+At this point in the example your cluster should be running `v1.22.13`. Repeat the steps described above to upgrade from `v1.22.13` to `v1.23.10`, adjusting the K8a versions described in the commands accordingly.
 
+#### Next steps: `v1.23.10` to `v1.24.x`
 
+Once your cluster is running `v1.23.10` you are nearly are ready to make the final jump to `v1.24.x`. Before repeating the steps above, switch from `dockershim` to `containerd` as the default container runtime for your cluster.
+
+SSH to your control plane and switching to the `root` user.
+
+```shell
+[you@controlplane] $ sudo su -
+```
+{:data-add-copy-button='true'}
+
+Configure `kubectl`/`kubeadm`.
+
+```shell
+[root@controlplane] # export KUBECONFIG=/etc/kubernetes/admin.conf
+```
+{:data-add-copy-button='true'}
+
+Stop any existing `containerd` service, set it the default runtime, and enable the service.
+
+```shell
+systemctl stop containerd && \
+containerd config default | sudo tee /etc/containerd/config.toml && \
+systemctl enable --now containerd
+```
+{:data-add-copy-button='true'}
+
+Stop the `kubelet` service, configure `containerd` as the new runtime endpoint, and restart the service.
+
+```shell
+systemctl stop kubelet
+```
+{:data-add-copy-button='true'}
+
+```shell
+echo 'KUBELET_KUBEADM_ARGS="--pod-infra-container-image=k8s.gcr.io/pause:3.4.1 --container-runtime=remote --container-runtime-endpoint=unix:///run/containerd/containerd.sock"' > /var/lib/kubelet/kubeadm-flags.env
+```
+{:data-add-copy-button='true'}
+
+```shell
+systemctl daemon-reload && \
+systemctl restart kubelet
+```
+{:data-add-copy-button='true'}
+
+Next, for each worker node edit its manifest.
+
+```shell
+kubectl edit node <workernode>
+```
+{:data-add-copy-button='true'}
+
+In the file content replace:
+
+```yaml
+...
+metadata:
+   annotations:
+      ...
+      kubeadm.alpha.kubernetes.io/cri-socket: /var/run/dockershim.sock
+      ...
+...
+```
+{:data-add-copy-button='true'}
+
+with:
+
+```yaml
+...
+metadata:
+   annotations:
+      ...
+      kubeadm.alpha.kubernetes.io/cri-socket: unix:///run/containerd/containerd.sock
+      ...
+...
+```
+{:data-add-copy-button='true'}
+
+Save the file and exit the editor.
+
+Finally, complete the final upgrade from `v1.23.10` to `v1.24.x` using the steps described above, adjusting the K8a versions described in the commands accordingly.
+
+#### Additional information
 
 See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) for complete instructions on updating a Kubernetes cluster from `v1.x` to `v1.24.x` using `kubeadm`.
 
+
+
+
+
+
+
+
 <span id="update-calico-cni"></span>
-### Update Calico CNI
+### (Recommended) Update Calico CNI
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
@@ -274,7 +382,7 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALI
 For more information on updating Calico see [Upgrade Calico on Kubernetes](https://projectcalico.docs.tigera.io/maintenance/kubernetes-upgrade).
 
 <span id="update-metallb"></span>
-### Update MetalLB
+### (Recommended) Update MetalLB
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
