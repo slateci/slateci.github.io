@@ -69,6 +69,11 @@ Best practice is to upgrade from one Kubernetes minor release to the next and so
   * `v1.22.13` --> `v1.23.10`
   * `v1.23.10` --> `v1.24.x`
 
+*Note:* The patchlevel of the minor releases may have changed since this
+document was written.  See [this
+page](https://kubernetes.io/releases/patch-releases/) to get the latest
+patchlevel to use for each minor release.  E.g. `v1.22.15` instead of `v1.22.13`
+
 #### Install and configure `containerd`
 If you are using Docker on your cluster, you'll need to switch the kubernetes runtime from Docker to `containerd` because Kubernetes removed support for Docker in `v1.24.0`.  [This guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
 has instructions on updating from Docker to `containerd.`  Please note that [this step](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/#configure-the-kubelet-to-use-containerd-as-its-container-runtime) 
