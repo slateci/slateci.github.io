@@ -38,6 +38,7 @@ best approach for different cases.
       </td>
     </tr>
     <tr>  
+       <td> </td>
        <td>
      Sign up to <a href="https://groups.google.com/forum/#!forum/slateci-discuss">slateci-discuss@</a> to discuss things with the SLATE community. 
        </td>
