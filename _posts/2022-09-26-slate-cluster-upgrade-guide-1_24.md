@@ -69,6 +69,10 @@ Best practice is to upgrade from one Kubernetes minor release to the next and so
   * `v1.22.13` --> `v1.23.10`
   * `v1.23.10` --> `v1.24.x`
 
+#### Install and configure `containerd`
+If you are using Docker on your cluster, you'll need to switch the kubernetes runtime from Docker to `containerd` because Kubernetes removed support for Docker in `v1.24.0`.  [This guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
+has instructions on updating from Docker to `containerd.`
+
 #### Upgrade the control plane
 
 Let's assume that like the example above, we are beginning with Kubernetes `v1.21.x`. Install the related packages for Kubernetes `v1.22.13`, making sure the `kubernetes` YUM repo is enabled.
@@ -178,9 +182,7 @@ At this point in the example your cluster should be running `v1.22.13`. Repeat t
 
 #### Next steps: `v1.23.10` to `v1.24.x`
 
-Once your cluster is running `v1.23.10` you are nearly are ready to make the final jump to `v1.24.x`. Before repeating the steps above, switch from `dockershim` to `containerd` as the default container runtime for your cluster.  If you don't have 
-`containerd` installed, [this guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
-has instructions on updating from Docker to `containerd.`
+Once your cluster is running `v1.23.10` you are nearly are ready to make the final jump to `v1.24.x`. 
 
 SSH to your control plane and switching to the `root` user.
 
