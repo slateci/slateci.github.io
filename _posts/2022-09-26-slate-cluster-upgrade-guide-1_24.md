@@ -61,34 +61,34 @@ NAME                    STATUS   ROLES           AGE     VERSION
 <controlplane>          Ready    control-plane   2y68d   v1.22.1
 ```
 
-#### Determine the upgrade path
-
-Best practice is to upgrade from one Kubernetes minor release to the next and so forth down the line all the way to `v1.24.x`. For example, if you are starting at `v1.21.x` the upgrade path should resemble:
-
-  * `v1.21.x` --> `v1.22.13`
-  * `v1.22.13` --> `v1.23.10`
-  * `v1.23.10` --> `v1.24.x`
-
-*Note:* The patchlevel of the minor releases may have changed since this
-document was written.  See [this
-page](https://kubernetes.io/releases/patch-releases/) to get the latest
-patchlevel to use for each minor release.  E.g. `v1.22.15` instead of `v1.22.13`
-
 #### Install and configure `containerd`
 If you are using Docker on your cluster, you'll need to switch the kubernetes runtime from Docker to `containerd` because Kubernetes removed support for Docker in `v1.24.0`.  [This guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
 has instructions on updating from Docker to `containerd.`  Please note that [this step](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/#configure-the-kubelet-to-use-containerd-as-its-container-runtime) 
 in the guide needs to be done for each node in your kubernetes cluster.
 
+#### Determine the upgrade path
+
+Best practice is to upgrade from one Kubernetes minor release to the next and so forth down the line all the way to `v1.24.x`. For example, if you are starting at `v1.21.x` the upgrade path should resemble:
+
+  * `v1.21.x` --> `v1.22.15`
+  * `v1.22.15` --> `v1.23.12`
+  * `v1.23.12` --> `v1.24.x`
+
+*Note:* The patchlevel of the minor releases may have changed since this
+document was written.  See [this
+page](https://kubernetes.io/releases/patch-releases/) to get the latest
+patchlevel to use for each minor release.  E.g. `v1.22.15` instead of `v1.22.15`
+
 #### Upgrade the control plane
 
-Let's assume that like the example above, we are beginning with Kubernetes `v1.21.x`. Install the related packages for Kubernetes `v1.22.13`, making sure the `kubernetes` YUM repo is enabled.
+Let's assume that like the example above, we are beginning with Kubernetes `v1.21.x`. Install the related packages for Kubernetes `v1.22.15`, making sure the `kubernetes` YUM repo is enabled.
 
 ```shell
-yum update --enablerepo=kubernetes kubelet-1.22.13 kubeadm-1.22.13 kubectl-1.22.13
+yum update --enablerepo=kubernetes kubelet-1.22.15 kubeadm-1.22.15 kubectl-1.22.15
 ```
 {:data-add-copy-button='true'}
 
-Check that your cluster can be upgraded from `v1.21.x` --> `v1.22.13`.
+Check that your cluster can be upgraded from `v1.21.x` --> `v1.22.15`.
 
 ```shell
 kubeadm upgrade plan
@@ -98,14 +98,14 @@ kubeadm upgrade plan
 If there aren't any issues proceed with the upgrade. 
 
 ```shell
-kubeadm upgrade apply v1.22.13
+kubeadm upgrade apply v1.22.15
 ```
 {:data-add-copy-button='true'}
 
 The output should resemble:
 
 ```shell
-[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.22.13". Enjoy!
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.22.15". Enjoy!
 
 [upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
 ```
@@ -123,10 +123,10 @@ systemctl status kubelet
 
 Leaving a terminal connected to the control plane, SSH to your first worker node in a fresh terminal, and switch to the `root` user.
 
-Install the related packages for Kubernetes `v1.22.13`, making sure the `kubernetes` YUM repo is enabled.
+Install the related packages for Kubernetes `v1.22.15`, making sure the `kubernetes` YUM repo is enabled.
 
 ```shell
-yum update --enablerepo=kubernetes kubelet-1.22.13 kubeadm-1.22.13 kubectl-1.22.13
+yum update --enablerepo=kubernetes kubelet-1.22.15 kubeadm-1.22.15 kubectl-1.22.15
 ```
 {:data-add-copy-button='true'}
 
@@ -176,15 +176,15 @@ The output should resemble:
 
 ```shell
 NAME                    STATUS   ROLES           AGE     VERSION
-<worker>                Ready    <none>          2y68d   v1.22.13 
-<controlplane>          Ready    control-plane   2y68d   v1.22.13 
+<worker>                Ready    <none>          2y68d   v1.22.15 
+<controlplane>          Ready    control-plane   2y68d   v1.22.15 
 ```
 
-If everything was successful the control plane and workers should all report as `v1.22.13`.
+If everything was successful the control plane and workers should all report as `v1.22.15`.
 
 #### Next steps
 
-At this point in the example your cluster should be running `v1.22.13`. Repeat the steps described above to upgrade from `v1.22.13` to `v1.23.10` and finally from `v1.23.10` to `v1.24.x` , adjusting the K8s versions described in the commands accordingly.
+At this point in the example your cluster should be running `v1.22.15`. Repeat the steps described above to upgrade from `v1.22.15` to `v1.23.12` and finally from `v1.23.12` to `v1.24.x` , adjusting the K8s versions described in the commands accordingly.
 
 #### Additional information
 
@@ -364,6 +364,10 @@ kubectl logs -n kube-system <federation-controller-pod-name>
 ### Update the SLATE Ingress Controller
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
+
+*Note:* You will need helm to update the SLATE Ingress controller.  If you do
+not have helm installed, you can install it following [these
+instructions.](https://helm.sh/docs/intro/install/)
 
 Updating the SLATE Ingress Controller involves the following steps:
 
