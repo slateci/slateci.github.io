@@ -77,7 +77,7 @@ Best practice is to upgrade from one Kubernetes minor release to the next and so
 *Note:* The patchlevel of the minor releases may have changed since this
 document was written.  See [this
 page](https://kubernetes.io/releases/patch-releases/) to get the latest
-patchlevel to use for each minor release.  E.g. `v1.22.15` instead of `v1.22.15`
+patchlevel to use for each minor release.  E.g. `v1.22.16` instead of `v1.22.15`
 
 #### Upgrade the control plane
 
