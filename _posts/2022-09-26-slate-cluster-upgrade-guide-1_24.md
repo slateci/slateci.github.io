@@ -182,9 +182,16 @@ NAME                    STATUS   ROLES           AGE     VERSION
 
 If everything was successful the control plane and workers should all report as `v1.22.15`.
 
-#### Next steps
+#### Next steps: `v1.22.15` to `v1.23.12`
 
-At this point in the example your cluster should be running `v1.22.15`. Repeat the steps described above to upgrade from `v1.22.15` to `v1.23.12` and finally from `v1.23.12` to `v1.24.x` , adjusting the K8s versions described in the commands accordingly.
+At this point in the example your cluster should be running `v1.22.15`. Repeat the steps described above to upgrade from `v1.22.15` to `v1.23.12`:
+* Adjusting the K8s versions described in the commands accordingly.
+
+#### Next steps: `v1.23.12` to `v1.24.x`
+
+At this point in the example your cluster should be running `v1.23.12`. Repeat the steps described above to upgrade from  `v1.23.12` to `v1.24.x`:
+* Adjusting the K8s versions described in the commands accordingly.
+* Removing the `--network-plugin` option from `/var/lib/kubelet/kubeadm-flags.env` before restarting each of the `kubelet`s.
 
 #### Additional information
 
