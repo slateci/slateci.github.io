@@ -367,35 +367,19 @@ kubectl logs -n kube-system <federation-controller-pod-name>
 
 Updating the SLATE Ingress Controller involves the following steps:
 
-1. Obtain the load balancer IP from the output of the following command:
+1. Download the manifest for the nginx-controller by running the following command:
 
    ```shell
-   kubectl get service -n slate-system
+   wget https://raw.githubusercontent.com/slateci/slate-client-server/develop/resources/nginx-ingress.yaml
+
    ```
    {:data-add-copy-button='true'}
 
-   Set the IP address aside for the final step below.
+2. Edit the manifest and replace `{{SLATE_NAMESPACE}}` with the namespace that slate is using on your cluster (i.e `slate-system`)
 
-2. Add the Nginx Ingress Helm repository:
-
-   ```shell
-   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-   ```
-   {:data-add-copy-button='true'}
-
-3. Clean up the old installation:
+3. Install the new SLATE Ingress Controller 
 
    ```shell
-   kubectl delete deployment  nginx-ingress-controller -n slate-system && \
-   kubectl delete service -n slate-system ingress-nginx
-   ```
-   {:data-add-copy-button='true'}
-
-4. Install the new SLATE Ingress Controller using the IP address from the first step:
-
-   ```shell
-   helm install ingress -n slate-system  ingress-nginx/ingress-nginx \
-     --set controller.ingressClass=slate \
-     --set controller.service.loadBalancerIP="<ip_address_from_step_1>"
+   kubectl apply -f nginx-ingress.yaml
    ```
    {:data-add-copy-button='true'}
