@@ -379,7 +379,7 @@ Updating the SLATE Ingress Controller involves the following steps:
    ```
    {:data-add-copy-button='true'}
 
-2. Edit the manifest and replace `{{SLATE_NAMESPACE}}` with the namespace that slate is using on your cluster (i.e `slate-system`)
+2. Edit the manifest and replace `{% raw %} {{SLATE_NAMESPACE}} {% endraw %}` with the namespace that slate is using on your cluster (i.e `slate-system`)
 
 3. Install the new SLATE Ingress Controller 
 
