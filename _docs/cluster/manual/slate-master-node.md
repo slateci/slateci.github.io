@@ -88,18 +88,81 @@ your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.24.0
 ```
 {:data-add-copy-button='true'}
 
-## Load Balancer
+## Load Balancer/MetalLB
 
-Kubernetes clusters, in order to evenly distribute work across all worker nodes, require a load balancer. There are a few load balancer solutions. We recommend using MetalLB for load balancing on SLATE clusters.
+When using the Kubernetes service type of Load Balancer, [MetalLB](https://metallb.org/) will attach an IP address to the service from a pool of address ranges you specify in the MetalLB configuration. The SLATE team usually uses MetalLB to automatically attach public IP addresses to a service, but it can be used with RFC1918 IP addresses as well. 
 
-### MetalLB
+Installing and configuring MetalLB is done in three steps: installation, configuration, and advertisement. (There is a fourth step if you are using virtual machines managed by OpenStack.) 
 
-See MetalLB's [installation instructions](https://metallb.universe.tf/installation/) for steps and commands.
+### Step 1: Installation
 
-#### MetalLB on OpenStack
+Run this command to install MetelLB version 0.13.5:
 
-If your Kubernetes cluster is installed on one or more virtual machines run by OpenStack, there is one small, extra step required to enable MetalLB to route traffic properly. 
+```shell
+METALLB_VERSION=0.13.5 && \
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v${METALLB_VERSION}/config/manifests/metallb-native.yaml
+```
+{:data-add-copy-button='true'}
 
-See [the MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) for details; in short, OpenStack must be informed that traffic sent to IP addresses controlled by MetalLB has a valid reason to be going to the VMs which make up the Kubernetes cluster. 
+### Step 2: Configuration
+
+The following command creates an IP Address Pool file. Replace the addresses in this IPAddressPool configuration with the available IP addresses for your cluster. As noted in the example, you can specify a range with a CIDR or a hyphen. You may configure more than one range of IP addresses. The example configures two ranges (make sure to remove the second range if you only need one). 
+
+```shell
+cat <<EOF > /tmp/metallb-ipaddrpool.yml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.10.0/24
+  - 192.168.9.1-192.168.9.5
+EOF
+```
+{:data-add-copy-button='true'}
+
+You can now apply the configuration file to Kubernetes:
+
+```shell
+kubectl create -f /tmp/metallb-ipaddrpool.yml
+```
+{:data-add-copy-button='true'}
+
+### Step 3: Advertisement
+
+Once configured, we need to tell MetalLB how to advertise the IP addresses in the pool. In this case we are configuring the pool to use Layer 2 advertisement. [MetalLB also supports BGP](https://metallb.org/configuration/_advanced_bgp_configuration/).
+
+```shell
+cat <<EOF > /tmp/metallb-ipaddrpool-advert.yml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - first-pool
+EOF
+```
+{:data-add-copy-button='true'}
+
+
+Apply the advertisement file to Kubernetes:
+
+```shell
+kubectl create -f /tmp/metallb-ipaddrpool-advert.yml
+```
+{:data-add-copy-button='true'}
+
+### Step 4 (if you are running VMs on OpenStack): MetalLB on OpenStack
+
+The [MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) notes the following for OpenStack managed virtual machines: 
+
+You can run a Kubernetes cluster on OpenStack VMs, and use MetalLB as the load balancer. However you have to disable OpenStack’s ARP spoofing protection if you want to use L2 mode. You must disable it on all the VMs that are running Kubernetes.
+
+By design, MetalLB’s L2 mode looks like an ARP spoofing attempt to OpenStack, because we’re announcing IP addresses that OpenStack doesn’t know about. There’s currently no way to make OpenStack cooperate with MetalLB here, so we have to turn off the spoofing protection entirely.
+
 
 {% include doc-next-link.html content="/docs/cluster/manual/slate-worker-node.html" %}
