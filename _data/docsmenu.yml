@@ -30,21 +30,21 @@ toc:
         url: /docs/cluster/manual/cluster-federation.html
       - page: Troubleshooting
         url: /docs/cluster/manual/troubleshooting.html
-  - title: Automated Cluster Installation
-    id: automated-cluster-installation
-    subfolderitems:
-      - page: Introduction
-        url: /docs/cluster/automated/introduction.html
-      - page: Prerequisites
-        url: /docs/cluster/automated/prerequisites.html
-      - page: Kubernetes Cluster Creation
-        url: /docs/cluster/automated/kubernetes-cluster-creation.html
-      - page: Reset Kubernetes Cluster
-        url: /docs/cluster/automated/reset.html
-      - page: Upgrades / Adding / Removing Nodes
-        url: /docs/cluster/automated/upgrades-adding-nodes.html
-      - page: Troubleshooting
-        url: /docs/cluster/automated/troubleshooting.html
+#  - title: Automated Cluster Installation
+#    id: automated-cluster-installation
+#    subfolderitems:
+#      - page: Introduction
+#        url: /docs/cluster/automated/introduction.html
+#      - page: Prerequisites
+#        url: /docs/cluster/automated/prerequisites.html
+#      - page: Kubernetes Cluster Creation
+#        url: /docs/cluster/automated/kubernetes-cluster-creation.html
+#      - page: Reset Kubernetes Cluster
+#        url: /docs/cluster/automated/reset.html
+#      - page: Upgrades / Adding / Removing Nodes
+#        url: /docs/cluster/automated/upgrades-adding-nodes.html
+#      - page: Troubleshooting
+#        url: /docs/cluster/automated/troubleshooting.html
   - title: SLATE Tools
     id: slate-tools
     url: /docs/tools/
