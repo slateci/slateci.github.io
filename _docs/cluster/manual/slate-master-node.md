@@ -96,7 +96,7 @@ Installing and configuring MetalLB is done in three steps: installation, configu
 
 ### Step 1: Installation
 
-Run this command to install MetelLB version 0.13.5
+Run this command to install MetelLB version 0.13.5:
 
 ```shell
 METALLB_VERSION=0.13.5 && \
@@ -156,7 +156,7 @@ kubectl create -f /tmp/metallb-ipaddrpool-advert.yml
 ```
 {:data-add-copy-button='true'}
 
-### MetalLB on OpenStack
+### Step 4 (if you are running VMs on OpenStack): MetalLB on OpenStack
 
 The [MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) notes the following for OpenStack managed virtual machines: 
 
