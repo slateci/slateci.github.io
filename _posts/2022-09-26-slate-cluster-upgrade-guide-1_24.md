@@ -203,15 +203,17 @@ By default, Kubernetes prevents pods from running on the Control-Plane/Master no
 
 The following command has two options based on the terminology change from Master node to Control-Plane node. If the first command referencing the Master node results in an error, try the second command, which instead references the Control-Plane node. 
 
-```
+```shell
 kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 ```
+{:data-add-copy-button='true'}
 
 If the previous command resulted in an error, try running this command instead: 
 
-```
+```shell
 kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 ```
+{:data-add-copy-button='true'}
 
 <span id="update-ingress-objects"></span>
 ### (Optional) Update Ingress Objects
