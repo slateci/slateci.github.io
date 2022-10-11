@@ -6,7 +6,6 @@ permalink: blog/slate-cluster-upgrade-guide-1_24.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 The team has been busy preparing SLATE for Kubernetes (K8s) `v1.24.x` and today we are happy to announce that this work is now live. As cluster administrators there are several upgrade tasks you must perform to continue using SLATE with this new version of K8s.
