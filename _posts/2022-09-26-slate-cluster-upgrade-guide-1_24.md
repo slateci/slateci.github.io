@@ -197,6 +197,21 @@ At this point in the example your cluster should be running `v1.23.12`. Repeat t
 
 See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) for complete instructions on updating a Kubernetes cluster from `v1.x` to `v1.24.x` using `kubeadm`.
 
+### Single-Node Clusters
+
+By default, Kubernetes prevents pods from running on the Control-Plane/Master node. Running a single-node cluster requires removing this setting so that Kubernetes has the resources to run pods. **If you a running a multi-node cluster, this step is not necessary.** 
+
+The following command has two options based on the terminology change from Master node to Control-Plane node. If the first command referencing the Master node results in an error, try the second command, which instead references the Control-Plane node. 
+
+```
+kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
+```
+
+If the previous command resulted in an error, try running this command instead: 
+
+```
+kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
+```
 
 <span id="update-ingress-objects"></span>
 ### (Optional) Update Ingress Objects
