@@ -80,8 +80,8 @@ in the guide needs to be done for each node in your kubernetes cluster.
 Best practice is to upgrade from one Kubernetes minor release to the next and so forth down the line all the way to `v1.24.x`. For example, if you are starting at `v1.21.x` the upgrade path should resemble:
 
   * `v1.21.x` --> `v1.22.15`
-  * `v1.22.15` --> `v1.23.12`
-  * `v1.23.12` --> `v1.24.x`
+  * `v1.22.15` --> `v1.23.13`
+  * `v1.23.13` --> `v1.24.x`
 
 *Note:* The patchlevel of the minor releases may have changed since this
 document was written.  See [this
@@ -226,27 +226,9 @@ See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-c
 By default, Kubernetes prevents pods from running on the Control-Plane/Master node. Running a single-node cluster requires removing this setting so that Kubernetes has the resources to run pods. **If you a running a multi-node cluster, this step is not necessary.** 
 
 ```shell
-kubectl uncordon control-node
+kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 ```
 {:data-add-copy-button='true'}
-
-<br>
-
-<span id="update-ingress-objects"></span>
-### (Optional) Update Ingress Objects
-
-{% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
-
-Support for `v1beta1` Ingress objects have been deprecated and completely removed by Kubernetes `v1.22`.  You will only
-need to update manifests to use the new Ingress objects.  Any Ingress objects currently active on your cluster will 
-automatically get updated when Kubernetes is upgraded to `v1.22`.  See the 
-[Kubernetes deprecation guide](https://kubernetes.io/docs/reference/using-api/deprecation-guide/#ingress-v122) for
-more details on the deprecation.
-
-If you need to update a manifest, [this article](https://awstip.com/upgrading-kubernetes-ingresses-from-v1beta1-to-v1-7f9235765332) 
-gives step-by-step instructions on what is needed.  
-
-If you need further assistance, please contact [the SLATE team](/community/).
 
 <br>
 
@@ -255,7 +237,13 @@ If you need further assistance, please contact [the SLATE team](/community/).
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
-Update the Calico CNI to `>= v3.24.1`.
+Run this command to get the version of Calico CNI:
+
+```shell
+ kubectl describe pod -n `kubectl get pods -A | grep calico | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
+```
+
+If the version is < v3.24.1, update the Calico CNI to `>= v3.24.1`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#pod-network) instructions when initially setting up your cluster, use the example below to update your Tigera operators and custom resources files.
 * If you chose a different route for initially installing and configuring Calico, please refer directly to the [Calico documentation](https://projectcalico.docs.tigera.io/maintenance/kubernetes-upgrade) for update procedures.
 
@@ -283,7 +271,12 @@ For more information on updating Calico see [Upgrade Calico on Kubernetes](https
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
-Update MetalLB to `>= v0.13.5`.
+Run this command to check the version of MetalLB:
+```shell
+kubectl decsribe pod -n `kubectl get pods -A | grep metal | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
+```
+
+If the version is < v0.13.5, update MetalLB to `>= v0.13.5`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#load-balancer) instructions when initially setting up your cluster, use the example below to update your MetalLB installation.
 * If you chose a different route for initially installing and configuring MetalLB, please refer directly to the [MetalLB documentation](https://metallb.universe.tf/installation/) for update procedures.
 
@@ -317,7 +310,6 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 192.168.10.0/24
   - 192.168.9.1-192.168.9.5
 EOF
 ```
@@ -361,8 +353,6 @@ For more information on updating MetalLB see [Installation By Manifest](https://
 <br>
 
 ## SLATE Tasks
-
-<br>
 
 <span id="update-fed-ctrl-role"></span>
 ### Update the SLATE Federation Controller Role
