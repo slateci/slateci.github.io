@@ -279,6 +279,7 @@ ping google.com
 
 This shows that the DNS is working and is a good indication that Calico is working. 
 
+<br>
 
 <span id="update-metallb"></span>
 ### (Recommended) Update MetalLB
