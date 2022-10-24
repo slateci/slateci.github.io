@@ -40,6 +40,8 @@ This post will walk you, the cluster administrator, through the following tasks:
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
+<br>
+
 #### Check the status of the cluster
 
 Start by SSH-ing to your control plane and switching to the `root` user.
@@ -64,14 +66,14 @@ NAME                    STATUS   ROLES           AGE     VERSION
 <controlplane>          Ready    control-plane   2y68d   v1.22.1
 ```
 
-
+<br>
 
 #### Install and configure `containerd`
 If you are using Docker on your cluster, you'll need to switch the kubernetes runtime from Docker to `containerd` because Kubernetes removed support for Docker in `v1.24.0`.  [This guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
 has instructions on updating from Docker to `containerd.`  Please note that [this step](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/#configure-the-kubelet-to-use-containerd-as-its-container-runtime) 
 in the guide needs to be done for each node in your kubernetes cluster.
 
-
+<br>
 
 #### Determine the upgrade path
 
@@ -86,7 +88,7 @@ document was written.  See [this
 page](https://kubernetes.io/releases/patch-releases/) to get the latest
 patchlevel to use for each minor release.  E.g. `v1.22.16` instead of `v1.22.15`
 
-
+<br>
 
 #### Upgrade the control plane
 
@@ -128,6 +130,8 @@ systemctl status kubelet
 ```
 {:data-add-copy-button='true'}
 
+<br>
+
 #### Upgrade the worker nodes one at a time
 
 Leaving a terminal connected to the control plane, SSH to your first worker node in a fresh terminal, and switch to the `root` user.
@@ -165,6 +169,8 @@ kubectl uncordon <workernode1>
 
 Log out of your worker node terminal window and rinse-repeat for your remaining worker nodes.
 
+<br>
+
 #### Verify the status of the cluster
 
 Now that the `kubelet` has been upgraded on the control plane and worker nodes, once more SSH to your control plane and switch to the `root` user.
@@ -191,10 +197,14 @@ NAME                    STATUS   ROLES           AGE     VERSION
 
 If everything was successful the control plane and workers should all report as `v1.22.15`.
 
+<br>
+
 #### Next steps: `v1.22.15` to `v1.23.12`
 
 At this point in the example your cluster should be running `v1.22.15`. Repeat the steps described above to upgrade from `v1.22.15` to `v1.23.12`:
 * Adjusting the K8s versions described in the commands accordingly.
+
+<br>
 
 #### Next steps: `v1.23.12` to `v1.24.x`
 
@@ -202,9 +212,13 @@ At this point in the example your cluster should be running `v1.23.12`. Repeat t
 * Adjusting the K8s versions described in the commands accordingly.
 * Removing the `--network-plugin` option from `/var/lib/kubelet/kubeadm-flags.env` before restarting each of the `kubelet`s.
 
+<br>
+
 #### Additional information
 
 See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/) for complete instructions on updating a Kubernetes cluster from `v1.x` to `v1.24.x` using `kubeadm`.
+
+<br>
 
 <span id="untaint"></span>
 ### Single-Node Clusters
@@ -215,6 +229,8 @@ By default, Kubernetes prevents pods from running on the Control-Plane/Master no
 kubectl uncordon control-node
 ```
 {:data-add-copy-button='true'}
+
+<br>
 
 <span id="update-ingress-objects"></span>
 ### (Optional) Update Ingress Objects
@@ -232,7 +248,7 @@ gives step-by-step instructions on what is needed.
 
 If you need further assistance, please contact [the SLATE team](/community/).
 
-
+<br>
 
 <span id="update-calico-cni"></span>
 ### (Recommended) Update Calico CNI
@@ -242,6 +258,8 @@ If you need further assistance, please contact [the SLATE team](/community/).
 Update the Calico CNI to `>= v3.24.1`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#pod-network) instructions when initially setting up your cluster, use the example below to update your Tigera operators and custom resources files.
 * If you chose a different route for initially installing and configuring Calico, please refer directly to the [Calico documentation](https://projectcalico.docs.tigera.io/maintenance/kubernetes-upgrade) for update procedures.
+
+<br>
 
 #### Example
 
@@ -258,6 +276,8 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALI
 
 For more information on updating Calico see [Upgrade Calico on Kubernetes](https://projectcalico.docs.tigera.io/maintenance/kubernetes-upgrade).
 
+<br>
+
 <span id="update-metallb"></span>
 ### (Recommended) Update MetalLB
 
@@ -266,6 +286,8 @@ For more information on updating Calico see [Upgrade Calico on Kubernetes](https
 Update MetalLB to `>= v0.13.5`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#load-balancer) instructions when initially setting up your cluster, use the example below to update your MetalLB installation.
 * If you chose a different route for initially installing and configuring MetalLB, please refer directly to the [MetalLB documentation](https://metallb.universe.tf/installation/) for update procedures.
+
+<br>
 
 #### Example
 
@@ -336,7 +358,11 @@ kubectl delete configmap config -n metallb-system
 
 For more information on updating MetalLB see [Installation By Manifest](https://metallb.universe.tf/installation/#installation-by-manifest).
 
+<br>
+
 ## SLATE Tasks
+
+<br>
 
 <span id="update-fed-ctrl-role"></span>
 ### Update the SLATE Federation Controller Role
@@ -356,6 +382,8 @@ Upon execution, `kubectl` should update the controller and output something simi
 clusterrole.rbac.authorization.k8s.io/federation-cluster configured
 clusterrole.rbac.authorization.k8s.io/federation-cluster-global unchanged
 ```
+
+<br>
 
 <span id="update-fed-ctrl"></span>
 ### Update the SLATE Federation Controller
@@ -384,6 +412,8 @@ After running the second command, you should see a `federation-controller` pod i
 kubectl logs -n kube-system <federation-controller-pod-name>
 ```
 {:data-add-copy-button='true'}
+
+<br>
 
 <span id="update-ingress-ctrl"></span>
 ### Update the SLATE Ingress Controller
