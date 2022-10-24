@@ -267,6 +267,19 @@ For more information on updating Calico see [Upgrade Calico on Kubernetes](https
 
 <br>
 
+Once Calico is updated, you can verify it is working with the following commands: 
+
+```shell
+kubectl run pingtest --image=busybox -it /bin/sh
+```
+
+```shell
+ping google.com
+```
+
+This shows that the DNS is working and is a good indication that Calico is working. 
+
+
 <span id="update-metallb"></span>
 ### (Recommended) Update MetalLB
 
