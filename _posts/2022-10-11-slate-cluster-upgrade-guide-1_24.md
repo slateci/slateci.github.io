@@ -236,7 +236,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
-Run this command to get the version of Calico CNI:
+Run this command to get the version of Calico CNI currenlty installed:
 
 ```shell
  kubectl describe pod -n `kubectl get pods -A | grep calico | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
@@ -285,7 +285,7 @@ This shows that the DNS is working and is a good indication that Calico is worki
 
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
-Run this command to check the version of MetalLB:
+Run this command to get the version of MetalLB currently installed:
 ```shell
 kubectl decsribe pod -n `kubectl get pods -A | grep metal | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
 ```
