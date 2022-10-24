@@ -243,6 +243,8 @@ Run this command to get the version of Calico CNI:
  kubectl describe pod -n `kubectl get pods -A | grep calico | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
 ```
 
+<br>
+
 If the version is < v3.24.1, update the Calico CNI to `>= v3.24.1`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#pod-network) instructions when initially setting up your cluster, use the example below to update your Tigera operators and custom resources files.
 * If you chose a different route for initially installing and configuring Calico, please refer directly to the [Calico documentation](https://projectcalico.docs.tigera.io/maintenance/kubernetes-upgrade) for update procedures.
@@ -275,6 +277,8 @@ Run this command to check the version of MetalLB:
 ```shell
 kubectl decsribe pod -n `kubectl get pods -A | grep metal | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
 ```
+
+<br>
 
 If the version is < v0.13.5, update MetalLB to `>= v0.13.5`.
 * If you followed our [Manual Cluster Installation](https://slateci.io/docs/cluster/manual/slate-master-node.html#load-balancer) instructions when initially setting up your cluster, use the example below to update your MetalLB installation.
