@@ -30,7 +30,10 @@ This post will walk you, the cluster administrator, through the following tasks:
 2. Update the SLATE Federation Controller itself (<a href="#update-fed-ctrl">see below</a>)
 3. Upgrade the SLATE Ingress Controller (<a href="#update-ingress-ctrl">see below</a>)
 
+
 ## Kubernetes Tasks
+
+
 
 <span id="upgrade-k8s"></span>
 ### Upgrade to K8s `v1.24.x`
@@ -61,10 +64,14 @@ NAME                    STATUS   ROLES           AGE     VERSION
 <controlplane>          Ready    control-plane   2y68d   v1.22.1
 ```
 
+
+
 #### Install and configure `containerd`
 If you are using Docker on your cluster, you'll need to switch the kubernetes runtime from Docker to `containerd` because Kubernetes removed support for Docker in `v1.24.0`.  [This guide](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/) 
 has instructions on updating from Docker to `containerd.`  Please note that [this step](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/#configure-the-kubelet-to-use-containerd-as-its-container-runtime) 
 in the guide needs to be done for each node in your kubernetes cluster.
+
+
 
 #### Determine the upgrade path
 
@@ -78,6 +85,8 @@ Best practice is to upgrade from one Kubernetes minor release to the next and so
 document was written.  See [this
 page](https://kubernetes.io/releases/patch-releases/) to get the latest
 patchlevel to use for each minor release.  E.g. `v1.22.16` instead of `v1.22.15`
+
+
 
 #### Upgrade the control plane
 
