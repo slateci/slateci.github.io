@@ -241,6 +241,7 @@ Run this command to get the version of Calico CNI currenlty installed:
 ```shell
  kubectl describe pod -n `kubectl get pods -A | grep calico | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
 ```
+{:data-add-copy-button='true'}
 
 <br>
 
@@ -272,10 +273,12 @@ Once Calico is updated, you can verify it is working with the following commands
 ```shell
 kubectl run pingtest --image=busybox -it /bin/sh
 ```
+{:data-add-copy-button='true'}
 
 ```shell
 ping google.com
 ```
+{:data-add-copy-button='true'}
 
 This shows that the DNS is working and is a good indication that Calico is working. 
 
@@ -290,6 +293,7 @@ Run this command to get the version of MetalLB currently installed:
 ```shell
 kubectl decsribe pod -n `kubectl get pods -A | grep metal | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
 ```
+{:data-add-copy-button='true'}
 
 <br>
 
