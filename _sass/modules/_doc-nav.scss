@@ -67,8 +67,7 @@
 }
 
 .freeze-menu {
-	position: -webkit-sticky;
-  	position: sticky;
+	position: absolute;
   	top: 0;
 	left: 10px;
 }
