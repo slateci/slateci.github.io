@@ -259,8 +259,8 @@ Install a newer version of Calico using the operator:
 
 ```shell
 CALICO_VERSION=3.24.1 && \
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/tigera-operator.yaml && \
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/custom-resources.yaml
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/tigera-operator.yaml && \
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/custom-resources.yaml
 ```
 {:data-add-copy-button='true'}
 
@@ -320,7 +320,7 @@ kubectl describe configmap config -n metallb-system
 ```
 {:data-add-copy-button='true'}
 
-Create a new custom resource (CR) with the gathered IP pool information:
+Create a new custom resource (CR) with the gathered IP pool information. Replace the IP addresses in this example with the IP addresses from the previous command. 
 
 ```shell
 cat <<EOF > /tmp/metallb-ipaddrpool.yml
