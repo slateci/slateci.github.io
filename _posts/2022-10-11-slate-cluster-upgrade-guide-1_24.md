@@ -291,7 +291,7 @@ This shows that the DNS is working and is a good indication that Calico is worki
 
 Run this command to get the version of MetalLB currently installed:
 ```shell
-kubectl decsribe pod -n `kubectl get pods -A | grep metal | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
+kubectl describe pod -n `kubectl get pods -A | grep metal | grep controller | awk '{print $1" "$2}'` | grep Image: | awk -F: '{print $3}'
 ```
 {:data-add-copy-button='true'}
 
@@ -424,6 +424,35 @@ kubectl logs -n kube-system <federation-controller-pod-name>
 ```
 {:data-add-copy-button='true'}
 
+The logs should look something like the following: 
+
+```
+I1011 21:00:41.448491       1 clusterns_controller.go:138] Waiting for informer caches to sync
+I1011 21:00:41.448598       1 reflector.go:219] Starting reflector *v1alpha2.ClusterNS (30s) from pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167
+I1011 21:00:41.448618       1 reflector.go:255] Listing and watching *v1alpha2.ClusterNS from pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167
+I1011 21:00:41.549025       1 shared_informer.go:270] caches populated
+I1011 21:00:41.549062       1 clusterns_controller.go:143] Starting workers
+I1011 21:00:41.549091       1 clusterns_controller.go:149] Started workers
+I1011 21:01:01.452612       1 reflector.go:382] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: forcing resync
+I1011 21:01:11.452267       1 reflector.go:382] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: forcing resync
+I1011 21:01:31.453082       1 reflector.go:382] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: forcing resync
+I1011 21:03:31.455629       1 reflector.go:382] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: forcing resync
+...
+I1013 01:02:06.178662       1 reflector.go:536] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: Watch close - *v1alpha2.ClusterNS total 7 items received
+I1013 01:02:14.611427       1 reflector.go:382] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: forcing resync
+I1013 01:02:34.311275       1 reflector.go:382] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: forcing resync
+I1013 01:02:42.263067       1 reflector.go:536] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: Watch close - *v1.Deployment total 12 items received
+I1013 01:02:44.612985       1 reflector.go:382] pkg/mod/k8s.io/client-go@v0.23.5/tools/cache/reflector.go:167: forcing resync
+
+```
+
+A line like the following is normal and does not indicate that an error
+occurred:
+
+```
+W1011 21:00:31.445414       1 client_config.go:617] Neither --kubeconfig nor --master was specified.  Using the inClusterConfig.  This might not work.
+```
+
 <br>
 
 <span id="update-ingress-ctrl"></span>
@@ -453,3 +482,9 @@ Updating the SLATE Ingress Controller involves the following steps:
    kubectl apply -f nginx-ingress.yaml
    ```
    {:data-add-copy-button='true'}
+
+If you look at the logs, a line like the following may appear but is normal:
+
+```
+E1026 18:56:04.160926       8 reflector.go:140] k8s.io/client-go@v0.25.2/tools/cache/reflector.go:169: Failed to watch *v1.EndpointSlice: unknown (get endpointslices.discovery.k8s.io)
+```
