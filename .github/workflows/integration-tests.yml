@@ -1,4 +1,6 @@
 name: Integration Tests
+concurrency:
+  group: integ-tests-${{ github.repository }}-${{ github.ref }}
 
 on:
   workflow_run:
