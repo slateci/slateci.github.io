@@ -72,7 +72,8 @@ If you are using Docker on your cluster, you'll need to switch the kubernetes ru
 has instructions on updating from Docker to `containerd.`  Please note that [this step](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/#configure-the-kubelet-to-use-containerd-as-its-container-runtime) 
 in the guide needs to be done for each node in your kubernetes cluster.
 
-After updating to containerd, one more change needs to be made to the service to increase the number of open files:
+After updating to containerd, one more change must be made to the service to increase the number of open files. The default value is limitNOFILE=infinity, but due to a regression, 'infinity' sets the limit at 65k. The following commands will increase it to 100k, which is required to run some applications such as XCache. 
+
 ```shell
 systemctl edit containerd
 ```
