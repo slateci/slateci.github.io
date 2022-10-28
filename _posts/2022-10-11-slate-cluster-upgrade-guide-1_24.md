@@ -72,6 +72,21 @@ If you are using Docker on your cluster, you'll need to switch the kubernetes ru
 has instructions on updating from Docker to `containerd.`  Please note that [this step](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/change-runtime-containerd/#configure-the-kubelet-to-use-containerd-as-its-container-runtime) 
 in the guide needs to be done for each node in your kubernetes cluster.
 
+After updating to containerd, one more change needs to be made to the service to increase the number of open files:
+```shell
+systemctl edit containerd
+```
+
+In the editor add the following line:
+```shell
+LimitNOFILE=1048576
+```
+
+Then restart the service
+```shell
+systemctl restart containerd
+```
+
 <br>
 
 #### Determine the upgrade path
