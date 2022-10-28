@@ -77,16 +77,19 @@ After updating to containerd, one more change must be made to the service to inc
 ```shell
 systemctl edit containerd
 ```
+{:data-add-copy-button='true'}
 
 In the editor add the following line:
 ```shell
 LimitNOFILE=1048576
 ```
+{:data-add-copy-button='true'}
 
 Then restart the service
 ```shell
 systemctl restart containerd
 ```
+{:data-add-copy-button='true'}
 
 <br>
 
