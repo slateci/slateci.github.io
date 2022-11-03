@@ -253,6 +253,10 @@ kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 <span id="update-calico-cni"></span>
 ### (Recommended) Update Calico CNI
 
+
+
+
+
 {% include alert/note.html content="If you encounter an error while performing these steps contact [the SLATE team](/community/) for further assistance." %}
 
 Run this command to get the version of Calico CNI currenlty installed:
@@ -270,11 +274,36 @@ If the version is < v3.24.1, update the Calico CNI to `>= v3.24.1`.
 
 <br>
 
-#### Example
+#### Operator vs Manifest Installation
 
-{% include alert/note.html content="If you changed the default IPv4 range during the initial installation, download, modify, and apply your own `custom-resources.yaml`." %}
+Calico can be installed in two ways, either using an operator or manifests. To update Calico we needs to determine how it was originally installed. This is easily determined by looking in which namespace Calico running. 
 
-Install a newer version of Calico using the operator: 
+```shell
+kubectl get pods -A | grep calico
+```
+{:data-add-copy-button='true'}
+
+If the pods are running in the `kube-system` namespace, it was installed using manifests. If the pods are running in the `tigera-operator` and `calico-system` namespaces, it is an operator based installation.
+
+
+#### Manfiest based update (`kube-system` namespace)
+
+Follow these instructions to update Calico if it is currently running in the `kube-system` namepsace as determined above. 
+
+{% include alert/note.html content="The custom-resources file in these instructions assumes the calico network is using 192.168.0.0/16. If your Calico network is using a different block, download and update `custom-resources.yaml` with the appropriate IP range." %}
+
+```shell
+CALICO_VERSION=3.24.1 && \
+kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/calico.yaml
+```
+{:data-add-copy-button='true'}
+
+#### Operator based update (`tigera-operator` and `calico-system` namespaces)
+
+Follow these instructions to update Calico if it is currently running in the `tigera-operator` and `calico-system` namespaces as determined above.
+
+{% include alert/note.html content="The custom-resources file in these instructions assumes the calico network is using 192.168.0.0/16. If your Calico network is using a different block, download and update `custom-resources.yaml` with the appropriate IP range." %}
+
 
 ```shell
 CALICO_VERSION=3.24.1 && \
