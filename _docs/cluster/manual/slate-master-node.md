@@ -50,7 +50,7 @@ If you are running a single-node SLATE cluster, you'll want to remove the `NoSch
 To remove the master taint:
  
 ```shell
-kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
+kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 ```
 {:data-add-copy-button='true'}
 
