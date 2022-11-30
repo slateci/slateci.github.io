@@ -2,7 +2,7 @@
 title: SLATE API/Client v1.0.33
 overview: SLATE API/Client v1.0.33
 published: true
-permalink: blog/2022-11-29-slate-apiclient-1033.html
+permalink: blog/2022-11-30-slate-apiclient-1033.html
 attribution: The SLATE Team
 layout: post
 type: markdown
