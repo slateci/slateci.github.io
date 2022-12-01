@@ -1,15 +1,15 @@
 ---
-title: SLATE API/Client v1.0.33
-overview: SLATE API/Client v1.0.33
+title: SLATE API/Client v1.0.34
+overview: SLATE API/Client v1.0.34
 published: true
-permalink: blog/2022-11-30-slate-apiclient-1033.html
+permalink: blog/2022-11-30-slate-apiclient-1034.html
 attribution: The SLATE Team
 layout: post
 type: markdown
 #tag: draft
 ---
 
-The SLATE API &amp; Client version `1.0.33` includes improvements to the Kubernetes NGINX Ingress Controller, added support for OpenTelemetry, and more.
+The SLATE API &amp; Client version `1.0.34` includes improvements to the Kubernetes NGINX Ingress Controller, added support for OpenTelemetry, and more.
 
 <!--end_excerpt-->
 
