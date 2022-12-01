@@ -24,12 +24,14 @@ The SLATE API &amp; Client version `1.0.34` includes improvements to the Kuberne
   * OpenTelemetry allows the SLATE team to track down and correct errors that occur in the SLATE API Server more quickly.
   * Future plans include OpenTelemetry integration with the SLATE Client and Portal.
 * Added a [new SLATE Client](https://github.com/slateci/slate-client-server/releases/latest) for macOS 12.
+* Transitioned to serving the SLATE [Incubator](https://github.com/slateci/slate-catalog-incubator) and [Stable](https://github.com/slateci/slate-catalog-stable) catalogs via GitHub Pages.
 
 ### Fixed
 
 * Addressed an issue where the Kubernetes NGINX Ingress controller was suffering `connection refused` errors.
 
-## Upgrade Guides
+## Guides
 
 * [SLATE Client Access & Installation](https://portal.slateci.io/cli)
 * [SLATE Cluster Upgrade Guide - K8s v1.24](/blog/slate-cluster-upgrade-guide-1_24.html)
+* [Adding the application to the catalog](/docs/apps/catalog.html)
