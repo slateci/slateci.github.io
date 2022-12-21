@@ -54,6 +54,15 @@ kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 ```
 {:data-add-copy-button='true'}
 
+You might want to adjust the above command based on the role your Master Node holds. You can find this out by running:
+
+```shell
+kubect get nodes
+```
+{:data-add-copy-button='true'}
+
+This should tell you the role(s) your Master Node holds and you can adjust the command to remove the taint accordingly, to either include ```master``` or ```control-plane```.
+
 ## Pod Network
 
 In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well.
