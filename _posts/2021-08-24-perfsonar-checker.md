@@ -52,7 +52,7 @@ Subcommands:
 To deploy the `perfsonar-checker` app, start by downloading the app configuration file and saving it locally using this command:
 
 ```
-slate app get-conf --dev perfsonar-checker > app.conf
+slate app get-conf perfsonar-checker > app.conf
 ```
 {:data-add-copy-button='true'}
 The default configuration should look something like:
@@ -92,7 +92,7 @@ Save the changes to the config file, and proceed to the next step.
 To install your app instance, run the below command after substituting `<your-group>` with your SLATE group and `<cluster>` with a target cluster for your app instance:
 
 ```
-slate app install --dev --group <your-group> --cluster <cluster> perfsonar-checker --conf app.conf
+slate app install --group <your-group> --cluster <cluster> perfsonar-checker --conf app.conf
 ``` 
 {:data-add-copy-button='true'}
 
