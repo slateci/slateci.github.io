@@ -11,6 +11,8 @@ type: markdown
 
 The SLATE Team is excited to announce the migration of Telegraf from the incubator catalog to the stable catalog on the SLATE Portal. 
 
+<!--end_excerpt-->
+
 Telegraf is an open source server agent that helps you collect metrics from your stacks, sensors, and systems. Developed by the Indiana University’s GlobalNOC, Telegraf is designed to be a lightweight and flexible tool that can be easily configured to collect a wide variety of metrics from a variety of sources.
 
 One of the key features of Telegraf is its ability to collect metrics from various sources, including servers, applications, databases, and other systems. It can be configured to collect metrics from popular systems like Linux, Windows, and MacOS, as well as from custom systems or devices. Telegraf can also be used to collect metrics from Kubernetes clusters and the applications running within them. This can be particularly useful for monitoring the health and performance of your Kubernetes resources, as well as identifying potential issues that may need to be addressed.

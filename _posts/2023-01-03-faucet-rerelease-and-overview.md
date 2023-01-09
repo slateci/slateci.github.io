@@ -11,6 +11,8 @@ type: markdown
 
 The SLATE Team is excited to announce the migration of Faucet from the incubator catalog to the stable catalog on the SLATE Portal. 
 
+<!--end_excerpt-->
+
 Faucet is an open source software defined networking (SDN) controller specifically designed for production networks. It is designed to make it easy for network administrators to manage and automate their networks, allowing them to quickly and easily implement changes and new policies.
 
 One of the key features of Faucet is its ability to support a wide range of networking hardware and protocols, including integration with Kubernetes. This makes it a versatile tool that can be used in a variety of different environments and networks, including those that are running on Kubernetes.
