@@ -98,10 +98,7 @@ What you will need to set up and run a succesful SLATE Kubernetes cluster:
   1. a CloudLab experiment
   2. key for CloudLab
   3. `ansible_ssh_common_args` added to hosts.yaml
-  4. a public IP and an IP ranger for MetalLb
-  5. CertManager
-  6. approriate version for Kubernetes
-  7. appropriate Docker and Calico versions
+  4. public IP(s) and/or range for MetalLB
 
 What you will *not* need to set up a SLATE Kuberentes cluster on CloudLab:
   - set up behind a NAT
