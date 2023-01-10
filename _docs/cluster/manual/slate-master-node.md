@@ -57,7 +57,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
 You might want to adjust the above command based on the role your Master Node holds. You can find this out by running:
 
 ```shell
-kubect get nodes
+kubectl get nodes
 ```
 {:data-add-copy-button='true'}
 
