@@ -19,9 +19,6 @@ jobs:
         image: selenium/standalone-chrome:latest
 
     steps:
-      - name: Wait a little longer
-        run: sleep 5m
-
       - name: Set up Python...
         uses: actions/setup-python@v4.3.0
         with:
