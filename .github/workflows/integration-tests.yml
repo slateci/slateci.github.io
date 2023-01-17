@@ -16,22 +16,18 @@ jobs:
   selenium:
     name: Selenium Tests
     runs-on: ubuntu-22.04
-    container: joyzoursky/python-chromedriver:3.9-alpine
+    container: joyzoursky/python-chromedriver:3.9-selenium
 
     steps:
-      - name: Install Selenium Python Bindings
-        run: pip install -U selenium
-
       - name: Check out repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
-          path: /usr/workspace/
+          path: .
           ref: main
           repository: slateci/slateci-unit-tests
 
       - name: Run Selenium tests
-        working-directory: /usr/workspace/
         run: python main.py
 
       - name: Notify Slack of Failure
