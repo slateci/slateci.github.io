@@ -16,32 +16,22 @@ jobs:
   selenium:
     name: Selenium Tests
     runs-on: ubuntu-22.04
-
-    services:
-      chrome:
-        image: selenium/standalone-chrome:latest
+    container: joyzoursky/python-chromedriver:3.9-alpine
 
     steps:
-      - name: Installed package list
-        run: apt list --installed
-
-      - name: Set up Python
-        uses: actions/setup-python@v4.5.0
-        with:
-          python-version: '3.10'
-
       - name: Install Selenium Python Bindings
-        run: pip install -U selenium    
+        run: pip install -U selenium
 
       - name: Check out repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
-          path: .
+          path: /usr/workspace/
           ref: main
           repository: slateci/slateci-unit-tests
 
       - name: Run Selenium tests
+        working-directory: /usr/workspace/
         run: python main.py
 
       - name: Notify Slack of Failure
