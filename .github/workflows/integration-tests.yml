@@ -22,6 +22,9 @@ jobs:
         image: selenium/standalone-chrome:latest
 
     steps:
+      - name: Installed package list
+        run: apt list --installed
+
       - name: Set up Python
         uses: actions/setup-python@v4.5.0
         with:
