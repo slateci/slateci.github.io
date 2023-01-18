@@ -23,11 +23,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
-          path: .
+          path: ./checkout
           ref: 14-integration-tests-seleniumcommonexceptionstimeoutexception
           repository: slateci/slateci-unit-tests
 
       - name: Run Selenium tests
+        working-directory: ./checkout
         run: python main.py
 
       - name: Notify Slack of Failure
