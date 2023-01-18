@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 1
           path: .
-          ref: main
+          ref: 14-integration-tests-seleniumcommonexceptionstimeoutexception
           repository: slateci/slateci-unit-tests
 
       - name: Run Selenium tests
