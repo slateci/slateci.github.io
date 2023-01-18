@@ -12,39 +12,24 @@ on:
 jobs:
   selenium:
     name: Selenium Tests
-    runs-on: ubuntu-20.04
-
-    services:
-      chrome:
-        image: selenium/standalone-chrome:latest
+    runs-on: ubuntu-22.04
+    container: joyzoursky/python-chromedriver:3.9-selenium
 
     steps:
-      - name: Wait a little longer
-        run: sleep 5m
-
-      - name: Set up Python...
-        uses: actions/setup-python@v4.3.0
+      - name: Check out repo
+        uses: actions/checkout@v3
         with:
-          python-version: '3.9.7'
-          architecture: 'x64'
+          fetch-depth: 1
+          path: ./checkout
+          ref: main
+          repository: slateci/slateci-unit-tests
 
-      - name: Install Selenium Python Bindings...
-        run: pip install -U selenium    
-        
-      - name: Download Selenium tests...
-        run: git clone https://github.com/slateci/slateci-unit-tests.git
+      - name: Run Selenium tests
+        working-directory: ./checkout
+        run: python main.py
 
-      - name: Run Selenium tests...
-        run: python slateci-unit-tests/main.py
-      
-      # Return result to Slack if tests failed
-      - name: Notify Slack Fail
+      - name: Notify Slack of Failure
         if: failure()
-        id: slack # IMPORTANT: reference this step ID value in future Slack steps
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v2
+        uses: slateci/github-actions/.github/actions/slack-notify-failure@v13
         with:
-          channel_id: CLRGHCWG3
-          status: FAILED
-          color: danger
+          slack_bot_token: '${{ secrets.SLACK_BOT_TOKEN }}'
