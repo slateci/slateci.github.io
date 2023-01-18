@@ -3,14 +3,11 @@ concurrency:
   group: integ-tests-${{ github.repository }}-${{ github.ref }}
 
 on:
-  push:
-    branches:
-      - 214-integration-tests-consistently-fail
-#  workflow_run:
-#    workflows:
-#      - pages-build-deployment
-#    types:
-#      - completed
+  workflow_run:
+    workflows:
+      - pages-build-deployment
+    types:
+      - completed
 
 jobs:
   selenium:
@@ -24,7 +21,7 @@ jobs:
         with:
           fetch-depth: 1
           path: ./checkout
-          ref: 14-integration-tests-seleniumcommonexceptionstimeoutexception
+          ref: main
           repository: slateci/slateci-unit-tests
 
       - name: Run Selenium tests
