@@ -6,7 +6,6 @@ permalink: blog/grnoc-telegraf-monitoring.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 The SLATE platform provides a powerful, simple way to deploy a large variety of applications.
