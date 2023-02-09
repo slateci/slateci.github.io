@@ -6,7 +6,7 @@ permalink: blog/2023-01-06-telegraf-rerelease-and-overview.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-# tag: draft
+tag: draft
 ---
 
 The SLATE Team is excited to announce the migration of Telegraf from the incubator catalog to the stable catalog on the SLATE Portal. 
