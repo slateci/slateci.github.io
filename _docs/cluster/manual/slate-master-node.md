@@ -70,14 +70,14 @@ In order to enable Pods to communicate with the rest of the cluster, you will ne
 To install Calico, you will simply need to apply the appropriate Kubernetes manifests beginning with the operator:
 
 ```shell
-kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml 
 ```
 {:data-add-copy-button='true'}
 
 If you haven't changed the default IP range then create the boilerplate custom resources manifest:
 
 ```shell
-kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml 
 ```
 {:data-add-copy-button='true'}
 
