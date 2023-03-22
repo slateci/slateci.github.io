@@ -47,7 +47,7 @@ When your request has been approved you'll be given an authentication token you.
 
 Download the base configuration of the [JupyterLab application](https://portal.slateci.io/applications/incubator/jupyter-notebook):
 
-	$ slate app get-conf --dev jupyter-notebook > jupyter.conf
+	$ slate app get-conf --dev jupyterlab > jupyter.conf
 
 
 Generate a random token for your JupyterLab instance:
@@ -104,7 +104,7 @@ Considering the number of jobs submitted in this demo, and local processes creat
 
 You're now ready to install the JupyterLab application on SLATE:
 
-	$ slate app install jupyter-notebook --dev --group <your-group> --cluster <a-cluster> --conf jupyter.conf
+	$ slate app install jupyterlab --dev --group <your-group> --cluster <a-cluster> --conf jupyter.conf
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user or due to an ExternalCondorPort value that's already allocated, please choose a different value for the instance and\or port and try running the above command again. 	
 
@@ -114,8 +114,8 @@ Inspect the instance's info to see the allocated URL and address for SSH service
 	$ slate instance info <instance-ID>
 	Services:
 	Name                        Cluster IP    External IP   Ports          URL                                     
-	your-group-jupyter-notebook 10.96.150.245 <IP-address>  8888:30712/TCP http://blogpostnotebook.slate-dev.slateci.net/
-	your-group-jupyter-notebook 10.96.150.245 <IP-address>  22:30033/TCP   <ip-address>:<port-number>
+	your-group-jupyterlab 10.96.150.245 <IP-address>  8888:30712/TCP http://blogpostnotebook.slate-dev.slateci.net/
+	your-group-jupyterlab 10.96.150.245 <IP-address>  22:30033/TCP   <ip-address>:<port-number>
 
 
 In the above example, the JupyterLab application can be accessed at this address *blogpostnotebook.slate-dev.slateci.net* using the Jupyter token you generated above. The second line has the SSH access info under URL, so you can use it with the ssh command like this:
@@ -131,7 +131,7 @@ where &lt;username&gt; is what you chose above for the NB_USER configuration var
 	
 We can submit jobs with either a JupyterLab terminal (using the Unix command line) or from a Jupyter notebook.  We'll use an [OSG Connect Quickstart](https://support.opensciencegrid.org/support/solutions/articles/5000633410-osg-connect-quickstart) tutorial example with a few modifications. 
 
-### From a JupyterLab terminal
+### From a JupyterLab Terminal
 
 First, open a new terminal window in your JupyterLab and create a test script to be executed as your job:
 
@@ -201,7 +201,7 @@ In our experience with this job submission to OSG, it took around one hour for a
 
 To check the status of your jobs, you can use the `condor_q` command as shown in the `Checking Job Status` section below.
 
-### From a Jupyter notebook
+### From a Jupyter Notebook 
 
 If you prefer to use a notebook to submit your jobs to the pool, you can do that using [HTCondor Python Bindings](https://htcondor.readthedocs.io/en/latest/apis/python-bindings/) as follows:
 
