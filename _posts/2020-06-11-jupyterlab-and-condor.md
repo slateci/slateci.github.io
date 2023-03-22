@@ -136,7 +136,7 @@ You can also customize the number of instances, the number of CPU cores requeste
 ## Deploy JupyterLab
 Download the base configurations:
 
-	$ slate app get-conf --dev jupyter-notebook > jupyter.conf
+	$ slate app get-conf --dev jupyterlab > jupyter.conf
 
 Generate a random token:
 
@@ -171,7 +171,7 @@ The last change is for the SSH service. Enable the service and add the SSH publi
 
 You're now ready to install the JupyterLab application on SLATE:
 
-	$ slate app install jupyter-notebook --dev --group <your-group> --cluster <a-cluster> --conf jupyter.conf
+	$ slate app install jupyterlab --dev --group <your-group> --cluster <a-cluster> --conf jupyter.conf
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again. 	
 
@@ -180,8 +180,8 @@ Inspect the instance's info to see the allocated URL and address for SSH service
 	$ slate instance info <instance-ID>
 	Services:
 	Name                        Cluster IP    External IP   Ports          URL                                     
-	your-group-jupyter-notebook 10.96.150.245 <IP-address>  8888:30712/TCP http://blogpostnotebook.slate-dev.slateci.net/
-	your-group-jupyter-notebook 10.96.150.245 <IP-address>  22:30033/TCP   <ip-address>:<port-number>
+	your-group-jupyterlab 10.96.150.245 <IP-address>  8888:30712/TCP http://blogpostnotebook.slate-dev.slateci.net/
+	your-group-jupyterlab 10.96.150.245 <IP-address>  22:30033/TCP   <ip-address>:<port-number>
 
 In the above example, the JupyterLab application can be accessed at this address *blogpostnotebook.slate-dev.slateci.net* using the token you generated above. The second line has the SSH access info under URL, so you can use it with the ssh command like this:
 
