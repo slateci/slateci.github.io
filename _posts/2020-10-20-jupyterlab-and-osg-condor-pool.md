@@ -16,8 +16,11 @@ Our previous post [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/s
 
 We assume you have a [SLATE account](https://portal.slateci.io/slate_portal) and access to a Kubernetes cluster [registered with the SLATE federation](https://portal.slateci.io/clusters).  You will also need a local copy of the [SLATE client installed](https://slateci.io/docs/tools/index.html).  See [SLATE quickstart](https://slateci.io/docs/quickstart/) or contact us if you need help getting started.
 
+We also assume that you have an authentication(submit) token and a project name in OSG that allow you to submit jobs to OSG's open science pool. If you'd like to use this app to submit jobs to a different pool, you should be able to do so with minor changes to the commands and configurations used in this blog post. 
+
 > __Note: this post is a technical preview of things to come, and primarily intended for demonstration purposes.__
 
+<!-- hiding this section to address issue https://github.com/slateci/slateci.github.io/issues/234
 
 ## Get an OSG token
 
@@ -29,6 +32,8 @@ Request a token by submitting a ticket to the [OSG Research Facilitation team](h
 
 
 When your request has been approved you'll be given an authentication token you.  For us, it took one business day for the OSG team to process our access request.
+
+-->
 
 ## Create a Secret
 
