@@ -53,7 +53,7 @@ When your request has been approved you'll be given an authentication token you.
 
 Download the base configuration of the [JupyterLab application](https://portal.slateci.io/applications/incubator/jupyter-notebook):
 
-	$ slate app get-conf --dev jupyterlab > jupyter.conf
+	$ slate app get-conf jupyterlab > jupyter.conf
 
 
 Generate a random token for your JupyterLab instance:
@@ -110,7 +110,7 @@ Considering the number of jobs submitted in this demo, and local processes creat
 
 You're now ready to install the JupyterLab application on SLATE:
 
-	$ slate app install jupyterlab --dev --group <your-group> --cluster <a-cluster> --conf jupyter.conf
+	$ slate app install jupyterlab --group <your-group> --cluster <a-cluster> --conf jupyter.conf
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user or due to an ExternalCondorPort value that's already allocated, please choose a different value for the instance and\or port and try running the above command again. 	
 
