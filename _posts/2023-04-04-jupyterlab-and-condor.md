@@ -7,7 +7,7 @@ attribution: The SLATE Team
 layout: post
 type: markdown
 ---
-
+###### Note: This blog post was first published on Jun 11,2020 and last updated on Apr 04, 2023.
 
 JupyterLab is a great tool for data analysis, visualization, machine learning and much more. It allows users to run code interactively via its web notebook interface and thus iterate changes quickly.  Often users need to scale up their work and thus require submission to a backend cluster from the notebook. We show how this can be done with HTCondor using SLATE. 
 <!--end_excerpt-->

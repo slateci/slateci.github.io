@@ -7,6 +7,7 @@ attribution: The SLATE Team
 layout: post
 type: markdown
 ---
+###### Note: This blog post was first published on Oct 20,2020 and last updated on Apr 04, 2023.
 
 Our previous post [JupyterLab and HTCondor with SLATE](https://slateci.io/blog/slate-jupyter-condor-june-2020.html) described deployment of an HTCondor pool onto  a SLATE-registered Kubernetes cluster with job submission provided by a JupyterLab application.  But what if you want just a JupyterLab capable of submitting jobs to the [Open Science Grid](https://www.opensciencegrid.org)? 
 
