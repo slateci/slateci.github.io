@@ -8,7 +8,7 @@ layout: post
 type: markdown
 
 ---
-###### Note: This blog post has been updated in January 2023 after moving the perfsonar-checker app from development to production. 
+###### Note: This blog post was first published on Aug 24,2021 and last updated on Jan 17, 2023.
 
 [PerfSONAR](https://docs.perfsonar.net/index.html) is a popular tool to measure network bandwidth and latency between between hosts in a network.  We've built an application that can be easily deployed on a SLATE cluster to check connectivity against production endpoints we operate on the SLATE platform.  This should be a handy tool that cluster administrators can use to check out a newly installed cluster.
 <!--end_excerpt-->
