@@ -73,7 +73,7 @@ Edit the JupyterLab application configuration file, in this case `jupyter.conf`,
 Choose a subdomain for the ingress (This will be used in the application's URL):
 
 	Ingress:
-          Subdomain: 'blogpostnotebook'
+	  Subdomain: 'blogpostnotebook'
 
 
 Update the **CondorConfig** to be enabled, and use hostname `flock.opensciencegrid.org` as the **CollectorHost**, port `9618` as the **CollectorPort**, a port number between 30000-32767 as the **ExternalCondorPort**, the value `true` for the **IsExternalPool** variable, and the submit secret, in our example "submit-auth-token", as the **AuthTokenSecret**. In our example, the configuration will be:
