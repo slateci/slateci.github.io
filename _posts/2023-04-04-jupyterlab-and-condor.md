@@ -29,7 +29,7 @@ First, we'll install a test HTCondor pool. Later, we'll deploy a JupyterLab inst
 
 First, get the configuration template of the central manager:
 
-	$ slate app get-conf condor-manager --dev > manager.conf
+	$ slate app get-conf condor-manager > manager.conf
 
 Edit the file by adding an instance name of your choice:
 
@@ -37,7 +37,7 @@ Edit the file by adding an instance name of your choice:
 
 Then install the central manager using the below SLATE command <small>(Please change &lt;your-group&gt; in the command to your SLATE group name, and &lt;a-cluster&gt; to the target cluster name that you want to use for your deployment)</small>:
 
-	$ slate app install --dev condor-manager --group <your-group> --cluster <a-cluster> --conf manager.conf 
+	$ slate app install condor-manager --group <your-group> --cluster <a-cluster> --conf manager.conf 
 	Successfully installed application condor-manager as instance your-group-condor-manager with ID instance_1sGae98se
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again. 
@@ -136,7 +136,7 @@ You can also customize the number of instances, the number of CPU cores requeste
 ## Deploy JupyterLab
 Download the base configurations:
 
-	$ slate app get-conf --dev jupyterlab > jupyter.conf
+	$ slate app get-conf jupyterlab > jupyter.conf
 
 Generate a random token:
 
@@ -171,7 +171,7 @@ The last change is for the SSH service. Enable the service and add the SSH publi
 
 You're now ready to install the JupyterLab application on SLATE:
 
-	$ slate app install jupyterlab --dev --group <your-group> --cluster <a-cluster> --conf jupyter.conf
+	$ slate app install jupyterlab --group <your-group> --cluster <a-cluster> --conf jupyter.conf
 
 ###### Note: If deployment fails due to an instance name that's already been chosen by another user, please choose a different instance name and try running the above command again. 	
 
