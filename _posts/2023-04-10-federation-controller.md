@@ -69,7 +69,7 @@ updated code did work.  However, the code still did not support Kubernetes clust
 However after reviewing the updated controller code and the changes needed to support current versions of Kubernetes,
 the decision was made to rewrite the controller to work within the current Kubernetes controller model. 
 
-<img src="/img/posts/controller-model.webp"> 
+<img src="/img/posts/controller-model.png"> 
 
 The K8S controller model is based on several components that work together to monitor CRDs on a K8S cluster and to
 update the cluster as CRDs are created, updated, or deleted.  In essance, a controller uses a component called an
