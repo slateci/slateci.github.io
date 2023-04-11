@@ -3,7 +3,7 @@ title: "Replacing the NRP controller in SLATE"
 overview: A guide to the new federation controller
 published: false
 permalink: blog/grnoc-telegraf-monitoring.html
-attribution: The SLATE Team
+attribution: Suchandra Thapa
 layout: post
 type: markdown
 tag: draft
