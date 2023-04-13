@@ -514,6 +514,8 @@ Updating the SLATE Ingress Controller involves the following steps:
    {:data-add-copy-button='true'}
 
 
+Getting output like the following is not a cause for concern:
+
 ```
 E1026 18:56:04.160926       8 reflector.go:140] k8s.io/client-go@v0.25.2/tools/cache/reflector.go:169: Failed to watch *v1.EndpointSlice: unknown (get endpointslices.discovery.k8s.io)
 ```
