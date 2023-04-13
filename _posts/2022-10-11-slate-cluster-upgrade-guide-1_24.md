@@ -495,12 +495,12 @@ Updating the SLATE Ingress Controller involves the following steps:
 
 1. Edit the manifest and make the following changes:
    1. Replace all instances of `{{ "{{SLATE_NAMESPACE" }}}}` with the namespace that slate is using on your cluster (i.e `slate-system`)
-   1. If your cluster is using IPv4, replace `{% raw %} {{IP_FAMILY_POLICY}} {% endraw %}` with `SingleStack` and `{% raw %} {{IP_FAMILIES}} {% endraw %}` with `IPv4`
-   1. If your cluster is using IPv6, replace `{% raw %} {{IP_FAMILY_POLICY}} {% endraw %}` with `SingleStack` and `{% raw %} {{IP_FAMILIES}} {% endraw %}` with `IPv6`
-   1. If your cluster is using IPv6, replace `{% raw %} {{IP_FAMILY_POLICY}} {% endraw %}` with `PreferDualStack` and `{% raw %} {{IP_FAMILIES}} {% endraw %}` with
+   1. If your cluster is using IPv4, replace `{{ "{{IP_FAMILY_POLICY" }}}}` with `SingleStack` and `{{ "{{IP_FAMILIES" }}}}` with `IPv4`
+   1. If your cluster is using IPv6, replace `{{ "{{IP_FAMILY_POLICY" }}}}` with `SingleStack` and `{{ "{{IP_FAMILIES" }}}}` with `IPv6`
+   1. If your cluster is using IPv6, replace `{{ "{{IP_FAMILY_POLICY" }}}}` with `PreferDualStack` and `{{ "{{IP_FAMILIES" }}}}` with
 
       ```
-   		- IPv6
+   	  - IPv6
         - IPv4
 
       ```
