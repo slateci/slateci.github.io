@@ -500,7 +500,7 @@ Updating the SLATE Ingress Controller involves the following steps:
    1. If your cluster is using IPv6, replace `{{ "{{IP_FAMILY_POLICY" }}}}` with `PreferDualStack` and `{{ "{{IP_FAMILIES" }}}}` with
 
       ```
-   	  - IPv6
+   	 - IPv6
         - IPv4
 
       ```
