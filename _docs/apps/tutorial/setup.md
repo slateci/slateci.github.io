@@ -7,12 +7,6 @@ order: 40
 layout: docs2020
 type: markdown
 ---
-<h2> Using a Developer SLATE Bundle </h2>
-<h3>Installing Minislate</h3>
-
-Under "More Resources" you will find the Github page for a project called Minislate, as well as installation instructions. Minislate acts as a self-contained instance of the SLATE platform, including all the components listed below. Using this gives you access to the Cluster and the components running within it as if you are the System Admin of a SLATE Cluster. This is the recommended environment for the tutorial because there is far less burden to download and install each software, and Minislate itself runs as a container on your local machine that can be stopped or deleted with ease. 
-
-<a href="https://github.com/slateci/minislate" class="ui gray button" role="button"> More Resources </a>
 
 <h2 class="ui header"> Install Each Piece Locally </h2>
 <h3 class="ui header">Installing Docker</h3>

@@ -25,32 +25,20 @@ In addition to maintaining the the state of one or more Pods, deployments are us
 The first tool we're going to look at within Kubernetes is the Command Line Interface (CLI) titled **kubectl** (pronounced cube-cuttle or cube-control). Kubectl lets users interact with the Kubernetes Cluster and its various components locally or remotely.
 
 ### Development Environments
-In [Setting Up Your Environment]({home}/docs/apps/tutorial/setup.html), we outlined two different interfaces for developing with Kubernetes: **MiniSLATE** and **Minikube**
-
-#### MiniSLATE
-If you followed [the directions for installing MiniSLATE]({home}/docs/apps/tutorial/setup.html), the full SLATE development environment, you can run the following commands to start your MiniSLATE cluster:
-
-```
-      $ ./minislate build
-      $ ./minislate start
-      $ ./minislate shell slate
-```
-{:data-add-copy-button='true'}
-
-This will put you within the MiniSLATE command shell and interact with the KubeCTL instance within your dev cluster.
+In [Setting Up Your Environment]({home}/docs/apps/tutorial/setup.html), we outlined an interface for developing with Kubernetes: **Minikube**
 
 #### Minikube
 
-If you decided not to use MiniSLATE, you'll need to start an instance of Minikube. If you've installed it as outlined in the [Setting up Your Environment]({home}/docs/apps/tutorial/setup.html) page, you should just be able to run `$ minikube start`. This will initialize a VM, and start Kubernetes within it that we can play with.
+You'll need to start an instance of Minikube. If you've installed it as outlined in the [Setting up Your Environment]({home}/docs/apps/tutorial/setup.html) page, you should just be able to run `$ minikube start`. This will initialize a VM, and start Kubernetes within it that we can play with.
 
 ### Get Resources
-The first, and maybe most important command is `$ kubectl get pods`. This command will fetch all resources of a certain type, and report some relevant infromation about them. In this case we've chosen pods, which will report back all pods in the current namespace, the readiness of the containers within the pod, the status of the pod as a whole, the number of times it has restarted, and the age of the pod. 
-If you've just started your Cluster to try this, you'll note that no pods yet. This is because all of the default pods run in the kube-system namespace. To see all pods running in your Cluster, run `$ kubectl get pods --all-namespaces`.
+The first and maybe most important command is `$ kubectl get pods`. This command will fetch all resources of a certain type, and report some relevant information about them. In this case we've chosen pods, which will report back all pods in the current namespace, the readiness of the containers within the pod, the status of the pod as a whole, the number of times it has restarted, and the age of the pod. 
+If you've just started your Cluster to try this, you'll note that no pods yet. This is because all the default pods run in the kube-system namespace. To see all pods running in your Cluster, run `$ kubectl get pods --all-namespaces`.
 
 Try to observe different types of resources like services, or deployments this way.
 
 ### Describe Resources
-The next powerful tool we'll use is describing a resource. To describe a pod, choose one of the pods you discovered from your get call, and run `$ kubectl describe pod [pod-name] -n kube-system`. The -n defines which namespace you are looking into, and is only needed if it does not match the current namespace you're working in. Once you've described the pod, you should see all of its attributes such as labels, status, event log, and more. Scroll through and see if you can make sense of any of it, but if you can't that's entirely okay at this point. We'll get there later.
+The next powerful tool we'll use is describing a resource. To describe a pod, choose one of the pods you discovered from your get call, and run `$ kubectl describe pod [pod-name] -n kube-system`. The -n defines which namespace you are looking into, and is only needed if it does not match the current namespace you're working in. Once you've described the pod, you should see all of its attributes such as labels, status, event log, and more. Scroll through and see if you can make sense of it, but if you can't that's entirely okay at this point. We'll get there later.
 
 ### Creation and Deletion
 Creation and Deletion are the last two pieces we need to get started. To create a resource, run `$ kubectl apply -f [your yaml(s)]`. The yaml pointed at after the -f flag can be local or web hosted, and will describe to Kubernetes the state that you want the system to reach. To delete an object, you can run `$ kubectl delete [resource type] [resource name]` to delete elements one at a time, or you can mass delete using `$ kubectl delete -f [your yaml(s)]`. That can delete resources using yaml descriptors. In both of these calls, you can also point the -f at a directory of yaml files to create or destroy all of them in bulk.
@@ -93,7 +81,7 @@ LoadBalancers are the default answer for exposing your service to the public. Th
 Though not technically a service, Ingress controllers are closely related. They act as a router for your services, while only requiring one entry point. Therefore, you can put an Ingress controller behind one LoadBalancer IP address and have it redirect to many services by subdomain. For related services, this helps scale service availability without demanding a huge (and expensive) number of public IP addresses.
 ### Demo Service
 Let's take a look at a service. The service linked below is designed to target the Nginx deployment from above. Take a look at the yaml, and compare it to the firstDeployment.yaml. What do you notice? There are some shared elements of the service and deployment to link the two, namely the labels. Matching the labels of the pods with the selector in the service is how a service knows what to target and provide connection to.
-Go ahead and install this service into your cluster with `$ kubectl apply -f firstService.yaml`. Once it's created, run `$ kubectl get services` to view the state of it. While the services are visible, copy the NodePort your service is running on (after the colon on the right right). To access the service within Minislate, run `$ curl kube:[nodeport]`, and on minikube run `$ minikube ssh curl localhost:[nodeport]`. You should receive a welcome to nginx page if everything is running properly. We'll serve something more interesting later.
+Go ahead and install this service into your cluster with `$ kubectl apply -f firstService.yaml`. Once it's created, run `$ kubectl get services` to view the state of it. While the services are visible, copy the NodePort your service is running on (after the colon on the right right). To access the service within minikube run `$ minikube ssh curl localhost:[nodeport]`. You should receive a welcome to nginx page if everything is running properly. We'll serve something more interesting later.
 
 ### Volumes
 Volumes are a deeply useful tool in Kubernetes, that is, once you know how to use them properly. Because filesystems of containers are not by default accessible within other containers, they provide a new level of interaction. These volumes enable containers to mount files that are pre-existing on a host system, from the cloud, or just from other containers in the same pod. There are too many types of volumes to cover all of them, but let's go over a few and why one may use them.

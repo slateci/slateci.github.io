@@ -53,10 +53,6 @@ toc:
         url: /docs/tools/index.html
       - page: SLATE CLI Manual
         url: /docs/tools/client-manual.html
-      - page: MiniSLATE
-        url: /docs/tools/minislate.html
-      - page: MiniSLATE Commands
-        url: /docs/tools/minislate-commands.html
   - title: Fields of Science
     id: fields-of-Science
     url: /docs/science-fields

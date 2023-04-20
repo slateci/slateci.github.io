@@ -8,3 +8,4 @@ gem "nokogiri", ">= 1.10.8"
 # https://github.com/github/personal-website/issues/166
 gem 'faraday', '~> 2.7.4'
 gem "kramdown", ">= 2.3.0"
+gem 'webrick'
