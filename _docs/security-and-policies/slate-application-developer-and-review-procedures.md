@@ -42,7 +42,7 @@ The chart must have a README document (for which the template is provided in the
 
 The default configuration of an application should, as much as possible, be chosen to be reasonably safe to operate (e.g. proxies should not default to being open to the entire internet, etc.). Any features of the application which have significant security implications must be clearly mentioned in the README with explanations of the concerns an operator should be aware of. 
 
-Application developers are encouraged to test their applications by installing them directly to a Kubernetes cluster (such as minikube) with Helm, or in the [miniSLATE](https://github.com/slateci/minislate) test environment to ensure proper functionality before submitting them for review, as this makes the review more efficient for all parties. 
+Application developers are encouraged to test their applications by installing them directly to a Kubernetes cluster (such as minikube) with Helm to ensure proper functionality before submitting them for review, as this makes the review more efficient for all parties. 
 
 
 ## Application Review

@@ -42,7 +42,7 @@ See the [cluster installation docs](https://slateci.io/docs/cluster/) for guidan
 
 ## Develop a SLATE Application
 
-The SLATE Team is always looking for new applications that can be deployed through the platform to enable collaborative science. Below you will find a guide on Application Development using our Software Developnment Kit, MiniSLATE:
+The SLATE Team is always looking for new applications that can be deployed through the platform to enable collaborative science. Below you will find a guide on Application Development:
 <div id="doc-call" class="container-fluid doc-call-container ">
     <div class="row doc-call-row">
         <div class="col-md-10 nofloat center-block">
