@@ -4,6 +4,8 @@
 
 The SLATE Client is a command line interface (CLI) intended to give edge administrators and application administrators a convenient way to work with the platform.
 
+Important note: Please be aware that the CLI must execute on a host with an IPv4 address. This means that if your machine does not have an IPv4 address, the client program may not function properly. To ensure that the client program works as intended, please make sure that the host on which you want to run the client has an IPv4 address assigned to it before installing the client.
+
 You can get the client executable and credentials from the [web portal](https://portal.slateci.io). To set up the client, first log into the web portal, go to the 'CLI Access' section, and run the provided script (note that it's specific to your account). You can then download and unpack the version of the client executable suitable for your system—Linux and Mac OS are supported.
 
 ## Basic Use
