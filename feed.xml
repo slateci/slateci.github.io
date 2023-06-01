@@ -14,7 +14,7 @@ layout: null
       <link>{{home}}/index.html</link>
     </image>
     {% for post in site.posts %}
-      {% unless post.draft %}
+      {% unless post.tag == 'draft' %}
         <item>
           <title>{{ post.title | xml_escape }}</title>
           <description>{{ post.overview | xml_escape }}</description>
