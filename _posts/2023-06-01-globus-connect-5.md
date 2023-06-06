@@ -1,11 +1,12 @@
 ---
 title: "Globus Connect 5 on SLATE"
 overview: Blog
-published: false
+published: true
 permalink: blog/slate-globus-connect-5.html
 attribution: The SLATE Team
 layout: post
 type: markdown
+tag: draft
 ---
 
 Globus Connect provides a secure way to transfer large volumes of data
