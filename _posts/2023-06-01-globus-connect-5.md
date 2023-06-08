@@ -6,7 +6,6 @@ permalink: blog/slate-globus-connect-5.html
 attribution: The SLATE Team
 layout: post
 type: markdown
-tag: draft
 ---
 
 Globus Connect Server v5 (GCS 5) provides a secure way to transfer large volumes of data between systems. Users can use it to securely transfer data between sites reliably at high speeds. SLATE provides GCS 5 as an application that can be deployed on SLATE clusters.
