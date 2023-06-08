@@ -52,19 +52,6 @@ type: markdown
 <hr>
 
 <div class="row p-2">
-	<div class="col-2">
-		<img src="/img/singularity.png">
-	</div>
-	<div class="col-10">
-		<p>
-		<a href="https://sylabs.io/singularity">Singularity</a> can be run in place of Docker as an alternative container run-time environment for Kubernetes. Singularity adds additional security and features that have made it popular in many environments including HPC. To learn more about running a Kubernetes cluster with Singularity checkout our recent blog post: <a href="/blog/kubernetes-with-singularity.html">Setting up a Kubernetes Cluster based on Singularity</a>. 
-		</p>
-	</div>
-</div>
-
-<hr>
-
-<div class="row p-2">
 	<div class="col-2"><img src="/img/Kubernetes-logo.png" /></div>
 	<div class="col-10">
 		<p class="technology-justify"><a href="https://kubernetes.io/">Kubernetes</a> facilitates the underlying container orchestration done by SLATE. Kubernetes, sometimes abbreviated K8s, is the open-source leader in deployment, management, and automation of containers. Kubernetes abstracts container workloads into deployments and services that can be connected using a simple internal networking model. The SLATE client provides granular secure access to the Kubernetes control plane, and allows the management of multiple geographically disparate clusters at once.</p>
