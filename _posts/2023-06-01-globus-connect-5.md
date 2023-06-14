@@ -96,5 +96,5 @@ Once that is done, the collection should appear in Globus Connect for users to a
 
 * For further instructions on how to use Globus in general, see their [documentation site](https://docs.globus.org/).
 * For detailed step-by-step instructions:
-  * See the Globus Connect Server v5 [README.md](https://github.com/slateci/slate-catalog-incubator/blob/master/charts/globus-connect-v5/README.md)
+  * See the Globus Connect Server v5 [README.md](https://github.com/slateci/slate-catalog-stable/blob/master/charts/globus-connect-v5/README.md)
   * Or the instructions for the application on the [SLATE Portal](https://portal.slateci.io/applications/incubator/globus-connect-v5).
