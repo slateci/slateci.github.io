@@ -488,7 +488,7 @@ Updating the SLATE Ingress Controller involves the following steps:
 1. Download the manifest for the nginx-controller by running the following command:
 
    ```shell
-   wget https://raw.githubusercontent.com/slateci/slate-client-server/develop/resources/nginx-ingress.yaml
+   wget https://raw.githubusercontent.com/slateci/slate-client-server/master/resources/nginx-ingress.yaml
 
    ```
    {:data-add-copy-button='true'}
