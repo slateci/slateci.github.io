@@ -80,7 +80,7 @@ $ uuid
 >>> uuid.uuid4()
 ```
 
-Copy the UUID and enter it into the following value
+Copy the UUID and enter it into the following value. This UUID that you create is the endpointUUID that you use to submit a function to your endpoint.
 
 my-conf
 ```yaml
@@ -122,5 +122,7 @@ By following this guide in the Globus Compute documentation you will be able to 
 
 [https://funcx.readthedocs.io/en/latest/Tutorial.html](https://funcx.readthedocs.io/en/latest/Tutorial.html)
 
-In the Tutorial, replace the tutorial_endpoint ID with the UUID you created for your SLATE instance of a Globus Compute Endpoint. 
+Submitting a function to you endpoint requires two values, the functionUUID that you'll create when registering the function and the endpointUUID that you created above for the enpointUUID in the configuration file. The [Tutorial](https://funcx.readthedocs.io/en/latest/Tutorial.html) walks through creating a simple "Hello world!" function and submitting to their sample endpoint. You'll want to replace their sample endpoint UUID  with the your endpointUUID.
+
+NOTE: When the Globus Compute Endpoint receives a job it fires up a worker to run the function, because we don't have an idle worker running initially, it takes a few seconds to start the worker. When following the tutorial listed above, it may take a few extra seconds to get the result. If the result  is not ready  when running the get_result() function, you'll see an error that says `TaskPending(task["status"])`. Just wait a few more seconds and try again.
 
