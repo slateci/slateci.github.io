@@ -82,14 +82,87 @@ OpenTelemetry C++ SDK and update the server code to generate and send traces.  A
 was a bit tedious, it was relatively straightforward.
 
 The core of the OpenTelemetry code is located in [Telemetry.cpp](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp).
-The `initializeTracer` function is called when the server starts up.  It configures the trace
-provider for the api server with the appropriate collector, sampling parameters, and other settings.
+The `initializeTracer` function is called when the server starts up.  It takes the configuration
+settings for the server and then intializes a trace provider for the api server 
+with the appropriate collector, sampling parameters, and other settings.
+
+Within each function that is involved in handling incoming api calls, the code then obtains the
+trace provider using [getTracer]().  This gets a `shared_ptr` to a tracer object that can generate
+spans associated with handling an incoming api call.  If the function is directly handling an incoming
+api request (e.g. the web framework routes incoming http requests to this function), it will then
+use [setWebSpanAttributes]() and [getWebSpanOptions]() to get attributes and options for the span.
+These options and attributes are then passed to the `StartSpan` method of the tracer in order to
+create a new span that'll cover the work done by this function. [populateSpan]() is called right after the 
+span is generated to add various information (client ip, http method, etc.) about the incoming http 
+request to the span. If an error occurs within the function, 
+[setWebSpanError]() is used to populate the span with error information to aid in debugging.  Finally, 
+the span's `End()` method is used to close the span and send it to the OpenTelemetry collector.
+
+If the function that's being run isn't directly processing an incoming api call, it does something slightly
+different to generate a span. The [getTracer]() function is still called to get a `shared_ptr` to
+a tracer object.  However, [setInternalSpanAttributes]() and [getInternalSpanOptions]() are used
+to get the options and attributes for the span.  These are then used when creating a new span using
+the `StartSpan` method of the tracer object. If an error occurs during the function call, 
+[setSpanError]() is used to set the appropriate fields in the span to aid in debugging.  Finally,
+the span's `End()` method is called just before the function exits.
 
 ### Python
 
+The SLATE portal uses python and flask to provide a web interface for SLATE.  Unlike with C++, OpenTelemetry
+provides a way to autoinstrument python and flask code so that traces are automatically generated.  This is achieved
+by deploying an instrumentation CRD with the SLATE portal pods on GKE.  
+
+```yaml
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: slate-instrumentation
+spec:
+  exporter:
+    endpoint: http://injection-collector-collector.development.svc.cluster.local:4318
+  propagators:
+    - tracecontext
+    - baggage
+    - b3
+  python:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-python:latest
+
+```
+
+The CRD sets the endpoint that traces go to  as well as the autoinstrumentation that should be used.  Next,
+we update the labels for the pod that runs the portal with annotations that indicate that an OpenTelemetry
+sidecar should be deployed
+
+```yaml
+       sidecar.opentelemetry.io/inject: "injection-collector"
+       instrumentation.opentelemetry.io/inject-python: "true"
+```
+
+Finally a CRD that is used to automatically deploy a collector in the same namespace as the portal pods.
+This collector is used to collect traces from the portal and then forward it to a central collector.
+
+
+## Observability
+
+Using Signoz, we can then examine operations on the web portal or within the api server.  We 
+can search for interactions based on search criteria like user name, the cluster being worked on,
+errors, http codes (e.g. 200, 500, 403, etc.) as well as time taken to handle api calls.  This 
+allows us to find anamolous calls that are taking more time than usual or to find api calls that result
+in elevated error rates (e.g. due to a problem with a SLATE cluster). 
+
 ## Adding monitoring
 
+Signoz also allows us to automatically send alerts to slack channels when incoming traces indicate that
+certain api calls result in elevated error rates or require significantly more time than usual to
+process a request.  This allows us to proactively investigate potential issues.
+
+
 ##  Conclusion
+
+Although adding OpenTelemetry to the SLATE infrastructure required large changes to our codebase and to 
+our infrastructure, the resulting improvements in observability and debugging has improved our ability 
+to monitor and respond to problems within the SLATE infrastructure.
+
 
 
 
