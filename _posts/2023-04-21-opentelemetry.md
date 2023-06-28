@@ -87,23 +87,28 @@ settings for the server and then intializes a trace provider for the api server
 with the appropriate collector, sampling parameters, and other settings.
 
 Within each function that is involved in handling incoming api calls, the code then obtains the
-trace provider using [getTracer]().  This gets a `shared_ptr` to a tracer object that can generate
+trace provider using [getTracer](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L124).  
+This gets a `shared_ptr` to a tracer object that can generate
 spans associated with handling an incoming api call.  If the function is directly handling an incoming
 api request (e.g. the web framework routes incoming http requests to this function), it will then
-use [setWebSpanAttributes]() and [getWebSpanOptions]() to get attributes and options for the span.
+use [setWebSpanAttributes](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L130) 
+and [getWebSpanOptions](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L152) to get attributes and options for the span.
 These options and attributes are then passed to the `StartSpan` method of the tracer in order to
-create a new span that'll cover the work done by this function. [populateSpan]() is called right after the 
+create a new span that'll cover the work done by this function. [populateSpan](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L179) 
+is called right after the 
 span is generated to add various information (client ip, http method, etc.) about the incoming http 
 request to the span. If an error occurs within the function, 
-[setWebSpanError]() is used to populate the span with error information to aid in debugging.  Finally, 
+[setWebSpanError](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L209) is used to populate the span with error information to aid in debugging.  Finally, 
 the span's `End()` method is used to close the span and send it to the OpenTelemetry collector.
 
 If the function that's being run isn't directly processing an incoming api call, it does something slightly
-different to generate a span. The [getTracer]() function is still called to get a `shared_ptr` to
-a tracer object.  However, [setInternalSpanAttributes]() and [getInternalSpanOptions]() are used
+different to generate a span. The [getTracer](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L124) 
+function is still called to get a `shared_ptr` to
+a tracer object.  However, [setInternalSpanAttributes](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L167) 
+and [getInternalSpanOptions](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L172) are used
 to get the options and attributes for the span.  These are then used when creating a new span using
 the `StartSpan` method of the tracer object. If an error occurs during the function call, 
-[setSpanError]() is used to set the appropriate fields in the span to aid in debugging.  Finally,
+[setSpanError](https://github.com/slateci/slate-client-server/blob/master/src/Telemetry.cpp#L215) is used to set the appropriate fields in the span to aid in debugging.  Finally,
 the span's `End()` method is called just before the function exits.
 
 ### Python
@@ -141,6 +146,38 @@ sidecar should be deployed
 Finally a CRD that is used to automatically deploy a collector in the same namespace as the portal pods.
 This collector is used to collect traces from the portal and then forward it to a central collector.
 
+```yaml
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: injection-collector
+spec:
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 75
+        spike_limit_percentage: 15
+      batch:
+        send_batch_size: 10000
+        timeout: 10s
+    exporters:
+      logging:
+      otlphttp:
+        endpoint: {{ .Values.opentelemetryCollector }}
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: []
+          exporters: [logging, otlphttp]
+
+```
 
 ## Observability
 
