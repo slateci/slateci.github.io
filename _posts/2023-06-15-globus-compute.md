@@ -182,4 +182,6 @@ The result will output a UUID. Copy this UUID to use as an argument when running
 $ python3 result.py <uuid>
 ```
 
-This will print the result of your function, "Hello world!"
+This will print the result of your function, "Hello World!"
+
+For more information about running functions with your Globus Compute Endpoint, visit [https://funcx.readthedocs.io/en/latest/Tutorial.html](https://funcx.readthedocs.io/en/latest/Tutorial.html).
