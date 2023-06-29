@@ -174,9 +174,12 @@ Run function.py
 ```bash
 $ python3 function.py
 ```
-The result will output a UUID. We will uses this 
+The result will output a UUID. Copy this UUID to use as an argument when running the result.py file:
 
+**NOTE**: When the Globus Compute Endpoint receives a job it fires up a worker to run the function; because we don't have an idle worker running initially, it takes a few seconds to start the worker. You may need to wait a minute to run result.py. If the result is not ready when running the get_result() function, you'll see an error that says `TaskPending(task["status"])`. Just wait a few more seconds and try again.
 
+```bash
+$ python3 result.py <uuid>
+```
 
-NOTE: When the Globus Compute Endpoint receives a job it fires up a worker to run the function, because we don't have an idle worker running initially, it takes a few seconds to start the worker. When following the tutorial listed above, it may take a few extra seconds to get the result. If the result  is not ready  when running the get_result() function, you'll see an error that says `TaskPending(task["status"])`. Just wait a few more seconds and try again.
-
+This will print the result of your function, "Hello world!"
