@@ -146,6 +146,7 @@ sidecar should be deployed
 Finally a CRD that is used to automatically deploy a collector in the same namespace as the portal pods.
 This collector is used to collect traces from the portal and then forward it to a central collector.
 
+{% raw %}
 ```yaml
 apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
@@ -176,8 +177,8 @@ spec:
           receivers: [otlp]
           processors: []
           exporters: [logging, otlphttp]
-
 ```
+{% endraw %}
 
 ## Observability
 
