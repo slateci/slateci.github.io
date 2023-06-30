@@ -170,7 +170,7 @@ spec:
     exporters:
       logging:
       otlphttp:
-        endpoint: {{ .Values.opentelemetryCollector }}
+        endpoint: opentel.collector.dns
     service:
       pipelines:
         traces:
