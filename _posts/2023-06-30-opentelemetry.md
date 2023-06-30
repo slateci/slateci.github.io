@@ -2,7 +2,7 @@
 title: "OpenTelemetry in SLATE"
 overview: How SLATE uses OpenTelemetry
 published: true
-permalink: blog/2023-04-21-opentelemetry.html
+permalink: blog/2023-06-30-opentelemetry.html
 attribution: Suchandra Thapa
 layout: post
 type: markdown
