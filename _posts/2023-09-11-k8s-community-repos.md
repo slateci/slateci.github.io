@@ -8,7 +8,7 @@ layout: post
 type: markdown
 ---
 
-The Kubernetes community has changed to community-owned package repositories. Learn how to update your SLATE clusters in this blog.
+The Kubernetes community has changed to community-owned package repositories. Learn how to update your SLATE Clusters in this blog.
 
 <!--end_excerpt-->
 
