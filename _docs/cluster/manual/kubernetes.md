@@ -17,19 +17,17 @@ The SLATE platform uses Kubernetes as its container orchestration system. This s
 The Kubernetes repository can be added to the node in the usual way:
 
 ```shell
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+export KUBE_VERSION=1.24 && \
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+baseurl=https://pkgs.k8s.io/core:/stable:/v${KUBE_VERSION}/rpm/
 enabled=1
 gpgcheck=1
-repo_gpgcheck=0
-gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+gpgkey=https://pkgs.k8s.io/core:/stable:/v${KUBE_VERSION}/rpm/repodata/repomd.xml.key
 EOF
 ```
 {:data-add-copy-button='true'}
-
-{% include alert/note.html content="To understand why `repo_gpgcheck=0`, see Google's [Known Issues](https://cloud.google.com/compute/docs/troubleshooting/known-issues#keyexpired) page." %}
 
 The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, and `kubelet`.
 
@@ -40,8 +38,7 @@ The Kubernetes install includes a few different pieces: `kubeadm`, `kubectl`, an
 Install and enable these components:
 
 ```shell
-KUBE_VERSION=1.24.* && \
-yum install -y kubeadm-${KUBE_VERSION} kubectl-${KUBE_VERSION} kubelet-${KUBE_VERSION} --disableexcludes=kubernetes
+yum install -y kubeadm kubectl kubelet
 ```
 {:data-add-copy-button='true'}
 
