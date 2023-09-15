@@ -21,7 +21,7 @@ The Kubernetes community has changed to community-owned package repositories. Le
 
 The amount of work to change over to the new package repositories is relatively small.
 
-1. SSH to your SLATE Cluster master node.
+1. SSH to your SLATE Cluster master node and switch to the `root` user.
 
 2. Execute the following to update the package repository file for Kubernetes `1.24.x`.
 
@@ -38,6 +38,20 @@ The amount of work to change over to the new package repositories is relatively 
    ```
    {:data-add-copy-button='true'}
 
-3. Close the connection and repeat the previous command on each of your worker nodes.
+3. Verify the changes by executing:
 
-4. Continue to update patch versions of the various Kubernetes `1.24.x` packages normally through commands like `yum update ...` or `dnf update ...`.
+   ```shell
+   yum list kubectl
+   ```
+
+   If the results include versions other than `1.24.x`, remove cached Yum packages and headers:
+
+   ```shell
+   yum clean all
+   ```
+
+   and check again.
+
+4. Close the connection and repeat the previous steps on each of your SLATE Cluster worker nodes.
+
+5. Continue to update patch versions of the various Kubernetes `1.24.x` packages normally through commands like `yum update ...` or `dnf update ...`.
