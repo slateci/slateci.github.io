@@ -54,12 +54,12 @@ sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/
 
 ## Use iptables for Bridged Network Traffic
 
+{% include alert/note.html content="This step is only necessary for EL7 and EL8 hosts." %}
+
 Ensure that bridged network traffic goes through `iptables`.
 
 ```shell
-cat <<EOF >  /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
+cat <<EOF >  /etc/sysctl.d/iptables-bridge.conf
 EOF
 sysctl --system
 ```
@@ -68,7 +68,10 @@ sysctl --system
 ## Enable routing
 
 ```shell
-echo 1 > /proc/sys/net/ipv4/ip_forward
+cat <<EOF >  /etc/sysctl.d/ip-forward.conf
+net.ipv4.ip_forward = 1 
+EOF
+sysctl --system
 ```
 {:data-add-copy-button='true'}
 

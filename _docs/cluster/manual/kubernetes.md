@@ -8,7 +8,7 @@ layout: docs2020
 type: markdown
 ---
 
-{% include alert/note.html content="SLATE currently supports Kubernetes v1.24." %}
+{% include alert/note.html content="SLATE currently supports Kubernetes v1.28." %}
 
 The SLATE platform uses Kubernetes as its container orchestration system. This section we'll install the base Kubernetes software components.
 
@@ -17,7 +17,7 @@ The SLATE platform uses Kubernetes as its container orchestration system. This s
 The Kubernetes repository can be added to the node in the usual way:
 
 ```shell
-export KUBE_VERSION=1.24 && \
+export KUBE_VERSION=1.28 && \
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
