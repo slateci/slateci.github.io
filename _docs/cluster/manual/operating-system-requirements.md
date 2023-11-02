@@ -52,12 +52,13 @@ sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/
 ```
 {:data-add-copy-button='true'}
 
-## Use iptables for Bridged Network Traffic
+## Configure Networking
 
-Ensure that bridged network traffic goes through `iptables`.
+Kubernetes requires port forwarding and filtering be enabled for packets going through a network bridge.
 
 ```shell
 cat <<EOF >  /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
@@ -65,10 +66,10 @@ sysctl --system
 ```
 {:data-add-copy-button='true'}
 
-## Enable routing
+Apply the changes:
 
 ```shell
-echo 1 > /proc/sys/net/ipv4/ip_forward
+sysctl --system
 ```
 {:data-add-copy-button='true'}
 

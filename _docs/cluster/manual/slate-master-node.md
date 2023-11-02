@@ -8,7 +8,7 @@ layout: docs2020
 type: markdown
 ---
 
-{% include alert/note.html content="SLATE currently supports Kubernetes v1.24." %}
+{% include alert/note.html content="SLATE currently supports Kubernetes v1.28." %}
 
 The first node you will add to your cluster will function as the SLATE Cluster master node.
 * All possible SLATE topologies will utilize a master node.
@@ -41,43 +41,43 @@ export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
 {:data-add-copy-button='true'}
 
-## Allowing pods to run on the Master
+## Allowing pods to run on the Control Plane
 
 {% include alert/note.html content="This step is optional for multi-node installations of Kubernetes and required for single-node installations." %}
 
-If you are running a single-node SLATE cluster, you'll want to remove the `NoSchedule` taint from the Kubernetes control plane. This will allow general workloads to run along-side of the Kubernetes master node processes. In larger clusters, it may instead be desirable to prevent "user" workloads from running on the control plane, especially on very busy clusters where the K8s API is servicing a large number of requests. If you are running a large, multi-node cluster then you may want to skip this step.
+If you are running a single-node SLATE cluster, you'll want to remove the `NoSchedule` taint from the Kubernetes Control Plane. This will allow general workloads to run along-side of the Kubernetes Control Plane processes. In larger clusters, it may instead be desirable to prevent "user" workloads from running on the Control Plane, especially on very busy clusters where the K8s API is servicing a large number of requests. If you are running a large, multi-node cluster then you may want to skip this step.
 
-To remove the master taint:
+To remove the Control Plane taint:
  
 ```shell
-kubectl taint nodes --all node-role.kubernetes.io/master:NoSchedule-
+kubectl taint nodes --all node-role.kubernetes.io/control-plane:NoSchedule-
 ```
 {:data-add-copy-button='true'}
 
-You might want to adjust the above command based on the role your Master Node holds. You can find this out by running:
+You might want to adjust the above command based on the role your Control Plane node holds. You can find this out by running:
 
 ```shell
 kubectl get nodes
 ```
 {:data-add-copy-button='true'}
 
-This should tell you the role(s) your Master Node holds and you can adjust the command to remove the taint accordingly, to either include ```master``` or ```control-plane```.
+This should tell you the role(s) your Control Plane node holds. You can also adjust the command to remove the taint accordingly.
 
 ## Pod Network
 
-In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options  should work as well.
+In order to enable Pods to communicate with the rest of the cluster, you will need to install a networking plugin. There are a large number of possible networking plugins for Kubernetes. SLATE clusters generally use Calico, although other options should work as well.
 
 To install Calico, you will simply need to apply the appropriate Kubernetes manifests beginning with the operator:
 
 ```shell
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml 
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.3/manifests/tigera-operator.yaml
 ```
 {:data-add-copy-button='true'}
 
 If you haven't changed the default IP range then create the boilerplate custom resources manifest:
 
 ```shell
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml 
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.3/manifests/custom-resources.yaml
 ```
 {:data-add-copy-button='true'}
 
@@ -93,7 +93,7 @@ After approximately five minutes, your master node should be ready. You can chec
 ```shell
 [root@your-node ~]# kubectl get nodes
 NAME                           STATUS   ROLES                  AGE     VERSION
-your-node.your-domain.edu   Ready    control-plane,master   2m50s   v1.24.0
+your-node.your-domain.edu      Ready    control-plane,master   2m50s   v1.28.0
 ```
 {:data-add-copy-button='true'}
 
@@ -105,10 +105,10 @@ Installing and configuring MetalLB is done in three steps: installation, configu
 
 ### Step 1: Installation
 
-Run this command to install MetelLB version 0.13.5:
+Run this command to install MetelLB:
 
 ```shell
-METALLB_VERSION=0.13.5 && \
+METALLB_VERSION=0.13.12 && \
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v${METALLB_VERSION}/config/manifests/metallb-native.yaml
 ```
 {:data-add-copy-button='true'}
@@ -169,7 +169,7 @@ kubectl create -f /tmp/metallb-ipaddrpool-advert.yml
 
 The [MetalLB documentation](https://metallb.universe.tf/faq/#is-metallb-working-on-openstack) notes the following for OpenStack managed virtual machines: 
 
-You can run a Kubernetes cluster on OpenStack VMs, and use MetalLB as the load balancer. However you have to disable OpenStack’s ARP spoofing protection if you want to use L2 mode. You must disable it on all the VMs that are running Kubernetes.
+You can run a Kubernetes cluster on OpenStack VMs, and use MetalLB as the load balancer. However, you have to disable OpenStack’s ARP spoofing protection if you want to use L2 mode. You must disable it on all the VMs that are running Kubernetes.
 
 By design, MetalLB’s L2 mode looks like an ARP spoofing attempt to OpenStack, because we’re announcing IP addresses that OpenStack doesn’t know about. There’s currently no way to make OpenStack cooperate with MetalLB here, so we have to turn off the spoofing protection entirely.
 
