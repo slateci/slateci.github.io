@@ -59,9 +59,7 @@ sed -i --follow-symlinks 's/#PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/
 Ensure that bridged network traffic goes through `iptables`.
 
 ```shell
-cat <<EOF >  /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
+cat <<EOF >  /etc/sysctl.d/iptables-bridge.conf
 EOF
 sysctl --system
 ```
