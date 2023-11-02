@@ -105,7 +105,7 @@ Installing and configuring MetalLB is done in three steps: installation, configu
 
 ### Step 1: Installation
 
-Run this command to install MetelLB:
+Run this command to install MetalLB:
 
 ```shell
 METALLB_VERSION=0.13.12 && \
