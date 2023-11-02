@@ -93,7 +93,7 @@ After approximately five minutes, your master node should be ready. You can chec
 ```shell
 [root@your-node ~]# kubectl get nodes
 NAME                           STATUS   ROLES                  AGE     VERSION
-your-node.your-domain.edu      Ready    control-plane,master   2m50s   v1.28.0
+your-node.your-domain.edu      Ready    control-plane        2m50s   v1.28.0
 ```
 {:data-add-copy-button='true'}
 
