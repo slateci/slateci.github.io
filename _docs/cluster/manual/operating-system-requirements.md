@@ -70,7 +70,10 @@ sysctl --system
 ## Enable routing
 
 ```shell
-echo 1 > /proc/sys/net/ipv4/ip_forward
+cat <<EOF >  /etc/sysctl.d/ip-forward.conf
+net.ipv4.ip_forward = 1 
+EOF
+sysctl --system
 ```
 {:data-add-copy-button='true'}
 
